@@ -6,11 +6,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Black+Ops+One&display=swap" rel="stylesheet"> 
+  <link href="https://fonts.googleapis.com/css2?family=Black+Ops+One&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;700&display=swap" rel="stylesheet">  
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;700&display=swap" rel="stylesheet"> 
   <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
   <title>Alejandro Reyna | Full Stack Developer</title>
   <style>
@@ -42,7 +40,6 @@
 
     .devicon {
       font-size: 30px;
-      color: #fff;
     }
 
     .title {
@@ -62,6 +59,55 @@
       color: #fff;
       text-decoration: none;
       margin-right: 10px;
+      transition: color .1s;
+    }
+
+    .linkedin:hover {
+      color: #0E76A8;
+    } 
+
+    .tippy-box[data-theme~='linkedin'] {
+      background-color: #0E76A8;
+      color: white;
+    }
+
+    .tippy-box[data-theme~='linkedin'] > .tippy-arrow::before {
+      border-top-color: #0E76A8;
+    }
+
+    .github:hover {
+      color: #6E5494;
+    }
+
+    .tippy-box[data-theme~='github'] {
+      background-color: #6E5494;
+      color: white;
+    }
+
+    .tippy-box[data-theme~='github'] > .tippy-arrow::before {
+      border-top-color: #6E5494;
+    }
+
+    .calendly:hover {
+      color: #006BFF;
+    }
+
+    .tippy-box[data-theme~='calendly'] {
+      background-color: #006BFF;
+      color: white;
+    }
+
+    .tippy-box[data-theme~='calendly'] > .tippy-arrow::before {
+      border-top-color: #006BFF;
+    }
+
+    .tippy-box[data-theme~='email'] {
+      background-color: #C71610;
+      color: white;
+    }
+
+    .tippy-box[data-theme~='email'] > .tippy-arrow::before {
+      border-right-color: #C71610;
     }
   </style>
 </head>
@@ -75,17 +121,19 @@
         <h2>Alejandro Reyna</h2>
         <span class="font-style: italic;">Full Stack Developer</span>
         <br><br>
-        <a class="link" href="mailto:me@alejandroreyna.com">me@alejandroreyna.com</a>
+        <a class="link email" href="mailto:me@alejandroreyna.com">me@alejandroreyna.com</a>
         <br>
         <br>
         <div>
-          <a class="link" href="https://www.linkedin.com/in/aleejandroreyna/" target="_blank"><i class="devicon-linkedin-plain devicon"></i></a>
-          <a class="link" href="https://github.com/AleejandroReyna" target="_blank"><i class="devicon-github-plain devicon"></i></a>
-          <a class="link" href="https://calendly.com/aleejandroreyna/15min" target="_blank"><i class="far fa-calendar-alt fa-2x"></i></a>
+          <a class="link linkedin" href="https://www.linkedin.com/in/aleejandroreyna/" target="_blank"><i class="devicon-linkedin-plain devicon"></i></a>
+          <a class="link github" href="https://github.com/AleejandroReyna" target="_blank"><i class="devicon-github-plain devicon"></i></a>
+          <a class="link calendly" href="https://calendly.com/aleejandroreyna/15min" target="_blank"><i class="far fa-calendar-alt fa-2x"></i></a>
         </div>
       </div>
       <div class="second">
-        <h1 class="title" style="text-align: right;">SIMPLE IS <br>BETTER <br>THAN COMPLEX</h1>
+        <h1 class="title" style="text-align: right;">
+          <a class="link" href="https://zen-of-python.info/" target="_blank" style="margin: 0;">SIMPLE IS <br>BETTER <br>THAN COMPLEX</a>
+        </h1>
         <div>
           <svg xmlns="http://www.w3.org/2000/svg" class="python-icon" viewBox="0 0 128 128">
             <linearGradient id="python-original-a" gradientUnits="userSpaceOnUse" x1="70.252" y1="1237.476" x2="170.659" y2="1151.089" gradientTransform="matrix(.563 0 0 -.568 -29.215 707.817)">
@@ -109,4 +157,33 @@
     </div>
   </div>
 </body>
+
+<script src="https://unpkg.com/@popperjs/core@2"></script>
+<script src="https://unpkg.com/tippy.js@6"></script>
+<script>
+  tippy('.linkedin', {
+    content: "Let's meet!",
+    theme: 'linkedin',
+    offset: [0, 20]
+  });
+
+  tippy('.github', {
+    content: "Check my Code!",
+    theme: 'github',
+    offset: [0, 20]
+  });
+
+  tippy('.calendly', {
+    content: "Talk to me!",
+    theme: 'calendly',
+    offset: [0, 20]
+  });
+
+  tippy('.email', {
+    content: "Send me an email!",
+    theme: 'email',
+    placement: 'right'
+  });
+
+</script>
 </html>
