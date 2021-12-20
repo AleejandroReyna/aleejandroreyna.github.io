@@ -101,9 +101,6 @@ body {
 }
 
 @media(max-width: 560px) {
-  body {
-    background: red;
-  }
 
   .container {
     flex-direction: column;
