@@ -6,12 +6,16 @@ import {
 } from "react-router-dom";
 
 // Screens
-import { HomeScreen } from "../../screens";
+import { 
+    HomeScreen,
+    ContactScreen 
+} from "../../screens";
 
 const Router = () => (
     <BrowserRouter>
         <Routes>
             <Route path="/" Component={HomeScreen} />
+            <Route path="/contact" Component={ContactScreen} />
         </Routes>
     </BrowserRouter>
 )

@@ -1,0 +1,1 @@
+export const ContactScreen = () => <p>Contact Screen</p>
