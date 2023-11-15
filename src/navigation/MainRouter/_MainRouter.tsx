@@ -8,7 +8,8 @@ import {
 // Screens
 import { 
     HomeScreen,
-    ContactScreen 
+    ContactScreen,
+    PortfolioScreen
 } from "../../screens";
 
 const Router = () => (
@@ -16,6 +17,7 @@ const Router = () => (
         <Routes>
             <Route path="/" Component={HomeScreen} />
             <Route path="/contact" Component={ContactScreen} />
+            <Route path="/portfolio" Component={PortfolioScreen} />
         </Routes>
     </BrowserRouter>
 )
