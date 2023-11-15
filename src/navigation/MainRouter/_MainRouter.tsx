@@ -5,6 +5,9 @@ import {
     Route 
 } from "react-router-dom";
 
+// UI Components
+import { MainMenu } from "../MainMenu";
+
 // Screens
 import { 
     HomeScreen,
@@ -14,6 +17,7 @@ import {
 
 const Router = () => (
     <BrowserRouter>
+        <MainMenu />
         <Routes>
             <Route path="/" Component={HomeScreen} />
             <Route path="/contact" Component={ContactScreen} />
