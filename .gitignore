@@ -25,3 +25,6 @@ dist-ssr
 
 # Vite files
 .vite/
+
+# Testing
+coverage/
