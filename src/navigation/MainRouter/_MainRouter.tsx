@@ -1,14 +1,29 @@
 // Dependencies
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { 
+    BrowserRouter, 
+    Routes, 
+    Route 
+} from "react-router-dom";
+
+// UI Components
+import { MainMenu } from "../MainMenu";
 
 // Screens
-import { HomeScreen } from "../../screens";
+import { 
+    HomeScreen,
+    ContactScreen,
+    PortfolioScreen
+} from "../../screens";
 
-const Router = createBrowserRouter([
-    {
-        path: "/",
-        element: <HomeScreen />,
-    }
-])
+const Router = () => (
+    <BrowserRouter>
+        <MainMenu />
+        <Routes>
+            <Route path="/" Component={HomeScreen} />
+            <Route path="/contact" Component={ContactScreen} />
+            <Route path="/portfolio" Component={PortfolioScreen} />
+        </Routes>
+    </BrowserRouter>
+)
 
-export const MainRouter = () => <RouterProvider router={Router} />
+export const MainRouter = () => <Router />
