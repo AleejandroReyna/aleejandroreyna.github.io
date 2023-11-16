@@ -1,0 +1,1 @@
+export const AboutScreen = () => <p>About Screen</p>
