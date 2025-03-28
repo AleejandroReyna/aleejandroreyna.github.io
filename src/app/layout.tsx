@@ -1,6 +1,8 @@
 // Dependencies
 import type { Metadata } from "next";
 import { Outfit } from "next/font/google";
+import { config } from '@fortawesome/fontawesome-svg-core'
+import '@fortawesome/fontawesome-svg-core/styles.css'
 import "./globals.css";
 
 // UI Components
@@ -11,6 +13,8 @@ const outfit = Outfit({
   variable: "--font-outfit",
   subsets: ["latin"],
 });
+
+config.autoAddCss = false
 
 export const metadata: Metadata = {
   title: "Create Next App",
