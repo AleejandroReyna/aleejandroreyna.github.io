@@ -12,7 +12,7 @@ export const Navbar = () => {
   ];
 
   return (
-    <header className="navbar bg-neutral text-neutral-content">
+    <header className="fixed navbar bg-neutral text-neutral-content">
       <div className="flex-1">
         <Link className="text-xl font-semibold" href={'/'}>Alejandro Reyna</Link>
       </div>
