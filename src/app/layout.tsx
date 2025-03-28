@@ -1,9 +1,16 @@
 // Dependencies
 import type { Metadata } from "next";
+import { Outfit } from "next/font/google";
 import "./globals.css";
 
 // UI Components
 import { Navbar } from "@/components/common/Navbar";
+
+// Constants
+const outfit = Outfit({
+  variable: "--font-outfit",
+  subsets: ["latin"],
+});
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -17,7 +24,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body>
+      <body className={`${outfit.variable} antialiased`}>
         <Navbar />
         {children}
       </body>
