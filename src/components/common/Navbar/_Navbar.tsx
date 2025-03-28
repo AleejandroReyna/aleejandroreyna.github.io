@@ -12,7 +12,10 @@ export const Navbar = () => {
   ];
 
   return (
-    <header className="navbar bg-base-100 shadow-sm">
+    <header className="navbar bg-neutral text-neutral-content">
+      <div className="flex-1">
+        <Link className="text-xl font-semibold" href={'/'}>Alejandro Reyna</Link>
+      </div>
       <nav className="flex-none">
         <ul className="menu menu-horizontal px-1">
           {links.map((link, index) => (
