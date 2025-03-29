@@ -7,6 +7,9 @@ export const About = () => {
     <section className="bg-white py-24">
       <div className="mx-auto max-w-md rounded-xl bg-white md:max-w-7xl lg:max-w-7xl">
         <div className="flex items-center">
+          
+          <img src="/images/about/me.jpg" className="max-w-sm mr-16 rounded-full shadow-2xl" />
+
           <article>
             <h2 className="text-5xl font-bold py-8">About Me</h2>
             <p className="py-2 text-xl">
@@ -29,8 +32,6 @@ export const About = () => {
               More about me
             </Link>
           </article>
-          
-          <img src="/images/about/me.jpg" className="max-w-sm ml-16 rounded-full shadow-2xl" />
         </div>
       </div>
     </section>
