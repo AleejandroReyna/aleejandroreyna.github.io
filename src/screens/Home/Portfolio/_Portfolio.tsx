@@ -25,7 +25,7 @@ export const Portfolio = () => {
           Here are some of the projects I have worked on. I am always looking for new challenges and opportunities to learn and grow.
         </p>
 
-        <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3 py-16">
+        <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3 pt-16">
 
           <article className="card bg-base-100 w-96 shadow-sm">
             <figure>

@@ -3,6 +3,7 @@ import { About } from "./About"
 import { Services } from "./Services"
 import { Experience } from "./Experience"
 import { Portfolio } from "./Portfolio"
+import { Results } from "./Results"
 
 export const HomeScreen = () => {
   return (
@@ -12,6 +13,7 @@ export const HomeScreen = () => {
       <Services />
       <Experience />
       <Portfolio />
+      <Results />
     </>
   )
 }
