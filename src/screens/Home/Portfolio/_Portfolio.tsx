@@ -38,11 +38,11 @@ export const Portfolio = () => {
               <p>Fintech app to democratize the banking.</p>
               <strong>Stack: </strong>
               <div className="flex">
-                <SiReact className="mr-2" />
-                <SiTypescript className="mr-2" />
-                <SiMobx className="mr-2" />
-                <SiBitrise className="mr-2" />
-                <SiWordpress />
+                <SiReact className="mr-2" color="default" />
+                <SiTypescript className="mr-2" color="default" />
+                <SiMobx className="mr-2" color="default" />
+                <SiBitrise className="mr-2" color="default" />
+                <SiWordpress color="default" />
               </div>
               <div className="card-actions">
                 <button className="btn btn-neutral">More about</button>
@@ -61,11 +61,11 @@ export const Portfolio = () => {
               <p>Human resources web app</p>
               <strong>Stack: </strong>
               <div className="flex">
-                <SiPhp className="mr-2" />
-                <SiLaravel className="mr-2" />
-                <SiJavascript className="mr-2" />
-                <SiVuedotjs className="mr-2" />
-                <SiAwsfargate />
+                <SiPhp className="mr-2" color="default" />
+                <SiLaravel className="mr-2" color="default" />
+                <SiJavascript className="mr-2" color="default" />
+                <SiVuedotjs className="mr-2" color="default" />
+                <SiAwsfargate color="default" />
               </div>
               <div className="card-actions">
                 <button className="btn btn-neutral">More about</button>
@@ -84,15 +84,15 @@ export const Portfolio = () => {
               <p>Chatbot for first childhood development</p>
               <strong>Stack: </strong>
               <div className="flex">
-                <SiPython className="mr-2" />
-                <SiDjango className="mr-2" />
-                <SiNodedotjs className="mr-2" />
-                <SiExpress className="mr-2" />
-                <SiJavascript className="mr-2" />
-                <SiReact className="mr-2" />
-                <SiVuedotjs className="mr-2" />
-                <SiMessenger className="mr-2" />
-                <SiTwilio className="mr-2" />
+                <SiPython className="mr-2" color="default" />
+                <SiDjango className="mr-2" color="default" />
+                <SiNodedotjs className="mr-2" color="default" />
+                <SiExpress className="mr-2" color="default" />
+                <SiJavascript className="mr-2" color="default" />
+                <SiReact className="mr-2" color="default" />
+                <SiVuedotjs className="mr-2" color="default" />
+                <SiMessenger className="mr-2" color="default" />
+                <SiTwilio className="mr-2" color="default" />
               </div>
               <div className="card-actions">
                 <button className="btn btn-neutral">More about</button>
