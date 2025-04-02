@@ -4,6 +4,7 @@ import { Services } from "./Services"
 import { Experience } from "./Experience"
 import { Portfolio } from "./Portfolio"
 import { Results } from "./Results"
+import { Contact } from "./Contact"
 
 export const HomeScreen = () => {
   return (
@@ -14,6 +15,7 @@ export const HomeScreen = () => {
       <Experience />
       <Portfolio />
       <Results />
+      <Contact />
     </>
   )
 }
