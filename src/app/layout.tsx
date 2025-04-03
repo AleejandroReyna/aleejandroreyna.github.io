@@ -7,6 +7,7 @@ import "./globals.css";
 
 // UI Components
 import { Navbar } from "@/components/common/Navbar";
+import { Footer } from "@/components/common/Footer";
 
 // Constants
 const outfit = Outfit({
@@ -31,6 +32,7 @@ export default function RootLayout({
       <body className={`${outfit.variable} antialiased`}>
         <Navbar />
         {children}
+        <Footer />
       </body>
     </html>
   );
