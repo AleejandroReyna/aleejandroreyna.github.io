@@ -5,7 +5,7 @@ import { faCheckCircle } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 
 export const Experience = () => {
-  const [activeTab, setActiveTab] = useState(0);
+  const [activeTab, setActiveTab] = useState(8);
 
   return (
     <section className="py-24 bg-neutral text-neutral-content">
@@ -21,86 +21,13 @@ export const Experience = () => {
           <div className="basis-1/3">
             <ul className="timeline timeline-vertical">
               <li>
-                <div className="timeline-start">September - 2012</div>
+                <div className="timeline-start">April - 2023</div>
                 <div className="timeline-middle">
 
                   <FontAwesomeIcon color="white" icon={faCheckCircle} className="timeline-icon" />
                 </div>
-                <div className="timeline-end timeline-box bg-neutral border-none p-0">
-                  <button className="btn btn-neutral h-auto my-2 border-solid border-white py-2 px-1 ml-2 btn-sm"  onClick={() => setActiveTab(0)}>
-                  Ziogama - My first experience
-                  </button>
-                </div>
-                <hr />
-              </li>
-              <li>
-                <hr />
-                <div className="timeline-start">April - 2014</div>
-                <div className="timeline-middle">
-
-                  <FontAwesomeIcon color="white" icon={faCheckCircle} className="timeline-icon" />
-                </div>
-                <div className="timeline-end timeline-box bg-neutral border-none p-0">
-                  <button className="btn btn-neutral h-auto my-2 border-solid border-white py-2 px-1 ml-2 btn-sm"  onClick={() => setActiveTab(1)}>Starting as a freelance</button>
-                </div>
-                <hr />
-              </li>
-              <li>
-                <hr />
-                <div className="timeline-start">January - 2015</div>
-                <div className="timeline-middle">
-
-                  <FontAwesomeIcon color="white" icon={faCheckCircle} className="timeline-icon" />
-                </div>
-                <div className="timeline-end timeline-box bg-neutral border-none p-0">
-                  <button className="btn btn-neutral h-auto my-2 border-solid border-white py-2 px-1 ml-2 btn-sm"  onClick={() => setActiveTab(2)}>Cobra Branding Studio - Wordpress Developer now</button></div>
-                <hr />
-              </li>
-              <li>
-                <hr />
-                <div className="timeline-start">January - 2016</div>
-                <div className="timeline-middle">
-
-                  <FontAwesomeIcon color="white" icon={faCheckCircle} className="timeline-icon" />
-                </div>
-                <div className="timeline-end timeline-box bg-neutral border-none p-0">
-                  <button className="btn btn-neutral h-auto my-2 border-solid border-white py-2 px-1 ml-2 btn-sm" onClick={() => setActiveTab(3)}> Time for a break</button>
-                </div>
-                <hr />
-              </li>
-              <li>
-                <hr />
-                <div className="timeline-start">March - 2017</div>
-                <div className="timeline-middle">
-
-                  <FontAwesomeIcon color="white" icon={faCheckCircle} className="timeline-icon" />
-                </div>
-                <div className="timeline-end timeline-box bg-neutral border-none p-0">
-                  <button className="btn btn-neutral h-auto my-2 border-solid border-white py-2 px-1 ml-2 btn-sm" onClick={() => setActiveTab(4)}>Somadtech - The Full Stack Developer is here</button>
-                </div>
-                <hr />
-              </li>
-              <li>
-                <hr />
-                <div className="timeline-start">November - 2018</div>
-                <div className="timeline-middle">
-
-                  <FontAwesomeIcon color="white" icon={faCheckCircle} className="timeline-icon" />
-                </div>
-                <div className="timeline-end timeline-box bg-neutral border-none p-0">
-                  <button className="btn btn-neutral h-auto my-2 border-solid border-white py-2 px-1 ml-2 btn-sm" onClick={() => setActiveTab(5)}>Botpro - A chatbot experience</button>
-                </div>
-                <hr />
-              </li>
-              <li>
-                <hr />
-                <div className="timeline-start">January - 2019</div>
-                <div className="timeline-middle">
-
-                  <FontAwesomeIcon color="white" icon={faCheckCircle} className="timeline-icon" />
-                </div>
-                <div className="timeline-end timeline-box bg-neutral border-none p-0">
-                <button className="btn btn-neutral h-auto my-2 border-solid border-white py-2 px-1 ml-2 btn-sm" onClick={() => setActiveTab(6)}>Afinidata - Working for the children</button>
+                <div className="timeline-end timeline-box bg-neutral border-none p-0" onClick={() => setActiveTab(8)}>
+                <button className="btn btn-neutral h-auto my-2 border-solid border-white py-2 px-1 ml-2 btn-sm">Zigi App - Fintech experience</button>
                 </div>
                 <hr />
               </li>
@@ -118,13 +45,86 @@ export const Experience = () => {
               </li>
               <li>
                 <hr />
-                <div className="timeline-start">April - 2023</div>
+                <div className="timeline-start">January - 2019</div>
                 <div className="timeline-middle">
 
                   <FontAwesomeIcon color="white" icon={faCheckCircle} className="timeline-icon" />
                 </div>
-                <div className="timeline-end timeline-box bg-neutral border-none p-0" onClick={() => setActiveTab(8)}>
-                <button className="btn btn-neutral h-auto my-2 border-solid border-white py-2 px-1 ml-2 btn-sm">Zigi App - Fintech experience</button>
+                <div className="timeline-end timeline-box bg-neutral border-none p-0">
+                <button className="btn btn-neutral h-auto my-2 border-solid border-white py-2 px-1 ml-2 btn-sm" onClick={() => setActiveTab(6)}>Afinidata - Working for the children</button>
+                </div>
+                <hr />
+              </li>
+              <li>
+                <hr />
+                <div className="timeline-start">November - 2018</div>
+                <div className="timeline-middle">
+
+                  <FontAwesomeIcon color="white" icon={faCheckCircle} className="timeline-icon" />
+                </div>
+                <div className="timeline-end timeline-box bg-neutral border-none p-0">
+                  <button className="btn btn-neutral h-auto my-2 border-solid border-white py-2 px-1 ml-2 btn-sm" onClick={() => setActiveTab(5)}>Botpro - A chatbot experience</button>
+                </div>
+                <hr />
+              </li>
+              <li>
+                <hr />
+                <div className="timeline-start">March - 2017</div>
+                <div className="timeline-middle">
+
+                  <FontAwesomeIcon color="white" icon={faCheckCircle} className="timeline-icon" />
+                </div>
+                <div className="timeline-end timeline-box bg-neutral border-none p-0">
+                  <button className="btn btn-neutral h-auto my-2 border-solid border-white py-2 px-1 ml-2 btn-sm" onClick={() => setActiveTab(4)}>Somadtech - The Full Stack Developer is here</button>
+                </div>
+                <hr />
+              </li>
+              <li>
+                <hr />
+                <div className="timeline-start">January - 2016</div>
+                <div className="timeline-middle">
+
+                  <FontAwesomeIcon color="white" icon={faCheckCircle} className="timeline-icon" />
+                </div>
+                <div className="timeline-end timeline-box bg-neutral border-none p-0">
+                  <button className="btn btn-neutral h-auto my-2 border-solid border-white py-2 px-1 ml-2 btn-sm" onClick={() => setActiveTab(3)}> Time for a break</button>
+                </div>
+                <hr />
+              </li>
+              <li>
+                <hr />
+                <div className="timeline-start">January - 2015</div>
+                <div className="timeline-middle">
+
+                  <FontAwesomeIcon color="white" icon={faCheckCircle} className="timeline-icon" />
+                </div>
+                <div className="timeline-end timeline-box bg-neutral border-none p-0">
+                  <button className="btn btn-neutral h-auto my-2 border-solid border-white py-2 px-1 ml-2 btn-sm"  onClick={() => setActiveTab(2)}>Cobra Branding Studio - Wordpress Developer now</button></div>
+                <hr />
+              </li>
+              <li>
+                <hr />
+                <div className="timeline-start">April - 2014</div>
+                <div className="timeline-middle">
+
+                  <FontAwesomeIcon color="white" icon={faCheckCircle} className="timeline-icon" />
+                </div>
+                <div className="timeline-end timeline-box bg-neutral border-none p-0">
+                  <button className="btn btn-neutral h-auto my-2 border-solid border-white py-2 px-1 ml-2 btn-sm"  onClick={() => setActiveTab(1)}>Starting as a freelance</button>
+                </div>
+                <hr />
+              </li>
+              <li>
+                <hr />
+                <div className="timeline-start">September - 2012</div>
+                <div className="timeline-middle">
+
+                  <FontAwesomeIcon color="white" icon={faCheckCircle} className="timeline-icon" />
+                </div>
+                <div className="timeline-end timeline-box bg-neutral border-none p-0">
+                  <button className="btn btn-neutral h-auto my-2 border-solid border-white py-2 px-1 ml-2 btn-sm"  onClick={() => setActiveTab(0)}>
+                  Ziogama - My first experience
+                  </button>
                 </div>
               </li>
             </ul>
