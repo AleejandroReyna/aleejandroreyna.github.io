@@ -7,6 +7,7 @@ import { LinkedinPlain } from 'devicons-react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCalendarAlt } from '@fortawesome/free-solid-svg-icons'
 import { currentYear } from "@/utils/currentYear";
+import { PythonOriginal } from "devicons-react";
 
 export const Footer = () => {
   return (
@@ -54,9 +55,10 @@ export const Footer = () => {
         </div>
       </nav>
     </footer>
-    <footer className="footer sm:footer-horizontal footer-center bg-neutral text-neutral-content px-10 py-4">
-      <aside>
-        <p>Copyright {currentYear()} - Simple is better than complex</p>
+    <footer className="footer sm:footer-horizontal bg-neutral text-neutral-content px-10 py-4">
+      <aside className="flex justify-between items-center w-full">
+        <p>© All rights reserved - {currentYear()}</p>
+        <p className="ops text-lg"><a href="#">Simple is better than complex</a> <PythonOriginal style={{display: 'inline'}} size={20} /></p>
       </aside>
     </footer>
     </>
