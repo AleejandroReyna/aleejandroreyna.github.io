@@ -4,6 +4,7 @@ import { useState } from "react";
 import { faCheckCircle } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 
+// TODO: Build a component to render the tabs
 export const Experience = () => {
   const [activeTab, setActiveTab] = useState(8);
 
