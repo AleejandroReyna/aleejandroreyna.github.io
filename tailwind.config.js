@@ -7,6 +7,7 @@ module.exports = {
     extend: {
       fontFamily: {
         outfit: ['var(--font-outfit)'],
+        blackOpsOne: ['var(--font-black_ops_one)']
       },
     },
   },

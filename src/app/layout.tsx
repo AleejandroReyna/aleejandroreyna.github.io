@@ -1,16 +1,28 @@
 // Dependencies
 import type { Metadata } from "next";
-import { Outfit } from "next/font/google";
+import { Outfit, Black_Ops_One } from "next/font/google";
+import { config } from '@fortawesome/fontawesome-svg-core'
+import '@fortawesome/fontawesome-svg-core/styles.css'
 import "./globals.css";
 
 // UI Components
 import { Navbar } from "@/components/common/Navbar";
+import { Footer } from "@/components/common/Footer";
 
 // Constants
 const outfit = Outfit({
   variable: "--font-outfit",
   subsets: ["latin"],
 });
+
+const opsOne = Black_Ops_One({
+  variable: "--font-black_ops_one",
+  subsets: ["latin"],
+  weight: "400"
+});
+
+
+config.autoAddCss = false
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -24,9 +36,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${outfit.variable} antialiased`}>
+      <body className={`${outfit.variable} ${opsOne.variable} antialiased`}>
         <Navbar />
         {children}
+        <Footer />
       </body>
     </html>
   );
