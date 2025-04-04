@@ -36,7 +36,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${outfit.variable} ${opsOne.variable} antialiased`}>
+      <body className={`${outfit.variable} ${opsOne.variable} antialiased flex flex-col min-h-screen`}>
         <Navbar />
         {children}
         <Footer />

@@ -26,6 +26,10 @@ body {
   font-family: var(--font-outfit), Arial, Helvetica, sans-serif;
 }
 
+main {
+  flex: auto;
+}
+
 .ops {
   font-family: var(--font-black_ops_one);
 }

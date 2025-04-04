@@ -12,7 +12,7 @@ import { PythonOriginal } from "devicons-react";
 export const Footer = () => {
   return (
     <>
-    <footer className="footer sm:footer-horizontal bg-neutral text-neutral-content p-10">
+    <footer className="footer sm:footer-horizontal bg-neutral text-neutral-content p-10 mt-auto">
       <aside>
         <Link className="text-xl font-semibold" href={'/'}>
           <h1>Alejandro Reyna</h1>
