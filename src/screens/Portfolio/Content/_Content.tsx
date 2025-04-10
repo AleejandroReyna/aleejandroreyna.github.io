@@ -5,7 +5,7 @@ export const Content = () => {
   return (
     <section className="py-16">
       <div className="mx-auto max-w-md md:max-w-7xl lg:max-w-7xl">
-        <div className="grid grid-cols-3 grid-gap-4">
+        <div className="grid grid-cols-3 gap-4">
           <div>
             <Form />
           </div>
