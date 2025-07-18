@@ -138,7 +138,7 @@ export const Experience = () => {
                 <time className="font-mono italic text-xl">September - 2012</time>
                 <h3 className="text-4xl mb-6 mt-3 font-black">Ziogama - My first experience</h3>
                 <p className="text-2xl">
-                  I started my career at Ziogama, A friend's company where I learned the basics of web development. I was responsible for creating
+                  I started my career at Ziogama, A {"friend's"} company where I learned the basics of web development. I was responsible for creating
                   and maintaining websites for small businesses. I learned a lot about HTML, CSS, and JavaScript, and I fell in love with web development.
                 </p>
               </article>

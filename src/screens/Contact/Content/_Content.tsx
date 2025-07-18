@@ -9,7 +9,7 @@ export const Content = () => {
       <div className="mx-auto max-w-md md:max-w-7xl lg:max-w-7xl h-full">
         <div className="flex flex-row items-center h-full">
           <div className="basis-1/3  pr-6">
-            <h2 className="text-5xl font-bold pb-4">Let's talk!</h2>
+            <h2 className="text-5xl font-bold pb-4">{"Let's talk!"}</h2>
             <p className="text-2xl mb-8">Do you have an interesting project, I want to work with you.</p>
 
             <div className='flex items-center mr-4 mb-4'>
