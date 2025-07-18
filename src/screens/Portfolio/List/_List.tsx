@@ -37,7 +37,7 @@ export const List = () => {
             alt="Album" />
         </figure>
         <div className="card-body">
-          <h2 className="card-title">T'Picaste App</h2>
+          <h2 className="card-title">{"T'Picaste"} App</h2>
           <p>Fidelity App for small and medium business (In progress)</p>
           <strong>Stack: </strong>
           <p className="flex">
