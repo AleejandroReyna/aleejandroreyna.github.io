@@ -1,5 +1,7 @@
 import { Metadata } from "next";
 
+import { PortfolioScreen } from "@/screens/Portfolio";
+
 export const metadata : Metadata = {
   title: "Portfolio",
   description: "Portfolio page",
@@ -7,9 +9,8 @@ export const metadata : Metadata = {
 
 export default function PortfolioPage() {
   return (
-    <div>
-      <h1>Portfolio</h1>
-      <p>This is the portfolio page.</p>
-    </div>
+    <main>
+      <PortfolioScreen />
+    </main>
   );
 }

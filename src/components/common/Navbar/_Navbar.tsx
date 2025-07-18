@@ -12,7 +12,7 @@ export const Navbar = () => {
   ];
 
   return (
-    <header className="fixed navbar bg-neutral text-neutral-content z-40">
+    <header className="fixed navbar bg-neutral text-neutral-content z-40 px-10">
       <div className="flex-1">
         <Link className="text-xl font-semibold" href={'/'}>
           <h1>Alejandro Reyna</h1>
