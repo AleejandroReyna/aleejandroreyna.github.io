@@ -1,37 +1,119 @@
 import Link from "next/link"
-import { faArrowRight } from "@fortawesome/free-solid-svg-icons"
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import { ArrowRight } from "lucide-react"
 
 export const About = () => {
   return (
-    <section className="bg-white py-24">
-      <div className="mx-auto max-w-md rounded-xl bg-white md:max-w-7xl lg:max-w-7xl">
-        <div className="flex items-center">
-          
-          <img src="/images/about/me.jpg" className="max-w-sm mr-16 rounded-full shadow-2xl" />
+    <section className="bg-white py-24 relative overflow-hidden">
+      {/* Background Pattern */}
+      <div className="absolute inset-0 opacity-5">
+        <div className="absolute inset-0" style={{
+          backgroundImage: 'radial-gradient(circle, #000 1px, transparent 1px)',
+          backgroundSize: '50px 50px'
+        }}></div>
+      </div>
 
-          <article>
-            <h2 className="text-5xl font-bold py-8">About Me</h2>
-            <p className="py-2 text-xl">
-            Knowing Python, Ruby, Javascript and Typescript has made these 12 years of experience wonderful. 
-            {"I'm"} passionate about technology, best practices, teamwork, and a firm believer that everyone deserves a chance.
-            </p>
-            <p className="py-2 text-xl">
-            {"I'm"} interested in leaving a better world for those who follow in our footsteps. {"I'm"} a cat lover and musician since I was 14. {"I'm"} constantly learning, with solid experience in Django, EcmaScript, 
-            React, and React Native, but always open to stepping out of my comfort zone. (Except for Java and .NET, nothing personal)
-            </p>
-            <p className="py-2 text-xl">
-              Fascinated by entrepreneurship 🚀 science 🔭 and education 📚
-            </p>
-            <p className="py-4 text-xl">
-            If you want to create a better version of the world, talk to me.
-            </p>
+      <div className="mx-auto max-w-7xl px-4 relative z-10">
+        {/* Heading */}
+        <div className="text-center mb-16">
+          <h2 className="text-5xl lg:text-6xl font-bold text-gray-900 mb-4">
+            The Story Behind the Code
+          </h2>
+          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+            More than just a developer—a code poet crafting elegant solutions
+          </p>
+        </div>
 
-            <Link href="/about" className="underline text-xl">
-              <FontAwesomeIcon icon={faArrowRight} className="ml-2 mr-4" />
-              More about me
-            </Link>
-          </article>
+        {/* Main Content Grid */}
+        <div className="grid md:grid-cols-2 gap-12 items-center mb-16">
+          {/* Image Section */}
+          <div className="flex justify-center">
+            <div className="relative">
+              <div className="w-80 h-80 rounded-full overflow-hidden ring-4 ring-primary ring-offset-4 ring-offset-white shadow-2xl">
+                <img
+                  src="/images/about/me.jpg"
+                  alt="Alejandro Reyna"
+                  className="w-full h-full object-cover"
+                />
+              </div>
+              {/* Decorative elements */}
+              <div className="absolute -top-4 -right-4 w-24 h-24 bg-primary/10 rounded-full blur-xl"></div>
+              <div className="absolute -bottom-4 -left-4 w-32 h-32 bg-secondary/10 rounded-full blur-xl"></div>
+            </div>
+          </div>
+
+          {/* Content Section */}
+          <div className="space-y-6">
+            {/* Philosophy */}
+            <div>
+              <h3 className="text-2xl font-bold text-gray-900 mb-3 flex items-center gap-2">
+                <span className="text-primary">🎨</span> The Philosophy
+              </h3>
+              <p className="text-lg text-gray-700 leading-relaxed">
+                I&apos;m Alejandro Reyna, a full-stack developer from Guatemala who believes that
+                programming is more than just solving problems—it&apos;s an art form. For over 12 years,
+                I&apos;ve been writing code that doesn&apos;t just work, but sings.
+              </p>
+            </div>
+
+            {/* Journey */}
+            <div>
+              <h3 className="text-2xl font-bold text-gray-900 mb-3 flex items-center gap-2">
+                <span className="text-primary">🚀</span> The Journey
+              </h3>
+              <p className="text-lg text-gray-700 leading-relaxed">
+                From Guatemala to the global tech community, my journey has been fueled by curiosity
+                and a commitment to continuous learning. With expertise in Python, JavaScript, TypeScript,
+                and Ruby, I&apos;ve built solutions across the full stack.
+              </p>
+            </div>
+
+            {/* Human Side */}
+            <div>
+              <h3 className="text-2xl font-bold text-gray-900 mb-3 flex items-center gap-2">
+                <span className="text-primary">🎵</span> The Human Side
+              </h3>
+              <p className="text-lg text-gray-700 leading-relaxed">
+                When I&apos;m not crafting code, you&apos;ll find me making music (a passion since I was 14) or
+                spending time with cats. I believe in leaving the world better than we found it, championing
+                teamwork, and ensuring everyone gets a fair chance to succeed.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        {/* Stats Grid */}
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-16">
+          <div className="bg-gray-50 border-2 border-gray-200 rounded-lg p-6 text-center hover:border-primary hover:shadow-lg transition-all">
+            <div className="text-4xl font-bold text-primary mb-2">12+</div>
+            <div className="text-gray-600 font-medium">Years Experience</div>
+          </div>
+          <div className="bg-gray-50 border-2 border-gray-200 rounded-lg p-6 text-center hover:border-secondary hover:shadow-lg transition-all">
+            <div className="text-4xl font-bold text-secondary mb-2">86+</div>
+            <div className="text-gray-600 font-medium">Projects</div>
+          </div>
+          <div className="bg-gray-50 border-2 border-gray-200 rounded-lg p-6 text-center hover:border-accent hover:shadow-lg transition-all">
+            <div className="text-4xl font-bold text-accent mb-2">4</div>
+            <div className="text-gray-600 font-medium">Tech Stacks</div>
+          </div>
+          <div className="bg-gray-50 border-2 border-gray-200 rounded-lg p-6 text-center hover:border-primary hover:shadow-lg transition-all">
+            <div className="text-4xl font-bold text-primary mb-2">∞</div>
+            <div className="text-gray-600 font-medium">Learning</div>
+          </div>
+        </div>
+
+        {/* Vision & CTA */}
+        <div className="text-center bg-gradient-to-br from-gray-50 to-gray-100 border-2 border-gray-200 rounded-2xl p-12 hover:border-primary hover:shadow-xl transition-all">
+          <h3 className="text-3xl font-bold text-gray-900 mb-4">
+            Fascinated by entrepreneurship 🚀 science 🔭 and education 📚
+          </h3>
+          <p className="text-xl text-gray-700 mb-8 max-w-2xl mx-auto">
+            I&apos;m always looking for opportunities to blend technology with purpose.
+            If you want to create a better version of the world, let&apos;s talk.
+          </p>
+          <Link href="/about" className="btn btn-primary btn-lg gap-2 text-white inline-flex items-center">
+            Read My Full Story
+            <ArrowRight size={20} />
+          </Link>
         </div>
       </div>
     </section>

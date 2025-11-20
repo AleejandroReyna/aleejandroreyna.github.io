@@ -603,3 +603,486 @@ The improved Hero section transforms from a generic developer introduction to a 
 ✅ **Optimized for All Devices** - Responsive, accessible, performant  
 
 This Hero section sets the tone for the entire website and immediately differentiates Alejandro Reyna from other developers in the market.
+
+---
+
+## 3.2 About Section
+
+### Current Implementation Analysis
+
+**Current About Component Location:** `src/screens/Home/About/_About.tsx`
+
+#### Current State
+```tsx
+// Current heading
+"About Me"
+
+// Current content
+"Knowing Python, Ruby, Javascript and Typescript has made these 12 years of experience wonderful. 
+I'm passionate about technology, best practices, teamwork, and a firm believer that everyone deserves a chance."
+
+"I'm interested in leaving a better world for those who follow in our footsteps. I'm a cat lover and musician since I was 14. 
+I'm constantly learning, with solid experience in Django, EcmaScript, React, and React Native, but always open to stepping out of my comfort zone. 
+(Except for Java and .NET, nothing personal)"
+
+"Fascinated by entrepreneurship 🚀 science �� and education 📚"
+
+// Current image
+Profile image: /images/about/me.jpg (rounded-full, shadow-2xl)
+
+// Current CTA
+Link to /about page with "More about me"
+```
+
+#### Current Strengths ✅
+- Personal and authentic voice
+- Mentions key technologies (Python, Ruby, JavaScript, TypeScript)
+- Shows personality (cat lover, musician)
+- Includes years of experience
+- Has profile image
+- Clean, readable layout
+- Mentions passions (entrepreneurship, science, education)
+
+#### Current Weaknesses ❌
+- **Lacks "Code Poet" branding** - Doesn't reflect the artistic/poetic identity
+- **Generic heading** - "About Me" is standard, not memorable
+- **Inconsistent with Hero** - Different tone and messaging
+- **Missing key elements** - No stats, no timeline, no visual interest
+- **White background only** - Doesn't match black Hero background
+- **Layout is basic** - Image + text, no creative structure
+- **Missing Guatemala emphasis** - Location mentioned in Hero but not here
+- **No tech stack visualization** - Just mentions technologies in text
+- **Weak CTA** - Simple underline link, not compelling
+
+---
+
+### Recommended About Improvements
+
+Based on the personality analysis and "Code Poet" brand, here's the enhanced About section:
+
+#### 1. **Updated Heading & Messaging**
+
+**Primary Heading:**
+```
+The Story Behind the Code
+```
+
+**Alternative Heading Options:**
+- "Meet the Code Poet"
+- "Beyond the Syntax"
+- "The Developer & The Artist"
+- "Crafting Code with Purpose"
+
+**Opening Statement:**
+```
+I'm Alejandro Reyna, a full-stack developer from Guatemala who believes that programming 
+is more than just solving problems—it's an art form. For over 12 years, I've been writing 
+code that doesn't just work, but sings.
+```
+
+#### 2. **Content Structure**
+
+**Section 1: The Philosophy**
+```
+Programming code is another way to write poetry with madness. Every line I write is an 
+opportunity to create something elegant, efficient, and beautiful. I approach development 
+with the same passion a musician brings to their craft—because I am both.
+```
+
+**Section 2: The Journey**
+```
+From Guatemala to the global tech community, my journey has been fueled by curiosity and 
+a commitment to continuous learning. With expertise in Python, JavaScript, TypeScript, and 
+Ruby, I've built solutions across the full stack—from Django backends to React frontends.
+```
+
+**Section 3: The Human Side**
+```
+When I'm not crafting code, you'll find me making music (a passion since I was 14) or 
+spending time with cats. I believe in leaving the world better than we found it, championing 
+teamwork, and ensuring everyone gets a fair chance to succeed.
+```
+
+**Section 4: The Vision**
+```
+Fascinated by entrepreneurship 🚀, science 🔭, and education 📚, I'm always looking for 
+opportunities to blend technology with purpose. If you want to create a better version of 
+the world, let's talk.
+```
+
+#### 3. **Visual Enhancements**
+
+**Background:**
+- Black background to match Hero section
+- Subtle gradient or pattern overlay
+- Consistent dark theme throughout
+
+**Layout Options:**
+
+**Option A: Two-Column with Image**
+```
+┌─────────────────────────────────────┐
+│  [Image]    │   Content             │
+│             │   - Philosophy        │
+│             │   - Journey           │
+│             │   - Human Side        │
+│             │   - Vision            │
+│             │   [CTA Button]        │
+└─────────────────────────────────────┘
+```
+
+**Option B: Timeline Layout**
+```
+┌─────────────────────────────────────┐
+│         Heading                     │
+│                                     │
+│  [Image]  ─→  Philosophy            │
+│                                     │
+│  Journey  ─→  [Tech Icons]          │
+│                                     │
+│  [Stats]  ─→  Human Side            │
+│                                     │
+│  Vision   ─→  [CTA]                 │
+└─────────────────────────────────────┘
+```
+
+**Option C: Card-Based Layout**
+```
+┌─────────────────────────────────────┐
+│         Heading + Image             │
+│                                     │
+│  ┌──────┐  ┌──────┐  ┌──────┐     │
+│  │ Phil │  │Journ │  │Human │     │
+│  │ osophy│  │  ey  │  │ Side │     │
+│  └──────┘  └──────┘  └──────┘     │
+│                                     │
+│         Vision + CTA                │
+└─────────────────────────────────────┘
+```
+
+#### 4. **Key Stats Integration**
+
+Add visual stats to support the narrative:
+```tsx
+<div className="grid grid-cols-2 md:grid-cols-4 gap-4 my-8">
+  <div className="stat-card">
+    <div className="stat-value">12+</div>
+    <div className="stat-label">Years Experience</div>
+  </div>
+  <div className="stat-card">
+    <div className="stat-value">86+</div>
+    <div className="stat-label">Projects</div>
+  </div>
+  <div className="stat-card">
+    <div className="stat-value">4</div>
+    <div className="stat-label">Tech Stacks</div>
+  </div>
+  <div className="stat-card">
+    <div className="stat-value">∞</div>
+    <div className="stat-label">Learning</div>
+  </div>
+</div>
+```
+
+#### 5. **Tech Stack Visualization**
+
+Instead of just mentioning technologies, show them visually:
+```tsx
+<div className="tech-journey">
+  <h3>My Technical Journey</h3>
+  <div className="tech-timeline">
+    <div className="tech-item">
+      <SiPython /> Python & Django
+      <span className="years">12 years</span>
+    </div>
+    <div className="tech-item">
+      <SiJavascript /> JavaScript & Node.js
+      <span className="years">10 years</span>
+    </div>
+    <div className="tech-item">
+      <SiTypescript /> TypeScript & React
+      <span className="years">6 years</span>
+    </div>
+    <div className="tech-item">
+      <SiRuby /> Ruby & Rails
+      <span className="years">8 years</span>
+    </div>
+  </div>
+</div>
+```
+
+#### 6. **Enhanced CTA**
+
+Replace simple link with compelling button:
+```tsx
+<div className="cta-section">
+  <h3>Want to know more about my journey?</h3>
+  <p>Explore my full story, projects, and the philosophy behind my work.</p>
+  <a href="/about" className="btn btn-primary btn-lg gap-2">
+    Read My Full Story
+    <ArrowRight />
+  </a>
+</div>
+```
+
+---
+
+### Improved About Component Structure
+
+```tsx
+export const About = () => {
+  return (
+    <section className="bg-black py-24 relative overflow-hidden">
+      {/* Background Pattern */}
+      <div className="absolute inset-0 opacity-5">
+        <div className="absolute inset-0" style={{
+          backgroundImage: 'radial-gradient(circle, currentColor 1px, transparent 1px)',
+          backgroundSize: '50px 50px'
+        }}></div>
+      </div>
+
+      <div className="mx-auto max-w-7xl px-4 relative z-10">
+        {/* Heading */}
+        <div className="text-center mb-16">
+          <h2 className="text-5xl lg:text-6xl font-bold text-white mb-4">
+            The Story Behind the Code
+          </h2>
+          <p className="text-xl text-gray-400 max-w-3xl mx-auto">
+            More than just a developer—a code poet crafting elegant solutions
+          </p>
+        </div>
+
+        {/* Main Content Grid */}
+        <div className="grid md:grid-cols-2 gap-12 items-center mb-16">
+          {/* Image Section */}
+          <div className="flex justify-center">
+            <div className="relative">
+              <div className="w-80 h-80 rounded-full overflow-hidden ring-4 ring-primary ring-offset-4 ring-offset-black">
+                <img 
+                  src="/images/about/me.jpg" 
+                  alt="Alejandro Reyna" 
+                  className="w-full h-full object-cover"
+                />
+              </div>
+              {/* Decorative elements */}
+              <div className="absolute -top-4 -right-4 w-24 h-24 bg-primary/20 rounded-full blur-xl"></div>
+              <div className="absolute -bottom-4 -left-4 w-32 h-32 bg-secondary/20 rounded-full blur-xl"></div>
+            </div>
+          </div>
+
+          {/* Content Section */}
+          <div className="space-y-6">
+            {/* Philosophy */}
+            <div>
+              <h3 className="text-2xl font-bold text-white mb-3 flex items-center gap-2">
+                <span className="text-primary">🎨</span> The Philosophy
+              </h3>
+              <p className="text-lg text-gray-300 leading-relaxed">
+                I'm Alejandro Reyna, a full-stack developer from Guatemala who believes that 
+                programming is more than just solving problems—it's an art form. For over 12 years, 
+                I've been writing code that doesn't just work, but sings.
+              </p>
+            </div>
+
+            {/* Journey */}
+            <div>
+              <h3 className="text-2xl font-bold text-white mb-3 flex items-center gap-2">
+                <span className="text-primary">🚀</span> The Journey
+              </h3>
+              <p className="text-lg text-gray-300 leading-relaxed">
+                From Guatemala to the global tech community, my journey has been fueled by curiosity 
+                and a commitment to continuous learning. With expertise in Python, JavaScript, TypeScript, 
+                and Ruby, I've built solutions across the full stack.
+              </p>
+            </div>
+
+            {/* Human Side */}
+            <div>
+              <h3 className="text-2xl font-bold text-white mb-3 flex items-center gap-2">
+                <span className="text-primary">🎵</span> The Human Side
+              </h3>
+              <p className="text-lg text-gray-300 leading-relaxed">
+                When I'm not crafting code, you'll find me making music (a passion since I was 14) or 
+                spending time with cats. I believe in leaving the world better than we found it, championing 
+                teamwork, and ensuring everyone gets a fair chance to succeed.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        {/* Stats Grid */}
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-16">
+          <div className="bg-gray-900 border border-gray-800 rounded-lg p-6 text-center">
+            <div className="text-4xl font-bold text-primary mb-2">12+</div>
+            <div className="text-gray-400">Years Experience</div>
+          </div>
+          <div className="bg-gray-900 border border-gray-800 rounded-lg p-6 text-center">
+            <div className="text-4xl font-bold text-secondary mb-2">86+</div>
+            <div className="text-gray-400">Projects</div>
+          </div>
+          <div className="bg-gray-900 border border-gray-800 rounded-lg p-6 text-center">
+            <div className="text-4xl font-bold text-accent mb-2">4</div>
+            <div className="text-gray-400">Tech Stacks</div>
+          </div>
+          <div className="bg-gray-900 border border-gray-800 rounded-lg p-6 text-center">
+            <div className="text-4xl font-bold text-primary mb-2">∞</div>
+            <div className="text-gray-400">Learning</div>
+          </div>
+        </div>
+
+        {/* Vision & CTA */}
+        <div className="text-center bg-gray-900 border border-gray-800 rounded-2xl p-12">
+          <h3 className="text-3xl font-bold text-white mb-4">
+            Fascinated by entrepreneurship 🚀 science �� and education 📚
+          </h3>
+          <p className="text-xl text-gray-300 mb-8 max-w-2xl mx-auto">
+            I'm always looking for opportunities to blend technology with purpose. 
+            If you want to create a better version of the world, let's talk.
+          </p>
+          <a href="/about" className="btn btn-primary btn-lg gap-2 text-white">
+            Read My Full Story
+            <ArrowRight size={20} />
+          </a>
+        </div>
+      </div>
+    </section>
+  );
+};
+```
+
+---
+
+### Color Scheme & Styling
+
+**Background:**
+- Main: `bg-black`
+- Cards: `bg-gray-900` with `border-gray-800`
+- Accents: Use primary, secondary, accent from theme
+
+**Text Colors:**
+- Headings: `text-white`
+- Body: `text-gray-300`
+- Labels: `text-gray-400`
+- Muted: `text-gray-500`
+
+**Interactive Elements:**
+- Buttons: `btn-primary` with `text-white`
+- Hover states: Subtle scale and color transitions
+- Links: Underline on hover
+
+---
+
+### Implementation Checklist
+
+#### Phase 1: Structure & Content
+- [ ] Update heading to "The Story Behind the Code"
+- [ ] Rewrite content to reflect "Code Poet" brand
+- [ ] Add philosophy, journey, human side sections
+- [ ] Update background to black
+- [ ] Ensure text colors are readable on dark background
+
+#### Phase 2: Visual Enhancements
+- [ ] Add background pattern matching Hero
+- [ ] Enhance profile image with ring and glow effects
+- [ ] Create stats grid with 4 key metrics
+- [ ] Add decorative elements (blur circles)
+
+#### Phase 3: Content Organization
+- [ ] Organize content into clear sections with icons
+- [ ] Add visual hierarchy with headings
+- [ ] Ensure responsive layout (mobile, tablet, desktop)
+
+#### Phase 4: CTA Enhancement
+- [ ] Replace simple link with prominent CTA section
+- [ ] Add compelling copy for CTA
+- [ ] Style button to match Hero buttons
+- [ ] Add icon to button
+
+#### Phase 5: Polish
+- [ ] Test on all screen sizes
+- [ ] Verify color contrast
+- [ ] Check image loading and optimization
+- [ ] Ensure smooth transitions
+- [ ] Verify link functionality
+
+---
+
+### Responsive Design
+
+#### Mobile (< 768px)
+- Single column layout
+- Image above content
+- Smaller text sizes
+- Stats in 2x2 grid
+- Full-width CTA
+
+#### Tablet (768px - 1024px)
+- Two-column layout begins
+- Medium text sizes
+- Stats in 2x2 or 4x1 grid
+- Balanced spacing
+
+#### Desktop (> 1024px)
+- Full two-column layout
+- Large, impactful typography
+- Stats in 4x1 grid
+- Maximum visual impact
+
+---
+
+### Content Tone Guidelines
+
+**Do:**
+- Use first person ("I'm Alejandro")
+- Be authentic and personal
+- Show passion and personality
+- Mention specific technologies
+- Include Guatemala and music
+- Emphasize continuous learning
+
+**Don't:**
+- Be overly formal or corporate
+- Use generic developer clichés
+- Hide personality behind professionalism
+- Forget the "Code Poet" brand
+- Ignore the artistic/creative angle
+
+---
+
+### Success Metrics
+
+**Engagement:**
+- Time spent on About section
+- "Read Full Story" click-through rate
+- Scroll depth through content
+
+**Content Effectiveness:**
+- Does it reinforce "Code Poet" brand?
+- Does it feel authentic and personal?
+- Does it create emotional connection?
+- Does it drive action (CTA clicks)?
+
+---
+
+### Next Steps After About Completion
+
+1. **Update context.md** - Document About section changes
+2. **Create 3.3 Portfolio Section** - Next development section
+3. **Test integration** - Ensure About flows well after Hero
+4. **Gather feedback** - User testing on new About section
+5. **Iterate** - Refine based on metrics
+
+---
+
+## Summary
+
+The improved About section transforms from a basic bio into a compelling narrative that:
+
+✅ **Reinforces "Code Poet" Brand** - Consistent messaging with Hero  
+✅ **Tells a Story** - Philosophy, journey, human side, vision  
+✅ **Shows Personality** - Guatemala, music, cats, passions  
+✅ **Provides Social Proof** - Stats and experience  
+✅ **Drives Action** - Compelling CTA to full story  
+✅ **Matches Visual Design** - Black background, consistent styling  
+
+This About section deepens the connection established in the Hero and invites visitors to learn more about the developer behind the code.
