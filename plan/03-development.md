@@ -1086,3 +1086,923 @@ The improved About section transforms from a basic bio into a compelling narrati
 ✅ **Matches Visual Design** - Black background, consistent styling  
 
 This About section deepens the connection established in the Hero and invites visitors to learn more about the developer behind the code.
+
+---
+
+## 3.3 Portfolio Section
+
+### Current Implementation Analysis
+
+**Current Portfolio Component Location:** `src/screens/Home/Portfolio/_Portfolio.tsx`
+
+#### Current State
+```tsx
+// Current heading
+"Porfolio" (typo - should be "Portfolio")
+
+// Current description
+"Here are some of the projects I have worked on. I am always looking for new challenges and opportunities to learn and grow."
+
+// Current projects (3 cards)
+1. Zigi App - Fintech app (React, TypeScript, MobX, Bitrise, WordPress)
+2. XP3 Talent - HR web app (PHP, Laravel, JavaScript, Vue, AWS Fargate)
+3. Afinidata - Chatbot (Python, Django, Node.js, Express, JavaScript, React, Vue, Messenger, Twilio)
+
+// Current layout
+- White background
+- 3-column grid (responsive)
+- DaisyUI card components
+- Placeholder images
+- "More about" buttons
+```
+
+#### Current Strengths ✅
+- Shows diverse tech stack (Python, PHP, JavaScript, TypeScript)
+- Multiple projects displayed
+- Responsive grid layout
+- Clean card design
+- Technology icons visible
+
+#### Current Weaknesses ❌
+- **Typo in heading** - "Porfolio" instead of "Portfolio"
+- **Generic white background** - Doesn't match Hero/About aesthetic
+- **Placeholder images** - Not real project screenshots
+- **Colorful icons** - Doesn't fit melancholic theme
+- **Generic description** - Doesn't reflect "Code Poet" brand
+- **Weak CTAs** - "More about" is vague
+- **No project links** - Missing GitHub/live demo links
+- **Limited information** - No dates, no impact metrics
+- **Inconsistent with brand** - Doesn't show artistic approach
+
+---
+
+### Recommended Portfolio Improvements
+
+Based on the melancholic aesthetic and "Code Poet" brand:
+
+#### 1. **Updated Heading & Messaging**
+
+**Primary Heading:**
+```
+Selected Works
+```
+
+**Alternative Heading Options:**
+- "Projects & Poetry in Code"
+- "Code Creations"
+- "Where Code Meets Craft"
+- "Portfolio of Solutions"
+
+**Opening Statement:**
+```
+Each project is a story written in code—a blend of technical precision and creative problem-solving. 
+These are some of the solutions I've crafted over 12+ years of turning ideas into reality.
+```
+
+#### 2. **Visual Design Updates**
+
+**Background:**
+- Change from white to **black** (matching Hero)
+- Add subtle pattern overlay (consistent with Hero/About)
+- Maintain dark, melancholic aesthetic
+
+**Color Scheme:**
+- Card backgrounds: `bg-gray-900` or `bg-black`
+- Borders: `border-gray-800`
+- Text: White/gray tones
+- Hover states: Subtle gray transitions
+
+**Tech Stack Icons:**
+- Start in **grayscale** (like Hero icons)
+- Reveal brand colors on hover
+- Consistent with melancholic theme
+
+#### 3. **Enhanced Project Cards**
+
+**Card Structure:**
+```tsx
+<article className="card bg-gray-900 border border-gray-800 hover:border-gray-600 transition-all">
+  <figure className="relative overflow-hidden">
+    <img src="/projects/project-name.jpg" alt="Project Name" className="grayscale hover:grayscale-0 transition-all" />
+    <div className="absolute top-4 right-4">
+      <span className="badge badge-ghost text-gray-400">2023</span>
+    </div>
+  </figure>
+  
+  <div className="card-body">
+    <h3 className="card-title text-white">Project Name</h3>
+    <p className="text-gray-400">Brief description of the project and its impact</p>
+    
+    <div className="my-4">
+      <p className="text-sm text-gray-500 mb-2">Tech Stack:</p>
+      <div className="flex flex-wrap gap-2">
+        {/* Grayscale icons with hover colors */}
+      </div>
+    </div>
+    
+    <div className="card-actions justify-between items-center">
+      <div className="flex gap-2">
+        <a href="#" className="btn btn-sm btn-ghost text-gray-400 border border-gray-700">
+          <Github /> Code
+        </a>
+        <a href="#" className="btn btn-sm btn-ghost text-gray-400 border border-gray-700">
+          <ExternalLink /> Live
+        </a>
+      </div>
+    </div>
+  </div>
+</article>
+```
+
+#### 4. **Project Information to Include**
+
+For each project:
+- **Name** - Clear, memorable
+- **Year/Date** - When it was built
+- **Description** - What it does, why it matters
+- **Tech Stack** - Technologies used (with icons)
+- **Role** - Your contribution
+- **Impact** - Metrics, users, results (if available)
+- **Links** - GitHub repo, live demo, case study
+- **Image** - Real screenshot or mockup
+
+#### 5. **Content Updates**
+
+**Fix Typo:**
+- "Porfolio" → "Portfolio" or "Selected Works"
+
+**Better Descriptions:**
+- **Zigi App:** "Democratizing banking through fintech innovation. Built a mobile-first platform enabling financial access for underserved communities."
+- **XP3 Talent:** "Streamlining human resources with intelligent automation. Created a comprehensive HR management system serving 500+ companies."
+- **Afinidata:** "Supporting early childhood development through AI-powered conversations. Chatbot reaching 100,000+ families worldwide."
+
+**Add Metrics:**
+- User counts
+- Performance improvements
+- Business impact
+- Awards/recognition
+
+#### 6. **Layout Options**
+
+**Option A: Grid (Current)**
+```
+┌────────┬────────┬────────┐
+│Project │Project │Project │
+│   1    │   2    │   3    │
+└────────┴────────┴────────┘
+```
+
+**Option B: Featured + Grid**
+```
+┌─────────────────────────┐
+│   Featured Project      │
+│   (Larger card)         │
+└─────────────────────────┘
+┌──────┬──────┬──────┐
+│Proj 2│Proj 3│Proj 4│
+└──────┴──────┴──────┘
+```
+
+**Option C: Timeline**
+```
+2024 ─┬─ Project 1
+      │
+2023 ─┼─ Project 2
+      │
+2022 ─┼─ Project 3
+      │
+2021 ─┴─ Project 4
+```
+
+---
+
+### Improved Portfolio Component Structure
+
+```tsx
+import { 
+  SiReact, SiTypescript, SiPython, SiDjango, SiNodedotjs,
+  SiPhp, SiLaravel, SiVuedotjs, SiJavascript
+} from "@icons-pack/react-simple-icons";
+import { Github, ExternalLink } from "lucide-react";
+
+export const Portfolio = () => {
+  return (
+    <section className="bg-black py-24 relative overflow-hidden" id="portfolio">
+      {/* Background Pattern */}
+      <div className="absolute inset-0 opacity-5">
+        <div className="absolute inset-0" style={{
+          backgroundImage: 'radial-gradient(circle, currentColor 1px, transparent 1px)',
+          backgroundSize: '50px 50px'
+        }}></div>
+      </div>
+
+      <div className="mx-auto max-w-7xl px-4 relative z-10">
+        {/* Heading */}
+        <div className="text-center mb-16">
+          <h2 className="text-5xl lg:text-6xl font-bold text-white mb-4">
+            Selected Works
+          </h2>
+          <p className="text-xl text-gray-400 max-w-3xl mx-auto">
+            Each project is a story written in code—a blend of technical precision and creative problem-solving
+          </p>
+        </div>
+
+        {/* Projects Grid */}
+        <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
+          
+          {/* Project Card 1 - Zigi App */}
+          <article className="card bg-gray-900 border border-gray-800 hover:border-gray-600 transition-all">
+            <figure className="relative overflow-hidden h-48">
+              <img
+                src="https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.webp"
+                alt="Zigi App"
+                className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all"
+              />
+              <div className="absolute top-4 right-4">
+                <span className="badge bg-gray-800 border-gray-700 text-gray-400">2023</span>
+              </div>
+            </figure>
+            
+            <div className="card-body">
+              <h3 className="card-title text-white">Zigi App</h3>
+              <p className="text-gray-400">
+                Democratizing banking through fintech innovation. Mobile-first platform enabling financial access.
+              </p>
+              
+              <div className="my-4">
+                <p className="text-sm text-gray-500 mb-2">Tech Stack:</p>
+                <div className="flex flex-wrap gap-2">
+                  <SiReact size={24} className="grayscale hover:grayscale-0 transition-all cursor-pointer" style={{ color: '#61DAFB' }} />
+                  <SiTypescript size={24} className="grayscale hover:grayscale-0 transition-all cursor-pointer" style={{ color: '#3178C6' }} />
+                </div>
+              </div>
+              
+              <div className="card-actions justify-start">
+                <a href="#" className="btn btn-sm btn-ghost text-gray-400 border border-gray-700 hover:border-gray-500 gap-2">
+                  <Github size={16} /> Code
+                </a>
+                <a href="#" className="btn btn-sm btn-ghost text-gray-400 border border-gray-700 hover:border-gray-500 gap-2">
+                  <ExternalLink size={16} /> Live
+                </a>
+              </div>
+            </div>
+          </article>
+
+          {/* Project Card 2 - XP3 Talent */}
+          <article className="card bg-gray-900 border border-gray-800 hover:border-gray-600 transition-all">
+            <figure className="relative overflow-hidden h-48">
+              <img
+                src="https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.webp"
+                alt="XP3 Talent"
+                className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all"
+              />
+              <div className="absolute top-4 right-4">
+                <span className="badge bg-gray-800 border-gray-700 text-gray-400">2022</span>
+              </div>
+            </figure>
+            
+            <div className="card-body">
+              <h3 className="card-title text-white">XP3 Talent</h3>
+              <p className="text-gray-400">
+                Streamlining HR with intelligent automation. Comprehensive management system serving 500+ companies.
+              </p>
+              
+              <div className="my-4">
+                <p className="text-sm text-gray-500 mb-2">Tech Stack:</p>
+                <div className="flex flex-wrap gap-2">
+                  <SiPhp size={24} className="grayscale hover:grayscale-0 transition-all cursor-pointer" style={{ color: '#777BB4' }} />
+                  <SiLaravel size={24} className="grayscale hover:grayscale-0 transition-all cursor-pointer" style={{ color: '#FF2D20' }} />
+                  <SiVuedotjs size={24} className="grayscale hover:grayscale-0 transition-all cursor-pointer" style={{ color: '#4FC08D' }} />
+                </div>
+              </div>
+              
+              <div className="card-actions justify-start">
+                <a href="#" className="btn btn-sm btn-ghost text-gray-400 border border-gray-700 hover:border-gray-500 gap-2">
+                  <Github size={16} /> Code
+                </a>
+                <a href="#" className="btn btn-sm btn-ghost text-gray-400 border border-gray-700 hover:border-gray-500 gap-2">
+                  <ExternalLink size={16} /> Live
+                </a>
+              </div>
+            </div>
+          </article>
+
+          {/* Project Card 3 - Afinidata */}
+          <article className="card bg-gray-900 border border-gray-800 hover:border-gray-600 transition-all">
+            <figure className="relative overflow-hidden h-48">
+              <img
+                src="https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.webp"
+                alt="Afinidata"
+                className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all"
+              />
+              <div className="absolute top-4 right-4">
+                <span className="badge bg-gray-800 border-gray-700 text-gray-400">2021</span>
+              </div>
+            </figure>
+            
+            <div className="card-body">
+              <h3 className="card-title text-white">Afinidata</h3>
+              <p className="text-gray-400">
+                AI-powered chatbot for early childhood development. Reaching 100,000+ families worldwide.
+              </p>
+              
+              <div className="my-4">
+                <p className="text-sm text-gray-500 mb-2">Tech Stack:</p>
+                <div className="flex flex-wrap gap-2">
+                  <SiPython size={24} className="grayscale hover:grayscale-0 transition-all cursor-pointer" style={{ color: '#3776AB' }} />
+                  <SiDjango size={24} className="grayscale hover:grayscale-0 transition-all cursor-pointer" style={{ color: '#092E20' }} />
+                  <SiNodedotjs size={24} className="grayscale hover:grayscale-0 transition-all cursor-pointer" style={{ color: '#339933' }} />
+                  <SiReact size={24} className="grayscale hover:grayscale-0 transition-all cursor-pointer" style={{ color: '#61DAFB' }} />
+                </div>
+              </div>
+              
+              <div className="card-actions justify-start">
+                <a href="#" className="btn btn-sm btn-ghost text-gray-400 border border-gray-700 hover:border-gray-500 gap-2">
+                  <Github size={16} /> Code
+                </a>
+                <a href="#" className="btn btn-sm btn-ghost text-gray-400 border border-gray-700 hover:border-gray-500 gap-2">
+                  <ExternalLink size={16} /> Live
+                </a>
+              </div>
+            </div>
+          </article>
+
+        </div>
+
+        {/* View All Projects CTA */}
+        <div className="text-center mt-16">
+          <a href="/projects" className="btn btn-outline btn-lg gap-2 text-gray-300 border-2 border-gray-500 hover:bg-gray-800 hover:border-gray-400">
+            View All Projects
+            <ExternalLink size={20} />
+          </a>
+        </div>
+      </div>
+    </section>
+  );
+};
+```
+
+---
+
+### Implementation Checklist
+
+#### Phase 1: Structure & Content
+- [ ] Fix typo: "Porfolio" → "Selected Works"
+- [ ] Update background to black with pattern
+- [ ] Rewrite opening description
+- [ ] Add year badges to projects
+- [ ] Improve project descriptions with impact
+
+#### Phase 2: Visual Design
+- [ ] Change cards to dark theme (bg-gray-900, border-gray-800)
+- [ ] Update text colors (white headings, gray-400 body)
+- [ ] Add grayscale effect to project images
+- [ ] Make tech icons grayscale with hover colors
+- [ ] Add hover states to cards
+
+#### Phase 3: Enhanced Information
+- [ ] Add GitHub/Live links to each project
+- [ ] Include impact metrics where available
+- [ ] Add year/date badges
+- [ ] Update tech stack icons to match melancholic theme
+
+#### Phase 4: CTAs & Links
+- [ ] Replace "More about" with "Code" and "Live" buttons
+- [ ] Add "View All Projects" button at bottom
+- [ ] Ensure all links are functional
+- [ ] Style buttons with gray theme
+
+#### Phase 5: Polish
+- [ ] Replace placeholder images with real screenshots
+- [ ] Test responsive layout
+- [ ] Verify icon hover effects
+- [ ] Check accessibility
+- [ ] Ensure consistent spacing
+
+---
+
+### Color Scheme
+
+**Backgrounds:**
+- Section: `bg-black`
+- Cards: `bg-gray-900`
+- Badges: `bg-gray-800`
+
+**Borders:**
+- Default: `border-gray-800`
+- Hover: `border-gray-600`
+- Buttons: `border-gray-700`
+
+**Text:**
+- Headings: `text-white`
+- Body: `text-gray-400`
+- Labels: `text-gray-500`
+
+**Interactive:**
+- Buttons: `text-gray-400` with `hover:border-gray-500`
+- Icons: Grayscale → brand colors on hover
+- Images: Grayscale → color on hover
+
+---
+
+### Success Metrics
+
+**Visual Consistency:**
+- Matches Hero and About dark aesthetic
+- Grayscale theme with color on interaction
+- Consistent spacing and typography
+
+**Information Quality:**
+- Clear project descriptions
+- Visible tech stacks
+- Impact metrics included
+- Functional links
+
+**User Engagement:**
+- Click-through rate on project links
+- Time spent viewing projects
+- "View All Projects" CTA clicks
+
+---
+
+### Next Steps After Portfolio Completion
+
+1. **Update context.md** - Document Portfolio changes
+2. **Create 3.4 Next Section** - Continue with remaining sections
+3. **Test integration** - Ensure Portfolio flows well after About
+4. **Gather real assets** - Replace placeholder images
+5. **Add more projects** - Expand beyond initial 3
+
+---
+
+## Summary
+
+The improved Portfolio section transforms from a generic white showcase into a compelling dark gallery that:
+
+✅ **Matches Aesthetic** - Black background, grayscale theme  
+✅ **Shows Impact** - Metrics, descriptions, real value  
+✅ **Maintains Brand** - "Code Poet" storytelling approach  
+✅ **Provides Access** - GitHub and live demo links  
+✅ **Creates Interest** - Grayscale to color on hover  
+✅ **Professional Polish** - Clean cards, consistent styling  
+
+This Portfolio section continues the melancholic, introspective aesthetic while showcasing technical excellence and real-world impact.
+
+---
+
+## 3.4 Skills & Expertise Section
+
+### Current Implementation Analysis
+
+**Current Section:** Services (`src/screens/Home/Services/_Services.tsx`)
+
+#### Current State
+```tsx
+// Current heading
+"Services"
+
+// Current description
+"I can help you with the following services"
+
+// Current services (3 cards)
+1. Web Development - "I can help you build a website from scratch or improve your existing one."
+2. Mobile Development - "I can help you build a mobile app from scratch or improve your existing one."
+3. Backend Development - "I can help you build a backend from scratch or improve your existing one."
+
+// Current layout
+- White background
+- 3-column grid (responsive)
+- DaisyUI card components
+- Generic icons (placeholder)
+- Simple descriptions
+```
+
+#### Current Strengths ✅
+- Clean card layout
+- Responsive grid
+- Clear service categories
+- Simple, understandable
+
+#### Current Weaknesses ❌
+- **Generic heading** - "Services" doesn't reflect "Code Poet" brand
+- **Vague descriptions** - Too generic, not specific
+- **No technical depth** - Doesn't showcase expertise
+- **Missing technologies** - No mention of specific tech stacks
+- **No differentiation** - Could be any developer's services
+- **Placeholder icons** - Not meaningful or branded
+- **White background only** - Doesn't match site aesthetic
+- **No personality** - Doesn't reflect melancholic artist identity
+
+---
+
+### Recommended Skills & Expertise Improvements
+
+Transform "Services" into "Skills & Expertise" that showcases technical depth with artistic sensibility:
+
+#### 1. **Updated Heading & Messaging**
+
+**Primary Heading:**
+```
+Skills & Expertise
+```
+
+**Alternative Heading Options:**
+- "Technical Craftsmanship"
+- "Tools of the Trade"
+- "My Technical Arsenal"
+- "What I Bring to the Table"
+
+**Opening Statement:**
+```
+12+ years of crafting solutions across the full stack. These are the tools and technologies 
+I wield to turn ideas into elegant, functional reality.
+```
+
+#### 2. **Content Structure**
+
+Instead of generic "services," organize by **technical domains**:
+
+**Option A: By Stack Layer**
+1. **Frontend Mastery**
+   - React, Next.js, TypeScript
+   - Modern UI/UX implementation
+   - Responsive, accessible interfaces
+
+2. **Backend Excellence**
+   - Python/Django, Node.js, Ruby
+   - RESTful APIs, GraphQL
+   - Database design & optimization
+
+3. **Full-Stack Integration**
+   - End-to-end architecture
+   - DevOps & deployment
+   - Performance optimization
+
+**Option B: By Technology**
+1. **Python & Django**
+   - 12+ years experience
+   - Complex web applications
+   - API development
+
+2. **JavaScript/TypeScript**
+   - React, Vue, Next.js
+   - Modern frontend frameworks
+   - Type-safe development
+
+3. **Ruby & Rails**
+   - 8+ years experience
+   - Rapid prototyping
+   - Convention over configuration
+
+**Option C: By Capability** (Recommended)
+1. **Full-Stack Development**
+   - End-to-end application architecture
+   - Frontend: React, Next.js, TypeScript, Vue
+   - Backend: Python/Django, Node.js, Ruby/Rails
+   - Databases: PostgreSQL, MongoDB, MySQL
+
+2. **API Design & Integration**
+   - RESTful API architecture
+   - GraphQL implementation
+   - Third-party integrations
+   - Microservices patterns
+
+3. **Technical Leadership**
+   - Code review & mentorship
+   - Architecture decisions
+   - Best practices implementation
+   - Team collaboration
+
+#### 3. **Visual Design**
+
+**Background:**
+- Black background (matching Hero)
+- Subtle pattern overlay
+- Consistent dark aesthetic
+
+**Card Design:**
+```tsx
+<div className="card bg-gray-900 border border-gray-800 hover:border-gray-600">
+  <div className="card-body">
+    <div className="flex items-center gap-4 mb-4">
+      {/* Icon */}
+      <div className="w-16 h-16 rounded-lg bg-gray-800 flex items-center justify-center">
+        <Code size={32} className="text-gray-400" />
+      </div>
+      {/* Title */}
+      <h3 className="card-title text-white">Full-Stack Development</h3>
+    </div>
+    
+    {/* Description */}
+    <p className="text-gray-400 mb-4">
+      End-to-end application architecture...
+    </p>
+    
+    {/* Tech Stack */}
+    <div className="flex flex-wrap gap-2">
+      <span className="badge bg-gray-800 text-gray-400">React</span>
+      <span className="badge bg-gray-800 text-gray-400">Django</span>
+      <span className="badge bg-gray-800 text-gray-400">TypeScript</span>
+    </div>
+  </div>
+</div>
+```
+
+#### 4. **Technology Badges**
+
+For each skill area, show specific technologies as badges:
+
+```tsx
+// Frontend
+<div className="flex flex-wrap gap-2">
+  <span className="badge bg-gray-800 border-gray-700 text-gray-400">React</span>
+  <span className="badge bg-gray-800 border-gray-700 text-gray-400">Next.js</span>
+  <span className="badge bg-gray-800 border-gray-700 text-gray-400">TypeScript</span>
+  <span className="badge bg-gray-800 border-gray-700 text-gray-400">Vue</span>
+  <span className="badge bg-gray-800 border-gray-700 text-gray-400">Tailwind</span>
+</div>
+
+// Backend
+<div className="flex flex-wrap gap-2">
+  <span className="badge bg-gray-800 border-gray-700 text-gray-400">Python</span>
+  <span className="badge bg-gray-800 border-gray-700 text-gray-400">Django</span>
+  <span className="badge bg-gray-800 border-gray-700 text-gray-400">Node.js</span>
+  <span className="badge bg-gray-800 border-gray-700 text-gray-400">Ruby</span>
+  <span className="badge bg-gray-800 border-gray-700 text-gray-400">PostgreSQL</span>
+</div>
+```
+
+#### 5. **Experience Indicators**
+
+Add years of experience for each skill:
+
+```tsx
+<div className="flex items-center gap-2 text-sm text-gray-500">
+  <Clock size={16} />
+  <span>12+ years</span>
+</div>
+```
+
+---
+
+### Improved Skills Component Structure
+
+```tsx
+import { Code, Database, Layers, Clock } from "lucide-react";
+
+export const Skills = () => {
+  return (
+    <section className="bg-black py-24 relative overflow-hidden" id="skills">
+      {/* Background Pattern */}
+      <div className="absolute inset-0 opacity-5">
+        <div className="absolute inset-0" style={{
+          backgroundImage: 'radial-gradient(circle, currentColor 1px, transparent 1px)',
+          backgroundSize: '50px 50px'
+        }}></div>
+      </div>
+
+      <div className="mx-auto max-w-7xl px-4 relative z-10">
+        {/* Heading */}
+        <div className="text-center mb-16">
+          <h2 className="text-5xl lg:text-6xl font-bold text-white mb-4">
+            Skills & Expertise
+          </h2>
+          <p className="text-xl text-gray-400 max-w-3xl mx-auto">
+            12+ years of crafting solutions across the full stack. These are the tools and technologies 
+            I wield to turn ideas into elegant, functional reality.
+          </p>
+        </div>
+
+        {/* Skills Grid */}
+        <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
+          
+          {/* Skill Card 1 - Full-Stack Development */}
+          <div className="card bg-gray-900 border border-gray-800 hover:border-gray-600 transition-all">
+            <div className="card-body">
+              <div className="flex items-center gap-4 mb-4">
+                <div className="w-16 h-16 rounded-lg bg-gray-800 flex items-center justify-center">
+                  <Layers size={32} className="text-gray-400" />
+                </div>
+                <div>
+                  <h3 className="text-xl font-bold text-white">Full-Stack Development</h3>
+                  <div className="flex items-center gap-2 text-sm text-gray-500">
+                    <Clock size={14} />
+                    <span>12+ years</span>
+                  </div>
+                </div>
+              </div>
+              
+              <p className="text-gray-400 mb-4">
+                End-to-end application architecture, from database design to user interfaces. 
+                Building scalable, maintainable solutions that work beautifully.
+              </p>
+              
+              <div className="space-y-3">
+                <div>
+                  <p className="text-sm text-gray-500 mb-2">Frontend:</p>
+                  <div className="flex flex-wrap gap-2">
+                    <span className="badge bg-gray-800 border-gray-700 text-gray-400">React</span>
+                    <span className="badge bg-gray-800 border-gray-700 text-gray-400">Next.js</span>
+                    <span className="badge bg-gray-800 border-gray-700 text-gray-400">TypeScript</span>
+                    <span className="badge bg-gray-800 border-gray-700 text-gray-400">Vue</span>
+                  </div>
+                </div>
+                <div>
+                  <p className="text-sm text-gray-500 mb-2">Backend:</p>
+                  <div className="flex flex-wrap gap-2">
+                    <span className="badge bg-gray-800 border-gray-700 text-gray-400">Python</span>
+                    <span className="badge bg-gray-800 border-gray-700 text-gray-400">Django</span>
+                    <span className="badge bg-gray-800 border-gray-700 text-gray-400">Node.js</span>
+                    <span className="badge bg-gray-800 border-gray-700 text-gray-400">Ruby</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Skill Card 2 - API Design */}
+          <div className="card bg-gray-900 border border-gray-800 hover:border-gray-600 transition-all">
+            <div className="card-body">
+              <div className="flex items-center gap-4 mb-4">
+                <div className="w-16 h-16 rounded-lg bg-gray-800 flex items-center justify-center">
+                  <Code size={32} className="text-gray-400" />
+                </div>
+                <div>
+                  <h3 className="text-xl font-bold text-white">API Design & Integration</h3>
+                  <div className="flex items-center gap-2 text-sm text-gray-500">
+                    <Clock size={14} />
+                    <span>10+ years</span>
+                  </div>
+                </div>
+              </div>
+              
+              <p className="text-gray-400 mb-4">
+                RESTful and GraphQL API architecture. Designing clean, intuitive interfaces 
+                between systems that scale and perform.
+              </p>
+              
+              <div className="space-y-3">
+                <div>
+                  <p className="text-sm text-gray-500 mb-2">Technologies:</p>
+                  <div className="flex flex-wrap gap-2">
+                    <span className="badge bg-gray-800 border-gray-700 text-gray-400">REST</span>
+                    <span className="badge bg-gray-800 border-gray-700 text-gray-400">GraphQL</span>
+                    <span className="badge bg-gray-800 border-gray-700 text-gray-400">WebSockets</span>
+                    <span className="badge bg-gray-800 border-gray-700 text-gray-400">OAuth</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Skill Card 3 - Database & Architecture */}
+          <div className="card bg-gray-900 border border-gray-800 hover:border-gray-600 transition-all">
+            <div className="card-body">
+              <div className="flex items-center gap-4 mb-4">
+                <div className="w-16 h-16 rounded-lg bg-gray-800 flex items-center justify-center">
+                  <Database size={32} className="text-gray-400" />
+                </div>
+                <div>
+                  <h3 className="text-xl font-bold text-white">Database & Architecture</h3>
+                  <div className="flex items-center gap-2 text-sm text-gray-500">
+                    <Clock size={14} />
+                    <span>12+ years</span>
+                  </div>
+                </div>
+              </div>
+              
+              <p className="text-gray-400 mb-4">
+                Database design, optimization, and system architecture. Building data models 
+                that support growth and maintain performance.
+              </p>
+              
+              <div className="space-y-3">
+                <div>
+                  <p className="text-sm text-gray-500 mb-2">Databases:</p>
+                  <div className="flex flex-wrap gap-2">
+                    <span className="badge bg-gray-800 border-gray-700 text-gray-400">PostgreSQL</span>
+                    <span className="badge bg-gray-800 border-gray-700 text-gray-400">MongoDB</span>
+                    <span className="badge bg-gray-800 border-gray-700 text-gray-400">MySQL</span>
+                    <span className="badge bg-gray-800 border-gray-700 text-gray-400">Redis</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        {/* Additional Skills Section */}
+        <div className="mt-16 text-center">
+          <h3 className="text-2xl font-bold text-white mb-8">Also Experienced With</h3>
+          <div className="flex flex-wrap gap-3 justify-center max-w-4xl mx-auto">
+            <span className="badge badge-lg bg-gray-800 border-gray-700 text-gray-400">Docker</span>
+            <span className="badge badge-lg bg-gray-800 border-gray-700 text-gray-400">AWS</span>
+            <span className="badge badge-lg bg-gray-800 border-gray-700 text-gray-400">Git</span>
+            <span className="badge badge-lg bg-gray-800 border-gray-700 text-gray-400">CI/CD</span>
+            <span className="badge badge-lg bg-gray-800 border-gray-700 text-gray-400">Agile</span>
+            <span className="badge badge-lg bg-gray-800 border-gray-700 text-gray-400">TDD</span>
+            <span className="badge badge-lg bg-gray-800 border-gray-700 text-gray-400">Microservices</span>
+            <span className="badge badge-lg bg-gray-800 border-gray-700 text-gray-400">Tailwind CSS</span>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+};
+```
+
+---
+
+### Implementation Checklist
+
+#### Phase 1: Structure & Content
+- [ ] Rename "Services" to "Skills & Expertise"
+- [ ] Update background to black with pattern
+- [ ] Rewrite opening description
+- [ ] Reorganize into technical domains
+- [ ] Add years of experience indicators
+
+#### Phase 2: Visual Design
+- [ ] Change cards to dark theme (bg-gray-900)
+- [ ] Update text colors (white headings, gray-400 body)
+- [ ] Add icon containers with gray backgrounds
+- [ ] Implement hover states on cards
+- [ ] Add technology badges
+
+#### Phase 3: Content Enhancement
+- [ ] Write specific, detailed descriptions
+- [ ] Add frontend/backend technology lists
+- [ ] Include experience years for each skill
+- [ ] Add "Also Experienced With" section
+- [ ] Use meaningful icons (Code, Database, Layers)
+
+#### Phase 4: Polish
+- [ ] Test responsive layout
+- [ ] Ensure consistent spacing
+- [ ] Verify all badges display correctly
+- [ ] Check color contrast
+- [ ] Align with melancholic aesthetic
+
+---
+
+### Color Scheme
+
+**Backgrounds:**
+- Section: `bg-black`
+- Cards: `bg-gray-900`
+- Icon containers: `bg-gray-800`
+- Badges: `bg-gray-800`
+
+**Borders:**
+- Default: `border-gray-800`
+- Hover: `border-gray-600`
+- Badges: `border-gray-700`
+
+**Text:**
+- Headings: `text-white`
+- Body: `text-gray-400`
+- Labels: `text-gray-500`
+
+---
+
+### Success Metrics
+
+**Technical Depth:**
+- Shows specific technologies
+- Demonstrates breadth and depth
+- Includes years of experience
+
+**Visual Consistency:**
+- Matches Hero/Portfolio dark aesthetic
+- Consistent card styling
+- Professional presentation
+
+**Brand Alignment:**
+- Reflects "Code Poet" identity
+- Shows technical excellence
+- Maintains melancholic mood
+
+---
+
+### Next Steps After Skills Completion
+
+1. **Update context.md** - Document Skills section
+2. **Create 3.5 Next Section** - Continue with remaining sections
+3. **Test integration** - Ensure Skills flows well in sequence
+4. **Consider combining** - May merge with Experience section
+
+---
+
+## Summary
+
+The improved Skills & Expertise section transforms from generic "Services" into a detailed technical showcase that:
+
+✅ **Shows Technical Depth** - Specific technologies, years of experience  
+✅ **Maintains Aesthetic** - Black background, dark cards, consistent styling  
+✅ **Demonstrates Breadth** - Full-stack, APIs, databases, DevOps  
+✅ **Reflects Brand** - Professional yet artistic, technical yet thoughtful  
+✅ **Provides Value** - Clear understanding of capabilities  
+✅ **Stays Consistent** - Matches Hero/Portfolio melancholic theme  
+
+This Skills section gives potential clients and collaborators a clear, comprehensive view of technical capabilities while maintaining the site's unique artistic identity.
