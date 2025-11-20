@@ -28,16 +28,14 @@ export const About = () => {
           {/* Image Section */}
           <div className="flex justify-center">
             <div className="relative">
-              <div className="w-80 h-80 rounded-full overflow-hidden ring-4 ring-primary ring-offset-4 ring-offset-white shadow-2xl">
+              {/* Clean profile image with subtle styling */}
+              <div className="w-80 h-80 rounded-full overflow-hidden ring-2 ring-gray-400 ring-offset-4 ring-offset-white shadow-2xl">
                 <img
                   src="/images/about/me.jpg"
                   alt="Alejandro Reyna"
                   className="w-full h-full object-cover"
                 />
               </div>
-              {/* Decorative elements */}
-              <div className="absolute -top-4 -right-4 w-24 h-24 bg-primary/10 rounded-full blur-xl"></div>
-              <div className="absolute -bottom-4 -left-4 w-32 h-32 bg-secondary/10 rounded-full blur-xl"></div>
             </div>
           </div>
 
@@ -81,22 +79,22 @@ export const About = () => {
           </div>
         </div>
 
-        {/* Stats Grid */}
+        {/* Stats Grid - Muted, melancholic colors */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-16">
-          <div className="bg-gray-50 border-2 border-gray-200 rounded-lg p-6 text-center hover:border-primary hover:shadow-lg transition-all">
-            <div className="text-4xl font-bold text-primary mb-2">12+</div>
+          <div className="bg-gray-50 border-2 border-gray-300 rounded-lg p-6 text-center hover:border-gray-500 hover:shadow-lg transition-all">
+            <div className="text-4xl font-bold text-gray-800 mb-2">12+</div>
             <div className="text-gray-600 font-medium">Years Experience</div>
           </div>
-          <div className="bg-gray-50 border-2 border-gray-200 rounded-lg p-6 text-center hover:border-secondary hover:shadow-lg transition-all">
-            <div className="text-4xl font-bold text-secondary mb-2">86+</div>
+          <div className="bg-gray-50 border-2 border-gray-300 rounded-lg p-6 text-center hover:border-gray-500 hover:shadow-lg transition-all">
+            <div className="text-4xl font-bold text-gray-800 mb-2">86+</div>
             <div className="text-gray-600 font-medium">Projects</div>
           </div>
-          <div className="bg-gray-50 border-2 border-gray-200 rounded-lg p-6 text-center hover:border-accent hover:shadow-lg transition-all">
-            <div className="text-4xl font-bold text-accent mb-2">4</div>
+          <div className="bg-gray-50 border-2 border-gray-300 rounded-lg p-6 text-center hover:border-gray-500 hover:shadow-lg transition-all">
+            <div className="text-4xl font-bold text-gray-800 mb-2">4</div>
             <div className="text-gray-600 font-medium">Tech Stacks</div>
           </div>
-          <div className="bg-gray-50 border-2 border-gray-200 rounded-lg p-6 text-center hover:border-primary hover:shadow-lg transition-all">
-            <div className="text-4xl font-bold text-primary mb-2">∞</div>
+          <div className="bg-gray-50 border-2 border-gray-300 rounded-lg p-6 text-center hover:border-gray-500 hover:shadow-lg transition-all">
+            <div className="text-4xl font-bold text-gray-800 mb-2">∞</div>
             <div className="text-gray-600 font-medium">Learning</div>
           </div>
         </div>

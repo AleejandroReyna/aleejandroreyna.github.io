@@ -55,7 +55,7 @@ export const Hero = () => {
               View My Work
               <ArrowRight size={20} />
             </a>
-            <a href="#contact" className="btn btn-outline btn-outline-primary btn-lg gap-2 text-white hover:bg-primary hover:text-white hover:border-primary">
+            <a href="#contact" className="btn btn-outline btn-lg gap-2 text-gray-300 border-2 border-gray-500 hover:bg-gray-800 hover:border-gray-400 transition-all">
               Get in Touch
               <Mail size={20} />
             </a>
@@ -63,7 +63,7 @@ export const Hero = () => {
               href="https://docs.google.com/document/d/19i8rsqaC642stR7IO8SOnJxGN19vojTO/edit"
               target="_blank"
               rel="noopener noreferrer"
-              className="btn btn-ghost gap-2 text-white hover:bg-gray-800"
+              className="btn btn-ghost gap-2 text-gray-400 border border-gray-700 hover:bg-gray-900 hover:border-gray-600 hover:text-gray-300"
             >
               Download Resume
               <Download size={20} />
@@ -76,7 +76,7 @@ export const Hero = () => {
               href="https://linkedin.com/in/aleejandroreyna"
               target="_blank"
               rel="noopener noreferrer"
-              className="btn btn-ghost gap-2 hover:btn-primary transition-all"
+              className="btn btn-ghost gap-2 text-gray-300 border border-gray-700 hover:bg-[#0A66C2] hover:border-[#0A66C2] hover:text-white transition-all"
               aria-label="LinkedIn Profile"
             >
               <LinkedinPlain color="currentColor" size={24} />
@@ -86,7 +86,7 @@ export const Hero = () => {
               href="https://github.com/aleejandroreyna"
               target="_blank"
               rel="noopener noreferrer"
-              className="btn btn-ghost gap-2 hover:btn-primary transition-all"
+              className="btn btn-ghost gap-2 text-gray-300 border border-gray-700 hover:bg-[#6e5494] hover:border-[#6e5494] hover:text-white transition-all"
               aria-label="GitHub Profile"
             >
               <SiGithub size={24} />
@@ -96,7 +96,7 @@ export const Hero = () => {
               href="https://calendly.com/aleejandroreyna"
               target="_blank"
               rel="noopener noreferrer"
-              className="btn btn-ghost gap-2 hover:btn-primary transition-all"
+              className="btn btn-ghost gap-2 text-gray-300 border border-gray-700 hover:bg-[#006BFF] hover:border-[#006BFF] hover:text-white transition-all"
               aria-label="Schedule a Call"
             >
               <FontAwesomeIcon icon={faCalendarAlt} size="lg" />
@@ -104,7 +104,7 @@ export const Hero = () => {
             </a>
             <a
               href="mailto:me@alejandroreyna.com"
-              className="btn btn-ghost gap-2 hover:btn-primary transition-all"
+              className="btn btn-ghost gap-2 text-gray-300 border border-gray-700 hover:bg-[#14B8A6] hover:border-[#14B8A6] hover:text-white transition-all"
               aria-label="Send Email"
             >
               <Mail size={24} />
@@ -117,22 +117,22 @@ export const Hero = () => {
             <p className="text-sm text-gray-500 mb-4 uppercase tracking-wider">Tech Stack</p>
             <div className="flex flex-wrap gap-6 items-center justify-center">
               <div className="tooltip" data-tip="Python/Django">
-                <SiPython size={40} className="hover:scale-110 transition-transform cursor-pointer" style={{ color: '#3776AB' }} />
+                <SiPython size={40} className="hover:scale-110 transition-all cursor-pointer grayscale hover:grayscale-0" style={{ color: '#3776AB' }} />
               </div>
               <div className="tooltip" data-tip="TypeScript">
-                <SiTypescript size={40} className="hover:scale-110 transition-transform cursor-pointer" style={{ color: '#3178C6' }} />
+                <SiTypescript size={40} className="hover:scale-110 transition-all cursor-pointer grayscale hover:grayscale-0" style={{ color: '#3178C6' }} />
               </div>
               <div className="tooltip" data-tip="React">
-                <SiReact size={40} className="hover:scale-110 transition-transform cursor-pointer" style={{ color: '#61DAFB' }} />
+                <SiReact size={40} className="hover:scale-110 transition-all cursor-pointer grayscale hover:grayscale-0" style={{ color: '#61DAFB' }} />
               </div>
               <div className="tooltip" data-tip="Node.js">
-                <SiNodedotjs size={40} className="hover:scale-110 transition-transform cursor-pointer" style={{ color: '#339933' }} />
+                <SiNodedotjs size={40} className="hover:scale-110 transition-all cursor-pointer grayscale hover:grayscale-0" style={{ color: '#339933' }} />
               </div>
               <div className="tooltip" data-tip="Next.js">
-                <SiNextdotjs size={40} className="hover:scale-110 transition-transform cursor-pointer" style={{ color: '#FFFFFF' }} />
+                <SiNextdotjs size={40} className="hover:scale-110 transition-all cursor-pointer grayscale hover:grayscale-0" style={{ color: '#FFFFFF' }} />
               </div>
               <div className="tooltip" data-tip="Ruby">
-                <SiRuby size={40} className="hover:scale-110 transition-transform cursor-pointer" style={{ color: '#CC342D' }} />
+                <SiRuby size={40} className="hover:scale-110 transition-all cursor-pointer grayscale hover:grayscale-0" style={{ color: '#CC342D' }} />
               </div>
             </div>
           </div>
@@ -142,17 +142,17 @@ export const Hero = () => {
         <div className="w-full max-w-4xl mx-auto">
           <div className="stats stats-vertical lg:stats-horizontal shadow-xl bg-black border border-gray-800 w-full">
             <div className="stat place-items-center">
-              <div className="stat-value text-primary">86+</div>
+              <div className="stat-value text-gray-400">86+</div>
               <div className="stat-title">Repositories</div>
               <div className="stat-desc">GitHub Projects</div>
             </div>
             <div className="stat place-items-center">
-              <div className="stat-value text-secondary">246+</div>
+              <div className="stat-value text-gray-400">246+</div>
               <div className="stat-title">Contributions</div>
               <div className="stat-desc">Last Year</div>
             </div>
             <div className="stat place-items-center">
-              <div className="stat-value text-accent">4</div>
+              <div className="stat-value text-gray-400">4</div>
               <div className="stat-title">Organizations</div>
               <div className="stat-desc">Active Member</div>
             </div>
