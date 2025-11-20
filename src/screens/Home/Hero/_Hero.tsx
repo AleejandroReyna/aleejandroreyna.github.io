@@ -3,7 +3,6 @@ import { LinkedinPlain } from 'devicons-react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCalendarAlt } from '@fortawesome/free-solid-svg-icons';
 import { ArrowRight, Mail, Download, ChevronDown } from 'lucide-react';
-import { yearsOfExperience } from '@/utils/yearsOfExperience';
 
 export const Hero = () => {
   return (
