@@ -1,5 +1,5 @@
 import Link from "next/link"
-import { ArrowRight } from "lucide-react"
+import { ArrowRight, Palette, Rocket, Music, Telescope, BookOpen } from "lucide-react"
 
 export const About = () => {
   return (
@@ -44,7 +44,7 @@ export const About = () => {
             {/* Philosophy */}
             <div>
               <h3 className="text-2xl font-bold text-gray-900 mb-3 flex items-center gap-2">
-                <span className="text-primary">🎨</span> The Philosophy
+                <Palette className="text-primary" size={24} /> The Philosophy
               </h3>
               <p className="text-lg text-gray-700 leading-relaxed">
                 I&apos;m Alejandro Reyna, a full-stack developer from Guatemala who believes that
@@ -56,7 +56,7 @@ export const About = () => {
             {/* Journey */}
             <div>
               <h3 className="text-2xl font-bold text-gray-900 mb-3 flex items-center gap-2">
-                <span className="text-primary">🚀</span> The Journey
+                <Rocket className="text-primary" size={24} /> The Journey
               </h3>
               <p className="text-lg text-gray-700 leading-relaxed">
                 From Guatemala to the global tech community, my journey has been fueled by curiosity
@@ -68,7 +68,7 @@ export const About = () => {
             {/* Human Side */}
             <div>
               <h3 className="text-2xl font-bold text-gray-900 mb-3 flex items-center gap-2">
-                <span className="text-primary">🎵</span> The Human Side
+                <Music className="text-primary" size={24} /> The Human Side
               </h3>
               <p className="text-lg text-gray-700 leading-relaxed">
                 When I&apos;m not crafting code, you&apos;ll find me making music (a passion since I was 14) or
@@ -102,7 +102,7 @@ export const About = () => {
         {/* Vision & CTA */}
         <div className="text-center bg-gradient-to-br from-gray-50 to-gray-100 border-2 border-gray-200 rounded-2xl p-12 hover:border-primary hover:shadow-xl transition-all">
           <h3 className="text-3xl font-bold text-gray-900 mb-4">
-            Fascinated by entrepreneurship 🚀 science 🔭 and education 📚
+            Fascinated by entrepreneurship <Rocket className="inline text-primary" size={20} /> science <Telescope className="inline text-primary" size={20} /> and education <BookOpen className="inline text-primary" size={20} />
           </h3>
           <p className="text-xl text-gray-700 mb-8 max-w-2xl mx-auto">
             I&apos;m always looking for opportunities to blend technology with purpose.

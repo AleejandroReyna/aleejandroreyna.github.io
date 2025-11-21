@@ -2,7 +2,7 @@ import { SiGithub, SiPython, SiTypescript, SiReact, SiNodedotjs, SiNextdotjs, Si
 import { LinkedinPlain } from 'devicons-react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCalendarAlt } from '@fortawesome/free-solid-svg-icons';
-import { ArrowRight, Mail, Download, ChevronDown } from 'lucide-react';
+import { ArrowRight, Star, Mail, Download, ChevronDown } from 'lucide-react';
 
 export const Hero = () => {
   return (
@@ -156,7 +156,7 @@ export const Hero = () => {
               <div className="stat-desc">Active Member</div>
             </div>
             <div className="stat place-items-center">
-              <div className="stat-value">⭐</div>
+              <div className="stat-value"><Star className="inline text-yellow-500" size={32} fill="currentColor" /></div>
               <div className="stat-title">Arctic Code Vault</div>
               <div className="stat-desc">Contributor</div>
             </div>
