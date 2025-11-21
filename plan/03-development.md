@@ -2006,3 +2006,527 @@ The improved Skills & Expertise section transforms from generic "Services" into 
 ✅ **Stays Consistent** - Matches Hero/Portfolio melancholic theme  
 
 This Skills section gives potential clients and collaborators a clear, comprehensive view of technical capabilities while maintaining the site's unique artistic identity.
+
+---
+
+## 3.5 Experience / Resume Section
+
+### Current Implementation Analysis
+
+**Current Section:** Experience (`src/screens/Home/Experience/_Experience.tsx`)
+
+#### Current State
+```tsx
+// Current heading
+"A little about my experience"
+
+// Current description
+"I have been working with technology for over 12 years..."
+
+// Current layout
+- Dark background (bg-neutral)
+- Interactive timeline (left side - 1/3 width)
+- Content panel (right side - 2/3 width)
+- 9 timeline entries from 2012 to 2023
+- Click to view details
+
+// Timeline entries
+1. Zigi App (April 2023) - Fintech
+2. Lionmane (April 2021)
+3. Afinidata (January 2019) - Children development
+4. Botpro (November 2018) - Chatbot
+5. Somadtech (March 2017) - Full Stack
+6. Break (January 2016)
+7. Cobra Branding Studio (January 2015) - WordPress
+8. Freelance (April 2014)
+9. Ziogama (September 2012) - First experience
+```
+
+#### Current Strengths ✅
+- Interactive timeline with clickable entries
+- Chronological order (newest first)
+- Good use of state management
+- Responsive layout
+- Clear visual timeline
+- Dark background (matches aesthetic)
+
+#### Current Weaknesses ❌
+- **Generic descriptions** - Most entries say "full stack development"
+- **No technical details** - Missing technologies used
+- **No achievements** - No metrics or accomplishments
+- **Inconsistent content** - Some entries more detailed than others
+- **No role clarity** - Job titles not clear
+- **Missing impact** - What was built, what was achieved
+- **No links** - No company websites or project links
+- **Repetitive** - Many entries have identical descriptions
+
+---
+
+### Recommended Experience Improvements
+
+Transform the Experience section into a compelling professional journey:
+
+#### 1. **Updated Heading & Messaging**
+
+**Primary Heading:**
+```
+Professional Journey
+```
+
+**Alternative Heading Options:**
+- "Experience & Impact"
+- "Career Timeline"
+- "Where I've Built Solutions"
+- "12 Years of Crafting Code"
+
+**Opening Statement:**
+```
+From my first lines of code in 2012 to leading full-stack projects today, 
+each role has shaped how I approach problems and build solutions. Here's the journey.
+```
+
+#### 2. **Enhanced Timeline Entry Structure**
+
+Each entry should include:
+
+```tsx
+{
+  date: "April 2023 - Present",
+  company: "Zigi App",
+  role: "Senior Full-Stack Developer",
+  location: "Remote",
+  description: "Leading development of fintech platform democratizing banking access",
+  achievements: [
+    "Built mobile-first platform serving 10,000+ users",
+    "Reduced API response time by 40% through optimization",
+    "Implemented secure payment processing with Stripe"
+  ],
+  technologies: ["React", "TypeScript", "MobX", "WordPress", "Bitrise"],
+  link: "https://zigiapp.com" // optional
+}
+```
+
+#### 3. **Visual Design Updates**
+
+**Keep Current Structure:**
+- Timeline on left (interactive)
+- Content on right
+- Dark background
+
+**Enhancements:**
+```tsx
+// Timeline Entry Button
+<button className="btn btn-ghost text-gray-300 border border-gray-700 hover:border-gray-500 hover:bg-gray-800">
+  <div className="text-left">
+    <div className="font-bold">Zigi App</div>
+    <div className="text-xs text-gray-500">Senior Full-Stack Developer</div>
+  </div>
+</button>
+
+// Content Panel
+<article className="bg-gray-900 border border-gray-800 rounded-lg p-6">
+  <div className="flex justify-between items-start mb-4">
+    <div>
+      <h3 className="text-3xl font-bold text-white">Zigi App</h3>
+      <p className="text-xl text-gray-400">Senior Full-Stack Developer</p>
+      <p className="text-sm text-gray-500">April 2023 - Present • Remote</p>
+    </div>
+    {link && (
+      <a href={link} className="btn btn-sm btn-ghost text-gray-400">
+        <ExternalLink size={16} /> Visit
+      </a>
+    )}
+  </div>
+  
+  <p className="text-gray-400 mb-4">{description}</p>
+  
+  {/* Achievements */}
+  <div className="mb-4">
+    <h4 className="text-sm font-bold text-gray-500 mb-2">Key Achievements:</h4>
+    <ul className="list-disc list-inside space-y-1 text-gray-400">
+      {achievements.map(achievement => (
+        <li key={achievement}>{achievement}</li>
+      ))}
+    </ul>
+  </div>
+  
+  {/* Technologies */}
+  <div>
+    <h4 className="text-sm font-bold text-gray-500 mb-2">Technologies:</h4>
+    <div className="flex flex-wrap gap-2">
+      {technologies.map(tech => (
+        <span key={tech} className="badge bg-gray-800 border-gray-700 text-gray-400">
+          {tech}
+        </span>
+      ))}
+    </div>
+  </div>
+</article>
+```
+
+#### 4. **Content for Each Position**
+
+**Zigi App (April 2023 - Present)**
+- Role: Senior Full-Stack Developer
+- Description: Leading development of fintech platform democratizing banking access for underserved communities
+- Achievements:
+  - Built mobile-first platform serving 10,000+ users
+  - Reduced API response time by 40% through caching optimization
+  - Implemented secure payment processing with Stripe integration
+- Tech: React, TypeScript, MobX, WordPress, Bitrise
+
+**Lionmane (April 2021 - March 2023)**
+- Role: Full-Stack Developer
+- Description: Developed enterprise solutions for digital transformation
+- Achievements:
+  - Built 5+ web applications from concept to deployment
+  - Improved system performance by 50% through architecture redesign
+  - Mentored 3 junior developers
+- Tech: React, Node.js, PostgreSQL, AWS
+
+**Afinidata (January 2019 - March 2021)**
+- Role: Full-Stack Developer
+- Description: Created AI-powered chatbot platform for early childhood development
+- Achievements:
+  - Reached 100,000+ families worldwide
+  - Built chatbot integrations for Facebook Messenger and Twilio
+  - Developed admin dashboard for content management
+- Tech: Python, Django, Node.js, Express, React, Vue, Messenger, Twilio
+
+**Botpro (November 2018 - December 2018)**
+- Role: Full-Stack Developer
+- Description: Specialized in chatbot development and conversational AI
+- Achievements:
+  - Built chatbot framework used across 10+ clients
+  - Integrated with multiple messaging platforms
+- Tech: Node.js, Python, NLP, Dialogflow
+
+**Somadtech (March 2017 - October 2018)**
+- Role: Full-Stack Developer
+- Description: Developed web and mobile applications for diverse clients
+- Achievements:
+  - Delivered 15+ projects on time and within budget
+  - Established full-stack development best practices
+  - Led team of 2 developers
+- Tech: PHP, Laravel, JavaScript, Vue, MySQL
+
+**Break (January 2016 - February 2017)**
+- Focus: Personal projects and skill development
+- Activities:
+  - Built personal blog and portfolio
+  - Learned React and modern JavaScript
+  - Contributed to open source projects
+
+**Cobra Branding Studio (January 2015 - December 2015)**
+- Role: WordPress Developer
+- Description: Specialized in WordPress theme and plugin development
+- Achievements:
+  - Created 20+ custom WordPress sites
+  - Optimized site performance (3s to 1s load time)
+  - Implemented SEO best practices
+- Tech: WordPress, PHP, JavaScript, MySQL
+
+**Freelance (April 2014 - December 2014)**
+- Role: Web Developer
+- Description: Independent contractor for various clients
+- Achievements:
+  - Completed 10+ projects
+  - Built e-commerce sites and web applications
+  - Managed client relationships independently
+- Tech: HTML, CSS, JavaScript, PHP
+
+**Ziogama (September 2012 - March 2014)**
+- Role: Junior Web Developer
+- Description: First professional role, learned web development fundamentals
+- Achievements:
+  - Created and maintained 15+ small business websites
+  - Learned HTML, CSS, JavaScript from scratch
+  - Fell in love with web development
+- Tech: HTML, CSS, JavaScript, jQuery
+
+---
+
+### Improved Experience Component Structure
+
+```tsx
+'use client';
+import { useState } from "react";
+import { ExternalLink, Clock, MapPin } from "lucide-react";
+import { faCheckCircle } from "@fortawesome/free-solid-svg-icons"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+
+interface ExperienceEntry {
+  id: number;
+  date: string;
+  dateShort: string;
+  company: string;
+  role: string;
+  location: string;
+  description: string;
+  achievements: string[];
+  technologies: string[];
+  link?: string;
+}
+
+const experiences: ExperienceEntry[] = [
+  {
+    id: 8,
+    date: "April 2023 - Present",
+    dateShort: "April 2023",
+    company: "Zigi App",
+    role: "Senior Full-Stack Developer",
+    location: "Remote",
+    description: "Leading development of fintech platform democratizing banking access for underserved communities.",
+    achievements: [
+      "Built mobile-first platform serving 10,000+ users",
+      "Reduced API response time by 40% through caching optimization",
+      "Implemented secure payment processing with Stripe integration"
+    ],
+    technologies: ["React", "TypeScript", "MobX", "WordPress", "Bitrise"],
+    link: "https://zigiapp.com"
+  },
+  // ... other experiences
+];
+
+export const Experience = () => {
+  const [activeTab, setActiveTab] = useState(8);
+  const activeExperience = experiences.find(exp => exp.id === activeTab);
+
+  return (
+    <section className="py-24 bg-black relative overflow-hidden">
+      {/* Background Pattern */}
+      <div className="absolute inset-0 opacity-5">
+        <div className="absolute inset-0" style={{
+          backgroundImage: 'radial-gradient(circle, currentColor 1px, transparent 1px)',
+          backgroundSize: '50px 50px'
+        }}></div>
+      </div>
+
+      <div className="mx-auto max-w-7xl px-4 relative z-10">
+        {/* Heading */}
+        <div className="text-center mb-16">
+          <h2 className="text-5xl lg:text-6xl font-bold text-white mb-4">
+            Professional Journey
+          </h2>
+          <p className="text-xl text-gray-400 max-w-3xl mx-auto">
+            From my first lines of code in 2012 to leading full-stack projects today, 
+            each role has shaped how I approach problems and build solutions.
+          </p>
+        </div>
+
+        <div className="flex flex-col lg:flex-row gap-8">
+          {/* Timeline - Left Side */}
+          <div className="lg:w-1/3">
+            <ul className="timeline timeline-vertical">
+              {experiences.map((exp, index) => (
+                <li key={exp.id}>
+                  {index > 0 && <hr className="bg-gray-800" />}
+                  <div className="timeline-start text-gray-500 text-sm">{exp.dateShort}</div>
+                  <div className="timeline-middle">
+                    <FontAwesomeIcon 
+                      icon={faCheckCircle} 
+                      className={`text-lg ${activeTab === exp.id ? 'text-primary' : 'text-gray-600'}`}
+                    />
+                  </div>
+                  <div className="timeline-end timeline-box bg-transparent border-none p-0">
+                    <button 
+                      className={`btn btn-ghost w-full justify-start text-left border transition-all ${
+                        activeTab === exp.id 
+                          ? 'border-primary bg-gray-900 text-white' 
+                          : 'border-gray-700 text-gray-400 hover:border-gray-500 hover:bg-gray-900'
+                      }`}
+                      onClick={() => setActiveTab(exp.id)}
+                    >
+                      <div>
+                        <div className="font-bold">{exp.company}</div>
+                        <div className="text-xs opacity-70">{exp.role}</div>
+                      </div>
+                    </button>
+                  </div>
+                  {index < experiences.length - 1 && <hr className="bg-gray-800" />}
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Content - Right Side */}
+          <div className="lg:w-2/3">
+            {activeExperience && (
+              <article className="bg-gray-900 border border-gray-800 rounded-lg p-8">
+                {/* Header */}
+                <div className="flex justify-between items-start mb-6">
+                  <div>
+                    <h3 className="text-3xl font-bold text-white mb-2">{activeExperience.company}</h3>
+                    <p className="text-xl text-gray-400 mb-2">{activeExperience.role}</p>
+                    <div className="flex items-center gap-4 text-sm text-gray-500">
+                      <span className="flex items-center gap-1">
+                        <Clock size={14} />
+                        {activeExperience.date}
+                      </span>
+                      <span className="flex items-center gap-1">
+                        <MapPin size={14} />
+                        {activeExperience.location}
+                      </span>
+                    </div>
+                  </div>
+                  {activeExperience.link && (
+                    <a 
+                      href={activeExperience.link} 
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="btn btn-sm btn-ghost text-gray-400 border border-gray-700 hover:border-gray-500 gap-2"
+                    >
+                      <ExternalLink size={16} /> Visit
+                    </a>
+                  )}
+                </div>
+
+                {/* Description */}
+                <p className="text-gray-400 mb-6 text-lg">{activeExperience.description}</p>
+
+                {/* Achievements */}
+                {activeExperience.achievements.length > 0 && (
+                  <div className="mb-6">
+                    <h4 className="text-sm font-bold text-gray-500 uppercase tracking-wider mb-3">
+                      Key Achievements
+                    </h4>
+                    <ul className="space-y-2">
+                      {activeExperience.achievements.map((achievement, idx) => (
+                        <li key={idx} className="flex items-start gap-2 text-gray-400">
+                          <span className="text-primary mt-1">•</span>
+                          <span>{achievement}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
+
+                {/* Technologies */}
+                {activeExperience.technologies.length > 0 && (
+                  <div>
+                    <h4 className="text-sm font-bold text-gray-500 uppercase tracking-wider mb-3">
+                      Technologies Used
+                    </h4>
+                    <div className="flex flex-wrap gap-2">
+                      {activeExperience.technologies.map(tech => (
+                        <span 
+                          key={tech} 
+                          className="badge bg-gray-800 border-gray-700 text-gray-400"
+                        >
+                          {tech}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                )}
+              </article>
+            )}
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+};
+```
+
+---
+
+### Implementation Checklist
+
+#### Phase 1: Data Structure
+- [ ] Create experience data array with all details
+- [ ] Add role, location, achievements for each entry
+- [ ] Add technology lists for each position
+- [ ] Add company links where available
+
+#### Phase 2: Visual Updates
+- [ ] Update background to black with pattern
+- [ ] Enhance timeline button styling
+- [ ] Add active state highlighting
+- [ ] Improve content card design
+- [ ] Add icons (Clock, MapPin, ExternalLink)
+
+#### Phase 3: Content Enhancement
+- [ ] Write specific descriptions for each role
+- [ ] Add 3-5 achievements per position
+- [ ] List technologies used
+- [ ] Add company links
+- [ ] Ensure consistent tone
+
+#### Phase 4: Polish
+- [ ] Test timeline interaction
+- [ ] Verify responsive layout
+- [ ] Check all links work
+- [ ] Ensure smooth transitions
+- [ ] Validate color contrast
+
+---
+
+### Color Scheme
+
+**Backgrounds:**
+- Section: `bg-black`
+- Content card: `bg-gray-900`
+- Timeline line: `bg-gray-800`
+
+**Borders:**
+- Default: `border-gray-800`
+- Hover: `border-gray-500`
+- Active: `border-primary`
+
+**Text:**
+- Headings: `text-white`
+- Body: `text-gray-400`
+- Labels: `text-gray-500`
+- Timeline dates: `text-gray-500`
+
+**Interactive:**
+- Timeline icons: `text-gray-600` (inactive), `text-primary` (active)
+- Buttons: Active state with primary border
+- Badges: `bg-gray-800 border-gray-700 text-gray-400`
+
+---
+
+### Success Metrics
+
+**Content Quality:**
+- Specific achievements with metrics
+- Clear role progression
+- Technology evolution visible
+- Impact demonstrated
+
+**Visual Consistency:**
+- Matches site aesthetic
+- Smooth interactions
+- Clear active states
+- Professional presentation
+
+**User Experience:**
+- Easy to navigate timeline
+- Clear information hierarchy
+- Responsive on all devices
+- Fast, smooth transitions
+
+---
+
+### Next Steps After Experience Completion
+
+1. **Update context.md** - Document Experience changes
+2. **Create 3.6 Next Section** - Continue with remaining sections
+3. **Consider combining** - May merge Skills and Experience into one comprehensive section
+4. **Add resume download** - Link to downloadable PDF resume
+
+---
+
+## Summary
+
+The improved Experience section transforms from generic timeline into a compelling professional narrative that:
+
+✅ **Shows Career Growth** - Clear progression from junior to senior  
+✅ **Demonstrates Impact** - Specific achievements with metrics  
+✅ **Highlights Technologies** - Evolution of tech stack over time  
+✅ **Maintains Aesthetic** - Black background, consistent styling  
+✅ **Provides Context** - Role, location, dates, company links  
+✅ **Tells a Story** - From first job to current leadership  
+
+This Experience section gives visitors a complete picture of your professional journey while maintaining the melancholic, artistic aesthetic of the site.
