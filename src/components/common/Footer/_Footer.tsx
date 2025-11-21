@@ -1,66 +1,181 @@
+'use client';
 import { yearsOfExperience } from "@/utils/yearsOfExperience";
-
-import Link from "next/link"
-
-import { SiGithub } from '@icons-pack/react-simple-icons';
-import { LinkedinPlain } from 'devicons-react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faCalendarAlt } from '@fortawesome/free-solid-svg-icons'
 import { currentYear } from "@/utils/currentYear";
+import { SiGithub } from '@icons-pack/react-simple-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCalendarAlt } from '@fortawesome/free-solid-svg-icons';
+import { Mail, Heart, Linkedin, Twitter } from 'lucide-react';
 import { PythonOriginal } from "devicons-react";
 
 export const Footer = () => {
+  const handleClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+    e.preventDefault();
+
+    if (href === "#home") {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    } else {
+      const element = document.querySelector(href);
+      if (element) {
+        const offset = 80;
+        const elementPosition = element.getBoundingClientRect().top;
+        const offsetPosition = elementPosition + window.pageYOffset - offset;
+
+        window.scrollTo({
+          top: offsetPosition,
+          behavior: 'smooth'
+        });
+      }
+    }
+  };
+
   return (
-    <>
-    <footer className="footer sm:footer-horizontal bg-neutral text-neutral-content p-10 mt-auto">
-      <aside>
-        <Link className="text-xl font-semibold" href={'/'}>
-          <h1>Alejandro Reyna</h1>
-        </Link>
-        <p>
-          Senior Software Developer
-          <br />
-          With {yearsOfExperience()}+ years of experience        
-        </p>
-      </aside>
-      <nav>
-        <h6 className="footer-title">Info</h6>
-        <Link href={'/about'} className="link link-hover">About me</Link>
-        <Link href={'/experience'} className="link link-hover">Experience</Link>
-        <Link href={'/portfolio'} className="link link-hover">Porfolio</Link>
-        <Link href={'/contact'} className="link link-hover">Contact</Link>
-      </nav>
-      <nav>
-        <h6 className="footer-title">Services</h6>
-        <Link href={'/'} className="link link-hover">Backend Development</Link>
-        <Link href={'/'} className="link link-hover">Frontend Development</Link>
-        <Link href={'/'} className="link link-hover">Web Development</Link>
-        <Link href={'/'} className="link link-hover">App Development</Link>
-      </nav>
-      <nav>
-        <h6 className="footer-title">Social</h6>
-        <div className="grid grid-flow-col gap-4">
+    <footer className="bg-black border-t border-gray-800">
+      {/* Main Footer Content */}
+      <div className="mx-auto max-w-7xl px-4 py-12">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
 
-          <a target='_blank' href="https://linkedin.com/in/aleejandroreyna">
-            <LinkedinPlain color="#ffffff" size={24} />
-          </a>
+          {/* Brand Section */}
+          <div className="lg:col-span-1">
+            <h3 className="text-2xl font-bold text-white mb-4">
+              <span className="bg-gradient-to-r from-white to-gray-400 bg-clip-text text-transparent">
+                Alejandro Reyna
+              </span>
+            </h3>
+            <p className="text-gray-400 mb-2">Code Poet & Full-Stack Developer</p>
+            <p className="text-gray-500 text-sm mb-4">
+              {yearsOfExperience()}+ years crafting elegant solutions
+            </p>
+            <p className="text-gray-400 text-sm italic">
+              "I don't just write code that works—I write code that sings."
+            </p>
+          </div>
 
-          <a target='_blank' href="https://github.com/aleejandroreyna">
-            <SiGithub color="#ffffff" size={24} />
-          </a>
+          {/* Quick Links */}
+          <div>
+            <h4 className="text-lg font-bold text-white mb-4">Quick Links</h4>
+            <nav className="space-y-2">
+              <a
+                href="#home"
+                onClick={(e) => handleClick(e, "#home")}
+                className="block text-gray-400 hover:text-white transition-colors cursor-pointer"
+              >
+                Home
+              </a>
+              <a
+                href="#about"
+                onClick={(e) => handleClick(e, "#about")}
+                className="block text-gray-400 hover:text-white transition-colors cursor-pointer"
+              >
+                About
+              </a>
+              <a
+                href="#portfolio"
+                onClick={(e) => handleClick(e, "#portfolio")}
+                className="block text-gray-400 hover:text-white transition-colors cursor-pointer"
+              >
+                Portfolio
+              </a>
+              <a
+                href="#skills"
+                onClick={(e) => handleClick(e, "#skills")}
+                className="block text-gray-400 hover:text-white transition-colors cursor-pointer"
+              >
+                Skills
+              </a>
+              <a
+                href="#contact"
+                onClick={(e) => handleClick(e, "#contact")}
+                className="block text-gray-400 hover:text-white transition-colors cursor-pointer"
+              >
+                Contact
+              </a>
+            </nav>
+          </div>
 
-          <a target='_blank' href="https://calendly.com/aleejandroreyna">
-            <FontAwesomeIcon icon={faCalendarAlt} size='2x' color="#ffffff" className='mr-4' />
-          </a>
+          {/* Expertise */}
+          <div>
+            <h4 className="text-lg font-bold text-white mb-4">Expertise</h4>
+            <ul className="space-y-2 text-gray-400 text-sm">
+              <li>Full-Stack Development</li>
+              <li>Python & Django</li>
+              <li>TypeScript & React</li>
+              <li>API Design & Integration</li>
+              <li>Database Architecture</li>
+            </ul>
+          </div>
+
+          {/* Connect */}
+          <div>
+            <h4 className="text-lg font-bold text-white mb-4">Connect</h4>
+            <div className="space-y-3 mb-6">
+              <a
+                href="mailto:me@alejandroreyna.com"
+                className="flex items-center gap-2 text-gray-400 hover:text-white transition-colors"
+              >
+                <Mail size={18} />
+                <span className="text-sm">me@alejandroreyna.com</span>
+              </a>
+              <p className="text-gray-400 text-sm">Guatemala, Guatemala</p>
+            </div>
+
+            <div className="flex gap-4">
+              <a
+                href="https://github.com/AleejandroReyna"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-gray-400 hover:text-white transition-colors"
+                aria-label="GitHub"
+              >
+                <SiGithub size={24} />
+              </a>
+              <a
+                href="https://linkedin.com/in/aleejandroreyna"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-gray-400 hover:text-blue-500 transition-colors"
+                aria-label="LinkedIn"
+              >
+                <Linkedin size={24} />
+              </a>
+              <a
+                href="https://twitter.com/aleejandroreyna"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-gray-400 hover:text-blue-400 transition-colors"
+                aria-label="Twitter"
+              >
+                <Twitter size={24} />
+              </a>
+              <a
+                href="https://calendly.com/aleejandroreyna"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-gray-400 hover:text-primary transition-colors"
+                aria-label="Schedule a call"
+              >
+                <FontAwesomeIcon icon={faCalendarAlt} size="lg" />
+              </a>
+            </div>
+          </div>
         </div>
-      </nav>
+      </div>
+
+      {/* Bottom Bar */}
+      <div className="border-t border-gray-800">
+        <div className="mx-auto max-w-7xl px-4 py-6">
+          <div className="flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-gray-500">
+            <p>
+              © {currentYear()} Alejandro Reyna. All rights reserved.
+            </p>
+            <p className="flex items-center gap-2">
+              Made with <Heart size={16} className="text-red-500" fill="currentColor" /> in Guatemala
+            </p>
+            <p className="italic text-gray-600">
+              <a href="https://zen-of-python.info/" target="_blank" rel="noopener noreferrer">"Simple is better than complex" - Zen of Python</a> <PythonOriginal style={{ display: 'inline' }} size={20} />
+            </p>
+          </div>
+        </div>
+      </div>
     </footer>
-    <footer className="footer sm:footer-horizontal bg-neutral text-neutral-content px-10 py-4">
-      <aside className="flex justify-between items-center w-full">
-        <p>© All rights reserved - {currentYear()}</p>
-        <p className="ops text-lg"><a href="#">Simple is better than complex</a> <PythonOriginal style={{display: 'inline'}} size={20} /></p>
-      </aside>
-    </footer>
-    </>
-  )
-}
+  );
+};
