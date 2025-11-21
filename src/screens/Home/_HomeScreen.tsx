@@ -15,8 +15,6 @@ export const HomeScreen = () => {
       <Portfolio />
       <Skills />
       <Resume />
-      <Experience />
-      <Results />
       <Contact />
     </>
   )
