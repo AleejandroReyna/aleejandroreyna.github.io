@@ -11,9 +11,11 @@ import {
   SiDjango,
   SiNodedotjs,
   SiBitrise,
-  SiAwsfargate
+  SiAwsfargate,
+  SiNextdotjs
 } from "@icons-pack/react-simple-icons";
 import { Github, ExternalLink } from "lucide-react";
+import Image from "next/image";
 
 export const Portfolio = () => {
   return (
@@ -43,10 +45,11 @@ export const Portfolio = () => {
           {/* Project Card 1 - Zigi App */}
           <article className="card bg-white border-2 border-gray-200 hover:border-gray-400 hover:shadow-xl transition-all">
             <figure className="relative overflow-hidden h-48">
-              <img
-                src="https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.webp"
+              <Image
+                src="/images/portfolio/zigi.png"
                 alt="Zigi App"
-                className="w-full h-full object-cover"
+                fill
+                className="object-cover"
               />
               <div className="absolute top-4 right-4">
                 <span className="badge bg-gray-200 border-gray-300 text-gray-700">2023</span>
@@ -84,18 +87,19 @@ export const Portfolio = () => {
           {/* Project Card 2 - XP3 Talent */}
           <article className="card bg-white border-2 border-gray-200 hover:border-gray-400 hover:shadow-xl transition-all">
             <figure className="relative overflow-hidden h-48">
-              <img
-                src="https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.webp"
+              <Image
+                src="/images/portfolio/sescom.png"
                 alt="XP3 Talent"
-                className="w-full h-full object-cover"
+                fill
+                className="object-cover"
               />
               <div className="absolute top-4 right-4">
-                <span className="badge bg-gray-200 border-gray-300 text-gray-700">2022</span>
+                <span className="badge bg-gray-200 border-gray-300 text-gray-700">2025</span>
               </div>
             </figure>
 
             <div className="card-body">
-              <h3 className="card-title text-gray-900">XP3 Talent</h3>
+              <h3 className="card-title text-gray-900">SESCOM</h3>
               <p className="text-gray-700">
                 Streamlining HR with intelligent automation. Comprehensive management system serving 500+ companies.
               </p>
@@ -125,31 +129,30 @@ export const Portfolio = () => {
           {/* Project Card 3 - Afinidata */}
           <article className="card bg-white border-2 border-gray-200 hover:border-gray-400 hover:shadow-xl transition-all">
             <figure className="relative overflow-hidden h-48">
-              <img
-                src="https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.webp"
-                alt="Afinidata"
-                className="w-full h-full object-cover"
+              <Image
+                src="/images/portfolio/insolgas.png"
+                alt="InsolGas"
+                fill
+                className="object-cover"
               />
               <div className="absolute top-4 right-4">
-                <span className="badge bg-gray-200 border-gray-300 text-gray-700">2021</span>
+                <span className="badge bg-gray-200 border-gray-300 text-gray-700">2024</span>
               </div>
             </figure>
 
             <div className="card-body">
-              <h3 className="card-title text-gray-900">Afinidata</h3>
+              <h3 className="card-title text-gray-900">InsolGas</h3>
               <p className="text-gray-700">
-                AI-powered chatbot for early childhood development. Reaching 100,000+ families worldwide.
+                Website for InsolGas, a company that provides instalation of gas stations and services.
               </p>
 
               <div className="my-4">
                 <p className="text-sm text-gray-500 mb-2">Tech Stack:</p>
                 <div className="flex flex-wrap gap-2">
-                  <SiPython size={24} className="hover:scale-110 transition-all cursor-pointer" style={{ color: '#3776AB' }} />
-                  <SiDjango size={24} className="hover:scale-110 transition-all cursor-pointer" style={{ color: '#092E20' }} />
                   <SiNodedotjs size={24} className="hover:scale-110 transition-all cursor-pointer" style={{ color: '#339933' }} />
-                  <SiJavascript size={24} className="hover:scale-110 transition-all cursor-pointer" style={{ color: '#F7DF1E' }} />
+                  <SiTypescript size={24} className="hover:scale-110 transition-all cursor-pointer" style={{ color: '#3178C6' }} />
                   <SiReact size={24} className="hover:scale-110 transition-all cursor-pointer" style={{ color: '#61DAFB' }} />
-                  <SiVuedotjs size={24} className="hover:scale-110 transition-all cursor-pointer" style={{ color: '#4FC08D' }} />
+                  <SiNextdotjs size={24} className="hover:scale-110 transition-all cursor-pointer" style={{ color: '#000000' }} />
                 </div>
               </div>
 

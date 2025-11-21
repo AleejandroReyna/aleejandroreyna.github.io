@@ -38,7 +38,7 @@ export const Hero = () => {
 
           {/* Philosophy Statement */}
           <p className="text-xl lg:text-2xl mb-6 text-gray-400 italic max-w-3xl mx-auto">
-            &ldquo;I don&apos;t just write code that works—I write code that sings.&rdquo;
+            &ldquo;I don&apos;t just write code that works - I write code that sings.&rdquo;
           </p>
 
           {/* Description */}
