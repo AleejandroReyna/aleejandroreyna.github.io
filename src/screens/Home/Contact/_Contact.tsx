@@ -1,8 +1,72 @@
+'use client';
+import { useState, FormEvent } from "react";
 import { Mail, MapPin, Github, Linkedin, Twitter, Send } from "lucide-react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCalendarAlt } from "@fortawesome/free-solid-svg-icons";
 
 export const Contact = () => {
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    subject: '',
+    message: ''
+  });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState<{
+    type: 'success' | 'error' | null;
+    message: string;
+  }>({ type: null, message: '' });
+
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+    setSubmitStatus({ type: null, message: '' });
+
+    try {
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        setSubmitStatus({
+          type: 'success',
+          message: data.message || 'Thank you for your message! I will get back to you soon.',
+        });
+        // Reset form
+        setFormData({
+          name: '',
+          email: '',
+          subject: '',
+          message: ''
+        });
+      } else {
+        setSubmitStatus({
+          type: 'error',
+          message: data.error || 'Failed to send message. Please try again.',
+        });
+      }
+    } catch (error) {
+      setSubmitStatus({
+        type: 'error',
+        message: 'An error occurred. Please try again later.',
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    setFormData(prev => ({
+      ...prev,
+      [e.target.name]: e.target.value
+    }));
+  };
   return (
     <section className="py-24 bg-black relative overflow-hidden" id="contact">
       {/* Background Pattern */}
@@ -139,7 +203,14 @@ export const Contact = () => {
           {/* Right Column - Contact Form */}
           <div className="bg-gray-900 border-2 border-gray-800 rounded-lg p-8 shadow-lg">
             <h3 className="text-2xl font-bold text-white mb-6">Send Me a Message</h3>
-            <form action="#" className="space-y-6">
+            <form onSubmit={handleSubmit} className="space-y-6">
+              {/* Status Messages */}
+              {submitStatus.type && (
+                <div className={`alert ${submitStatus.type === 'success' ? 'alert-success bg-green-900/30 border-green-700 text-green-400' : 'alert-error bg-red-900/30 border-red-700 text-red-400'} border-2`}>
+                  <span>{submitStatus.message}</span>
+                </div>
+              )}
+
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div className="form-control">
                   <label className="label">
@@ -147,9 +218,13 @@ export const Contact = () => {
                   </label>
                   <input
                     type="text"
+                    name="name"
+                    value={formData.name}
+                    onChange={handleChange}
                     placeholder="John Doe"
                     className="input input-bordered bg-gray-800 border-gray-700 text-white focus:border-primary focus:bg-gray-800 w-full"
                     required
+                    disabled={isSubmitting}
                   />
                 </div>
 
@@ -159,9 +234,13 @@ export const Contact = () => {
                   </label>
                   <input
                     type="email"
+                    name="email"
+                    value={formData.email}
+                    onChange={handleChange}
                     placeholder="john@example.com"
                     className="input input-bordered bg-gray-800 border-gray-700 text-white focus:border-primary focus:bg-gray-800 w-full"
                     required
+                    disabled={isSubmitting}
                   />
                 </div>
               </div>
@@ -172,9 +251,13 @@ export const Contact = () => {
                 </label>
                 <input
                   type="text"
+                  name="subject"
+                  value={formData.subject}
+                  onChange={handleChange}
                   placeholder="What's this about?"
                   className="input input-bordered bg-gray-800 border-gray-700 text-white focus:border-primary focus:bg-gray-800 w-full"
                   required
+                  disabled={isSubmitting}
                 />
               </div>
 
@@ -183,19 +266,33 @@ export const Contact = () => {
                   <span className="label-text text-gray-400 font-semibold">Message</span>
                 </label>
                 <textarea
+                  name="message"
+                  value={formData.message}
+                  onChange={handleChange}
                   rows={6}
                   placeholder="Tell me about your project or idea..."
                   className="textarea textarea-bordered bg-gray-800 border-gray-700 text-white focus:border-primary focus:bg-gray-800 w-full resize-none"
                   required
+                  disabled={isSubmitting}
                 ></textarea>
               </div>
 
               <button
                 type="submit"
                 className="btn btn-primary w-full text-white gap-2 text-lg"
+                disabled={isSubmitting}
               >
-                <Send size={20} />
-                Send Message
+                {isSubmitting ? (
+                  <>
+                    <span className="loading loading-spinner loading-sm"></span>
+                    Sending...
+                  </>
+                ) : (
+                  <>
+                    <Send size={20} />
+                    Send Message
+                  </>
+                )}
               </button>
             </form>
           </div>

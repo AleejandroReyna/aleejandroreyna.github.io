@@ -30,7 +30,7 @@ services:
     ports:
       - "8081:8081"
     environment:
-      ME_CONFIG_MONGODB_URL: mongodb://admin:password@mongo:27017/admin?directConnection=true
+      ME_CONFIG_MONGODB_URL: mongodb://mongo:27017/admin?directConnection=true
       ME_CONFIG_BASICAUTH: false
     depends_on:
       mongo:
