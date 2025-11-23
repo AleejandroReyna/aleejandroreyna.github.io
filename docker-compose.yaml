@@ -10,16 +10,16 @@ services:
     ports:
       - "27017:27017"
     environment:
+      MONGO_INITDB_ROOT_USERNAME: admin
+      MONGO_INITDB_ROOT_PASSWORD: password
       MONGO_REPLICA_HOST: host.docker.internal
       MONGO_REPLICA_PORT: 27017
       MONGO_COMMAND: mongosh
     volumes:
       - mongo_data:/data/db
-    networks:
-      - dev-network
     healthcheck:
       test: [ 'CMD', 'mongosh', 'admin', '--port', '27017', '--eval', "db.adminCommand('ping').ok" ]
-      interval: 5s
+      interval: 3s
       timeout: 2s
       retries: 20
 
@@ -30,18 +30,11 @@ services:
     ports:
       - "8081:8081"
     environment:
-      ME_CONFIG_MONGODB_URL: mongodb://mongo:27017/admin?directConnection=true
+      ME_CONFIG_MONGODB_URL: mongodb://admin:password@mongo:27017/admin?directConnection=true
       ME_CONFIG_BASICAUTH: false
     depends_on:
       mongo:
         condition: service_healthy
-    networks:
-      - dev-network
 
 volumes:
   mongo_data:
-    driver: local
-
-networks:
-  dev-network:
-    driver: bridge
