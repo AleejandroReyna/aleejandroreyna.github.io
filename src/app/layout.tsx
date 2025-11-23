@@ -35,7 +35,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" data-theme="light">
+    <html lang="en" data-theme="light" className="scroll-smooth">
       <body className={`${outfit.variable} ${opsOne.variable} antialiased flex flex-col min-h-screen`}>
         <Navbar />
         {children}

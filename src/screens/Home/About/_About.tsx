@@ -3,7 +3,7 @@ import { ArrowRight, Palette, Rocket, Music, Telescope, BookOpen } from "lucide-
 
 export const About = () => {
   return (
-    <section className="bg-white py-24 relative overflow-hidden">
+    <section className="bg-white py-24 relative overflow-hidden" id="about">
       {/* Background Pattern */}
       <div className="absolute inset-0 opacity-5">
         <div className="absolute inset-0" style={{

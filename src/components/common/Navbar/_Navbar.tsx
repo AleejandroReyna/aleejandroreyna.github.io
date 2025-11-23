@@ -14,27 +14,6 @@ export const Navbar = () => {
     { href: "#contact", label: "Contact" },
   ];
 
-  const handleClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
-    e.preventDefault();
-    setIsOpen(false);
-
-    if (href === "#home") {
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    } else {
-      const element = document.querySelector(href);
-      if (element) {
-        const offset = 80; // Account for fixed navbar height
-        const elementPosition = element.getBoundingClientRect().top;
-        const offsetPosition = elementPosition + window.pageYOffset - offset;
-
-        window.scrollTo({
-          top: offsetPosition,
-          behavior: 'smooth'
-        });
-      }
-    }
-  };
-
   return (
     <header className="fixed top-0 w-full bg-black/95 backdrop-blur-sm border-b border-gray-800 z-50">
       <div className="mx-auto max-w-7xl px-4">
@@ -43,7 +22,6 @@ export const Navbar = () => {
           <Link
             href="/"
             className="text-2xl font-bold text-white hover:text-primary transition-colors"
-            onClick={(e) => handleClick(e, "#home")}
           >
             <span className="bg-gradient-to-r from-white to-gray-400 bg-clip-text text-transparent">
               Alejandro Reyna
@@ -56,8 +34,7 @@ export const Navbar = () => {
               <a
                 key={link.href}
                 href={link.href}
-                onClick={(e) => handleClick(e, link.href)}
-                className="px-4 py-2 text-gray-300 hover:text-white hover:bg-gray-800 rounded-lg transition-all cursor-pointer"
+                className="px-4 py-2 text-gray-300 hover:text-white hover:bg-gray-800 rounded-lg transition-all"
               >
                 {link.label}
               </a>
@@ -82,8 +59,8 @@ export const Navbar = () => {
                 <li key={link.href}>
                   <a
                     href={link.href}
-                    onClick={(e) => handleClick(e, link.href)}
-                    className="block px-4 py-3 text-gray-300 hover:text-white hover:bg-gray-800 rounded-lg transition-all cursor-pointer"
+                    onClick={() => setIsOpen(false)}
+                    className="block px-4 py-3 text-gray-300 hover:text-white hover:bg-gray-800 rounded-lg transition-all"
                   >
                     {link.label}
                   </a>

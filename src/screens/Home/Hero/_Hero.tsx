@@ -6,7 +6,7 @@ import { ArrowRight, Star, Mail, Download, ChevronDown } from 'lucide-react';
 
 export const Hero = () => {
   return (
-    <section className="hero min-h-screen bg-black relative overflow-hidden">
+    <section className="hero min-h-screen bg-black relative overflow-hidden" id="home">
       {/* Background subtle pattern */}
       <div className="absolute inset-0 opacity-5">
         <div className="absolute inset-0" style={{
@@ -141,24 +141,24 @@ export const Hero = () => {
         <div className="w-full max-w-4xl mx-auto">
           <div className="stats stats-vertical lg:stats-horizontal shadow-xl bg-black border border-gray-800 w-full">
             <div className="stat place-items-center">
-              <div className="stat-value text-gray-400">86+</div>
-              <div className="stat-title">Repositories</div>
-              <div className="stat-desc">GitHub Projects</div>
+              <div className="stat-value text-gray-100">86+</div>
+              <div className="stat-title text-gray-100">Repositories</div>
+              <div className="stat-desc text-gray-100">GitHub Projects</div>
             </div>
             <div className="stat place-items-center">
-              <div className="stat-value text-gray-400">246+</div>
-              <div className="stat-title">Contributions</div>
-              <div className="stat-desc">Last Year</div>
+              <div className="stat-value text-gray-100">246+</div>
+              <div className="stat-title text-gray-100">Contributions</div>
+              <div className="stat-desc text-gray-100">Last Year</div>
             </div>
             <div className="stat place-items-center">
-              <div className="stat-value text-gray-400">4</div>
-              <div className="stat-title">Organizations</div>
-              <div className="stat-desc">Active Member</div>
+              <div className="stat-value text-gray-100">4</div>
+              <div className="stat-title text-gray-100">Organizations</div>
+              <div className="stat-desc text-gray-100">Active Member</div>
             </div>
             <div className="stat place-items-center">
               <div className="stat-value"><Star className="inline text-yellow-500" size={32} fill="currentColor" /></div>
-              <div className="stat-title">Arctic Code Vault</div>
-              <div className="stat-desc">Contributor</div>
+              <div className="stat-title text-gray-100">Arctic Code Vault</div>
+              <div className="stat-desc text-gray-100">Contributor</div>
             </div>
           </div>
         </div>

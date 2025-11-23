@@ -8,26 +8,6 @@ import { Mail, Heart, Linkedin, Twitter } from 'lucide-react';
 import { PythonOriginal } from "devicons-react";
 
 export const Footer = () => {
-  const handleClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
-    e.preventDefault();
-
-    if (href === "#home") {
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    } else {
-      const element = document.querySelector(href);
-      if (element) {
-        const offset = 80;
-        const elementPosition = element.getBoundingClientRect().top;
-        const offsetPosition = elementPosition + window.pageYOffset - offset;
-
-        window.scrollTo({
-          top: offsetPosition,
-          behavior: 'smooth'
-        });
-      }
-    }
-  };
-
   return (
     <footer className="bg-black border-t border-gray-800">
       {/* Main Footer Content */}
@@ -56,35 +36,30 @@ export const Footer = () => {
             <nav className="space-y-2">
               <a
                 href="#home"
-                onClick={(e) => handleClick(e, "#home")}
                 className="block text-gray-400 hover:text-white transition-colors cursor-pointer"
               >
                 Home
               </a>
               <a
                 href="#about"
-                onClick={(e) => handleClick(e, "#about")}
                 className="block text-gray-400 hover:text-white transition-colors cursor-pointer"
               >
                 About
               </a>
               <a
                 href="#portfolio"
-                onClick={(e) => handleClick(e, "#portfolio")}
                 className="block text-gray-400 hover:text-white transition-colors cursor-pointer"
               >
                 Portfolio
               </a>
               <a
                 href="#skills"
-                onClick={(e) => handleClick(e, "#skills")}
                 className="block text-gray-400 hover:text-white transition-colors cursor-pointer"
               >
                 Skills
               </a>
               <a
                 href="#contact"
-                onClick={(e) => handleClick(e, "#contact")}
                 className="block text-gray-400 hover:text-white transition-colors cursor-pointer"
               >
                 Contact

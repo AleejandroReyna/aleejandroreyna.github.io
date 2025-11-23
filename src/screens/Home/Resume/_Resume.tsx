@@ -20,7 +20,7 @@ interface ExperienceEntry {
 const experiences: ExperienceEntry[] = [
     {
         id: 8,
-        date: "April 2023 - Present",
+        date: "April 2023 - June 2024",
         dateShort: "April 2023",
         company: "Zigi App",
         role: "Senior Full-Stack Developer",
@@ -124,7 +124,7 @@ const experiences: ExperienceEntry[] = [
     },
     {
         id: 1,
-        date: "April 2014 - December 2014",
+        date: "April 2014 - Present",
         dateShort: "April 2014",
         company: "Freelance",
         role: "Web Developer",
