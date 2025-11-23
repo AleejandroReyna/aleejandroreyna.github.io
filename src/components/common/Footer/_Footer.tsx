@@ -46,7 +46,7 @@ export const Footer = () => {
               {yearsOfExperience()}+ years crafting elegant solutions
             </p>
             <p className="text-gray-400 text-sm italic">
-              "I don't just write code that works—I write code that sings."
+              {`"I don't just write code that works—I write code that sings."`}
             </p>
           </div>
 
@@ -171,7 +171,7 @@ export const Footer = () => {
               Made with <Heart size={16} className="text-red-500" fill="currentColor" /> in Guatemala
             </p>
             <p className="italic text-gray-600">
-              <a href="https://zen-of-python.info/" target="_blank" rel="noopener noreferrer">"Simple is better than complex" - Zen of Python</a> <PythonOriginal style={{ display: 'inline' }} size={20} />
+              <a href="https://zen-of-python.info/" target="_blank" rel="noopener noreferrer">{`"Simple is better than complex" - Zen of Python`}</a> <PythonOriginal style={{ display: 'inline' }} size={20} />
             </p>
           </div>
         </div>

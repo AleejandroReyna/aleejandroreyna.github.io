@@ -17,11 +17,11 @@ export const Contact = () => {
         {/* Heading */}
         <div className="text-center mb-16">
           <h2 className="text-5xl lg:text-6xl font-bold text-white mb-4">
-            Let's Create Something Beautiful Together
+            {`Let's Create Something Beautiful Together`}
           </h2>
           <p className="text-xl text-gray-400 max-w-3xl mx-auto">
-            Have an interesting project? Want to collaborate? I'm always open to discussing new opportunities
-            and creative ideas. Let's turn your vision into reality.
+            {`Have an interesting project? Want to collaborate? I'm always open to discussing new opportunities
+            and creative ideas. Let's turn your vision into reality.`}
           </p>
         </div>
 
@@ -38,9 +38,9 @@ export const Contact = () => {
             <div>
               <h3 className="text-3xl font-bold text-white mb-4">Get in Touch</h3>
               <p className="text-lg text-gray-300 leading-relaxed">
-                I'm currently seeking opportunities as a Full-Stack Engineer, Django Developer,
+                {`I'm currently seeking opportunities as a Full-Stack Engineer, Django Developer,
                 or JavaScript/TypeScript Developer. Whether it's a remote position or based in Guatemala,
-                I'd love to hear from you.
+                I'd love to hear from you.`}
               </p>
             </div>
 

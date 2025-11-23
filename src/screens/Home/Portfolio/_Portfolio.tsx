@@ -7,8 +7,6 @@ import {
   SiVuedotjs,
   SiPhp,
   SiLaravel,
-  SiPython,
-  SiDjango,
   SiNodedotjs,
   SiBitrise,
   SiAwsfargate,
