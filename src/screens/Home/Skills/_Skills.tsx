@@ -51,10 +51,12 @@ export const Skills = () => {
                                 <div>
                                     <p className="text-sm text-gray-500 mb-2">Frontend:</p>
                                     <div className="flex flex-wrap gap-2">
-                                        <span className="badge bg-gray-800 border-gray-700 text-gray-400">React</span>
-                                        <span className="badge bg-gray-800 border-gray-700 text-gray-400">Next.js</span>
                                         <span className="badge bg-gray-800 border-gray-700 text-gray-400">TypeScript</span>
+                                        <span className="badge bg-gray-800 border-gray-700 text-gray-400">React</span>
+                                        <span className="badge bg-gray-800 border-gray-700 text-gray-400">React Native</span>
+                                        <span className="badge bg-gray-800 border-gray-700 text-gray-400">Next</span>
                                         <span className="badge bg-gray-800 border-gray-700 text-gray-400">Vue</span>
+                                        <span className="badge bg-gray-800 border-gray-700 text-gray-400">Electron</span>
                                     </div>
                                 </div>
                                 <div>
@@ -62,8 +64,12 @@ export const Skills = () => {
                                     <div className="flex flex-wrap gap-2">
                                         <span className="badge bg-gray-800 border-gray-700 text-gray-400">Python</span>
                                         <span className="badge bg-gray-800 border-gray-700 text-gray-400">Django</span>
-                                        <span className="badge bg-gray-800 border-gray-700 text-gray-400">Node.js</span>
+                                        <span className="badge bg-gray-800 border-gray-700 text-gray-400">Node</span>
+                                        <span className="badge bg-gray-800 border-gray-700 text-gray-400">Nest</span>
                                         <span className="badge bg-gray-800 border-gray-700 text-gray-400">Ruby</span>
+                                        <span className="badge bg-gray-800 border-gray-700 text-gray-400">Rails</span>
+                                        <span className="badge bg-gray-800 border-gray-700 text-gray-400">PHP</span>
+                                        <span className="badge bg-gray-800 border-gray-700 text-gray-400">Laravel</span>
                                     </div>
                                 </div>
                             </div>

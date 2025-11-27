@@ -169,10 +169,12 @@ export const Portfolio = () => {
 
         {/* View All Projects CTA */}
         <div className="text-center mt-16">
-          <a href="/projects" className="btn btn-outline btn-lg gap-2 text-gray-700 border-2 border-gray-400 hover:bg-gray-200 hover:border-gray-500 transition-all">
-            View All Projects
-            <ExternalLink size={20} />
-          </a>
+          <div className="tooltip tooltip-top" data-tip="Coming Soon">
+            <button className="btn btn-outline btn-lg gap-2 text-gray-700 border-2 border-gray-400 hover:bg-gray-200 hover:border-gray-500 transition-all">
+              View All Projects
+              <ExternalLink size={20} />
+            </button>
+          </div>
         </div>
       </div>
     </section>

@@ -15,7 +15,7 @@ export const Hero = () => {
         }}></div>
       </div>
 
-      <div className="hero-content flex-col gap-8 max-w-7xl mx-auto px-4 py-20 relative z-10">
+      <div className="hero-content flex-col gap-8 max-w-7xl mx-auto px-4 py-28 relative z-10">
         {/* Main Content Section */}
         <div className="text-center w-full">
           {/* Availability Badge */}

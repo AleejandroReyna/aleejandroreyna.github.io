@@ -1,4 +1,4 @@
-import Link from "next/link"
+'use client'
 import { ArrowRight, Palette, Rocket, Music, Telescope, BookOpen } from "lucide-react"
 
 export const About = () => {
@@ -72,7 +72,7 @@ export const About = () => {
               </h3>
               <p className="text-lg text-gray-700 leading-relaxed">
                 When I&apos;m not crafting code, you&apos;ll find me making music (a passion since I was 14) or
-                spending time with cats. I believe in leaving the world better than we found it, championing
+                spending time with my cat. Or maybe doing skateboarding or BMX. I believe in leaving the world better than we found it, championing
                 teamwork, and ensuring everyone gets a fair chance to succeed.
               </p>
             </div>
@@ -108,10 +108,14 @@ export const About = () => {
             I&apos;m always looking for opportunities to blend technology with purpose.
             If you want to create a better version of the world, let&apos;s talk.
           </p>
-          <Link href="/about" className="btn btn-primary btn-lg gap-2 text-white inline-flex items-center">
-            Read My Full Story
-            <ArrowRight size={20} />
-          </Link>
+          <div className="tooltip tooltip-top" data-tip="Coming Soon">
+            <button
+              className="btn btn-primary btn-lg gap-2 text-white inline-flex items-center"
+            >
+              Read My Full Story
+              <ArrowRight size={20} />
+            </button>
+          </div>
         </div>
       </div>
     </section>
