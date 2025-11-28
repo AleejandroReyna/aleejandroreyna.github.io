@@ -1,6 +1,6 @@
 'use client';
 import { useState, FormEvent } from "react";
-import { Mail, MapPin, Github, Linkedin, Twitter, Send } from "lucide-react";
+import { Mail, MapPin, Github, Linkedin, Send } from "lucide-react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCalendarAlt } from "@fortawesome/free-solid-svg-icons";
 
@@ -155,15 +155,6 @@ export const Contact = () => {
                 >
                   <Linkedin size={20} />
                   LinkedIn
-                </a>
-                <a
-                  href="https://twitter.com/aleejandroreyna"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="btn btn-ghost border-2 border-gray-700 text-gray-300 hover:border-blue-400 hover:bg-blue-400 hover:text-white transition-all gap-2"
-                >
-                  <Twitter size={20} />
-                  Twitter
                 </a>
                 <a
                   href="https://calendly.com/aleejandroreyna"

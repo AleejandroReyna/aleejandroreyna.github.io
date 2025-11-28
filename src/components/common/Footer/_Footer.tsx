@@ -4,7 +4,7 @@ import { currentYear } from "@/utils/currentYear";
 import { SiGithub } from '@icons-pack/react-simple-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCalendarAlt } from '@fortawesome/free-solid-svg-icons';
-import { Mail, Heart, Linkedin, Twitter } from 'lucide-react';
+import { Mail, Heart, Linkedin } from 'lucide-react';
 import { PythonOriginal } from "devicons-react";
 
 export const Footer = () => {
@@ -111,15 +111,6 @@ export const Footer = () => {
                 aria-label="LinkedIn"
               >
                 <Linkedin size={24} />
-              </a>
-              <a
-                href="https://twitter.com/aleejandroreyna"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-gray-400 hover:text-blue-400 transition-colors"
-                aria-label="Twitter"
-              >
-                <Twitter size={24} />
               </a>
               <a
                 href="https://calendly.com/aleejandroreyna"
