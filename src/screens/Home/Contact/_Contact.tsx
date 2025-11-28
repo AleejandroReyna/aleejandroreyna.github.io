@@ -1,6 +1,6 @@
 'use client';
 import { useState, FormEvent } from "react";
-import { Mail, MapPin, Github, Linkedin, Twitter, Send } from "lucide-react";
+import { Mail, MapPin, Github, Linkedin, Send } from "lucide-react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCalendarAlt } from "@fortawesome/free-solid-svg-icons";
 
