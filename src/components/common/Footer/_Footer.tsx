@@ -113,15 +113,6 @@ export const Footer = () => {
                 <Linkedin size={24} />
               </a>
               <a
-                href="https://twitter.com/aleejandroreyna"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-gray-400 hover:text-blue-400 transition-colors"
-                aria-label="Twitter"
-              >
-                <Twitter size={24} />
-              </a>
-              <a
                 href="https://calendly.com/aleejandroreyna"
                 target="_blank"
                 rel="noopener noreferrer"
