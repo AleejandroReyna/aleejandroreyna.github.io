@@ -1,0 +1,40 @@
+services:
+  mongo:
+    build:
+      context: ./mongo
+      dockerfile: Dockerfile
+      args:
+        MONGO_VERSION: latest
+    container_name: mongo
+    restart: unless-stopped
+    ports:
+      - "27017:27017"
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: admin
+      MONGO_INITDB_ROOT_PASSWORD: password
+      MONGO_REPLICA_HOST: host.docker.internal
+      MONGO_REPLICA_PORT: 27017
+      MONGO_COMMAND: mongosh
+    volumes:
+      - mongo_data:/data/db
+    healthcheck:
+      test: [ 'CMD', 'mongosh', 'admin', '--port', '27017', '--eval', "db.adminCommand('ping').ok" ]
+      interval: 3s
+      timeout: 2s
+      retries: 20
+
+  mongo-express:
+    image: mongo-express:latest
+    container_name: mongo-express
+    restart: unless-stopped
+    ports:
+      - "8081:8081"
+    environment:
+      ME_CONFIG_MONGODB_URL: mongodb://mongo:27017/admin?directConnection=true
+      ME_CONFIG_BASICAUTH: false
+    depends_on:
+      mongo:
+        condition: service_healthy
+
+volumes:
+  mongo_data:
