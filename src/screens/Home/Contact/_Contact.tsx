@@ -52,6 +52,7 @@ export const Contact = () => {
         });
       }
     } catch (error) {
+      console.error('Error sending message:', error);
       setSubmitStatus({
         type: 'error',
         message: 'An error occurred. Please try again later.',

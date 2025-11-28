@@ -2,17 +2,15 @@ import {
   SiReact,
   SiTypescript,
   SiWordpress,
-  SiMobx,
   SiJavascript,
   SiVuedotjs,
   SiPhp,
   SiLaravel,
   SiNodedotjs,
-  SiBitrise,
   SiAwsfargate,
   SiNextdotjs
 } from "@icons-pack/react-simple-icons";
-import { Github, ExternalLink } from "lucide-react";
+import { ExternalLink } from "lucide-react";
 import Image from "next/image";
 
 export const Portfolio = () => {

@@ -2,7 +2,7 @@ import { SiGithub, SiPython, SiTypescript, SiReact, SiNodedotjs, SiNextdotjs, Si
 import { LinkedinPlain } from 'devicons-react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCalendarAlt } from '@fortawesome/free-solid-svg-icons';
-import { ArrowRight, Star, Mail, Download, ChevronDown } from 'lucide-react';
+import { ArrowRight, Star, Mail, ChevronDown } from 'lucide-react';
 
 export const Hero = () => {
   return (
