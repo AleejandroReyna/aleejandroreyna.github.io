@@ -87,7 +87,7 @@ export const Skills = () => {
                                     <h3 className="text-xl font-bold text-white">API Design & Integration</h3>
                                     <div className="flex items-center gap-2 text-sm text-gray-500">
                                         <Clock size={14} />
-                                        <span>10+ years</span>
+                                        <span>9+ years</span>
                                     </div>
                                 </div>
                             </div>
@@ -122,7 +122,7 @@ export const Skills = () => {
                                     <h3 className="text-xl font-bold text-white">Database & Architecture</h3>
                                     <div className="flex items-center gap-2 text-sm text-gray-500">
                                         <Clock size={14} />
-                                        <span>12+ years</span>
+                                        <span>8+ years</span>
                                     </div>
                                 </div>
                             </div>

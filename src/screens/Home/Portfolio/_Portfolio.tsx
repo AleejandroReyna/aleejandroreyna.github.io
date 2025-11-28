@@ -71,14 +71,14 @@ export const Portfolio = () => {
                 </div>
               </div>
 
-              <div className="card-actions justify-start gap-2">
+              {/* <div className="card-actions justify-start gap-2">
                 <a href="#" className="btn btn-sm btn-ghost text-gray-700 border border-gray-300 hover:border-gray-400 gap-2">
                   <Github size={16} /> Code
                 </a>
                 <a href="#" className="btn btn-sm btn-ghost text-gray-700 border border-gray-300 hover:border-gray-400 gap-2">
                   <ExternalLink size={16} /> Live
                 </a>
-              </div>
+              </div>*/}
             </div>
           </article>
 
@@ -113,14 +113,14 @@ export const Portfolio = () => {
                 </div>
               </div>
 
-              <div className="card-actions justify-start gap-2">
+              {/* <div className="card-actions justify-start gap-2">
                 <a href="#" className="btn btn-sm btn-ghost text-gray-700 border border-gray-300 hover:border-gray-400 gap-2">
                   <Github size={16} /> Code
                 </a>
                 <a href="#" className="btn btn-sm btn-ghost text-gray-700 border border-gray-300 hover:border-gray-400 gap-2">
                   <ExternalLink size={16} /> Live
                 </a>
-              </div>
+              </div> */}
             </div>
           </article>
 
@@ -154,14 +154,14 @@ export const Portfolio = () => {
                 </div>
               </div>
 
-              <div className="card-actions justify-start gap-2">
+              {/* <div className="card-actions justify-start gap-2">
                 <a href="#" className="btn btn-sm btn-ghost text-gray-700 border border-gray-300 hover:border-gray-400 gap-2">
                   <Github size={16} /> Code
                 </a>
                 <a href="#" className="btn btn-sm btn-ghost text-gray-700 border border-gray-300 hover:border-gray-400 gap-2">
                   <ExternalLink size={16} /> Live
                 </a>
-              </div>
+              </div> */}
             </div>
           </article>
 

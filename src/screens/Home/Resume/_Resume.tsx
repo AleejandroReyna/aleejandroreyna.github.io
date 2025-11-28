@@ -27,11 +27,11 @@ const experiences: ExperienceEntry[] = [
         location: "Remote",
         description: "Leading development of fintech platform democratizing banking access for underserved communities.",
         achievements: [
-            "Built mobile-first platform serving 10,000+ users",
-            "Reduced API response time by 40% through caching optimization",
-            "Implemented secure payment processing with Stripe integration"
+            "Built mobile-first platform serving 100,000+ users",
+            "Created custom design system for consistent UI/UX",
+            "Tested and implemented security tools and libraries"
         ],
-        technologies: ["React", "TypeScript", "MobX", "WordPress", "Bitrise"]
+        technologies: ["React", "React Native", "TypeScript", "MobX", "WordPress", "Bitrise"]
     },
     {
         id: 7,
@@ -42,9 +42,10 @@ const experiences: ExperienceEntry[] = [
         location: "Remote",
         description: "Developed enterprise solutions for digital transformation.",
         achievements: [
-            "Built 5+ web applications from concept to deployment",
-            "Improved system performance by 50% through architecture redesign",
-            "Mentored 3 junior developers"
+            "Implemented RESTful API endpoints for core platform features",
+            "Built responsive UI screens consuming backend services",
+            "Delivered new features and resolved critical bugs across the stack",
+            "Proposed database optimization strategies to improve data architecture"
         ],
         technologies: ["React", "Node.js", "PostgreSQL", "AWS"]
     },
@@ -88,7 +89,7 @@ const experiences: ExperienceEntry[] = [
         achievements: [
             "Delivered 15+ projects on time and within budget",
             "Established full-stack development best practices",
-            "Led team of 2 developers"
+            "Led team on 3 projects"
         ],
         technologies: ["PHP", "Laravel", "JavaScript", "Vue", "MySQL"]
     },
@@ -101,7 +102,7 @@ const experiences: ExperienceEntry[] = [
         location: "Guatemala",
         description: "Focused on personal projects and skill development.",
         achievements: [
-            "Built personal blog and portfolio",
+            "Built personal blog and portfolio (outdated now, haha)",
             "Learned React and modern JavaScript",
             "Contributed to open source projects"
         ],
@@ -116,8 +117,8 @@ const experiences: ExperienceEntry[] = [
         location: "Guatemala",
         description: "Specialized in WordPress theme and plugin development.",
         achievements: [
-            "Created 20+ custom WordPress sites",
-            "Optimized site performance (3s to 1s load time)",
+            "Created 6+ custom WordPress sites",
+            "Optimized site performance",
             "Implemented SEO best practices"
         ],
         technologies: ["WordPress", "PHP", "JavaScript", "MySQL"]
@@ -131,11 +132,11 @@ const experiences: ExperienceEntry[] = [
         location: "Guatemala",
         description: "Independent contractor for various clients.",
         achievements: [
-            "Completed 10+ projects",
+            "Completed 10+ MVPs",
             "Built e-commerce sites and web applications",
             "Managed client relationships independently"
         ],
-        technologies: ["HTML", "CSS", "JavaScript", "PHP"]
+        technologies: ["HTML", "CSS", "JavaScript", "PHP", "Node.js", "React", "React Native", "TypeScript", "MobX", "WordPress", "Bitrise"]
     },
     {
         id: 0,
@@ -146,8 +147,8 @@ const experiences: ExperienceEntry[] = [
         location: "Guatemala",
         description: "First professional role, learned web development fundamentals.",
         achievements: [
-            "Created and maintained 15+ small business websites",
-            "Learned HTML, CSS, JavaScript from scratch",
+            "Created and maintained 5+ small business websites",
+            "Learned HTML, CSS, JavaScript, PHP and wordpress from scratch",
             "Fell in love with web development"
         ],
         technologies: ["HTML", "CSS", "JavaScript", "jQuery"]

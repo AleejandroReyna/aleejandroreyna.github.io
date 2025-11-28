@@ -21,9 +21,9 @@ export const Navbar = () => {
           {/* Logo */}
           <Link
             href="/"
-            className="text-2xl font-bold text-white hover:text-primary transition-colors"
+            className="text-2xl font-bold text-white transition-colors"
           >
-            <span className="bg-gradient-to-r from-white to-gray-400 bg-clip-text text-transparent">
+            <span className="">
               Alejandro Reyna
             </span>
           </Link>
