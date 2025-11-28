@@ -31,7 +31,7 @@ const experiences: ExperienceEntry[] = [
             "Created custom design system for consistent UI/UX",
             "Tested and implemented security tools and libraries"
         ],
-        technologies: ["React", "React Native", "TypeScript", "MobX", "WordPress", "Bitrise"]
+        technologies: ["React", "TypeScript", "Bitrise"]
     },
     {
         id: 7,

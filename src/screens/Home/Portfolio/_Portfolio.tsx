@@ -65,8 +65,6 @@ export const Portfolio = () => {
                 <div className="flex flex-wrap gap-2">
                   <SiReact size={24} className="hover:scale-110 transition-all cursor-pointer" style={{ color: '#61DAFB' }} />
                   <SiTypescript size={24} className="hover:scale-110 transition-all cursor-pointer" style={{ color: '#3178C6' }} />
-                  <SiMobx size={24} className="hover:scale-110 transition-all cursor-pointer" style={{ color: '#FF9955' }} />
-                  <SiBitrise size={24} className="hover:scale-110 transition-all cursor-pointer" style={{ color: '#683D87' }} />
                   <SiWordpress size={24} className="hover:scale-110 transition-all cursor-pointer" style={{ color: '#21759B' }} />
                 </div>
               </div>
