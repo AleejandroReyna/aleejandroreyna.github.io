@@ -58,15 +58,6 @@ export const Hero = () => {
               Get in Touch
               <Mail size={20} />
             </a>
-            <a
-              href="https://docs.google.com/document/d/19i8rsqaC642stR7IO8SOnJxGN19vojTO/edit"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="btn btn-ghost gap-2 text-gray-400 border border-gray-700 hover:bg-gray-900 hover:border-gray-600 hover:text-gray-300"
-            >
-              Download Resume
-              <Download size={20} />
-            </a>
           </div>
 
           {/* Social Links */}
