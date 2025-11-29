@@ -2,6 +2,7 @@ import { SiGithub } from '@icons-pack/react-simple-icons';
 import { LinkedinPlain } from 'devicons-react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCalendarAlt } from '@fortawesome/free-solid-svg-icons'
+import { envs } from "@/lib/envs";
 
 export const Content = () => {
   return (
@@ -14,45 +15,45 @@ export const Content = () => {
 
             <div className='flex items-center mr-4 mb-4'>
               <LinkedinPlain color="#ffffff" size={32} className='mr-1' />
-              <a target='_blank' className='link link-hover' href="https://linkedin.com/in/aleejandroreyna">/in/aleejandroreyna</a>
+              <a target='_blank' className='link link-hover' href={`https://linkedin.com/in/${envs.linkedinUser}`}>/in/{envs.linkedinUser}</a>
             </div>
             <div className=' flex items-center mr-4 mb-4'>
-              <SiGithub color="#ffffff" size={32}  className='mr-1' />
-              <a target='_blank' className='link link-hover' href="https://github.com/aleejandroreyna">@aleejandroreyna</a>
+              <SiGithub color="#ffffff" size={32} className='mr-1' />
+              <a target='_blank' className='link link-hover' href={`https://github.com/${envs.githubUser}`}>@{envs.githubUser}</a>
             </div>
             <div className='flex items-center mr-4 mb-4'>
-              <FontAwesomeIcon icon={faCalendarAlt} size='2x' color="#ffffff"  className='mr-1' />
-              <a target='_blank' className='link link-hover' href="https://calendly.com/aleejandroreyna">/aleejandroreyna</a>
+              <FontAwesomeIcon icon={faCalendarAlt} size='2x' color="#ffffff" className='mr-1' />
+              <a target='_blank' className='link link-hover' href={`https://calendly.com/${envs.calendlyUser}`}>/{envs.calendlyUser}</a>
             </div>
           </div>
           <div className="basis-2/3">
-          <form action="#" className="inline mr-auto">
-            <div className="grid grid-cols-3 gap-4">
-              <fieldset className="fieldset mb-2">
-                <legend className="fieldset-legend text-white">Your name</legend>
-                <input type="text" className="input input-lg bg-neutral border-white" placeholder="I want to know more about you" />
-              </fieldset>
+            <form action="#" className="inline mr-auto">
+              <div className="grid grid-cols-3 gap-4">
+                <fieldset className="fieldset mb-2">
+                  <legend className="fieldset-legend text-white">Your name</legend>
+                  <input type="text" className="input input-lg bg-neutral border-white" placeholder="I want to know more about you" />
+                </fieldset>
+
+                <fieldset className="fieldset mb-2 ">
+                  <legend className="fieldset-legend text-white">Your email</legend>
+                  <input type="text" className="input input-lg bg-neutral border-white" placeholder="ex: your@email.com" />
+                </fieldset>
+
+                <fieldset className="fieldset mb-2">
+                  <legend className="fieldset-legend text-white">Your phone</legend>
+                  <input type="text" className="input input-lg bg-neutral border-white" placeholder="ex: +502 43434343" />
+                </fieldset>
+              </div>
 
               <fieldset className="fieldset mb-2 ">
-                <legend className="fieldset-legend text-white">Your email</legend>
-                <input type="text" className="input input-lg bg-neutral border-white" placeholder="ex: your@email.com" />
+                <legend className="fieldset-legend text-white">Tell me about your project</legend>
+                <textarea rows={6} className="textarea input textarea-lg bg-neutral border-white w-full h-30" placeholder="Every idea is been received">
+                </textarea>
               </fieldset>
 
-              <fieldset className="fieldset mb-2">
-                <legend className="fieldset-legend text-white">Your phone</legend>
-                <input type="text" className="input input-lg bg-neutral border-white" placeholder="ex: +502 43434343" />
-              </fieldset>
-            </div>
-
-            <fieldset className="fieldset mb-2 ">
-              <legend className="fieldset-legend text-white">Tell me about your project</legend>
-              <textarea rows={6} className="textarea input textarea-lg bg-neutral border-white w-full h-30" placeholder="Every idea is been received">
-              </textarea>
-            </fieldset>
-
-            <div className="text-right">
-              <button className="btn btn-neutral border-white ml-auto">Submit</button>
-            </div>
+              <div className="text-right">
+                <button className="btn btn-neutral border-white ml-auto">Submit</button>
+              </div>
             </form>
           </div>
         </div>
