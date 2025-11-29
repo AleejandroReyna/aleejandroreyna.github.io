@@ -8,8 +8,7 @@ import "./globals.css";
 // UI Components
 import { Navbar } from "@/components/common/Navbar";
 import { Footer } from "@/components/common/Footer";
-import AnalyticsHeader from "@/components/common/Google/Analytics/Header";
-import AnalyticsBody from "@/components/common/Google/Analytics/Body";
+import { GoogleAnalytics } from '@next/third-parties/google'
 
 // Constants
 const outfit = Outfit({
@@ -108,9 +107,8 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" data-theme="custom" className="scroll-smooth">
-      <AnalyticsHeader />
+      <GoogleAnalytics gaId={'G-J0NP6MJ4QZ'} />
       <body className={`${outfit.variable} ${opsOne.variable} antialiased flex flex-col min-h-screen`}>
-        <AnalyticsBody />
         <Navbar />
         {children}
         <Footer />
