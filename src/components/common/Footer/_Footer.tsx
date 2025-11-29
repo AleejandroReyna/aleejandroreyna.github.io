@@ -1,4 +1,3 @@
-'use client';
 import { yearsOfExperience } from "@/utils/yearsOfExperience";
 import { currentYear } from "@/utils/currentYear";
 import { SiGithub } from '@icons-pack/react-simple-icons';
@@ -6,6 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCalendarAlt } from '@fortawesome/free-solid-svg-icons';
 import { Mail, Heart, Linkedin } from 'lucide-react';
 import { PythonOriginal } from "devicons-react";
+import { envs } from "@/lib/envs";
 
 export const Footer = () => {
   return (
@@ -84,18 +84,18 @@ export const Footer = () => {
             <h4 className="text-lg font-bold text-white mb-4">Connect</h4>
             <div className="space-y-3 mb-6">
               <a
-                href="mailto:me@alejandroreyna.com"
+                href={`mailto:${envs.contactEmail}`}
                 className="flex items-center gap-2 text-gray-400 hover:text-white transition-colors"
               >
                 <Mail size={18} />
-                <span className="text-sm">me@alejandroreyna.com</span>
+                <span className="text-sm">{envs.contactEmail}</span>
               </a>
               <p className="text-gray-400 text-sm">Guatemala, Guatemala</p>
             </div>
 
             <div className="flex gap-4">
               <a
-                href="https://github.com/AleejandroReyna"
+                href={`https://github.com/${envs.githubUser}`}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-gray-400 hover:text-white transition-colors"
@@ -104,7 +104,7 @@ export const Footer = () => {
                 <SiGithub size={24} />
               </a>
               <a
-                href="https://linkedin.com/in/aleejandroreyna"
+                href={`https://linkedin.com/in/${envs.linkedinUser}`}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-gray-400 hover:text-blue-500 transition-colors"
@@ -113,7 +113,7 @@ export const Footer = () => {
                 <Linkedin size={24} />
               </a>
               <a
-                href="https://calendly.com/aleejandroreyna"
+                href={`https://calendly.com/${envs.calendlyUser}`}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-gray-400 hover:text-primary transition-colors"

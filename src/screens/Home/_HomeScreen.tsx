@@ -4,6 +4,7 @@ import { Portfolio } from "./Portfolio"
 import { Skills } from "./Skills"
 import { Resume } from "./Resume"
 import { Contact } from "./Contact"
+import { envs } from "@/lib/envs"
 
 export const HomeScreen = () => {
   return (
@@ -13,7 +14,12 @@ export const HomeScreen = () => {
       <Portfolio />
       <Skills />
       <Resume />
-      <Contact />
+      <Contact
+        contactEmail={envs.contactEmail}
+        githubUser={envs.githubUser}
+        linkedinUser={envs.linkedinUser}
+        calendlyUser={envs.calendlyUser}
+      />
     </>
   )
 }

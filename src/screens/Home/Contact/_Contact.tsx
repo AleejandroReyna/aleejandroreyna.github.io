@@ -4,7 +4,14 @@ import { Mail, MapPin, Github, Linkedin, Send } from "lucide-react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCalendarAlt } from "@fortawesome/free-solid-svg-icons";
 
-export const Contact = () => {
+interface ContactProps {
+  contactEmail: string;
+  githubUser: string;
+  linkedinUser: string;
+  calendlyUser: string;
+}
+
+export const Contact = ({ contactEmail, githubUser, linkedinUser, calendlyUser }: ContactProps) => {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -117,8 +124,8 @@ export const Contact = () => {
                 </div>
                 <div>
                   <p className="text-sm text-gray-500">Email</p>
-                  <a href="mailto:me@alejandroreyna.com" className="text-lg font-semibold hover:text-primary transition-colors">
-                    me@alejandroreyna.com
+                  <a href={`mailto:${contactEmail}`} className="text-lg font-semibold hover:text-primary transition-colors">
+                    {contactEmail}
                   </a>
                 </div>
               </div>
@@ -139,16 +146,16 @@ export const Contact = () => {
               <h4 className="text-lg font-bold text-white mb-4">Connect With Me</h4>
               <div className="flex flex-wrap gap-3">
                 <a
-                  href="https://github.com/AleejandroReyna"
+                  href={`https://github.com/${githubUser}`}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="btn btn-ghost border-2 border-gray-700 text-gray-300 hover:border-gray-500 hover:bg-gray-800 transition-all gap-2"
+                  className="btn btn-ghost border-2 border-gray-700 text-gray-300 hover:border-gray-500 hover:bg-gray-800 hover:text-white transition-all gap-2"
                 >
                   <Github size={20} />
                   GitHub
                 </a>
                 <a
-                  href="https://linkedin.com/in/aleejandroreyna"
+                  href={`https://linkedin.com/in/${linkedinUser}`}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="btn btn-ghost border-2 border-gray-700 text-gray-300 hover:border-blue-600 hover:bg-blue-600 hover:text-white transition-all gap-2"
@@ -157,7 +164,7 @@ export const Contact = () => {
                   LinkedIn
                 </a>
                 <a
-                  href="https://calendly.com/aleejandroreyna"
+                  href={`https://calendly.com/${calendlyUser}`}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="btn btn-ghost border-2 border-gray-700 text-gray-300 hover:border-primary hover:bg-primary hover:text-white transition-all gap-2"
@@ -174,7 +181,7 @@ export const Contact = () => {
               <ul className="space-y-2 text-gray-400">
                 <li className="flex items-start gap-2">
                   <span className="text-primary mt-1">•</span>
-                  <span>Full-Stack Engineer roles (Remote or Guatemala)</span>
+                  <span>Full-Stack Engineer roles</span>
                 </li>
                 <li className="flex items-start gap-2">
                   <span className="text-primary mt-1">•</span>
