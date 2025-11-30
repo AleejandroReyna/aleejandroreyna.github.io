@@ -1,5 +1,14 @@
 import type { NextAuthConfig } from 'next-auth';
 
+// Define protected routes here - add more as needed
+const protectedRoutes = [
+    '/dashboard',
+    // Add more protected routes here, e.g.:
+    // '/admin',
+    // '/profile',
+    // '/settings',
+];
+
 export const authConfig = {
     pages: {
         signIn: '/login', // Redirect here when user tries to access protected route
@@ -8,9 +17,13 @@ export const authConfig = {
         // This runs on EVERY request to check if user can access the page
         authorized({ auth, request: { nextUrl } }) {
             const isLoggedIn = !!auth?.user; // Check if session exists
-            const isOnDashboard = nextUrl.pathname.startsWith('/dashboard');
 
-            if (isOnDashboard) {
+            // Check if the current path matches any protected route
+            const isProtectedRoute = protectedRoutes.some(route =>
+                nextUrl.pathname.startsWith(route)
+            );
+
+            if (isProtectedRoute) {
                 if (isLoggedIn) return true; // Allow access
                 return false; // Redirect to login
             }
