@@ -44,6 +44,21 @@ export default async function DashboardPage() {
                     </div>
                 </div>
 
+                {/* Quick Links */}
+                <div className="bg-white shadow-lg rounded-lg p-6 border border-gray-200">
+                    <h2 className="text-xl font-semibold mb-4 text-gray-800">
+                        Quick Links
+                    </h2>
+                    <div className="space-y-2">
+                        <a
+                            href="/submissions"
+                            className="block btn btn-primary text-white w-full"
+                        >
+                            📬 View Contact Submissions
+                        </a>
+                    </div>
+                </div>
+
                 {/* Sign Out Button */}
                 <form
                     action={async () => {

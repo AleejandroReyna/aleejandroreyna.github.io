@@ -3,6 +3,7 @@ import type { NextAuthConfig } from 'next-auth';
 // Define protected routes here - add more as needed
 const protectedRoutes = [
     '/dashboard',
+    '/submissions',
     // Add more protected routes here, e.g.:
     // '/admin',
     // '/profile',
