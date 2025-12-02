@@ -22,7 +22,7 @@ export default async function SubmissionsPage() {
     await prisma.$disconnect();
 
     return (
-        <main className="min-h-screen p-8">
+        <main className="min-h-screen p-32">
             <div className="max-w-7xl mx-auto">
                 {/* Header */}
                 <div className="mb-8 flex justify-between items-center">
@@ -47,12 +47,9 @@ export default async function SubmissionsPage() {
                 ) : (
                     <div className="grid gap-4">
                         {submissions.map((submission) => (
-                            <Link
-                                key={submission.id}
-                                href={`/submissions/${submission.id}`}
-                                className="bg-white border border-gray-200 rounded-lg p-6 hover:shadow-lg transition-shadow"
-                            >
-                                <div className="flex justify-between items-start">
+
+                            <article key={submission.id} className='card bg-white border border-gray-200 rounded-lg p-6 hover:shadow-lg transition-shadow'>
+                                <div className="flex justify-between items-stretch">
                                     <div className="flex-1">
                                         <div className="flex items-center gap-3 mb-2">
                                             <h2 className="text-xl font-semibold text-gray-900">
@@ -70,7 +67,7 @@ export default async function SubmissionsPage() {
                                             {submission.message}
                                         </p>
                                     </div>
-                                    <div className="text-right ml-4">
+                                    <div className="text-right ml-4 flex flex-col">
                                         <p className="text-sm text-gray-500">
                                             {new Date(submission.createdAt).toLocaleDateString('en-US', {
                                                 year: 'numeric',
@@ -84,9 +81,17 @@ export default async function SubmissionsPage() {
                                                 minute: '2-digit',
                                             })}
                                         </p>
+
+
+                                        <Link
+                                            key={submission.id}
+                                            href={`/submissions/${submission.id}`}
+                                            className="btn btn-primary mt-auto"
+                                        >Ver</Link>
                                     </div>
+
                                 </div>
-                            </Link>
+                            </article>
                         ))}
                     </div>
                 )}
