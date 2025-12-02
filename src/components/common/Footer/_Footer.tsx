@@ -26,7 +26,7 @@ export const Footer = () => {
               {yearsOfExperience()}+ years crafting elegant solutions
             </p>
             <p className="text-gray-400 text-sm italic">
-              {`"I don't just write code that works—I write code that sings."`}
+              {`"I don't just write code that works - I write code that sings."`}
             </p>
           </div>
 
