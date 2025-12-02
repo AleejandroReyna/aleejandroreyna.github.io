@@ -45,7 +45,7 @@ export default async function SubmissionDetailPage(props: PageProps) {
     await prisma.$disconnect();
 
     return (
-        <main className="min-h-screen p-8">
+        <main className="min-h-screen p-32">
             <div className="max-w-4xl mx-auto">
                 {/* Header */}
                 <div className="mb-8">
@@ -69,7 +69,7 @@ export default async function SubmissionDetailPage(props: PageProps) {
                 {/* Submission Details Card */}
                 <div className="bg-white border border-gray-200 rounded-lg shadow-lg overflow-hidden">
                     {/* Header Section */}
-                    <div className="bg-gradient-to-r from-blue-500 to-blue-600 p-6 text-white">
+                    <div className="bg-primary p-6 text-white">
                         <div className="flex justify-between items-start">
                             <div>
                                 <h2 className="text-2xl font-bold mb-1">{submission.name}</h2>
