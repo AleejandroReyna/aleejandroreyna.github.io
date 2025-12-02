@@ -144,12 +144,6 @@ export default async function SubmissionDetailPage(props: PageProps) {
                     {/* Actions */}
                     <div className="bg-gray-50 px-6 py-4 border-t border-gray-200">
                         <div className="flex gap-3">
-                            <a
-                                href={`mailto:${submission.email}?subject=Re: ${submission.subject}`}
-                                className="btn btn-primary text-white"
-                            >
-                                Reply via Email
-                            </a>
                             <Link
                                 href="/submissions"
                                 className="btn btn-ghost"
