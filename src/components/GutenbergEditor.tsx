@@ -15,7 +15,17 @@ import { registerCoreBlocks } from '@wordpress/block-library';
 import '@wordpress/components/build-style/style.css';
 import '@wordpress/block-editor/build-style/style.css';
 import '@wordpress/block-library/build-style/style.css';
-/* Removed theme.css and common.css as they don't exist in the current version of the package */
+/*
+   We cannot import the css directly from node_modules if Next.js/Turbopack can't resolve it via package exports.
+   However, since we verified it exists, we will try to import it via a relative path or skip if it keeps failing.
+   For now, we'll try to rely on the components styles and our custom CSS.
+   The format library mostly provides inline styles for bold/italic which often work without extra CSS,
+   or rely on the main editor styles.
+*/
+// import '@wordpress/format-library/build-style/style.css';
+
+import './GutenbergEditor.css';
+
 
 interface GutenbergEditorProps {
   initialContent?: string;
@@ -45,18 +55,20 @@ export default function GutenbergEditor({ initialContent, onChange }: GutenbergE
   };
 
   return (
-    <div className="gutenberg-editor-wrapper border rounded p-4 bg-white min-h-[400px]">
+    <div className="gutenberg-editor-wrapper border rounded p-4 bg-white min-h-[500px] relative iso-root">
       <SlotFillProvider>
         <BlockEditorProvider
           value={blocks}
           onInput={handleUpdateBlocks}
           onChange={handleUpdateBlocks}
         >
-          <WritingFlow>
-            <ObserveTyping>
-              <BlockList />
-            </ObserveTyping>
-          </WritingFlow>
+          <div className="editor-styles-wrapper">
+             <WritingFlow>
+                <ObserveTyping>
+                  <BlockList />
+                </ObserveTyping>
+              </WritingFlow>
+          </div>
           <Popover.Slot />
         </BlockEditorProvider>
       </SlotFillProvider>

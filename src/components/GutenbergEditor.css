@@ -1,0 +1,38 @@
+/* src/components/GutenbergEditor.css */
+
+/* Basic layout for the editor to resemble the standalone editor */
+.gutenberg-editor-wrapper {
+    /* Reset some defaults */
+    --wp-admin-theme-color: #007cba;
+    --wp-admin-theme-color-darker-10: #006ba1;
+    --wp-admin-theme-color-darker-20: #005a87;
+    --wp-admin-border-width-focus: 2px;
+}
+
+.gutenberg-editor-wrapper .block-editor-writing-flow {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.gutenberg-editor-wrapper .block-editor-block-list__layout {
+    max-width: 840px; /* Standard content width */
+    margin-left: auto;
+    margin-right: auto;
+    padding: 20px;
+}
+
+/* Ensure blocks have some spacing */
+.gutenberg-editor-wrapper .wp-block {
+    margin-bottom: 1.5em;
+}
+
+/* Fix for appender visibility */
+.gutenberg-editor-wrapper .block-editor-default-block-appender__content {
+    margin-top: 1em;
+}
+
+/* Ensure popovers (like block toolbar) are visible above other content */
+.components-popover {
+    z-index: 100000;
+}

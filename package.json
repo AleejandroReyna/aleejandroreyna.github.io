@@ -31,6 +31,7 @@
     "@wordpress/data": "^10.36.0",
     "@wordpress/editor": "^14.36.0",
     "@wordpress/element": "^6.36.0",
+    "@wordpress/format-library": "^5.36.0",
     "@wordpress/i18n": "^6.9.0",
     "@wordpress/icons": "^11.3.0",
     "@wordpress/primitives": "^4.36.0",
