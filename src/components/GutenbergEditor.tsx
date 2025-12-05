@@ -6,6 +6,8 @@ import {
   BlockList,
   WritingFlow,
   ObserveTyping,
+  BlockTools,
+  BlockInspector,
 } from '@wordpress/block-editor';
 import {
   SlotFillProvider,
@@ -15,13 +17,6 @@ import { registerCoreBlocks } from '@wordpress/block-library';
 import '@wordpress/components/build-style/style.css';
 import '@wordpress/block-editor/build-style/style.css';
 import '@wordpress/block-library/build-style/style.css';
-/*
-   We cannot import the css directly from node_modules if Next.js/Turbopack can't resolve it via package exports.
-   However, since we verified it exists, we will try to import it via a relative path or skip if it keeps failing.
-   For now, we'll try to rely on the components styles and our custom CSS.
-   The format library mostly provides inline styles for bold/italic which often work without extra CSS,
-   or rely on the main editor styles.
-*/
 // import '@wordpress/format-library/build-style/style.css';
 
 import './GutenbergEditor.css';
@@ -55,20 +50,30 @@ export default function GutenbergEditor({ initialContent, onChange }: GutenbergE
   };
 
   return (
-    <div className="gutenberg-editor-wrapper border rounded p-4 bg-white min-h-[500px] relative iso-root">
+    <div className="gutenberg-editor-wrapper border rounded bg-white min-h-[600px] relative iso-root flex flex-row">
       <SlotFillProvider>
         <BlockEditorProvider
           value={blocks}
           onInput={handleUpdateBlocks}
           onChange={handleUpdateBlocks}
         >
-          <div className="editor-styles-wrapper">
-             <WritingFlow>
-                <ObserveTyping>
-                  <BlockList />
-                </ObserveTyping>
-              </WritingFlow>
+          {/* Main Editor Area */}
+          <div className="editor-content flex-1 p-4 overflow-y-auto h-[600px] relative">
+            <BlockTools>
+                <WritingFlow>
+                    <ObserveTyping>
+                        <BlockList />
+                    </ObserveTyping>
+                </WritingFlow>
+            </BlockTools>
           </div>
+
+          {/* Sidebar Inspector */}
+          <div className="editor-sidebar w-80 border-l bg-gray-50 p-4 overflow-y-auto h-[600px]">
+             <h3 className="font-bold mb-4">Block Settings</h3>
+             <BlockInspector />
+          </div>
+
           <Popover.Slot />
         </BlockEditorProvider>
       </SlotFillProvider>
