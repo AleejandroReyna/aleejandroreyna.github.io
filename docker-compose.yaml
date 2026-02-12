@@ -12,7 +12,7 @@ services:
     environment:
       MONGO_INITDB_ROOT_USERNAME: admin
       MONGO_INITDB_ROOT_PASSWORD: password
-      MONGO_REPLICA_HOST: host.docker.internal
+      MONGO_REPLICA_HOST: localhost
       MONGO_REPLICA_PORT: 27017
       MONGO_COMMAND: mongosh
     volumes:
