@@ -6,9 +6,7 @@ function getEnvVar(key: string): string {
 }
 
 export const envs = {
-    githubUser: getEnvVar('GITHUB_USER'),
-    linkedinUser: getEnvVar('LINKEDIN_USER'),
-    contactEmail: getEnvVar('CONTACT_EMAIL'),
     googleAnalyticsId: getEnvVar('GOOGLE_ANALYTICS_ID'),
-    calendlyUser: getEnvVar('CALENDLY_USER'),
+    payloadSecret: getEnvVar('PAYLOAD_SECRET'),
+    databaseUrl: getEnvVar('DATABASE_URL'),
 };

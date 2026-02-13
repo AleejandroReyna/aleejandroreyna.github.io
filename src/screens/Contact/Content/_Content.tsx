@@ -2,9 +2,12 @@ import { SiGithub } from '@icons-pack/react-simple-icons';
 import { LinkedinPlain } from 'devicons-react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCalendarAlt } from '@fortawesome/free-solid-svg-icons'
-import { envs } from "@/lib/envs";
+import { getSiteSettings } from "@/lib/payload";
 
-export const Content = () => {
+export const Content = async () => {
+  const settings = await getSiteSettings();
+  const { github, linkedin, calendly } = settings.social || {};
+
   return (
     <section className="bg-neutral text-neutral-content flex-auto py-32 px-4">
       <div className="mx-auto max-w-md md:max-w-7xl lg:max-w-7xl h-full">
@@ -15,15 +18,15 @@ export const Content = () => {
 
             <div className='flex items-center mr-4 mb-4'>
               <LinkedinPlain color="#ffffff" size={32} className='mr-1' />
-              <a target='_blank' className='link link-hover' href={`https://linkedin.com/in/${envs.linkedinUser}`}>/in/{envs.linkedinUser}</a>
+              <a target='_blank' className='link link-hover' href={`https://linkedin.com/in/${linkedin}`}>/in/{linkedin}</a>
             </div>
             <div className=' flex items-center mr-4 mb-4'>
               <SiGithub color="#ffffff" size={32} className='mr-1' />
-              <a target='_blank' className='link link-hover' href={`https://github.com/${envs.githubUser}`}>@{envs.githubUser}</a>
+              <a target='_blank' className='link link-hover' href={`https://github.com/${github}`}>@{github}</a>
             </div>
             <div className='flex items-center mr-4 mb-4'>
               <FontAwesomeIcon icon={faCalendarAlt} size='2x' color="#ffffff" className='mr-1' />
-              <a target='_blank' className='link link-hover' href={`https://calendly.com/${envs.calendlyUser}`}>/{envs.calendlyUser}</a>
+              <a target='_blank' className='link link-hover' href={`https://calendly.com/${calendly}`}>/{calendly}</a>
             </div>
           </div>
           <div className="basis-2/3">

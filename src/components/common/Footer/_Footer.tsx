@@ -5,9 +5,11 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCalendarAlt } from '@fortawesome/free-solid-svg-icons';
 import { Mail, Heart, Linkedin } from 'lucide-react';
 import { PythonOriginal } from "devicons-react";
-import { envs } from "@/lib/envs";
+import { getSiteSettings } from "@/lib/payload";
 
-export const Footer = () => {
+export const Footer = async () => {
+  const settings = await getSiteSettings();
+  const { github, linkedin, calendly, email } = settings.social || {};
   return (
     <footer className="bg-black border-t border-gray-800">
       {/* Main Footer Content */}
@@ -84,18 +86,18 @@ export const Footer = () => {
             <h4 className="text-lg font-bold text-white mb-4">Connect</h4>
             <div className="space-y-3 mb-6">
               <a
-                href={`mailto:${envs.contactEmail}`}
+                href={`mailto:${email}`}
                 className="flex items-center gap-2 text-gray-400 hover:text-white transition-colors"
               >
                 <Mail size={18} />
-                <span className="text-sm">{envs.contactEmail}</span>
+                <span className="text-sm">{email}</span>
               </a>
               <p className="text-gray-400 text-sm">Guatemala, Guatemala</p>
             </div>
 
             <div className="flex gap-4">
               <a
-                href={`https://github.com/${envs.githubUser}`}
+                href={`https://github.com/${github}`}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-gray-400 hover:text-white transition-colors"
@@ -104,7 +106,7 @@ export const Footer = () => {
                 <SiGithub size={24} />
               </a>
               <a
-                href={`https://linkedin.com/in/${envs.linkedinUser}`}
+                href={`https://linkedin.com/in/${linkedin}`}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-gray-400 hover:text-blue-500 transition-colors"
@@ -113,7 +115,7 @@ export const Footer = () => {
                 <Linkedin size={24} />
               </a>
               <a
-                href={`https://calendly.com/${envs.calendlyUser}`}
+                href={`https://calendly.com/${calendly}`}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-gray-400 hover:text-primary transition-colors"

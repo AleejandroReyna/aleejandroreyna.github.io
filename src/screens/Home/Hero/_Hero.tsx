@@ -3,9 +3,11 @@ import { LinkedinPlain } from 'devicons-react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCalendarAlt } from '@fortawesome/free-solid-svg-icons';
 import { ArrowRight, Star, Mail, ChevronDown } from 'lucide-react';
-import { envs } from "@/lib/envs";
+import { getSiteSettings } from "@/lib/payload";
 
-export const Hero = () => {
+export const Hero = async () => {
+  const settings = await getSiteSettings();
+  const { github, linkedin, calendly, email } = settings.social || {};
   return (
     <section className="hero min-h-screen bg-black relative overflow-hidden" id="home">
       {/* Background subtle pattern */}
@@ -64,7 +66,7 @@ export const Hero = () => {
           {/* Social Links */}
           <div className="flex flex-wrap gap-4 items-center justify-center mb-8">
             <a
-              href={`https://linkedin.com/in/${envs.linkedinUser}`}
+              href={`https://linkedin.com/in/${linkedin}`}
               target="_blank"
               rel="noopener noreferrer"
               className="btn btn-ghost gap-2 text-gray-300 border border-gray-700 hover:bg-[#0A66C2] hover:border-[#0A66C2] hover:text-white transition-all"
@@ -74,7 +76,7 @@ export const Hero = () => {
               <span className="hidden sm:inline">LinkedIn</span>
             </a>
             <a
-              href={`https://github.com/${envs.githubUser}`}
+              href={`https://github.com/${github}`}
               target="_blank"
               rel="noopener noreferrer"
               className="btn btn-ghost gap-2 text-gray-300 border border-gray-700 hover:bg-[#6e5494] hover:border-[#6e5494] hover:text-white transition-all"
@@ -84,7 +86,7 @@ export const Hero = () => {
               <span className="hidden sm:inline">GitHub</span>
             </a>
             <a
-              href={`https://calendly.com/${envs.calendlyUser}`}
+              href={`https://calendly.com/${calendly}`}
               target="_blank"
               rel="noopener noreferrer"
               className="btn btn-ghost gap-2 text-gray-300 border border-gray-700 hover:bg-[#006BFF] hover:border-[#006BFF] hover:text-white transition-all"
@@ -94,7 +96,7 @@ export const Hero = () => {
               <span className="hidden sm:inline">Schedule Call</span>
             </a>
             <a
-              href={`mailto:${envs.contactEmail}`}
+              href={`mailto:${email}`}
               className="btn btn-ghost gap-2 text-gray-300 border border-gray-700 hover:bg-[#14B8A6] hover:border-[#14B8A6] hover:text-white transition-all"
               aria-label="Send Email"
             >

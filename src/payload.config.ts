@@ -8,6 +8,7 @@ import sharp from 'sharp'
 import { Users } from './collections/Users'
 import { Media } from './collections/Media'
 import { SiteSettings } from './globals/SiteSettings'
+import { envs } from './lib/envs'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -22,12 +23,12 @@ export default buildConfig({
     collections: [Users, Media],
     globals: [SiteSettings],
     editor: lexicalEditor(),
-    secret: process.env.PAYLOAD_SECRET || '',
+    secret: envs.payloadSecret,
     typescript: {
         outputFile: path.resolve(dirname, 'payload-types.ts'),
     },
     db: mongooseAdapter({
-        url: process.env.DATABASE_URL || '',
+        url: envs.databaseUrl,
     }),
     sharp,
     plugins: [],

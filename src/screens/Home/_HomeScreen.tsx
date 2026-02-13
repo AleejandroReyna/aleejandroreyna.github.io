@@ -4,9 +4,12 @@ import { Portfolio } from "./Portfolio"
 import { Skills } from "./Skills"
 import { Resume } from "./Resume"
 import { Contact } from "./Contact"
-import { envs } from "@/lib/envs"
+import { getSiteSettings } from "@/lib/payload"
 
-export const HomeScreen = () => {
+export const HomeScreen = async () => {
+  const settings = await getSiteSettings();
+  const { github, linkedin, calendly, email } = settings.social || {};
+
   return (
     <>
       <Hero />
@@ -15,10 +18,10 @@ export const HomeScreen = () => {
       <Skills />
       <Resume />
       <Contact
-        contactEmail={envs.contactEmail}
-        githubUser={envs.githubUser}
-        linkedinUser={envs.linkedinUser}
-        calendlyUser={envs.calendlyUser}
+        contactEmail={email || ''}
+        githubUser={github || ''}
+        linkedinUser={linkedin || ''}
+        calendlyUser={calendly || ''}
       />
     </>
   )
