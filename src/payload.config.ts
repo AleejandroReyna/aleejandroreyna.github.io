@@ -40,6 +40,7 @@ export default buildConfig({
             collections: {
                 media: {
                     prefix: envs.uploadPrefix,
+                    disablePayloadAccessControl: true,
                 },
             },
         }),
