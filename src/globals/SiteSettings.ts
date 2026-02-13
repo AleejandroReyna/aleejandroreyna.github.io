@@ -1,10 +1,18 @@
 import type { GlobalConfig } from 'payload'
+import { revalidatePath } from 'next/cache'
 
 export const SiteSettings: GlobalConfig = {
     slug: 'site-settings',
     label: 'Site Settings',
     access: {
         read: () => true,
+    },
+    hooks: {
+        afterChange: [
+            () => {
+                revalidatePath('/', 'layout')
+            },
+        ],
     },
     fields: [
         {
