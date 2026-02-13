@@ -1,5 +1,6 @@
 import { mongooseAdapter } from '@payloadcms/db-mongodb'
 import { lexicalEditor } from '@payloadcms/richtext-lexical'
+import { vercelBlobStorage } from '@payloadcms/storage-vercel-blob'
 import path from 'path'
 import { buildConfig } from 'payload'
 import { fileURLToPath } from 'url'
@@ -7,6 +8,8 @@ import sharp from 'sharp'
 
 import { Users } from './collections/Users'
 import { Media } from './collections/Media'
+import { Companies } from './collections/Companies'
+import { ExperienceDetails } from './collections/ExperienceDetails'
 import { SiteSettings } from './globals/SiteSettings'
 import { envs } from './lib/envs'
 
@@ -20,7 +23,7 @@ export default buildConfig({
             baseDir: path.resolve(dirname),
         },
     },
-    collections: [Users, Media],
+    collections: [Users, Media, Companies, ExperienceDetails],
     globals: [SiteSettings],
     editor: lexicalEditor(),
     secret: envs.payloadSecret,
@@ -31,5 +34,14 @@ export default buildConfig({
         url: envs.databaseUrl,
     }),
     sharp,
-    plugins: [],
+    plugins: [
+        vercelBlobStorage({
+            token: envs.blobToken,
+            collections: {
+                media: {
+                    prefix: envs.uploadPrefix,
+                },
+            },
+        }),
+    ],
 })

@@ -1,8 +1,6 @@
 'use client';
 import { useState } from "react";
-import { ExternalLink, Clock, MapPin } from "lucide-react";
-import { faCheckCircle } from "@fortawesome/free-solid-svg-icons"
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import { ExternalLink, Clock, MapPin, Briefcase, Code2, Building2, CheckCircle2 } from "lucide-react";
 
 interface ExperienceEntry {
     id: number;
@@ -155,9 +153,22 @@ const experiences: ExperienceEntry[] = [
     }
 ];
 
+// Collect unique technologies across all experiences
+const allTechnologies = new Set(experiences.flatMap(exp => exp.technologies));
+
+const stats = [
+    { icon: Clock, label: "Years of Experience", value: "12+" },
+    { icon: Building2, label: "Companies", value: `${experiences.length}` },
+    { icon: Code2, label: "Technologies", value: `${allTechnologies.size}+` },
+    { icon: Briefcase, label: "Projects Delivered", value: "50+" },
+];
+
 export const Resume = () => {
     const [activeTab, setActiveTab] = useState(8);
     const activeExperience = experiences.find(exp => exp.id === activeTab);
+
+    // Extract year from the active experience for the watermark
+    const watermarkYear = activeExperience?.dateShort.split(' ').pop() || '';
 
     return (
         <section className="py-24 bg-gray-100 relative overflow-hidden">
@@ -171,7 +182,7 @@ export const Resume = () => {
 
             <div className="mx-auto max-w-7xl px-4 relative z-10">
                 {/* Heading */}
-                <div className="text-center mb-16">
+                <div className="text-center mb-8">
                     <h2 className="text-5xl lg:text-6xl font-bold text-gray-900 mb-4">
                         Professional Journey
                     </h2>
@@ -181,112 +192,165 @@ export const Resume = () => {
                     </p>
                 </div>
 
+                {/* Stats Bar */}
+                <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-16 max-w-4xl mx-auto">
+                    {stats.map((stat) => (
+                        <div
+                            key={stat.label}
+                            className="bg-white/80 backdrop-blur-sm border border-gray-200 rounded-xl p-5 text-center shadow-sm hover:shadow-md hover:border-primary/30 transition-all duration-300"
+                        >
+                            <stat.icon className="w-5 h-5 text-primary mx-auto mb-2" />
+                            <div className="text-3xl font-bold text-gray-900 mb-1">{stat.value}</div>
+                            <div className="text-xs text-gray-500 uppercase tracking-wider font-medium">{stat.label}</div>
+                        </div>
+                    ))}
+                </div>
+
                 <div className="flex flex-col lg:flex-row gap-8">
                     {/* Timeline - Left Side */}
                     <div className="lg:w-1/3">
                         <ul className="timeline timeline-vertical">
-                            {experiences.map((exp, index) => (
-                                <li key={exp.id}>
-                                    {index > 0 && <hr className="bg-gray-300" />}
-                                    <div className="timeline-start text-gray-600 text-sm">{exp.dateShort}</div>
-                                    <div className="timeline-middle">
-                                        <FontAwesomeIcon
-                                            icon={faCheckCircle}
-                                            className={`text-lg ${activeTab === exp.id ? 'text-primary' : 'text-gray-400'}`}
-                                        />
-                                    </div>
-                                    <div className="timeline-end timeline-box bg-transparent border-none p-0">
-                                        <button
-                                            className={`btn btn-ghost w-full justify-start text-left border transition-all ${activeTab === exp.id
-                                                ? 'border-primary bg-white text-gray-900 shadow-md'
-                                                : 'border-gray-300 text-gray-700 hover:border-gray-400 hover:bg-white hover:shadow-sm'
-                                                }`}
-                                            onClick={() => setActiveTab(exp.id)}
-                                        >
-                                            <div>
-                                                <div className="font-bold">{exp.company}</div>
-                                                <div className="text-xs opacity-70">{exp.role}</div>
+                            {experiences.map((exp, index) => {
+                                const isActive = activeTab === exp.id;
+                                return (
+                                    <li key={exp.id}>
+                                        {index > 0 && <hr className="bg-primary" />}
+                                        <div className="timeline-start text-gray-500 text-sm font-medium">
+                                            {exp.dateShort}
+                                        </div>
+                                        <div className="timeline-middle">
+                                            <div className="relative flex items-center justify-center">
+                                                {/* Glow ring behind active dot */}
+                                                {isActive && (
+                                                    <span
+                                                        className="absolute w-7 h-7 rounded-full opacity-30"
+                                                        style={{ backgroundColor: 'var(--color-primary)' }}
+                                                    />
+                                                )}
+                                                <span
+                                                    className={`relative w-3.5 h-3.5 rounded-full border-2 transition-all duration-300 ${isActive
+                                                        ? 'border-primary bg-primary scale-110'
+                                                        : 'border-gray-400 bg-white'
+                                                        }`}
+                                                />
                                             </div>
-                                        </button>
-                                    </div>
-                                    {index < experiences.length - 1 && <hr className="bg-gray-300" />}
-                                </li>
-                            ))}
+                                        </div>
+                                        <div className="timeline-end timeline-box bg-transparent border-none p-0">
+                                            <button
+                                                className={`btn btn-ghost w-full justify-start text-left border transition-all duration-300 ${isActive
+                                                    ? 'border-primary bg-white text-gray-900 shadow-md'
+                                                    : 'border-gray-300 text-gray-700 hover:border-gray-400 hover:bg-white hover:shadow-sm'
+                                                    }`}
+                                                onClick={() => setActiveTab(exp.id)}
+                                            >
+                                                <div>
+                                                    <div className="font-bold">{exp.company}</div>
+                                                    <div className="text-xs opacity-70">{exp.role}</div>
+                                                </div>
+                                            </button>
+                                        </div>
+                                        {index < experiences.length - 1 && <hr className="bg-primary" />}
+                                    </li>
+                                );
+                            })}
                         </ul>
                     </div>
 
-                    {/* Content - Right Side */}
+                    {/* Content - Right Side (Sticky) */}
                     <div className="lg:w-2/3">
-                        {activeExperience && (
-                            <article className="bg-white border-2 border-gray-200 rounded-lg p-8 shadow-lg">
-                                {/* Header */}
-                                <div className="flex justify-between items-start mb-6">
-                                    <div>
-                                        <h3 className="text-3xl font-bold text-gray-900 mb-2">{activeExperience.company}</h3>
-                                        <p className="text-xl text-gray-700 mb-2">{activeExperience.role}</p>
-                                        <div className="flex items-center gap-4 text-sm text-gray-600">
-                                            <span className="flex items-center gap-1">
-                                                <Clock size={14} />
-                                                {activeExperience.date}
-                                            </span>
-                                            <span className="flex items-center gap-1">
-                                                <MapPin size={14} />
-                                                {activeExperience.location}
-                                            </span>
-                                        </div>
+                        <div className="lg:sticky lg:top-24">
+                            {activeExperience && (
+                                <article className="relative bg-white border border-gray-200 rounded-2xl overflow-hidden shadow-lg">
+                                    {/* Primary accent bar - top */}
+                                    <div className="h-1.5 w-full bg-primary" />
+
+                                    {/* Watermark Year */}
+                                    <div className="absolute top-8 right-6 text-[8rem] font-black text-gray-900/[0.03] leading-none select-none pointer-events-none">
+                                        {watermarkYear}
                                     </div>
-                                    {activeExperience.link && (
-                                        <a
-                                            href={activeExperience.link}
-                                            target="_blank"
-                                            rel="noopener noreferrer"
-                                            className="btn btn-sm btn-ghost text-gray-700 border border-gray-300 hover:border-gray-400 gap-2"
-                                        >
-                                            <ExternalLink size={16} /> Visit
-                                        </a>
-                                    )}
-                                </div>
 
-                                {/* Description */}
-                                <p className="text-gray-700 mb-6 text-lg">{activeExperience.description}</p>
-
-                                {/* Achievements */}
-                                {activeExperience.achievements.length > 0 && (
-                                    <div className="mb-6">
-                                        <h4 className="text-sm font-bold text-gray-600 uppercase tracking-wider mb-3">
-                                            Key Achievements
-                                        </h4>
-                                        <ul className="space-y-2">
-                                            {activeExperience.achievements.map((achievement, idx) => (
-                                                <li key={idx} className="flex items-start gap-2 text-gray-700">
-                                                    <span className="text-primary mt-1">•</span>
-                                                    <span>{achievement}</span>
-                                                </li>
-                                            ))}
-                                        </ul>
-                                    </div>
-                                )}
-
-                                {/* Technologies */}
-                                {activeExperience.technologies.length > 0 && (
-                                    <div>
-                                        <h4 className="text-sm font-bold text-gray-600 uppercase tracking-wider mb-3">
-                                            Technologies Used
-                                        </h4>
-                                        <div className="flex flex-wrap gap-2">
-                                            {activeExperience.technologies.map(tech => (
-                                                <span
-                                                    key={tech}
-                                                    className="badge bg-gray-200 border-gray-300 text-gray-700"
+                                    <div className="p-8 relative">
+                                        {/* Header with subtle background */}
+                                        <div className="flex justify-between items-start mb-6 pb-6 border-b border-gray-100">
+                                            <div>
+                                                <h3 className="text-3xl font-bold text-gray-900 mb-1">
+                                                    {activeExperience.company}
+                                                </h3>
+                                                <p className="text-lg text-primary font-semibold mb-3">
+                                                    {activeExperience.role}
+                                                </p>
+                                                <div className="flex items-center gap-4 text-sm text-gray-500">
+                                                    <span className="flex items-center gap-1.5 bg-gray-100 px-3 py-1 rounded-full">
+                                                        <Clock size={13} />
+                                                        {activeExperience.date}
+                                                    </span>
+                                                    <span className="flex items-center gap-1.5 bg-gray-100 px-3 py-1 rounded-full">
+                                                        <MapPin size={13} />
+                                                        {activeExperience.location}
+                                                    </span>
+                                                </div>
+                                            </div>
+                                            {activeExperience.link && (
+                                                <a
+                                                    href={activeExperience.link}
+                                                    target="_blank"
+                                                    rel="noopener noreferrer"
+                                                    className="btn btn-sm btn-ghost text-gray-700 border border-gray-300 hover:border-primary hover:text-primary gap-2"
                                                 >
-                                                    {tech}
-                                                </span>
-                                            ))}
+                                                    <ExternalLink size={16} /> Visit
+                                                </a>
+                                            )}
                                         </div>
+
+                                        {/* Description */}
+                                        <p className="text-gray-700 mb-8 text-lg leading-relaxed">
+                                            {activeExperience.description}
+                                        </p>
+
+                                        {/* Achievements */}
+                                        {activeExperience.achievements.length > 0 && (
+                                            <div className="mb-8">
+                                                <h4 className="text-sm font-bold text-gray-500 uppercase tracking-wider mb-4">
+                                                    Key Achievements
+                                                </h4>
+                                                <ul className="space-y-3">
+                                                    {activeExperience.achievements.map((achievement, idx) => (
+                                                        <li key={idx} className="flex items-start gap-3 text-gray-700">
+                                                            <CheckCircle2 size={18} className="text-primary mt-0.5 shrink-0" />
+                                                            <span>{achievement}</span>
+                                                        </li>
+                                                    ))}
+                                                </ul>
+                                            </div>
+                                        )}
+
+                                        {/* Technologies */}
+                                        {activeExperience.technologies.length > 0 && (
+                                            <div>
+                                                <h4 className="text-sm font-bold text-gray-500 uppercase tracking-wider mb-4">
+                                                    Technologies Used
+                                                </h4>
+                                                <div className="flex flex-wrap gap-2">
+                                                    {activeExperience.technologies.map(tech => (
+                                                        <span
+                                                            key={tech}
+                                                            className="px-3 py-1.5 text-sm font-medium rounded-lg border transition-colors duration-200"
+                                                            style={{
+                                                                backgroundColor: 'color-mix(in srgb, var(--color-primary) 8%, transparent)',
+                                                                borderColor: 'color-mix(in srgb, var(--color-primary) 20%, transparent)',
+                                                                color: 'var(--color-primary)'
+                                                            }}
+                                                        >
+                                                            {tech}
+                                                        </span>
+                                                    ))}
+                                                </div>
+                                            </div>
+                                        )}
                                     </div>
-                                )}
-                            </article>
-                        )}
+                                </article>
+                            )}
+                        </div>
                     </div>
                 </div>
             </div>
