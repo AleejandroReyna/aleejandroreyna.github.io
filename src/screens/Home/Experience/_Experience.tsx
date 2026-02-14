@@ -4,13 +4,6 @@ import Image from "next/image";
 import type { ExperienceDetail, Company, Media } from "@/payload-types";
 import { ExternalLink, Clock, MapPin, Briefcase, Code2, Building2, CheckCircle2 } from "lucide-react";
 
-const stats = [
-  { icon: Clock, label: "Years of Experience", value: "12+" },
-  { icon: Building2, label: "Companies", value: `9` },
-  { icon: Code2, label: "Technologies", value: `30+` },
-  { icon: Briefcase, label: "Projects Delivered", value: "50+" },
-];
-
 interface ExperienceProps {
   experiences: ExperienceDetail[];
 }
@@ -48,6 +41,14 @@ export const Experience = ({ experiences }: ExperienceProps) => {
     : '';
 
   if (experiences.length === 0) return null;
+
+  const stats = [
+    { icon: Clock, label: "Years of Experience", value: new Date().getFullYear() - new Date("2013").getFullYear() + "+" },
+    { icon: Building2, label: "Companies", value: `${experiences.length}` },
+    { icon: Code2, label: "Technologies", value: `30+` },
+    { icon: Briefcase, label: "Projects Delivered", value: "50+" },
+  ];
+
 
   return (
     <section className="py-24 bg-gray-100 relative overflow-hidden">
