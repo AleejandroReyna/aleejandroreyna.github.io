@@ -97,8 +97,19 @@ export const Experience = ({ experiences }: ExperienceProps) => {
                 return (
                   <li key={exp.id}>
                     {index > 0 && <hr className="bg-primary" />}
-                    <div className="timeline-start text-gray-500 text-sm font-medium">
-                      {formatDateShort(exp.startDate)}
+                    <div className="timeline-start timeline-box bg-transparent border-none p-0 w-full">
+                      <button
+                        className={`btn btn-ghost w-full justify-end text-right border transition-all duration-300 ${isActive
+                          ? 'border-primary bg-white text-gray-900 shadow-md'
+                          : 'border-gray-300 text-gray-700 hover:border-gray-400 hover:bg-white hover:shadow-sm'
+                          }`}
+                        onClick={() => setActiveId(exp.id)}
+                      >
+                        <div>
+                          <div className="font-bold">{company?.name || 'Company'}</div>
+                          <div className="text-xs opacity-70">{exp.role}</div>
+                        </div>
+                      </button>
                     </div>
                     <div className="timeline-middle">
                       <div className="relative flex items-center justify-center">
@@ -116,19 +127,8 @@ export const Experience = ({ experiences }: ExperienceProps) => {
                         />
                       </div>
                     </div>
-                    <div className="timeline-end timeline-box bg-transparent border-none p-0">
-                      <button
-                        className={`btn btn-ghost w-full justify-start text-left border transition-all duration-300 ${isActive
-                          ? 'border-primary bg-white text-gray-900 shadow-md'
-                          : 'border-gray-300 text-gray-700 hover:border-gray-400 hover:bg-white hover:shadow-sm'
-                          }`}
-                        onClick={() => setActiveId(exp.id)}
-                      >
-                        <div>
-                          <div className="font-bold">{company?.name || 'Company'}</div>
-                          <div className="text-xs opacity-70">{exp.role}</div>
-                        </div>
-                      </button>
+                    <div className="timeline-end text-gray-500 text-sm font-medium pl-4">
+                      {formatDateShort(exp.startDate)}
                     </div>
                     {index < experiences.length - 1 && <hr className="bg-primary" />}
                   </li>
