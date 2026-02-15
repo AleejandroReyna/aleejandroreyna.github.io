@@ -1,4 +1,5 @@
 import type { CollectionConfig } from 'payload'
+import { revalidatePath } from 'next/cache'
 import { lexicalEditor } from '@payloadcms/richtext-lexical'
 
 export const ExperienceDetails: CollectionConfig = {
@@ -91,5 +92,19 @@ export const ExperienceDetails: CollectionConfig = {
             ],
         },
     ],
+    hooks: {
+        afterChange: [
+            ({ doc }) => {
+                revalidatePath('/')
+                return doc
+            },
+        ],
+        afterDelete: [
+            ({ doc }) => {
+                revalidatePath('/')
+                return doc
+            },
+        ],
+    },
     defaultSort: '-startDate',
 }
