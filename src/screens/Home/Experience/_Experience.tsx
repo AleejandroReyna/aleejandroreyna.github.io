@@ -88,49 +88,42 @@ export const Experience = ({ experiences }: ExperienceProps) => {
 
 
         <div className="flex flex-col lg:flex-row gap-8">
-          {/* Timeline - Left Side */}
-          <div className="lg:w-1/3">
-            <ul className="timeline timeline-vertical">
-              {experiences.map((exp, index) => {
+          {/* Navigation - Left Side */}
+          <div className="lg:w-1/3 relative">
+            <div className="absolute left-4 top-4 bottom-4 w-0.5 bg-gray-200" aria-hidden="true" /> {/* Vertical Line */}
+
+            <ul className="space-y-6 relative">
+              {experiences.map((exp) => {
                 const isActive = activeId === exp.id;
                 const company = getCompany(exp);
                 return (
-                  <li key={exp.id}>
-                    {index > 0 && <hr className="bg-primary" />}
-                    <div className="timeline-start timeline-box bg-transparent border-none p-0 w-full">
-                      <button
-                        className={`btn btn-ghost w-full justify-end text-right border transition-all duration-300 ${isActive
-                          ? 'border-primary bg-white text-gray-900 shadow-md'
-                          : 'border-gray-300 text-gray-700 hover:border-gray-400 hover:bg-white hover:shadow-sm'
-                          }`}
-                        onClick={() => setActiveId(exp.id)}
-                      >
-                        <div>
-                          <div className="font-bold">{company?.name || 'Company'}</div>
-                          <div className="text-xs opacity-70">{exp.role}</div>
-                        </div>
-                      </button>
-                    </div>
-                    <div className="timeline-middle">
-                      <div className="relative flex items-center justify-center">
-                        {isActive && (
-                          <span
-                            className="absolute w-7 h-7 rounded-full opacity-30"
-                            style={{ backgroundColor: 'var(--color-primary)' }}
-                          />
-                        )}
-                        <span
-                          className={`relative w-3.5 h-3.5 rounded-full border-2 transition-all duration-300 ${isActive
-                            ? 'border-primary bg-primary scale-110'
-                            : 'border-gray-400 bg-white'
-                            }`}
-                        />
+                  <li key={exp.id} className="relative pl-12 group">
+                    {/* Dot Indicator */}
+                    <div
+                      className={`absolute left-[11px] top-1.5 w-3 h-3 rounded-full border-2 transition-all duration-300 z-10 ${isActive
+                          ? 'border-primary bg-primary scale-125 shadow-[0_0_0_4px_rgba(var(--primary-rgb),0.2)]'
+                          : 'border-gray-300 bg-white group-hover:border-gray-400 group-hover:scale-110'
+                        }`}
+                    />
+
+                    <button
+                      onClick={() => setActiveId(exp.id)}
+                      className={`text-left w-full transition-all duration-300 rounded-lg p-3 -ml-3 ${isActive
+                          ? 'bg-white shadow-sm ring-1 ring-gray-200/50'
+                          : 'hover:bg-white/50 hover:shadow-sm'
+                        }`}
+                    >
+                      <div className={`font-bold text-lg leading-tight mb-0.5 transition-colors ${isActive ? 'text-primary' : 'text-gray-900 group-hover:text-gray-700'
+                        }`}>
+                        {company?.name || 'Company'}
                       </div>
-                    </div>
-                    <div className="timeline-end text-gray-500 text-sm font-medium pl-4">
-                      {formatDateShort(exp.startDate)}
-                    </div>
-                    {index < experiences.length - 1 && <hr className="bg-primary" />}
+                      <div className="text-sm font-medium text-gray-700 mb-1">
+                        {exp.role}
+                      </div>
+                      <div className="text-xs text-gray-500 font-mono uppercase tracking-wide">
+                        {formatDateShort(exp.startDate)}
+                      </div>
+                    </button>
                   </li>
                 );
               })}
