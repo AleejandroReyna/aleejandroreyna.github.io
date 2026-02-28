@@ -7,10 +7,15 @@ export const metadata : Metadata = {
   description: "Portfolio page",
 };
 
-export default function PortfolioPage() {
+interface Props {
+  searchParams?: Promise<{ [key: string]: string | string[] | undefined }>;
+}
+
+export default async function PortfolioPage({ searchParams }: Props) {
+  const resolvedSearchParams = await searchParams;
   return (
     <main>
-      <PortfolioScreen />
+      <PortfolioScreen searchParams={resolvedSearchParams} />
     </main>
   );
 }
