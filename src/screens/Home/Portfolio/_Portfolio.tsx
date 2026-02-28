@@ -46,12 +46,11 @@ export const Portfolio = async () => {
               <article key={project.id} className="card bg-white border-2 border-gray-200 hover:border-gray-400 hover:shadow-xl transition-all">
                 <figure className="relative overflow-hidden h-48">
                   {project.thumbnail && typeof project.thumbnail !== 'string' ? (
-                     <Image
-                        src={(project.thumbnail as Media).url!}
-                        alt={project.name}
-                        fill
-                        className="object-cover"
-                     />
+                    <img
+                      src={(project.thumbnail as Media).url!}
+                      alt={project.name}
+                      className="object-cover h-full w-full"
+                    />
                   ) : (
                     <img
                       src="https://place-hold.it/400x250"
