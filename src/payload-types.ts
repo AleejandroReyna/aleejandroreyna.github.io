@@ -243,6 +243,7 @@ export interface Technology {
 export interface Project {
   id: string;
   name: string;
+  releaseDate: string;
   /**
    * Must be a real link in production
    */
@@ -448,6 +449,7 @@ export interface TechnologiesSelect<T extends boolean = true> {
  */
 export interface ProjectsSelect<T extends boolean = true> {
   name?: T;
+  releaseDate?: T;
   public_link?: T;
   company?: T;
   technologies?: T;

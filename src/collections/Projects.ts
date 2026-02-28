@@ -22,6 +22,18 @@ export const Projects: CollectionConfig = {
             required: true,
         },
         {
+            name: 'releaseDate',
+            label: 'Release Date',
+            type: 'date',
+            required: true,
+            admin: {
+                position: 'sidebar',
+                date: {
+                    pickerAppearance: 'dayAndTime',
+                },
+            },
+        },
+        {
             name: 'public_link',
             label: 'Public Link',
             type: 'text',
@@ -81,4 +93,5 @@ export const Projects: CollectionConfig = {
             },
         ],
     },
+    defaultSort: '-releaseDate',
 }
