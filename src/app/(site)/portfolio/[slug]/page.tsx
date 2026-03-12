@@ -58,15 +58,15 @@ export default async function ProjectDetailPage({ params }: Props) {
             <PageTitle title={project.name} description="Project Details" />
 
             <section className="py-16">
-                <div className="mx-auto max-w-md md:max-w-4xl lg:max-w-4xl bg-base-100 shadow-xl rounded-xl overflow-hidden p-6 md:p-10">
+                <div className="mx-auto max-w-7xl px-6 md:px-10">
 
                     <div className="mb-8">
                         {project.thumbnail && typeof project.thumbnail !== 'string' ? (
                             <Image
                                 src={(project.thumbnail as Media).url!}
                                 alt={project.name}
-                                width={800}
-                                height={400}
+                                width={1200}
+                                height={600}
                                 className="w-full h-auto rounded-lg object-cover"
                             />
                         ) : (
@@ -76,8 +76,8 @@ export default async function ProjectDetailPage({ params }: Props) {
                         )}
                     </div>
 
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8 border-b pb-8">
-                        <div className="md:col-span-2 prose max-w-none">
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-12 mb-8 border-b pb-8">
+                        <div className="md:col-span-2 prose max-w-none px-0">
                             <h2 className="text-2xl font-bold mb-4">About the Project</h2>
                             {project.content && (
                                 <RichText data={project.content} />
@@ -104,15 +104,15 @@ export default async function ProjectDetailPage({ params }: Props) {
 
                             <div>
                                 <h3 className="font-bold text-lg mb-2">Technologies Used</h3>
-                                <div className="flex flex-wrap gap-3">
+                                <div className="flex flex-wrap gap-4">
                                     {project.technologies?.map((techInput) => {
                                         const tech = techInput as Technology
                                         const IconComponent = tech.icon ? (Icons as any)[tech.icon] : null
 
                                         return (
-                                            <div key={tech.id} className="flex items-center gap-2 bg-base-200 px-3 py-2 rounded-lg">
-                                                {IconComponent && <IconComponent size={20} />}
-                                                <span className="text-sm font-medium">{tech.name}</span>
+                                            <div key={tech.id} className="flex items-center gap-2">
+                                                {IconComponent && <IconComponent size={24} />}
+                                                <span className="text-md font-medium text-black">{tech.name}</span>
                                             </div>
                                         )
                                     })}
@@ -120,6 +120,7 @@ export default async function ProjectDetailPage({ params }: Props) {
                             </div>
                         </div>
                     </div>
+
 
                     <div className="text-center">
                         <Link href="/portfolio" className="btn btn-outline">

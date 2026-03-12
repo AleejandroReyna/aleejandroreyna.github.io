@@ -103,7 +103,7 @@ export const Portfolio = async () => {
 
         {/* View All Projects CTA */}
         <div className="text-center mt-16">
-            <Link href="/portfolio" className="btn btn-outline btn-lg gap-2 text-gray-700 border-2 border-gray-400 hover:bg-gray-200 hover:border-gray-500 transition-all">
+            <Link href="/portfolio" className="btn btn-outline btn-lg gap-2 text-gray-700 border-2 border-gray-400 transition-all">
               View All Projects
               <ExternalLink size={20} />
             </Link>

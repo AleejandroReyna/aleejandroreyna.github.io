@@ -57,7 +57,7 @@ export const Hero = async () => {
               View My Work
               <ArrowRight size={20} />
             </a>
-            <a href="#contact" className="btn btn-outline btn-lg gap-2 text-gray-300 border-2 border-gray-500 hover:bg-gray-800 hover:border-gray-400 transition-all">
+            <a href="#contact" className="btn btn-outline btn-lg gap-2 text-gray-300 border-2 border-gray-500 transition-all">
               Get in Touch
               <Mail size={20} />
             </a>
@@ -69,7 +69,7 @@ export const Hero = async () => {
               href={`https://linkedin.com/in/${linkedin}`}
               target="_blank"
               rel="noopener noreferrer"
-              className="btn btn-ghost gap-2 text-gray-300 border border-gray-700 hover:bg-[#0A66C2] hover:border-[#0A66C2] hover:text-white transition-all"
+              className="btn btn-ghost gap-2 text-gray-300 border border-gray-700 transition-all"
               aria-label="LinkedIn Profile"
             >
               <LinkedinPlain color="currentColor" size={24} />
@@ -79,7 +79,7 @@ export const Hero = async () => {
               href={`https://github.com/${github}`}
               target="_blank"
               rel="noopener noreferrer"
-              className="btn btn-ghost gap-2 text-gray-300 border border-gray-700 hover:bg-[#6e5494] hover:border-[#6e5494] hover:text-white transition-all"
+              className="btn btn-ghost gap-2 text-gray-300 border border-gray-700 transition-all"
               aria-label="GitHub Profile"
             >
               <SiGithub size={24} />
@@ -89,7 +89,7 @@ export const Hero = async () => {
               href={`https://calendly.com/${calendly}`}
               target="_blank"
               rel="noopener noreferrer"
-              className="btn btn-ghost gap-2 text-gray-300 border border-gray-700 hover:bg-[#006BFF] hover:border-[#006BFF] hover:text-white transition-all"
+              className="btn btn-ghost gap-2 text-gray-300 border border-gray-700 transition-all"
               aria-label="Schedule a Call"
             >
               <FontAwesomeIcon icon={faCalendarAlt} size="lg" />
@@ -97,7 +97,7 @@ export const Hero = async () => {
             </a>
             <a
               href={`mailto:${email}`}
-              className="btn btn-ghost gap-2 text-gray-300 border border-gray-700 hover:bg-[#14B8A6] hover:border-[#14B8A6] hover:text-white transition-all"
+              className="btn btn-ghost gap-2 text-gray-300 border border-gray-700 transition-all"
               aria-label="Send Email"
             >
               <Mail size={24} />
