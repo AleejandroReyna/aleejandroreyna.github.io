@@ -1,4 +1,6 @@
 import type { CollectionConfig } from 'payload'
+import { revalidatePath } from 'next/cache'
+import { slugField } from '@/fields/slug'
 
 export const Companies: CollectionConfig = {
     slug: 'companies',
@@ -34,5 +36,20 @@ export const Companies: CollectionConfig = {
                 description: 'Company website URL',
             },
         },
+        slugField('name'),
     ],
+    hooks: {
+        afterChange: [
+            ({ doc }) => {
+                revalidatePath('/', 'layout')
+                return doc
+            },
+        ],
+        afterDelete: [
+            ({ doc }) => {
+                revalidatePath('/', 'layout')
+                return doc
+            },
+        ],
+    },
 }
