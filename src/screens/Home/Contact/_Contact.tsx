@@ -149,7 +149,7 @@ export const Contact = ({ contactEmail, githubUser, linkedinUser, calendlyUser }
                   href={`https://github.com/${githubUser}`}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="btn btn-ghost border-2 border-gray-700 text-gray-300 hover:border-gray-500 hover:bg-gray-800 hover:text-white transition-all gap-2"
+                  className="btn btn-ghost border-2 border-gray-700 text-gray-300 transition-all gap-2"
                 >
                   <Github size={20} />
                   GitHub
@@ -158,7 +158,7 @@ export const Contact = ({ contactEmail, githubUser, linkedinUser, calendlyUser }
                   href={`https://linkedin.com/in/${linkedinUser}`}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="btn btn-ghost border-2 border-gray-700 text-gray-300 hover:border-blue-600 hover:bg-blue-600 hover:text-white transition-all gap-2"
+                  className="btn btn-ghost border-2 border-gray-700 text-gray-300 transition-all gap-2"
                 >
                   <Linkedin size={20} />
                   LinkedIn
@@ -167,7 +167,7 @@ export const Contact = ({ contactEmail, githubUser, linkedinUser, calendlyUser }
                   href={`https://calendly.com/${calendlyUser}`}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="btn btn-ghost border-2 border-gray-700 text-gray-300 hover:border-primary hover:bg-primary hover:text-white transition-all gap-2"
+                  className="btn btn-ghost border-2 border-gray-700 text-gray-300 transition-all gap-2"
                 >
                   <FontAwesomeIcon icon={faCalendarAlt} />
                   Schedule Call

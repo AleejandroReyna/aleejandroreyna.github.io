@@ -71,6 +71,8 @@ export interface Config {
     media: Media;
     companies: Company;
     'experience-details': ExperienceDetail;
+    technologies: Technology;
+    projects: Project;
     'payload-kv': PayloadKv;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
@@ -82,6 +84,8 @@ export interface Config {
     media: MediaSelect<false> | MediaSelect<true>;
     companies: CompaniesSelect<false> | CompaniesSelect<true>;
     'experience-details': ExperienceDetailsSelect<false> | ExperienceDetailsSelect<true>;
+    technologies: TechnologiesSelect<false> | TechnologiesSelect<true>;
+    projects: ProjectsSelect<false> | ProjectsSelect<true>;
     'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
@@ -222,6 +226,52 @@ export interface ExperienceDetail {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "technologies".
+ */
+export interface Technology {
+  id: string;
+  name: string;
+  icon?: string | null;
+  description?: string | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "projects".
+ */
+export interface Project {
+  id: string;
+  name: string;
+  releaseDate: string;
+  /**
+   * Must be a real link in production
+   */
+  public_link: string;
+  company?: (string | null) | Company;
+  technologies?: (string | Technology)[] | null;
+  thumbnail?: (string | null) | Media;
+  content?: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  slug: string;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-kv".
  */
 export interface PayloadKv {
@@ -259,6 +309,14 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'experience-details';
         value: string | ExperienceDetail;
+      } | null)
+    | ({
+        relationTo: 'technologies';
+        value: string | Technology;
+      } | null)
+    | ({
+        relationTo: 'projects';
+        value: string | Project;
       } | null);
   globalSlug?: string | null;
   user: {
@@ -371,6 +429,33 @@ export interface ExperienceDetailsSelect<T extends boolean = true> {
         achievement?: T;
         id?: T;
       };
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "technologies_select".
+ */
+export interface TechnologiesSelect<T extends boolean = true> {
+  name?: T;
+  icon?: T;
+  description?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "projects_select".
+ */
+export interface ProjectsSelect<T extends boolean = true> {
+  name?: T;
+  releaseDate?: T;
+  public_link?: T;
+  company?: T;
+  technologies?: T;
+  thumbnail?: T;
+  content?: T;
+  slug?: T;
   updatedAt?: T;
   createdAt?: T;
 }

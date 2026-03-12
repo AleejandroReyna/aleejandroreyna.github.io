@@ -1,19 +1,20 @@
-import {
-  SiReact,
-  SiTypescript,
-  SiWordpress,
-  SiJavascript,
-  SiVuedotjs,
-  SiPhp,
-  SiLaravel,
-  SiNodedotjs,
-  SiAwsfargate,
-  SiNextdotjs
-} from "@icons-pack/react-simple-icons";
 import { ExternalLink } from "lucide-react";
 import Image from "next/image";
+import Link from "next/link";
+import { getPayload } from "payload"
+import config from "@payload-config"
+import * as Icons from "@icons-pack/react-simple-icons"
+import { Technology, Media } from "@/payload-types"
 
-export const Portfolio = () => {
+export const Portfolio = async () => {
+  const payload = await getPayload({ config })
+  const result = await payload.find({
+    collection: "projects",
+    depth: 2,
+    limit: 3,
+    sort: "-releaseDate",
+  })
+
   return (
     <section className="bg-gray-100 py-24 relative overflow-hidden" id="portfolio">
       {/* Background Pattern */}
@@ -38,139 +39,74 @@ export const Portfolio = () => {
         {/* Projects Grid */}
         <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
 
-          {/* Project Card 1 - Zigi App */}
-          <article className="card bg-white border-2 border-gray-200 hover:border-gray-400 hover:shadow-xl transition-all">
-            <figure className="relative overflow-hidden h-48">
-              <Image
-                src="/images/portfolio/zigi.png"
-                alt="Zigi App"
-                fill
-                className="object-cover"
-              />
-              <div className="absolute top-4 right-4">
-                <span className="badge bg-gray-200 border-gray-300 text-gray-700">2023</span>
-              </div>
-            </figure>
+          {result.docs.map((project) => {
+             const releaseYear = project.releaseDate ? new Date(project.releaseDate).getFullYear() : ''
 
-            <div className="card-body">
-              <h3 className="card-title text-gray-900">Zigi App</h3>
-              <p className="text-gray-700">
-                Democratizing banking through fintech innovation. Mobile-first platform enabling financial access.
-              </p>
+             return (
+              <article key={project.id} className="card bg-white border-2 border-gray-200 hover:border-gray-400 hover:shadow-xl transition-all">
+                <figure className="relative overflow-hidden h-48">
+                  {project.thumbnail && typeof project.thumbnail !== 'string' ? (
+                    <img
+                      src={(project.thumbnail as Media).url!}
+                      alt={project.name}
+                      className="object-cover h-full w-full"
+                    />
+                  ) : (
+                    <img
+                      src="https://place-hold.it/400x250"
+                      alt="Placeholder"
+                      className="object-cover h-full w-full"
+                    />
+                  )}
+                  {releaseYear && (
+                    <div className="absolute top-4 right-4">
+                      <span className="badge bg-gray-200 border-gray-300 text-gray-700">{releaseYear}</span>
+                    </div>
+                  )}
+                </figure>
 
-              <div className="my-4">
-                <p className="text-sm text-gray-500 mb-2">Tech Stack:</p>
-                <div className="flex flex-wrap gap-2">
-                  <SiReact size={24} className="hover:scale-110 transition-all cursor-pointer" style={{ color: '#61DAFB' }} />
-                  <SiTypescript size={24} className="hover:scale-110 transition-all cursor-pointer" style={{ color: '#3178C6' }} />
-                  <SiWordpress size={24} className="hover:scale-110 transition-all cursor-pointer" style={{ color: '#21759B' }} />
+                <div className="card-body">
+                  <h3 className="card-title text-gray-900">{project.name}</h3>
+                  {project.company && typeof project.company !== 'string' && (
+                      <p className="text-gray-700">
+                         {project.company.name}
+                      </p>
+                  )}
+
+                  <div className="my-4">
+                    <p className="text-sm text-gray-500 mb-2">Tech Stack:</p>
+                    <div className="flex flex-wrap gap-2">
+                       {project.technologies?.map((techInput) => {
+                          const tech = techInput as Technology
+                          if (tech.icon) {
+                              const IconComponent = (Icons as any)[tech.icon]
+                              if (IconComponent) {
+                                  return <IconComponent key={tech.id} size={24} className="hover:scale-110 transition-all cursor-pointer" color="default" title={tech.name} />
+                              }
+                          }
+                          return <span key={tech.id} className="badge badge-neutral">{tech.name}</span>
+                      })}
+                    </div>
+                  </div>
+
+                  <div className="card-actions justify-end mt-4">
+                    <Link href={`/portfolio/${project.slug}`} className="btn btn-sm btn-outline">
+                        See details
+                    </Link>
+                  </div>
                 </div>
-              </div>
-
-              {/* <div className="card-actions justify-start gap-2">
-                <a href="#" className="btn btn-sm btn-ghost text-gray-700 border border-gray-300 hover:border-gray-400 gap-2">
-                  <Github size={16} /> Code
-                </a>
-                <a href="#" className="btn btn-sm btn-ghost text-gray-700 border border-gray-300 hover:border-gray-400 gap-2">
-                  <ExternalLink size={16} /> Live
-                </a>
-              </div>*/}
-            </div>
-          </article>
-
-          {/* Project Card 2 - XP3 Talent */}
-          <article className="card bg-white border-2 border-gray-200 hover:border-gray-400 hover:shadow-xl transition-all">
-            <figure className="relative overflow-hidden h-48">
-              <Image
-                src="/images/portfolio/sescom.png"
-                alt="XP3 Talent"
-                fill
-                className="object-cover"
-              />
-              <div className="absolute top-4 right-4">
-                <span className="badge bg-gray-200 border-gray-300 text-gray-700">2025</span>
-              </div>
-            </figure>
-
-            <div className="card-body">
-              <h3 className="card-title text-gray-900">SESCOM</h3>
-              <p className="text-gray-700">
-                Streamlining HR with intelligent automation. Comprehensive management system serving 500+ companies.
-              </p>
-
-              <div className="my-4">
-                <p className="text-sm text-gray-500 mb-2">Tech Stack:</p>
-                <div className="flex flex-wrap gap-2">
-                  <SiPhp size={24} className="hover:scale-110 transition-all cursor-pointer" style={{ color: '#777BB4' }} />
-                  <SiLaravel size={24} className="hover:scale-110 transition-all cursor-pointer" style={{ color: '#FF2D20' }} />
-                  <SiJavascript size={24} className="hover:scale-110 transition-all cursor-pointer" style={{ color: '#F7DF1E' }} />
-                  <SiVuedotjs size={24} className="hover:scale-110 transition-all cursor-pointer" style={{ color: '#4FC08D' }} />
-                  <SiAwsfargate size={24} className="hover:scale-110 transition-all cursor-pointer" style={{ color: '#FF9900' }} />
-                </div>
-              </div>
-
-              {/* <div className="card-actions justify-start gap-2">
-                <a href="#" className="btn btn-sm btn-ghost text-gray-700 border border-gray-300 hover:border-gray-400 gap-2">
-                  <Github size={16} /> Code
-                </a>
-                <a href="#" className="btn btn-sm btn-ghost text-gray-700 border border-gray-300 hover:border-gray-400 gap-2">
-                  <ExternalLink size={16} /> Live
-                </a>
-              </div> */}
-            </div>
-          </article>
-
-          {/* Project Card 3 - Afinidata */}
-          <article className="card bg-white border-2 border-gray-200 hover:border-gray-400 hover:shadow-xl transition-all">
-            <figure className="relative overflow-hidden h-48">
-              <Image
-                src="/images/portfolio/insolgas.png"
-                alt="InsolGas"
-                fill
-                className="object-cover"
-              />
-              <div className="absolute top-4 right-4">
-                <span className="badge bg-gray-200 border-gray-300 text-gray-700">2024</span>
-              </div>
-            </figure>
-
-            <div className="card-body">
-              <h3 className="card-title text-gray-900">InsolGas</h3>
-              <p className="text-gray-700">
-                Website for InsolGas, a company that provides instalation of gas stations and services.
-              </p>
-
-              <div className="my-4">
-                <p className="text-sm text-gray-500 mb-2">Tech Stack:</p>
-                <div className="flex flex-wrap gap-2">
-                  <SiNodedotjs size={24} className="hover:scale-110 transition-all cursor-pointer" style={{ color: '#339933' }} />
-                  <SiTypescript size={24} className="hover:scale-110 transition-all cursor-pointer" style={{ color: '#3178C6' }} />
-                  <SiReact size={24} className="hover:scale-110 transition-all cursor-pointer" style={{ color: '#61DAFB' }} />
-                  <SiNextdotjs size={24} className="hover:scale-110 transition-all cursor-pointer" style={{ color: '#000000' }} />
-                </div>
-              </div>
-
-              {/* <div className="card-actions justify-start gap-2">
-                <a href="#" className="btn btn-sm btn-ghost text-gray-700 border border-gray-300 hover:border-gray-400 gap-2">
-                  <Github size={16} /> Code
-                </a>
-                <a href="#" className="btn btn-sm btn-ghost text-gray-700 border border-gray-300 hover:border-gray-400 gap-2">
-                  <ExternalLink size={16} /> Live
-                </a>
-              </div> */}
-            </div>
-          </article>
+              </article>
+             )
+          })}
 
         </div>
 
         {/* View All Projects CTA */}
         <div className="text-center mt-16">
-          <div className="tooltip tooltip-top" data-tip="Coming Soon">
-            <button className="btn btn-outline btn-lg gap-2 text-gray-700 border-2 border-gray-400 hover:bg-gray-200 hover:border-gray-500 transition-all">
+            <Link href="/portfolio" className="btn btn-outline btn-lg gap-2 text-gray-700 border-2 border-gray-400 transition-all">
               View All Projects
               <ExternalLink size={20} />
-            </button>
-          </div>
+            </Link>
         </div>
       </div>
     </section>

@@ -1,19 +1,56 @@
 'use client'
 
-import { useState, useId } from "react"
+import { useState, useEffect, useId, useCallback } from "react"
+import { useRouter, useSearchParams, usePathname } from "next/navigation"
+
+interface Tech {
+    id: string;
+    name: string;
+}
 
 export const Form = () => {
-  const [ items, setItems ] = useState<string[]>(['all'])
+  const [techs, setTechs] = useState<Tech[]>([])
+  const router = useRouter()
+  const pathname = usePathname()
+  const searchParams = useSearchParams()
   const formId = useId()
 
+  const fetchTechs = useCallback(async () => {
+    try {
+        const response = await fetch('/api/technologies?limit=100')
+        const data = await response.json()
+        setTechs(data.docs)
+    } catch (error) {
+        console.error('Error fetching technologies', error)
+    }
+  }, [])
+
+  useEffect(() => {
+      fetchTechs()
+  }, [fetchTechs])
+
+  const currentParams = new URLSearchParams(Array.from(searchParams.entries()))
+  const currentTechParams = currentParams.get('tech')
+  const items = currentTechParams ? currentTechParams.split(',') : []
+
   const toggleItem = (item: string) => {
-    setItems((prev) => {
-      if (prev.includes(item)) {
-        return prev.filter(i => i !== item)
-      } else {
-        return [...prev, item]
-      }
-    })
+    let newItems: string[]
+    if (items.includes(item)) {
+        newItems = items.filter(i => i !== item)
+    } else {
+        newItems = [...items, item]
+    }
+
+    if (newItems.length > 0) {
+        currentParams.set('tech', newItems.join(','))
+    } else {
+        currentParams.delete('tech')
+    }
+
+    // reset page to 1 when changing filters
+    currentParams.delete('page')
+
+    router.push(`${pathname}?${currentParams.toString()}`)
   }
 
   const checkIfItemChecked = (item: string) => {
@@ -21,287 +58,30 @@ export const Form = () => {
   }
  
   return (
-    <aside>
-      <p className="mb-2">Role:</p>
+    <aside className="sticky top-24 bg-base-100 p-4 rounded-lg shadow-sm">
+      <p className="mb-4 font-bold text-lg">Filters</p>
 
-      <form action="#">
-        <fieldset className="mb-1">
-          <label htmlFor={`${formId}-all`}>
-            <input 
-              type="checkbox" 
-              checked={checkIfItemChecked('all')} 
-              onChange={() => toggleItem('all')} 
-              className="checkbox checkbox-neutral" />{' '}
-            All
-          </label>
-        </fieldset>
-
-        <fieldset className="mb-1">
-          <label htmlFor={`${formId}-frontend`}>
-            <input 
-              type="checkbox" 
-              checked={checkIfItemChecked('frontend')} 
-              onChange={() => toggleItem('frontend')} 
-              className="checkbox checkbox-neutral" />{' '}
-            Frontend
-          </label>
-        </fieldset>
-
-        <fieldset className="mb-1">
-          <label htmlFor={`${formId}-backend`}>
-            <input 
-              type="checkbox" 
-              checked={checkIfItemChecked('backend')} 
-              onChange={() => toggleItem('backend')} 
-              className="checkbox checkbox-neutral" />{' '}
-            Backend
-          </label>
-        </fieldset>
-
-        <fieldset>
-          <label htmlFor={`${formId}-mobile`}>
-            <input 
-              type="checkbox" 
-              checked={checkIfItemChecked('mobile')} 
-              onChange={() => toggleItem('mobile')} 
-              className="checkbox checkbox-neutral" />{' '}
-            Mobile
-          </label>
-        </fieldset>
-
-        <div className="divider"></div>
-
-        <p className="mb-2">Languages:</p>
-
-        <fieldset className="mb-1">
-          <label htmlFor={`${formId}-javascript`}>
-            <input 
-              type="checkbox" 
-              checked={checkIfItemChecked('javascript')} 
-              onChange={() => toggleItem('javascript')} 
-              className="checkbox checkbox-neutral" />{' '}
-            Javascript
-          </label>
-        </fieldset>
-
-        <fieldset className="mb-1">
-          <label htmlFor={`${formId}-typescript`}>
-            <input 
-              type="checkbox" 
-              checked={checkIfItemChecked('typescript')} 
-              onChange={() => toggleItem('typescript')} 
-              className="checkbox checkbox-neutral" />{' '}
-            Typescript
-          </label>
-        </fieldset>
-
-        
-        <fieldset className="mb-1">
-          <label htmlFor={`${formId}-python`}>
-            <input 
-              type="checkbox" 
-              checked={checkIfItemChecked('python')} 
-              onChange={() => toggleItem('python')} 
-              className="checkbox checkbox-neutral" />{' '}
-            Python
-          </label>
-        </fieldset>
-
-        <fieldset className="mb-1">
-          <label htmlFor={`${formId}-ruby`}>
-            <input 
-              type="checkbox" 
-              checked={checkIfItemChecked('ruby')} 
-              onChange={() => toggleItem('ruby')} 
-              className="checkbox checkbox-neutral" />{' '}
-            Ruby
-          </label>
-        </fieldset>
-
-        <fieldset>
-          <label htmlFor={`${formId}-php`}>
-            <input 
-              type="checkbox" 
-              checked={checkIfItemChecked('php')} 
-              onChange={() => toggleItem('php')} 
-              className="checkbox checkbox-neutral" />{' '}
-            PHP
-          </label>
-        </fieldset>
-
-        <div className="divider"></div>
-
-        <p className="mb-2">Frameworks:</p>
-
-        <fieldset className="mb-1">
-          <label htmlFor={`${formId}-react`}>
-            <input 
-              type="checkbox" 
-              checked={checkIfItemChecked('react')} 
-              onChange={() => toggleItem('react')} 
-              className="checkbox checkbox-neutral" />{' '}
-            React
-          </label>
-        </fieldset>
-
-        <fieldset className="mb-1">
-          <label htmlFor={`${formId}-react-native`}>
-            <input 
-              type="checkbox" 
-              checked={checkIfItemChecked('react-native')} 
-              onChange={() => toggleItem('react-native')} 
-              className="checkbox checkbox-neutral" />{' '}
-            React Native
-          </label>
-        </fieldset>
-
-        <fieldset className="mb-1">
-          <label htmlFor={`${formId}-ionic`}>
-            <input 
-              type="checkbox" 
-              checked={checkIfItemChecked('ionic')} 
-              onChange={() => toggleItem('ionic')} 
-              className="checkbox checkbox-neutral" />{' '}
-            Ionic
-          </label>
-        </fieldset>
-
-        <fieldset className="mb-1">
-          <label htmlFor={`${formId}-electron`}>
-            <input 
-              type="checkbox" 
-              checked={checkIfItemChecked('electron')} 
-              onChange={() => toggleItem('electron')} 
-              className="checkbox checkbox-neutral" />{' '}
-            Electron
-          </label>
-        </fieldset>
-
-        <fieldset className="mb-1">
-          <label htmlFor={`${formId}-vue`}>
-            <input 
-              type="checkbox" 
-              checked={checkIfItemChecked('vue')} 
-              onChange={() => toggleItem('vue')} 
-              className="checkbox checkbox-neutral" />{' '}
-          Vue
-          </label>
-        </fieldset>
-
-        <fieldset className="mb-1">
-          <label htmlFor={`${formId}-angular`}>
-            <input 
-              type="checkbox" 
-              checked={checkIfItemChecked('angular')} 
-              onChange={() => toggleItem('angular')} 
-              className="checkbox checkbox-neutral" />{' '}
-            Angular
-          </label>
-        </fieldset>
-
-        <fieldset className="mb-1">
-          <label htmlFor={`${formId}-flask`}>
-            <input 
-              type="checkbox" 
-              checked={checkIfItemChecked('flask')} 
-              onChange={() => toggleItem('flask')} 
-              className="checkbox checkbox-neutral" />{' '}
-            Flask
-          </label>
-        </fieldset>
-
-        <fieldset className="mb-1">
-          <label htmlFor={`${formId}-web2py`}>
-            <input 
-              type="checkbox" 
-              checked={checkIfItemChecked('web2py')} 
-              onChange={() => toggleItem('web2py')} 
-              className="checkbox checkbox-neutral" />{' '}
-            Web2py
-          </label>
-        </fieldset>        
- 
-        <fieldset className="mb-1">
-          <label htmlFor={`${formId}-django`}>
-            <input 
-              type="checkbox" 
-              checked={checkIfItemChecked('django')} 
-              onChange={() => toggleItem('django')} 
-              className="checkbox checkbox-neutral" />{' '}
-            Django
-          </label>
-        </fieldset>
-
-        <fieldset className="mb-1">
-          <label htmlFor={`${formId}-ruby-on-rails`}>
-            <input 
-              type="checkbox" 
-              checked={checkIfItemChecked('ruby-on-rails')} 
-              onChange={() => toggleItem('ruby-on-rails')} 
-              className="checkbox checkbox-neutral" />{' '}
-            Ruby on Rails
-          </label>
-        </fieldset>
-
-        <fieldset className="mb-1">
-          <label htmlFor={`${formId}-laravel`}>
-            <input 
-              type="checkbox" 
-              checked={checkIfItemChecked('laravel')} 
-              onChange={() => toggleItem('laravel')} 
-              className="checkbox checkbox-neutral" />{' '}
-            Laravel
-          </label>
-        </fieldset>
-
-        <fieldset className="mb-1">
-          <label htmlFor={`${formId}-code-igniter`}>
-            <input 
-              type="checkbox" 
-              checked={checkIfItemChecked('code-igniter')} 
-              onChange={() => toggleItem('code-igniter')} 
-              className="checkbox checkbox-neutral" />{' '}
-            Code Igniter
-          </label>
-        </fieldset>
-
-        <fieldset className="mb-1">
-          <label htmlFor={`${formId}-wordpress`}>
-            <input 
-              type="checkbox" 
-              checked={checkIfItemChecked('wordpress')} 
-              onChange={() => toggleItem('wordpress')} 
-              className="checkbox checkbox-neutral" />{' '}
-            Wordpress
-          </label>
-        </fieldset>
-
-        <div className="divider"></div>
-
-        <p className="mb-2">Other:</p>
-
-        <fieldset className="mb-1">
-          <label htmlFor={`${formId}-redux`}>
-            <input 
-              type="checkbox" 
-              checked={checkIfItemChecked('redux')} 
-              onChange={() => toggleItem('redux')} 
-              className="checkbox checkbox-neutral" />{' '}
-            Redux
-          </label>
-        </fieldset>
-
-        <fieldset className="mb-1">
-          <label htmlFor={`${formId}-mobx`}>
-            <input 
-              type="checkbox" 
-              checked={checkIfItemChecked('mobx')} 
-              onChange={() => toggleItem('mobx')} 
-              className="checkbox checkbox-neutral" />{' '}
-            Mobx
-          </label>
-        </fieldset>
-      </form>
+      <p className="mb-2 font-semibold">Technologies:</p>
+      {techs.length === 0 ? (
+          <span className="loading loading-spinner loading-sm"></span>
+      ) : (
+        <form action="#">
+            {techs.map((tech) => (
+                <fieldset className="mb-2" key={tech.id}>
+                    <label htmlFor={`${formId}-${tech.name}`} className="flex items-center gap-2 cursor-pointer">
+                        <input
+                            id={`${formId}-${tech.name}`}
+                            type="checkbox"
+                            checked={checkIfItemChecked(tech.name)}
+                            onChange={() => toggleItem(tech.name)}
+                            className="checkbox checkbox-sm checkbox-neutral"
+                        />
+                        <span className="label-text">{tech.name}</span>
+                    </label>
+                </fieldset>
+            ))}
+        </form>
+      )}
     </aside>
   )
 }
