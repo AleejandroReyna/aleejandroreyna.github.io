@@ -1,6 +1,7 @@
 import type { CollectionConfig } from 'payload'
 import { lexicalEditor } from '@payloadcms/richtext-lexical'
 import { revalidatePath } from 'next/cache'
+import { slugField } from '@/fields/slug'
 
 export const Projects: CollectionConfig = {
     slug: 'projects',
@@ -67,27 +68,22 @@ export const Projects: CollectionConfig = {
             type: 'richText',
             editor: lexicalEditor(),
         },
-        {
-            name: 'slug',
-            label: 'Slug',
-            type: 'text',
-            required: true,
-            unique: true,
-            admin: {
-                position: 'sidebar',
-            },
-        },
+        slugField('name'),
     ],
     hooks: {
         afterChange: [
             ({ doc }) => {
+                revalidatePath('/', 'layout')
                 revalidatePath('/portfolio')
-                revalidatePath(`/portfolio/${doc.slug}`)
+                if (doc.slug) {
+                    revalidatePath(`/portfolio/${doc.slug}`)
+                }
                 return doc
             },
         ],
         afterDelete: [
             ({ doc }) => {
+                revalidatePath('/', 'layout')
                 revalidatePath('/portfolio')
                 return doc
             },

@@ -1,6 +1,7 @@
 import type { CollectionConfig } from 'payload'
 import { revalidatePath } from 'next/cache'
 import { lexicalEditor } from '@payloadcms/richtext-lexical'
+import { slugField } from '@/fields/slug'
 
 export const ExperienceDetails: CollectionConfig = {
     slug: 'experience-details',
@@ -91,17 +92,18 @@ export const ExperienceDetails: CollectionConfig = {
                 },
             ],
         },
+        slugField('role'),
     ],
     hooks: {
         afterChange: [
             ({ doc }) => {
-                revalidatePath('/')
+                revalidatePath('/', 'layout')
                 return doc
             },
         ],
         afterDelete: [
             ({ doc }) => {
-                revalidatePath('/')
+                revalidatePath('/', 'layout')
                 return doc
             },
         ],
