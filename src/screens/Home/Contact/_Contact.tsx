@@ -1,8 +1,9 @@
 'use client';
-import { useState, FormEvent } from "react";
+import { useActionState, useEffect, useRef } from "react";
 import { Mail, MapPin, Github, Linkedin, Send } from "lucide-react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCalendarAlt } from "@fortawesome/free-solid-svg-icons";
+import { submitContactForm, ContactFormState } from "@/lib/actions/contact";
 
 interface ContactProps {
   contactEmail: string;
@@ -11,70 +12,22 @@ interface ContactProps {
   calendlyUser: string;
 }
 
+const initialState: ContactFormState = {
+  success: false,
+  errors: {},
+  message: '',
+};
+
 export const Contact = ({ contactEmail, githubUser, linkedinUser, calendlyUser }: ContactProps) => {
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    subject: '',
-    message: ''
-  });
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [submitStatus, setSubmitStatus] = useState<{
-    type: 'success' | 'error' | null;
-    message: string;
-  }>({ type: null, message: '' });
+  const [state, formAction, isPending] = useActionState(submitContactForm, initialState);
+  const formRef = useRef<HTMLFormElement>(null);
 
-  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    setIsSubmitting(true);
-    setSubmitStatus({ type: null, message: '' });
-
-    try {
-      const response = await fetch('/api/contact', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(formData),
-      });
-
-      const data = await response.json();
-
-      if (response.ok) {
-        setSubmitStatus({
-          type: 'success',
-          message: data.message || 'Thank you for your message! I will get back to you soon.',
-        });
-        // Reset form
-        setFormData({
-          name: '',
-          email: '',
-          subject: '',
-          message: ''
-        });
-      } else {
-        setSubmitStatus({
-          type: 'error',
-          message: data.error || 'Failed to send message. Please try again.',
-        });
-      }
-    } catch (error) {
-      console.error('Error sending message:', error);
-      setSubmitStatus({
-        type: 'error',
-        message: 'An error occurred. Please try again later.',
-      });
-    } finally {
-      setIsSubmitting(false);
+  useEffect(() => {
+    if (state.success && formRef.current) {
+      formRef.current.reset();
     }
-  };
+  }, [state.success]);
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    setFormData(prev => ({
-      ...prev,
-      [e.target.name]: e.target.value
-    }));
-  };
   return (
     <section className="py-24 bg-black relative overflow-hidden" id="contact">
       {/* Background Pattern */}
@@ -202,15 +155,15 @@ export const Contact = ({ contactEmail, githubUser, linkedinUser, calendlyUser }
           {/* Right Column - Contact Form */}
           <div className="bg-gray-900 border-2 border-gray-800 rounded-lg p-8 shadow-lg">
             <h3 className="text-2xl font-bold text-white mb-6">Send Me a Message</h3>
-            <form onSubmit={handleSubmit} className="space-y-6">
+            <form ref={formRef} action={formAction} className="space-y-6">
               {/* Status Messages */}
-              {submitStatus.type && (
-                <div className={`alert ${submitStatus.type === 'success' ? 'alert-success bg-green-900/30 border-green-700 text-green-400' : 'alert-error bg-red-900/30 border-red-700 text-red-400'} border-2`}>
-                  <span>{submitStatus.message}</span>
+              {state.message && (
+                <div className={`alert ${state.success ? 'alert-success bg-green-900/30 border-green-700 text-green-400' : 'alert-error bg-red-900/30 border-red-700 text-red-400'} border-2`}>
+                  <span>{state.message}</span>
                 </div>
               )}
 
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div className="space-y-6">
                 <div className="form-control">
                   <label className="label">
                     <span className="label-text text-gray-400 font-semibold">Your Name</span>
@@ -218,13 +171,12 @@ export const Contact = ({ contactEmail, githubUser, linkedinUser, calendlyUser }
                   <input
                     type="text"
                     name="name"
-                    value={formData.name}
-                    onChange={handleChange}
                     placeholder="John Doe"
-                    className="input input-bordered bg-gray-800 border-gray-700 text-white focus:border-primary focus:bg-gray-800 w-full"
+                    className={`input input-bordered bg-gray-800 border-gray-700 text-white focus:border-primary focus:bg-gray-800 w-full ${state.errors?.name ? 'border-error' : ''}`}
                     required
-                    disabled={isSubmitting}
+                    disabled={isPending}
                   />
+                  {state.errors?.name && <span className="text-error text-xs mt-1">{state.errors.name[0]}</span>}
                 </div>
 
                 <div className="form-control">
@@ -234,30 +186,41 @@ export const Contact = ({ contactEmail, githubUser, linkedinUser, calendlyUser }
                   <input
                     type="email"
                     name="email"
-                    value={formData.email}
-                    onChange={handleChange}
                     placeholder="john@example.com"
-                    className="input input-bordered bg-gray-800 border-gray-700 text-white focus:border-primary focus:bg-gray-800 w-full"
+                    className={`input input-bordered bg-gray-800 border-gray-700 text-white focus:border-primary focus:bg-gray-800 w-full ${state.errors?.email ? 'border-error' : ''}`}
                     required
-                    disabled={isSubmitting}
+                    disabled={isPending}
+                  />
+                  {state.errors?.email && <span className="text-error text-xs mt-1">{state.errors.email[0]}</span>}
+                </div>
+
+                <div className="form-control">
+                  <label className="label">
+                    <span className="label-text text-gray-400 font-semibold">Subject</span>
+                  </label>
+                  <input
+                    type="text"
+                    name="subject"
+                    placeholder="What's this about?"
+                    className={`input input-bordered bg-gray-800 border-gray-700 text-white focus:border-primary focus:bg-gray-800 w-full ${state.errors?.subject ? 'border-error' : ''}`}
+                    required
+                    disabled={isPending}
+                  />
+                  {state.errors?.subject && <span className="text-error text-xs mt-1">{state.errors.subject[0]}</span>}
+                </div>
+
+                <div className="form-control">
+                  <label className="label">
+                    <span className="label-text text-gray-400 font-semibold">Your Phone (Optional)</span>
+                  </label>
+                  <input
+                    type="text"
+                    name="phone"
+                    placeholder="+502 1234 5678"
+                    className="input input-bordered bg-gray-800 border-gray-700 text-white focus:border-primary focus:bg-gray-800 w-full"
+                    disabled={isPending}
                   />
                 </div>
-              </div>
-
-              <div className="form-control">
-                <label className="label">
-                  <span className="label-text text-gray-400 font-semibold">Subject</span>
-                </label>
-                <input
-                  type="text"
-                  name="subject"
-                  value={formData.subject}
-                  onChange={handleChange}
-                  placeholder="What's this about?"
-                  className="input input-bordered bg-gray-800 border-gray-700 text-white focus:border-primary focus:bg-gray-800 w-full"
-                  required
-                  disabled={isSubmitting}
-                />
               </div>
 
               <div className="form-control">
@@ -266,22 +229,21 @@ export const Contact = ({ contactEmail, githubUser, linkedinUser, calendlyUser }
                 </label>
                 <textarea
                   name="message"
-                  value={formData.message}
-                  onChange={handleChange}
                   rows={6}
                   placeholder="Tell me about your project or idea..."
-                  className="textarea textarea-bordered bg-gray-800 border-gray-700 text-white focus:border-primary focus:bg-gray-800 w-full resize-none"
+                  className={`textarea textarea-bordered bg-gray-800 border-gray-700 text-white focus:border-primary focus:bg-gray-800 w-full resize-none ${state.errors?.message ? 'border-error' : ''}`}
                   required
-                  disabled={isSubmitting}
+                  disabled={isPending}
                 ></textarea>
+                {state.errors?.message && <span className="text-error text-xs mt-1">{state.errors.message[0]}</span>}
               </div>
 
               <button
                 type="submit"
                 className="btn btn-primary w-full text-white gap-2 text-lg"
-                disabled={isSubmitting}
+                disabled={isPending}
               >
-                {isSubmitting ? (
+                {isPending ? (
                   <>
                     <span className="loading loading-spinner loading-sm"></span>
                     Sending...

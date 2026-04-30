@@ -12,6 +12,7 @@ import { Companies } from './collections/Companies'
 import { ExperienceDetails } from './collections/ExperienceDetails'
 import { Technologies } from './collections/Technologies'
 import { Projects } from './collections/Projects'
+import { ContactSubmissions } from './collections/ContactSubmissions'
 import { SiteSettings } from './globals/SiteSettings'
 import { envs } from './lib/envs'
 
@@ -25,7 +26,7 @@ export default buildConfig({
             baseDir: path.resolve(dirname),
         },
     },
-    collections: [Users, Media, Companies, ExperienceDetails, Technologies, Projects],
+    collections: [Users, Media, Companies, ExperienceDetails, Technologies, Projects, ContactSubmissions],
     globals: [SiteSettings],
     editor: lexicalEditor(),
     secret: envs.payloadSecret,

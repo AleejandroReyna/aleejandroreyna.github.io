@@ -73,6 +73,7 @@ export interface Config {
     'experience-details': ExperienceDetail;
     technologies: Technology;
     projects: Project;
+    'contact-submissions': ContactSubmission;
     'payload-kv': PayloadKv;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
@@ -86,6 +87,7 @@ export interface Config {
     'experience-details': ExperienceDetailsSelect<false> | ExperienceDetailsSelect<true>;
     technologies: TechnologiesSelect<false> | TechnologiesSelect<true>;
     projects: ProjectsSelect<false> | ProjectsSelect<true>;
+    'contact-submissions': ContactSubmissionsSelect<false> | ContactSubmissionsSelect<true>;
     'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
@@ -132,6 +134,7 @@ export interface UserAuthOperations {
  */
 export interface User {
   id: string;
+  slug: string;
   updatedAt: string;
   createdAt: string;
   email: string;
@@ -158,6 +161,7 @@ export interface User {
 export interface Media {
   id: string;
   alt: string;
+  slug: string;
   prefix?: string | null;
   updatedAt: string;
   createdAt: string;
@@ -183,6 +187,7 @@ export interface Company {
    * Company website URL
    */
   url?: string | null;
+  slug: string;
   updatedAt: string;
   createdAt: string;
 }
@@ -221,6 +226,7 @@ export interface ExperienceDetail {
         id?: string | null;
       }[]
     | null;
+  slug: string;
   updatedAt: string;
   createdAt: string;
 }
@@ -233,6 +239,7 @@ export interface Technology {
   name: string;
   icon?: string | null;
   description?: string | null;
+  slug: string;
   updatedAt: string;
   createdAt: string;
 }
@@ -267,6 +274,22 @@ export interface Project {
     [k: string]: unknown;
   } | null;
   slug: string;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "contact-submissions".
+ */
+export interface ContactSubmission {
+  id: string;
+  name: string;
+  email: string;
+  subject?: string | null;
+  phone?: string | null;
+  message: string;
+  status: 'new' | 'contacted';
+  notes?: string | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -317,6 +340,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'projects';
         value: string | Project;
+      } | null)
+    | ({
+        relationTo: 'contact-submissions';
+        value: string | ContactSubmission;
       } | null);
   globalSlug?: string | null;
   user: {
@@ -365,6 +392,7 @@ export interface PayloadMigration {
  * via the `definition` "users_select".
  */
 export interface UsersSelect<T extends boolean = true> {
+  slug?: T;
   updatedAt?: T;
   createdAt?: T;
   email?: T;
@@ -388,6 +416,7 @@ export interface UsersSelect<T extends boolean = true> {
  */
 export interface MediaSelect<T extends boolean = true> {
   alt?: T;
+  slug?: T;
   prefix?: T;
   updatedAt?: T;
   createdAt?: T;
@@ -409,6 +438,7 @@ export interface CompaniesSelect<T extends boolean = true> {
   name?: T;
   logo?: T;
   url?: T;
+  slug?: T;
   updatedAt?: T;
   createdAt?: T;
 }
@@ -429,6 +459,7 @@ export interface ExperienceDetailsSelect<T extends boolean = true> {
         achievement?: T;
         id?: T;
       };
+  slug?: T;
   updatedAt?: T;
   createdAt?: T;
 }
@@ -440,6 +471,7 @@ export interface TechnologiesSelect<T extends boolean = true> {
   name?: T;
   icon?: T;
   description?: T;
+  slug?: T;
   updatedAt?: T;
   createdAt?: T;
 }
@@ -456,6 +488,21 @@ export interface ProjectsSelect<T extends boolean = true> {
   thumbnail?: T;
   content?: T;
   slug?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "contact-submissions_select".
+ */
+export interface ContactSubmissionsSelect<T extends boolean = true> {
+  name?: T;
+  email?: T;
+  subject?: T;
+  phone?: T;
+  message?: T;
+  status?: T;
+  notes?: T;
   updatedAt?: T;
   createdAt?: T;
 }
