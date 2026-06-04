@@ -1,9 +1,10 @@
-// Dependencies
 import type { Metadata } from "next";
 import { Outfit, Black_Ops_One } from "next/font/google";
 import { config } from '@fortawesome/fontawesome-svg-core'
 import '@fortawesome/fontawesome-svg-core/styles.css'
 import "./globals.css";
+
+export const dynamic = 'force-dynamic'
 
 // UI Components
 import { Navbar } from "@/components/common/Navbar";
