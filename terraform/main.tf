@@ -57,7 +57,7 @@ resource "google_cloud_run_v2_service_iam_member" "public_access" {
 
 resource "google_cloud_run_domain_mapping" "portfolio_domain" {
   location = "us-central1"
-  name     = "portfolio.alejandroreyna.com"
+  name     = "alejandroreyna.com"
 
   metadata {
     namespace = "aleejandroreyna"

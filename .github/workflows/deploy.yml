@@ -4,7 +4,6 @@ on:
   push:
     branches:
       - main
-      - gcp-migration
 
 env:
   PROJECT_ID: aleejandroreyna
@@ -13,10 +12,9 @@ env:
   REPOSITORY: site-images
 
 jobs:
-  deploy:
-    name: Build and Deploy
+  terraform:
+    name: Terraform Apply
     runs-on: ubuntu-latest
-
     permissions:
       contents: read
       id-token: write
@@ -44,6 +42,24 @@ jobs:
         run: terraform apply -auto-approve
         working-directory: ./terraform
 
+  build:
+    name: Build & Push Container
+    needs: terraform
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Google Auth
+        id: auth
+        uses: google-github-actions/auth@v2
+        with:
+          credentials_json: ${{ secrets.GCP_SA_KEY }}
+
       - name: Configure Docker Client
         run: |-
           gcloud auth configure-docker ${{ env.REGION }}-docker.pkg.dev --quiet
@@ -53,6 +69,24 @@ jobs:
           IMAGE_TAG="${{ env.REGION }}-docker.pkg.dev/${{ env.PROJECT_ID }}/${{ env.REPOSITORY }}/${{ env.SERVICE_NAME }}:${{ github.sha }}"
           docker build -t "$IMAGE_TAG" .
           docker push "$IMAGE_TAG"
+
+  deploy:
+    name: Deploy to Cloud Run
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Google Auth
+        id: auth
+        uses: google-github-actions/auth@v2
+        with:
+          credentials_json: ${{ secrets.GCP_SA_KEY }}
 
       - name: Deploy to Cloud Run
         id: deploy
