@@ -27,6 +27,8 @@ resource "google_cloud_run_v2_service" "nextjs_service" {
       max_instance_count = 10
     }
 
+    startup_cpu_boost = true
+
     containers {
       image = "us-docker.pkg.dev/cloudrun/container/hello:latest"
       ports {
