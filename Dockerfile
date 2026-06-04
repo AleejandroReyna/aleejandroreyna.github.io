@@ -12,7 +12,10 @@ COPY . .
 ENV NEXT_TELEMETRY_DISABLED=1
 ENV NODE_ENV=production
 ENV DATABASE_URL=mongodb://127.0.0.1:27017/build-placeholder
-ENV PAYLOAD_SECRET=build_placeholder_secret_for_nextjs_standalone
+ENV PAYLOAD_SECRET=build_placeholder_secret
+ENV GOOGLE_ANALYTICS_ID=build-placeholder
+ENV UPLOAD_PREFIX=build-placeholder
+ENV BLOB_READ_WRITE_TOKEN=build-placeholder
 RUN npm run build
 
 FROM base AS runner
