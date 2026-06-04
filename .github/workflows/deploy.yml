@@ -31,6 +31,19 @@ jobs:
         with:
           credentials_json: ${{ secrets.GCP_SA_KEY }}
 
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_wrapper: false
+
+      - name: Terraform Init
+        run: terraform init
+        working-directory: ./terraform
+
+      - name: Terraform Apply
+        run: terraform apply -auto-approve
+        working-directory: ./terraform
+
       - name: Configure Docker Client
         run: |-
           gcloud auth configure-docker ${{ env.REGION }}-docker.pkg.dev --quiet
