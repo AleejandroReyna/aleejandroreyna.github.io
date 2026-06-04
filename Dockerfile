@@ -15,7 +15,7 @@ ENV DATABASE_URL=mongodb://127.0.0.1:27017/build-placeholder
 ENV PAYLOAD_SECRET=build_placeholder_secret
 ENV GOOGLE_ANALYTICS_ID=build-placeholder
 ENV UPLOAD_PREFIX=build-placeholder
-ENV BLOB_READ_WRITE_TOKEN=build-placeholder
+ENV BLOB_READ_WRITE_TOKEN=vercel_blob_rw_placeholder_placeholder
 RUN npm run build
 
 FROM base AS runner
