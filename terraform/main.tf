@@ -34,6 +34,11 @@ resource "google_cloud_run_v2_service" "nextjs_service" {
       }
       resources {
         startup_cpu_boost = true
+        cpu_idle          = true
+        limits = {
+          cpu    = "1"
+          memory = "512Mi"
+        }
       }
     }
   }
