@@ -4,6 +4,7 @@ import { Mail, MapPin, Github, Linkedin, Send, Terminal } from "lucide-react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCalendarAlt } from "@fortawesome/free-solid-svg-icons";
 import { submitContactForm, ContactFormState } from "@/lib/actions/contact";
+import { motion } from "motion/react";
 
 interface ContactProps {
   contactEmail: string;
@@ -18,6 +19,25 @@ const initialState: ContactFormState = {
   message: '',
 };
 
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.15
+    }
+  }
+};
+
+const itemVariants = {
+  hidden: { opacity: 0, y: 30 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.6, ease: "easeOut" }
+  }
+};
+
 export const Contact = ({ contactEmail, githubUser, linkedinUser, calendlyUser }: ContactProps) => {
   const [state, formAction, isPending] = useActionState(submitContactForm, initialState);
   const formRef = useRef<HTMLFormElement>(null);
@@ -30,10 +50,16 @@ export const Contact = ({ contactEmail, githubUser, linkedinUser, calendlyUser }
 
   return (
     <section className="py-32 bg-background relative overflow-hidden" id="contact">
-      <div className="mx-auto max-w-7xl px-6 relative z-10 reveal">
+      <div className="mx-auto max-w-7xl px-6 relative z-10">
         
         {/* Heading */}
-        <div className="mb-20 flex flex-col md:flex-row md:items-end justify-between gap-6 border-b border-secondary/50 pb-8">
+        <motion.div 
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          viewport={{ once: true }}
+          className="mb-20 flex flex-col md:flex-row md:items-end justify-between gap-6 border-b border-secondary/50 pb-8"
+        >
           <div>
             <span className="text-neutral-400 text-xs font-bold tracking-[0.2em] uppercase mb-4 block flex items-center gap-2">
               <Terminal size={14} /> Get In Touch
@@ -43,12 +69,18 @@ export const Contact = ({ contactEmail, githubUser, linkedinUser, calendlyUser }
             </h2>
           </div>
           <div className="w-16 h-1 bg-[#092e20] shadow-[0_0_10px_#092e20]"></div>
-        </div>
+        </motion.div>
 
-        <div className="grid lg:grid-cols-5 gap-12 lg:gap-16 items-start">
+        <motion.div 
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-100px" }}
+          variants={containerVariants}
+          className="grid lg:grid-cols-5 gap-12 lg:gap-16 items-start"
+        >
           
           {/* Left Column - Contact Info */}
-          <div className="lg:col-span-2 space-y-12">
+          <motion.div variants={itemVariants} className="lg:col-span-2 space-y-12">
             
             {/* Intro */}
             <div className="bg-secondary/15 border border-secondary p-8 hover:border-[#092e20] transition-colors duration-300 relative group">
@@ -118,10 +150,10 @@ export const Contact = ({ contactEmail, githubUser, linkedinUser, calendlyUser }
                 </a>
               </div>
             </div>
-          </div>
+          </motion.div>
 
           {/* Right Column - Contact Form */}
-          <div className="lg:col-span-3">
+          <motion.div variants={itemVariants} className="lg:col-span-3">
             <div className="bg-secondary/15 border border-secondary p-8 sm:p-12 relative group">
               <div className="absolute top-0 right-0 w-4 h-4 border-t-2 border-r-2 border-[#092e20] opacity-50"></div>
               <div className="absolute bottom-0 left-0 w-4 h-4 border-b-2 border-l-2 border-[#092e20] opacity-50"></div>
@@ -230,9 +262,9 @@ export const Contact = ({ contactEmail, githubUser, linkedinUser, calendlyUser }
                 </div>
               </form>
             </div>
-          </div>
+          </motion.div>
 
-        </div>
+        </motion.div>
       </div>
     </section>
   );

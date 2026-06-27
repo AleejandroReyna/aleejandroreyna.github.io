@@ -1,4 +1,25 @@
+'use client';
 import { Code, Database, Layers, Terminal } from "lucide-react";
+import { motion } from "motion/react";
+
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.15
+    }
+  }
+};
+
+const cardVariants = {
+  hidden: { opacity: 0, y: 30 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.6, ease: "easeOut" }
+  }
+};
 
 export const Skills = () => {
     return (
@@ -6,10 +27,16 @@ export const Skills = () => {
             {/* Tech background elements */}
             <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-secondary to-transparent"></div>
             
-            <div className="mx-auto max-w-7xl px-6 relative z-10 reveal">
+            <motion.div 
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, margin: "-100px" }}
+              variants={containerVariants}
+              className="mx-auto max-w-7xl px-6 relative z-10"
+            >
                 
                 {/* Heading */}
-                <div className="mb-20 flex flex-col md:flex-row md:items-end justify-between gap-6 border-b border-secondary/50 pb-8">
+                <motion.div variants={cardVariants} className="mb-20 flex flex-col md:flex-row md:items-end justify-between gap-6 border-b border-secondary/50 pb-8">
                   <div>
                     <span className="text-neutral-400 text-xs font-bold tracking-[0.2em] uppercase mb-4 block flex items-center gap-2">
                       <Terminal size={14} /> Core Competencies
@@ -23,13 +50,13 @@ export const Skills = () => {
                       A curated selection of technologies mastered over 12 years of architecting scalable applications.
                     </p>
                   </div>
-                </div>
+                </motion.div>
 
                 {/* Skills Grid */}
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8 relative">
                     
                     {/* Skill Group 1: Frontend & Backend */}
-                    <div className="group bg-secondary/15 border border-secondary hover:border-[#092e20] p-10 flex flex-col items-start transition-all duration-300 relative">
+                    <motion.div variants={cardVariants} className="group bg-secondary/15 border border-secondary hover:border-[#092e20] p-10 flex flex-col items-start transition-all duration-300 relative">
                         <div className="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-100 transition-opacity">
                             <Layers size={64} className="text-neutral-500" />
                         </div>
@@ -65,10 +92,10 @@ export const Skills = () => {
                                 </ul>
                             </div>
                         </div>
-                    </div>
+                    </motion.div>
 
                     {/* Skill Group 2: API Architecture */}
-                    <div className="group bg-secondary/15 border border-secondary hover:border-[#092e20] p-10 flex flex-col items-start transition-all duration-300 relative">
+                    <motion.div variants={cardVariants} className="group bg-secondary/15 border border-secondary hover:border-[#092e20] p-10 flex flex-col items-start transition-all duration-300 relative">
                         <div className="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-100 transition-opacity">
                             <Code size={64} className="text-neutral-500" />
                         </div>
@@ -104,10 +131,10 @@ export const Skills = () => {
                                 </ul>
                             </div>
                         </div>
-                    </div>
+                    </motion.div>
 
                     {/* Skill Group 3: Database & Data */}
-                    <div className="group bg-secondary/15 border border-secondary hover:border-[#092e20] p-10 flex flex-col items-start transition-all duration-300 relative">
+                    <motion.div variants={cardVariants} className="group bg-secondary/15 border border-secondary hover:border-[#092e20] p-10 flex flex-col items-start transition-all duration-300 relative">
                         <div className="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-100 transition-opacity">
                             <Database size={64} className="text-neutral-500" />
                         </div>
@@ -143,12 +170,11 @@ export const Skills = () => {
                                 </ul>
                             </div>
                         </div>
-                    </div>
-
+                    </motion.div>
                 </div>
 
                 {/* Additional Skills Section */}
-                <div className="mt-24 pt-12 border-t border-secondary/50">
+                <motion.div variants={cardVariants} className="mt-24 pt-12 border-t border-secondary/50">
                     <h3 className="text-sm font-bold text-foreground mb-8 uppercase tracking-[0.2em] flex items-center gap-2">
                       <span className="w-2 h-2 bg-[#092e20]"></span> Complementary Toolkit
                     </h3>
@@ -159,9 +185,9 @@ export const Skills = () => {
                             </span>
                         ))}
                     </div>
-                </div>
+                </motion.div>
 
-            </div>
+            </motion.div>
         </section>
     );
 };

@@ -5,6 +5,7 @@ import { getPayload } from "payload"
 import config from "@payload-config"
 import * as Icons from "@icons-pack/react-simple-icons"
 import { Technology, Media } from "@/payload-types"
+import { AnimateIn } from "@/components/ds/AnimateIn"
 
 export const Portfolio = async () => {
   const payload = await getPayload({ config })
@@ -20,27 +21,30 @@ export const Portfolio = async () => {
       {/* Background Accent */}
       <div className="absolute top-1/2 right-0 w-1/3 h-1/2 bg-secondary/5 rounded-full blur-[120px] pointer-events-none"></div>
 
-      <div className="mx-auto max-w-7xl px-6 relative z-10 reveal">
+      <div className="mx-auto max-w-7xl px-6 relative z-10">
         
         {/* Heading */}
-        <div className="mb-20 flex flex-col md:flex-row md:items-end justify-between gap-6 border-b border-secondary/50 pb-8">
-          <div>
-            <span className="text-neutral-400 text-xs font-bold tracking-[0.2em] uppercase mb-4 block flex items-center gap-2">
-              <FolderGit2 size={14} /> Featured Projects
-            </span>
-            <h2 className="text-4xl md:text-5xl font-heading font-bold text-foreground tracking-tight uppercase">
-              Recent <span className="text-white">Projects</span>
-            </h2>
+        <AnimateIn>
+          <div className="mb-20 flex flex-col md:flex-row md:items-end justify-between gap-6 border-b border-secondary/50 pb-8">
+            <div>
+              <span className="text-neutral-400 text-xs font-bold tracking-[0.2em] uppercase mb-4 block flex items-center gap-2">
+                <FolderGit2 size={14} /> Featured Projects
+              </span>
+              <h2 className="text-4xl md:text-5xl font-heading font-bold text-foreground tracking-tight uppercase">
+                Recent <span className="text-white">Projects</span>
+              </h2>
+            </div>
+            <div className="hidden md:block">
+              <Link href="/portfolio" className="text-sm font-bold tracking-widest uppercase text-white hover:text-neutral-300 border border-[#092e20] px-4 py-2 transition-colors flex items-center gap-2 group hover:bg-[#092e20]">
+                View All Projects <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
+              </Link>
+            </div>
           </div>
-          <div className="hidden md:block">
-            <Link href="/portfolio" className="text-sm font-bold tracking-widest uppercase text-white hover:text-neutral-300 border border-[#092e20] px-4 py-2 transition-colors flex items-center gap-2 group hover:bg-[#092e20]">
-              View All Projects <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
-            </Link>
-          </div>
-        </div>
+        </AnimateIn>
 
         {/* Projects Grid */}
-        <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
+        <AnimateIn delay={0.2}>
+          <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
           {result.docs.map((project) => {
              const releaseYear = project.releaseDate ? new Date(project.releaseDate).getFullYear() : ''
 
@@ -105,6 +109,7 @@ export const Portfolio = async () => {
              )
           })}
         </div>
+        </AnimateIn>
 
         {/* Mobile View All Projects CTA */}
         <div className="text-center mt-12 md:hidden">
