@@ -5,6 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCalendarAlt } from '@fortawesome/free-solid-svg-icons';
 import { Mail, Heart, Linkedin, Terminal } from 'lucide-react';
 import { getSiteSettings } from "@/lib/payload";
+import { PythonOriginal } from "devicons-react";
 
 export const Footer = async () => {
   const settings = await getSiteSettings();
@@ -108,6 +109,10 @@ export const Footer = async () => {
           <div className="flex flex-col md:flex-row justify-between items-center gap-4 text-[10px] font-bold uppercase tracking-widest text-neutral-400">
             <p className="flex items-center gap-2">
               <Terminal size={12} className="text-neutral-400" /> ONLINE © {currentYear()} Alejandro Reyna
+            </p>
+            <p className="font-body italic text-[11px] text-neutral-500 hover:text-white transition-colors duration-300 flex items-center gap-2 normal-case tracking-normal">
+              <a href="https://zen-of-python.info/" target="_blank" rel="noopener noreferrer">{`"Simple is better than complex" - Zen of Python`}</a> 
+              <PythonOriginal style={{ display: 'inline' }} size={16} />
             </p>
             <p className="flex items-center gap-2">
               BUILT WITH <Heart size={12} className="text-neutral-400" fill="currentColor" /> IN GTM
