@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Outfit, Black_Ops_One } from "next/font/google";
+import { Archivo, Space_Grotesk } from "next/font/google";
 import { config } from '@fortawesome/fontawesome-svg-core'
 import '@fortawesome/fontawesome-svg-core/styles.css'
 import "./globals.css";
@@ -9,19 +9,21 @@ export const dynamic = 'force-dynamic'
 // UI Components
 import { Navbar } from "@/components/common/Navbar";
 import { Footer } from "@/components/common/Footer";
+import { ScrollRevealInit } from "@/components/common/ScrollRevealInit";
 import { GoogleAnalytics } from '@next/third-parties/google'
 import { envs } from "@/lib/envs";
 
 // Constants
-const outfit = Outfit({
-  variable: "--font-outfit",
+const archivo = Archivo({
+  variable: "--font-archivo",
   subsets: ["latin"],
+  weight: ["300", "400", "500", "600", "700"],
 });
 
-const opsOne = Black_Ops_One({
-  variable: "--font-black_ops_one",
+const spaceGrotesk = Space_Grotesk({
+  variable: "--font-space-grotesk",
   subsets: ["latin"],
-  weight: "400"
+  weight: ["300", "400", "500", "600", "700"],
 });
 
 
@@ -110,7 +112,8 @@ export default function RootLayout({
   return (
     <html lang="en" data-theme="custom" className="scroll-smooth">
       <GoogleAnalytics gaId={envs.googleAnalyticsId} />
-      <body className={`${outfit.variable} ${opsOne.variable} antialiased flex flex-col min-h-screen`}>
+      <body className={`antialiased flex flex-col min-h-screen text-foreground bg-background ${archivo.variable} ${spaceGrotesk.variable}`}>
+        <ScrollRevealInit />
         <Navbar />
         {children}
         <Footer />

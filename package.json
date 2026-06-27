@@ -4,7 +4,7 @@
   "type": "module",
   "private": true,
   "scripts": {
-    "dev": "cross-env NODE_OPTIONS=--no-deprecation next dev --turbopack",
+    "dev": "cross-env PORT=3050 NODE_OPTIONS=--no-deprecation next dev --turbopack",
     "build": "cross-env NODE_OPTIONS=\"--no-deprecation --max-old-space-size=8000\" next build",
     "start": "cross-env NODE_OPTIONS=--no-deprecation next start",
     "lint": "next lint",
@@ -29,6 +29,7 @@
     "devicons-react": "^1.4.0",
     "graphql": "^16.12.0",
     "lucide-react": "^0.554.0",
+    "motion": "^12.42.0",
     "next": "^16.1.6",
     "payload": "^3.76.1",
     "react": "^19.0.0",

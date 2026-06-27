@@ -58,25 +58,33 @@ export const Form = () => {
   }
  
   return (
-    <aside className="sticky top-24 bg-base-100 p-4 rounded-lg shadow-sm">
-      <p className="mb-4 font-bold text-lg">Filters</p>
+    <aside className="sticky top-32 bg-secondary/15 border border-secondary p-6 rounded-none relative group hover:border-[#092e20] transition-colors duration-300">
+      <div className="absolute top-0 left-0 w-2 h-2 bg-[#092e20] opacity-0 group-hover:opacity-100 transition-opacity"></div>
+      
+      <h3 className="mb-6 font-heading font-bold text-xs uppercase tracking-[0.2em] text-foreground flex items-center gap-2">
+        <span className="w-1.5 h-1.5 bg-[#092e20]"></span> System Filters
+      </h3>
 
-      <p className="mb-2 font-semibold">Technologies:</p>
+      <p className="mb-4 font-bold text-[10px] uppercase tracking-widest text-neutral-500">Technologies</p>
       {techs.length === 0 ? (
-          <span className="loading loading-spinner loading-sm"></span>
+          <div className="flex justify-center py-4">
+            <span className="loading loading-spinner loading-sm text-[#092e20]"></span>
+          </div>
       ) : (
-        <form action="#">
+        <form action="#" className="space-y-3">
             {techs.map((tech) => (
-                <fieldset className="mb-2" key={tech.id}>
-                    <label htmlFor={`${formId}-${tech.name}`} className="flex items-center gap-2 cursor-pointer">
+                <fieldset key={tech.id} className="flex items-center">
+                    <label htmlFor={`${formId}-${tech.name}`} className="flex items-center gap-3 cursor-pointer select-none group/item">
                         <input
                             id={`${formId}-${tech.name}`}
                             type="checkbox"
                             checked={checkIfItemChecked(tech.name)}
                             onChange={() => toggleItem(tech.name)}
-                            className="checkbox checkbox-sm checkbox-neutral"
+                            className="w-4 h-4 border border-secondary bg-background rounded-none checked:bg-[#092e20] checked:border-[#092e20] focus:ring-0 text-white cursor-pointer accent-[#092e20]"
                         />
-                        <span className="label-text">{tech.name}</span>
+                        <span className={`text-xs font-medium uppercase tracking-wider transition-colors group-hover/item:text-white ${checkIfItemChecked(tech.name) ? 'text-white' : 'text-neutral-400'}`}>
+                          {tech.name}
+                        </span>
                     </label>
                 </fieldset>
             ))}

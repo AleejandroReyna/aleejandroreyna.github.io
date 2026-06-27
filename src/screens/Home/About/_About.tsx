@@ -1,122 +1,146 @@
 'use client'
-import { ArrowRight, Palette, Rocket, Music, Telescope, BookOpen } from "lucide-react"
+import { ArrowRight, Terminal, Globe, BrainCircuit } from "lucide-react"
+import { motion } from "motion/react"
 
 export const About = () => {
   return (
-    <section className="bg-white py-24 relative overflow-hidden" id="about">
-      {/* Background Pattern */}
-      <div className="absolute inset-0 opacity-5">
-        <div className="absolute inset-0" style={{
-          backgroundImage: 'radial-gradient(circle, #000 1px, transparent 1px)',
-          backgroundSize: '50px 50px'
-        }}></div>
-      </div>
-
-      <div className="mx-auto max-w-7xl px-4 relative z-10">
+    <section className="py-32 bg-background relative overflow-hidden" id="about">
+      <div className="mx-auto max-w-7xl px-6 relative z-10">
+        
         {/* Heading */}
-        <div className="text-center mb-16">
-          <h2 className="text-5xl lg:text-6xl font-bold text-gray-900 mb-4">
-            The Story Behind the Code
-          </h2>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-            More than just a developer—a code poet crafting elegant solutions
-          </p>
-        </div>
+        <motion.div 
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          viewport={{ once: true }}
+          className="mb-20 flex flex-col md:flex-row md:items-end justify-between gap-6 border-b border-secondary/50 pb-8"
+        >
+          <div>
+            <span className="text-neutral-400 text-xs font-bold tracking-[0.2em] uppercase mb-4 block flex items-center gap-2">
+              <Terminal size={14} /> About Me
+            </span>
+            <h2 className="text-4xl md:text-5xl font-heading font-bold text-foreground tracking-tight uppercase">
+              Beyond the <span className="text-white">Logic</span>
+            </h2>
+          </div>
+          <div className="w-16 h-1 bg-[#092e20] shadow-[0_0_10px_#092e20]"></div>
+        </motion.div>
 
         {/* Main Content Grid */}
-        <div className="grid md:grid-cols-2 gap-12 items-center mb-16">
-          {/* Image Section */}
-          <div className="flex justify-center">
-            <div className="relative">
-              {/* Clean profile image with subtle styling */}
-              <div className="w-80 h-80 rounded-full overflow-hidden ring-2 ring-gray-400 ring-offset-4 ring-offset-white shadow-2xl">
-                <img
-                  src="/images/about/me.jpg"
-                  alt="Alejandro Reyna"
-                  className="w-full h-full object-cover"
-                />
+        <div className="grid lg:grid-cols-12 gap-8 items-stretch mb-24">
+          
+          {/* Content Section */}
+          <motion.div 
+            initial={{ opacity: 0, x: -30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            viewport={{ once: true }}
+            className="lg:col-span-7 bg-secondary/15 backdrop-blur-md border border-secondary p-8 md:p-12 relative group"
+          >
+            {/* Corner accents */}
+            <div className="absolute top-0 left-0 w-4 h-4 border-t-2 border-l-2 border-[#092e20] opacity-0 group-hover:opacity-100 transition-opacity"></div>
+            <div className="absolute bottom-0 right-0 w-4 h-4 border-b-2 border-r-2 border-[#092e20] opacity-0 group-hover:opacity-100 transition-opacity"></div>
+            
+            <div className="space-y-8">
+              <p className="text-xl md:text-2xl font-medium leading-relaxed text-foreground tracking-wide">
+                I'm Alejandro Reyna, a full-stack engineer from Guatemala dedicated to writing elegant, high-performance code.
+              </p>
+              <p className="text-base text-neutral-400 leading-relaxed font-body">
+                For over 12 years, I've been architecting digital solutions. I believe programming is more than solving problems—it's about creating scalable systems wrapped in visually stunning, intuitive interfaces. From complex database architectures to micro-interactions on the frontend, every layer matters.
+              </p>
+
+              <div className="grid sm:grid-cols-2 gap-8 border-t border-secondary/50 pt-8 mt-8">
+                {/* Global Scope */}
+                <div>
+                  <h3 className="text-sm font-bold text-foreground tracking-wider uppercase mb-3 flex items-center gap-2">
+                    <Globe size={16} className="text-neutral-400" /> Global Impact
+                  </h3>
+                  <p className="text-neutral-400 text-sm leading-relaxed">
+                    Working remotely has allowed me to collaborate with teams globally. Proficient in Python, TypeScript, React, Node.js, and Ruby on Rails.
+                  </p>
+                </div>
+
+                {/* Beyond Logic */}
+                <div>
+                  <h3 className="text-sm font-bold text-foreground tracking-wider uppercase mb-3 flex items-center gap-2">
+                    <BrainCircuit size={16} className="text-neutral-400" /> Human Side
+                  </h3>
+                  <p className="text-neutral-400 text-sm leading-relaxed">
+                    When I'm not writing code, you can find me making music, hanging with my cat, or doing BMX. I champion clear communication and empathy.
+                  </p>
+                </div>
               </div>
             </div>
-          </div>
+          </motion.div>
 
-          {/* Content Section */}
-          <div className="space-y-6">
-            {/* Philosophy */}
-            <div>
-              <h3 className="text-2xl font-bold text-gray-900 mb-3 flex items-center gap-2">
-                <Palette className="text-primary" size={24} /> The Philosophy
-              </h3>
-              <p className="text-lg text-gray-700 leading-relaxed">
-                I&apos;m Alejandro Reyna, a full-stack developer from Guatemala who believes that
-                programming is more than just solving problems—it&apos;s an art form. For over 12 years,
-                I&apos;ve been writing code that doesn&apos;t just work, but sings.
-              </p>
-            </div>
+          {/* Image Section */}
+          <motion.div 
+            initial={{ opacity: 0, x: 30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.6, delay: 0.4 }}
+            viewport={{ once: true }}
+            className="lg:col-span-5 h-full min-h-[400px] relative border border-secondary overflow-hidden group"
+          >
+            <div className="absolute inset-0 bg-[#092e20]/10 mix-blend-overlay z-10 group-hover:bg-transparent transition-colors duration-500"></div>
+            <img
+              src="/images/about/me.jpg"
+              alt="Alejandro Reyna"
+              className="w-full h-full object-cover filter grayscale contrast-125 group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700"
+            />
+            {/* Tech grid overlay */}
+            <div className="absolute inset-0 z-20 opacity-15 pointer-events-none mix-blend-screen" style={{ backgroundImage: 'linear-gradient(rgba(255, 255, 255, 0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, 0.1) 1px, transparent 1px)', backgroundSize: '20px 20px' }}></div>
+          </motion.div>
 
-            {/* Journey */}
-            <div>
-              <h3 className="text-2xl font-bold text-gray-900 mb-3 flex items-center gap-2">
-                <Rocket className="text-primary" size={24} /> The Journey
-              </h3>
-              <p className="text-lg text-gray-700 leading-relaxed">
-                From Guatemala to the global tech community, my journey has been fueled by curiosity
-                and a commitment to continuous learning. With expertise in Python, JavaScript, TypeScript,
-                and Ruby, I&apos;ve built solutions across the full stack.
-              </p>
-            </div>
-
-            {/* Human Side */}
-            <div>
-              <h3 className="text-2xl font-bold text-gray-900 mb-3 flex items-center gap-2">
-                <Music className="text-primary" size={24} /> The Human Side
-              </h3>
-              <p className="text-lg text-gray-700 leading-relaxed">
-                When I&apos;m not crafting code, you&apos;ll find me making music (a passion since I was 14) or
-                spending time with my cat. Or maybe doing skateboarding or BMX. I believe in leaving the world better than we found it, championing
-                teamwork, and ensuring everyone gets a fair chance to succeed.
-              </p>
-            </div>
-          </div>
         </div>
 
-        {/* Stats Grid - Muted, melancholic colors */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-16">
-          <div className="bg-gray-50 border-2 border-gray-300 rounded-lg p-6 text-center hover:border-gray-500 hover:shadow-lg transition-all">
-            <div className="text-4xl font-bold text-gray-800 mb-2">12+</div>
-            <div className="text-gray-600 font-medium">Years Experience</div>
+        {/* Stats Grid - Tech Block Style */}
+        <motion.div 
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.2 }}
+          viewport={{ once: true }}
+          className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-24"
+        >
+          <div className="bg-secondary/15 border border-secondary p-8 flex flex-col items-start hover:border-[#092e20] transition-colors duration-300">
+            <div className="text-4xl md:text-5xl font-heading font-bold text-foreground mb-2">12<span className="text-neutral-400">+</span></div>
+            <div className="font-medium text-xs uppercase tracking-[0.2em] text-neutral-400">Years Exp</div>
           </div>
-          <div className="bg-gray-50 border-2 border-gray-300 rounded-lg p-6 text-center hover:border-gray-500 hover:shadow-lg transition-all">
-            <div className="text-4xl font-bold text-gray-800 mb-2">86+</div>
-            <div className="text-gray-600 font-medium">Projects</div>
+          <div className="bg-secondary/15 border border-secondary p-8 flex flex-col items-start hover:border-[#092e20] transition-colors duration-300">
+            <div className="text-4xl md:text-5xl font-heading font-bold text-foreground mb-2">86<span className="text-neutral-400">+</span></div>
+            <div className="font-medium text-xs uppercase tracking-[0.2em] text-neutral-400">Projects</div>
           </div>
-          <div className="bg-gray-50 border-2 border-gray-300 rounded-lg p-6 text-center hover:border-gray-500 hover:shadow-lg transition-all">
-            <div className="text-4xl font-bold text-gray-800 mb-2">4</div>
-            <div className="text-gray-600 font-medium">Tech Stacks</div>
+          <div className="bg-secondary/15 border border-secondary p-8 flex flex-col items-start hover:border-[#092e20] transition-colors duration-300">
+            <div className="text-4xl md:text-5xl font-heading font-bold text-foreground mb-2">4</div>
+            <div className="font-medium text-xs uppercase tracking-[0.2em] text-neutral-400">Core Stacks</div>
           </div>
-          <div className="bg-gray-50 border-2 border-gray-300 rounded-lg p-6 text-center hover:border-gray-500 hover:shadow-lg transition-all">
-            <div className="text-4xl font-bold text-gray-800 mb-2">∞</div>
-            <div className="text-gray-600 font-medium">Learning</div>
+          <div className="bg-secondary/15 border border-secondary p-8 flex flex-col items-start hover:border-[#092e20] transition-colors duration-300">
+            <div className="text-4xl md:text-5xl font-heading font-bold text-foreground mb-2">∞</div>
+            <div className="font-bold text-xs uppercase tracking-[0.2em] text-neutral-300">Learning</div>
           </div>
-        </div>
+        </motion.div>
 
         {/* Vision & CTA */}
-        <div className="text-center bg-gradient-to-br from-gray-50 to-gray-100 border-2 border-gray-200 rounded-2xl p-12 hover:border-primary hover:shadow-xl transition-all">
-          <h3 className="text-3xl font-bold text-gray-900 mb-4">
-            Fascinated by entrepreneurship <Rocket className="inline text-primary" size={20} /> science <Telescope className="inline text-primary" size={20} /> and education <BookOpen className="inline text-primary" size={20} />
-          </h3>
-          <p className="text-xl text-gray-700 mb-8 max-w-2xl mx-auto">
-            I&apos;m always looking for opportunities to blend technology with purpose.
-            If you want to create a better version of the world, let&apos;s talk.
-          </p>
-          <div className="tooltip tooltip-top" data-tip="Coming Soon">
-            <button
-              className="btn btn-primary btn-lg gap-2 text-white inline-flex items-center"
-            >
-              Read My Full Story
-              <ArrowRight size={20} />
-            </button>
+        <motion.div 
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.4 }}
+          viewport={{ once: true }}
+          className="bg-secondary/15 border border-secondary p-10 md:p-16 flex flex-col md:flex-row items-center justify-between gap-10"
+        >
+          <div className="max-w-2xl">
+            <h3 className="text-2xl md:text-3xl font-heading font-bold mb-4 text-foreground uppercase tracking-tight">
+              Fascinated by the intersection of <br/>
+              <span className="text-white">entrepreneurship, science, & education.</span>
+            </h3>
+            <p className="text-base text-neutral-400">
+              Constantly seeking opportunities to blend advanced technology with meaningful purpose. Ready to architect the next big thing?
+            </p>
           </div>
-        </div>
+          <button className="bg-transparent border border-[#092e20] text-white px-8 py-4 font-bold tracking-widest uppercase text-sm hover:bg-[#092e20] hover:text-white transition-all duration-300 flex items-center gap-3 shrink-0">
+            Read Full Story
+            <ArrowRight size={18} />
+          </button>
+        </motion.div>
       </div>
     </section>
   )

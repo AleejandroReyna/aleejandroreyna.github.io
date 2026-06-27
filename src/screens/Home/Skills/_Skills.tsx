@@ -1,147 +1,146 @@
-import { Code, Database, Layers, Clock } from "lucide-react";
+import { Code, Database, Layers, Terminal } from "lucide-react";
 
 export const Skills = () => {
     return (
-        <section className="bg-black py-24 relative overflow-hidden" id="skills">
-            {/* Background Pattern */}
-            <div className="absolute inset-0 opacity-5">
-                <div className="absolute inset-0" style={{
-                    backgroundImage: 'radial-gradient(circle, currentColor 1px, transparent 1px)',
-                    backgroundSize: '50px 50px'
-                }}></div>
-            </div>
-
-            <div className="mx-auto max-w-7xl px-4 relative z-10">
+        <section className="bg-background py-32 relative overflow-hidden" id="skills">
+            {/* Tech background elements */}
+            <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-secondary to-transparent"></div>
+            
+            <div className="mx-auto max-w-7xl px-6 relative z-10 reveal">
+                
                 {/* Heading */}
-                <div className="text-center mb-16">
-                    <h2 className="text-5xl lg:text-6xl font-bold text-white mb-4">
-                        Skills & Expertise
+                <div className="mb-20 flex flex-col md:flex-row md:items-end justify-between gap-6 border-b border-secondary/50 pb-8">
+                  <div>
+                    <span className="text-neutral-400 text-xs font-bold tracking-[0.2em] uppercase mb-4 block flex items-center gap-2">
+                      <Terminal size={14} /> Core Competencies
+                    </span>
+                    <h2 className="text-4xl md:text-5xl font-heading font-bold text-foreground tracking-tight uppercase">
+                      Technical <span className="text-white">Expertise</span>
                     </h2>
-                    <p className="text-xl text-gray-400 max-w-3xl mx-auto">
-                        12+ years of crafting solutions across the full stack. These are the tools and technologies
-                        I wield to turn ideas into elegant, functional reality.
+                  </div>
+                  <div className="max-w-md hidden md:block">
+                    <p className="text-sm text-neutral-400 font-medium uppercase tracking-widest text-right">
+                      A curated selection of technologies mastered over 12 years of architecting scalable applications.
                     </p>
+                  </div>
                 </div>
 
                 {/* Skills Grid */}
-                <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
-
-                    {/* Skill Card 1 - Full-Stack Development */}
-                    <div className="card bg-gray-900 border border-gray-800 hover:border-gray-600 transition-all">
-                        <div className="card-body">
-                            <div className="flex items-center gap-4 mb-4">
-                                <div className="w-16 h-16 rounded-lg bg-gray-800 flex items-center justify-center">
-                                    <Layers size={32} className="text-gray-400" />
-                                </div>
-                                <div>
-                                    <h3 className="text-xl font-bold text-white">Full-Stack Development</h3>
-                                    <div className="flex items-center gap-2 text-sm text-gray-500">
-                                        <Clock size={14} />
-                                        <span>12+ years</span>
-                                    </div>
-                                </div>
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8 relative">
+                    
+                    {/* Skill Group 1: Frontend & Backend */}
+                    <div className="group bg-secondary/15 border border-secondary hover:border-[#092e20] p-10 flex flex-col items-start transition-all duration-300 relative">
+                        <div className="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-100 transition-opacity">
+                            <Layers size={64} className="text-neutral-500" />
+                        </div>
+                        <div className="mb-8 p-3 bg-secondary/40 border border-secondary/80 text-white group-hover:bg-[#092e20] group-hover:border-[#092e20] transition-colors duration-300">
+                            <Layers size={24} />
+                        </div>
+                        <h3 className="text-2xl font-heading font-bold text-foreground tracking-tight mb-2 uppercase">Full-Stack Core</h3>
+                        <div className="text-neutral-300 text-[10px] font-bold uppercase tracking-[0.2em] mb-10 bg-secondary/60 px-2.5 py-1 border border-secondary/30">
+                            12+ Years Experience
+                        </div>
+                        
+                        <div className="w-full space-y-8 relative z-10">
+                            <div>
+                                <p className="text-foreground text-xs font-bold uppercase tracking-widest mb-4 flex items-center gap-2">
+                                  <span className="w-2 h-2 bg-[#092e20]"></span> Frontend
+                                </p>
+                                <ul className="space-y-3 font-medium text-neutral-400 text-sm">
+                                    <li className="flex items-center gap-2 hover:text-white transition-colors"><span className="text-neutral-600">/</span> TypeScript</li>
+                                    <li className="flex items-center gap-2 hover:text-white transition-colors"><span className="text-neutral-600">/</span> React</li>
+                                    <li className="flex items-center gap-2 hover:text-white transition-colors"><span className="text-neutral-600">/</span> Next.js</li>
+                                    <li className="flex items-center gap-2 hover:text-white transition-colors"><span className="text-neutral-600">/</span> Vue</li>
+                                </ul>
                             </div>
-
-                            <p className="text-gray-400 mb-4">
-                                End-to-end application architecture, from database design to user interfaces.
-                                Building scalable, maintainable solutions that work beautifully.
-                            </p>
-
-                            <div className="space-y-3">
-                                <div>
-                                    <p className="text-sm text-gray-500 mb-2">Frontend:</p>
-                                    <div className="flex flex-wrap gap-2">
-                                        <span className="badge bg-gray-800 border-gray-700 text-gray-400">TypeScript</span>
-                                        <span className="badge bg-gray-800 border-gray-700 text-gray-400">React</span>
-                                        <span className="badge bg-gray-800 border-gray-700 text-gray-400">React Native</span>
-                                        <span className="badge bg-gray-800 border-gray-700 text-gray-400">Next</span>
-                                        <span className="badge bg-gray-800 border-gray-700 text-gray-400">Vue</span>
-                                        <span className="badge bg-gray-800 border-gray-700 text-gray-400">Electron</span>
-                                    </div>
-                                </div>
-                                <div>
-                                    <p className="text-sm text-gray-500 mb-2">Backend:</p>
-                                    <div className="flex flex-wrap gap-2">
-                                        <span className="badge bg-gray-800 border-gray-700 text-gray-400">Python</span>
-                                        <span className="badge bg-gray-800 border-gray-700 text-gray-400">Django</span>
-                                        <span className="badge bg-gray-800 border-gray-700 text-gray-400">Node</span>
-                                        <span className="badge bg-gray-800 border-gray-700 text-gray-400">Nest</span>
-                                        <span className="badge bg-gray-800 border-gray-700 text-gray-400">Ruby</span>
-                                        <span className="badge bg-gray-800 border-gray-700 text-gray-400">Rails</span>
-                                        <span className="badge bg-gray-800 border-gray-700 text-gray-400">PHP</span>
-                                        <span className="badge bg-gray-800 border-gray-700 text-gray-400">Laravel</span>
-                                    </div>
-                                </div>
+                            <div className="w-full h-[1px] bg-secondary/50"></div>
+                            <div>
+                                <p className="text-foreground text-xs font-bold uppercase tracking-widest mb-4 flex items-center gap-2">
+                                  <span className="w-2 h-2 bg-[#092e20]"></span> Backend
+                                </p>
+                                <ul className="space-y-3 font-medium text-neutral-400 text-sm">
+                                    <li className="flex items-center gap-2 hover:text-white transition-colors"><span className="text-neutral-600">/</span> Python & Django</li>
+                                    <li className="flex items-center gap-2 hover:text-white transition-colors"><span className="text-neutral-600">/</span> Node.js</li>
+                                    <li className="flex items-center gap-2 hover:text-white transition-colors"><span className="text-neutral-600">/</span> Ruby on Rails</li>
+                                </ul>
                             </div>
                         </div>
                     </div>
 
-                    {/* Skill Card 2 - API Design */}
-                    <div className="card bg-gray-900 border border-gray-800 hover:border-gray-600 transition-all">
-                        <div className="card-body">
-                            <div className="flex items-center gap-4 mb-4">
-                                <div className="w-16 h-16 rounded-lg bg-gray-800 flex items-center justify-center">
-                                    <Code size={32} className="text-gray-400" />
-                                </div>
-                                <div>
-                                    <h3 className="text-xl font-bold text-white">API Design & Integration</h3>
-                                    <div className="flex items-center gap-2 text-sm text-gray-500">
-                                        <Clock size={14} />
-                                        <span>9+ years</span>
-                                    </div>
-                                </div>
+                    {/* Skill Group 2: API Architecture */}
+                    <div className="group bg-secondary/15 border border-secondary hover:border-[#092e20] p-10 flex flex-col items-start transition-all duration-300 relative">
+                        <div className="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-100 transition-opacity">
+                            <Code size={64} className="text-neutral-500" />
+                        </div>
+                        <div className="mb-8 p-3 bg-secondary/40 border border-secondary/80 text-white group-hover:bg-[#092e20] group-hover:border-[#092e20] transition-colors duration-300">
+                            <Code size={24} />
+                        </div>
+                        <h3 className="text-2xl font-heading font-bold text-foreground tracking-tight mb-2 uppercase">Architecture</h3>
+                        <div className="text-neutral-300 text-[10px] font-bold uppercase tracking-[0.2em] mb-10 bg-secondary/60 px-2.5 py-1 border border-secondary/30">
+                            9+ Years Experience
+                        </div>
+                        
+                        <div className="w-full space-y-8 relative z-10">
+                            <div>
+                                <p className="text-foreground text-xs font-bold uppercase tracking-widest mb-4 flex items-center gap-2">
+                                  <span className="w-2 h-2 bg-[#092e20]"></span> Protocols
+                                </p>
+                                <ul className="space-y-3 font-medium text-neutral-400 text-sm">
+                                    <li className="flex items-center gap-2 hover:text-white transition-colors"><span className="text-neutral-600">/</span> RESTful APIs</li>
+                                    <li className="flex items-center gap-2 hover:text-white transition-colors"><span className="text-neutral-600">/</span> GraphQL</li>
+                                    <li className="flex items-center gap-2 hover:text-white transition-colors"><span className="text-neutral-600">/</span> WebSockets</li>
+                                    <li className="flex items-center gap-2 hover:text-white transition-colors"><span className="text-neutral-600">/</span> OAuth & JWT</li>
+                                </ul>
                             </div>
-
-                            <p className="text-gray-400 mb-4">
-                                RESTful and GraphQL API architecture. Designing clean, intuitive interfaces
-                                between systems that scale and perform.
-                            </p>
-
-                            <div className="space-y-3">
-                                <div>
-                                    <p className="text-sm text-gray-500 mb-2">Technologies:</p>
-                                    <div className="flex flex-wrap gap-2">
-                                        <span className="badge bg-gray-800 border-gray-700 text-gray-400">REST</span>
-                                        <span className="badge bg-gray-800 border-gray-700 text-gray-400">GraphQL</span>
-                                        <span className="badge bg-gray-800 border-gray-700 text-gray-400">WebSockets</span>
-                                        <span className="badge bg-gray-800 border-gray-700 text-gray-400">OAuth</span>
-                                    </div>
-                                </div>
+                            <div className="w-full h-[1px] bg-secondary/50"></div>
+                            <div>
+                                <p className="text-foreground text-xs font-bold uppercase tracking-widest mb-4 flex items-center gap-2">
+                                  <span className="w-2 h-2 bg-[#092e20]"></span> Standards
+                                </p>
+                                <ul className="space-y-3 font-medium text-neutral-400 text-sm">
+                                    <li className="flex items-center gap-2 hover:text-white transition-colors"><span className="text-neutral-600">/</span> OpenAPI / Swagger</li>
+                                    <li className="flex items-center gap-2 hover:text-white transition-colors"><span className="text-neutral-600">/</span> JSON:API</li>
+                                    <li className="flex items-center gap-2 hover:text-white transition-colors"><span className="text-neutral-600">/</span> Microservices</li>
+                                </ul>
                             </div>
                         </div>
                     </div>
 
-                    {/* Skill Card 3 - Database & Architecture */}
-                    <div className="card bg-gray-900 border border-gray-800 hover:border-gray-600 transition-all">
-                        <div className="card-body">
-                            <div className="flex items-center gap-4 mb-4">
-                                <div className="w-16 h-16 rounded-lg bg-gray-800 flex items-center justify-center">
-                                    <Database size={32} className="text-gray-400" />
-                                </div>
-                                <div>
-                                    <h3 className="text-xl font-bold text-white">Database & Architecture</h3>
-                                    <div className="flex items-center gap-2 text-sm text-gray-500">
-                                        <Clock size={14} />
-                                        <span>8+ years</span>
-                                    </div>
-                                </div>
+                    {/* Skill Group 3: Database & Data */}
+                    <div className="group bg-secondary/15 border border-secondary hover:border-[#092e20] p-10 flex flex-col items-start transition-all duration-300 relative">
+                        <div className="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-100 transition-opacity">
+                            <Database size={64} className="text-neutral-500" />
+                        </div>
+                        <div className="mb-8 p-3 bg-secondary/40 border border-secondary/80 text-white group-hover:bg-[#092e20] group-hover:border-[#092e20] transition-colors duration-300">
+                            <Database size={24} />
+                        </div>
+                        <h3 className="text-2xl font-heading font-bold text-foreground tracking-tight mb-2 uppercase">Data Systems</h3>
+                        <div className="text-neutral-300 text-[10px] font-bold uppercase tracking-[0.2em] mb-10 bg-secondary/60 px-2.5 py-1 border border-secondary/30">
+                            8+ Years Experience
+                        </div>
+                        
+                        <div className="w-full space-y-8 relative z-10">
+                            <div>
+                                <p className="text-foreground text-xs font-bold uppercase tracking-widest mb-4 flex items-center gap-2">
+                                  <span className="w-2 h-2 bg-[#092e20]"></span> Engines
+                                </p>
+                                <ul className="space-y-3 font-medium text-neutral-400 text-sm">
+                                    <li className="flex items-center gap-2 hover:text-white transition-colors"><span className="text-neutral-600">/</span> PostgreSQL</li>
+                                    <li className="flex items-center gap-2 hover:text-white transition-colors"><span className="text-neutral-600">/</span> MongoDB</li>
+                                    <li className="flex items-center gap-2 hover:text-white transition-colors"><span className="text-neutral-600">/</span> MySQL</li>
+                                    <li className="flex items-center gap-2 hover:text-white transition-colors"><span className="text-neutral-600">/</span> Redis</li>
+                                </ul>
                             </div>
-
-                            <p className="text-gray-400 mb-4">
-                                Database design, optimization, and system architecture. Building data models
-                                that support growth and maintain performance.
-                            </p>
-
-                            <div className="space-y-3">
-                                <div>
-                                    <p className="text-sm text-gray-500 mb-2">Databases:</p>
-                                    <div className="flex flex-wrap gap-2">
-                                        <span className="badge bg-gray-800 border-gray-700 text-gray-400">PostgreSQL</span>
-                                        <span className="badge bg-gray-800 border-gray-700 text-gray-400">MongoDB</span>
-                                        <span className="badge bg-gray-800 border-gray-700 text-gray-400">MySQL</span>
-                                        <span className="badge bg-gray-800 border-gray-700 text-gray-400">Redis</span>
-                                    </div>
-                                </div>
+                            <div className="w-full h-[1px] bg-secondary/50"></div>
+                            <div>
+                                <p className="text-foreground text-xs font-bold uppercase tracking-widest mb-4 flex items-center gap-2">
+                                  <span className="w-2 h-2 bg-[#092e20]"></span> Infrastructure
+                                </p>
+                                <ul className="space-y-3 font-medium text-neutral-400 text-sm">
+                                    <li className="flex items-center gap-2 hover:text-white transition-colors"><span className="text-neutral-600">/</span> AWS (EC2, S3, RDS)</li>
+                                    <li className="flex items-center gap-2 hover:text-white transition-colors"><span className="text-neutral-600">/</span> Docker</li>
+                                    <li className="flex items-center gap-2 hover:text-white transition-colors"><span className="text-neutral-600">/</span> CI/CD</li>
+                                </ul>
                             </div>
                         </div>
                     </div>
@@ -149,19 +148,19 @@ export const Skills = () => {
                 </div>
 
                 {/* Additional Skills Section */}
-                <div className="mt-16 text-center">
-                    <h3 className="text-2xl font-bold text-white mb-8">Also Experienced With</h3>
-                    <div className="flex flex-wrap gap-3 justify-center max-w-4xl mx-auto">
-                        <span className="badge badge-lg bg-gray-800 border-gray-700 text-gray-400">Docker</span>
-                        <span className="badge badge-lg bg-gray-800 border-gray-700 text-gray-400">AWS</span>
-                        <span className="badge badge-lg bg-gray-800 border-gray-700 text-gray-400">Git</span>
-                        <span className="badge badge-lg bg-gray-800 border-gray-700 text-gray-400">CI/CD</span>
-                        <span className="badge badge-lg bg-gray-800 border-gray-700 text-gray-400">Agile</span>
-                        <span className="badge badge-lg bg-gray-800 border-gray-700 text-gray-400">TDD</span>
-                        <span className="badge badge-lg bg-gray-800 border-gray-700 text-gray-400">Microservices</span>
-                        <span className="badge badge-lg bg-gray-800 border-gray-700 text-gray-400">Tailwind CSS</span>
+                <div className="mt-24 pt-12 border-t border-secondary/50">
+                    <h3 className="text-sm font-bold text-foreground mb-8 uppercase tracking-[0.2em] flex items-center gap-2">
+                      <span className="w-2 h-2 bg-[#092e20]"></span> Complementary Toolkit
+                    </h3>
+                    <div className="flex flex-wrap gap-4">
+                        {['Docker', 'AWS', 'Git', 'CI/CD', 'Agile', 'TDD', 'Figma', 'Tailwind CSS'].map(skill => (
+                            <span key={skill} className="px-4 py-2 border border-secondary text-neutral-400 font-bold text-xs uppercase tracking-widest hover:border-[#092e20] hover:text-white transition-colors duration-300 hover:bg-[#092e20]/20">
+                                {skill}
+                            </span>
+                        ))}
                     </div>
                 </div>
+
             </div>
         </section>
     );

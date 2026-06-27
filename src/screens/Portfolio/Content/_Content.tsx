@@ -7,13 +7,13 @@ interface Props {
 
 export const Content = ({ searchParams }: Props) => {
   return (
-    <section className="py-16">
-      <div className="mx-auto max-w-md md:max-w-7xl lg:max-w-7xl">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-          <div>
+    <section className="bg-background pb-32 relative overflow-hidden">
+      <div className="mx-auto max-w-7xl px-6 relative z-10">
+        <div className="grid grid-cols-1 lg:grid-cols-4 gap-12 items-start">
+          <div className="lg:col-span-1">
             <Form />
           </div>
-          <div className="col-span-2">
+          <div className="lg:col-span-3">
             <List searchParams={searchParams} />
           </div>
         </div>

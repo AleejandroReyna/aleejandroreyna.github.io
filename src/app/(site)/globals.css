@@ -1,48 +1,122 @@
+@import url('https://fonts.googleapis.com/css2?family=Archivo:wght@300;400;500;600;700&family=Space+Grotesk:wght@300;400;500;600;700&display=swap');
+
 @import "tailwindcss";
 @plugin "daisyui";
 
 @plugin "daisyui/theme" {
   name: "custom";
   default: true;
-  prefersdark: false;
-  color-scheme: light;
+  prefersdark: true;
+  color-scheme: dark;
 
-  --color-primary: #092E20;
-  --color-secondary: #3776AB;
-  --color-accent: #FFD43B;
-  --color-base-100: #ffffff;
-  --color-base-content: #171717;
+  --color-primary: #0a0a0a;
+  --color-secondary: #171717;
+  --color-accent: #092e20;
+  --color-base-100: #000000;
+  --color-base-content: #ffffff;
 }
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
-  --font-outfit: var(--font-outfit);
-  --font-black_ops_one: var(--font-black_ops_one);
+  --background: #000000;
+  --foreground: #ffffff;
+  --font-heading: var(--font-archivo), sans-serif;
+  --font-body: var(--font-space-grotesk), sans-serif;
 }
 
 @theme inline {
-  --color-background: #ffffff;
-  --color-foreground: #171717;
+  --color-background: #000000;
+  --color-foreground: #ffffff;
+  --color-primary: #0a0a0a;
+  --color-secondary: #171717;
+  --color-cta: #092e20;
+  --color-cta-hover: #0e442f;
+  --font-heading: var(--font-heading);
+  --font-body: var(--font-body);
 }
-
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: var(--font-outfit), Arial, Helvetica, sans-serif;
+  font-family: var(--font-body);
+  letter-spacing: -0.02em;
 }
 
 main {
   flex: auto;
 }
 
-.ops {
-  font-family: var(--font-black_ops_one);
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading);
+  letter-spacing: -0.03em;
 }
 
-.btn:hover {
-  background-color: black !important;
-  color: white !important;
-  border-color: black !important;
+/* Liquid Glass Utilities */
+.glass-panel {
+  background: rgba(23, 23, 23, 0.5); /* black-ish instead of slate */
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
 }
+
+/* Elegant Buttons */
+.btn-elegant {
+  background: transparent;
+  color: var(--color-cta);
+  border: 1px solid var(--color-cta);
+  padding: 0.75rem 2rem;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  font-size: 0.875rem;
+  font-family: var(--font-body);
+  font-weight: 500;
+}
+.btn-elegant:hover {
+  background: var(--color-cta);
+  color: var(--foreground);
+  box-shadow: 0 0 20px rgba(9, 46, 32, 0.4); /* #092e20 shadow */
+}
+
+.btn-elegant-solid {
+  background: var(--color-cta);
+  color: var(--foreground);
+  border: 1px solid var(--color-cta);
+  padding: 0.75rem 2rem;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  font-size: 0.875rem;
+  font-family: var(--font-body);
+  font-weight: 500;
+}
+.btn-elegant-solid:hover {
+  background: transparent;
+  color: var(--color-cta);
+}
+
+/* Slow Fade Reveal Animations */
+@layer utilities {
+  .reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 1s cubic-bezier(0.16, 1, 0.3, 1), transform 1s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .reveal.active {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  
+  .reveal-delay-100 { transition-delay: 100ms; }
+  .reveal-delay-200 { transition-delay: 200ms; }
+  .reveal-delay-300 { transition-delay: 300ms; }
+  .reveal-delay-500 { transition-delay: 500ms; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal {
+    transition: none !important;
+    transform: none !important;
+    opacity: 1 !important;
+  }
+}

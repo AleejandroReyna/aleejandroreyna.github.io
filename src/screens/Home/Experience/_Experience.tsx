@@ -1,8 +1,7 @@
 'use client';
 import { useState } from "react";
-import Image from "next/image";
 import type { ExperienceDetail, Company, Media } from "@/payload-types";
-import { ExternalLink, Clock, MapPin, Briefcase, Code2, Building2, CheckCircle2 } from "lucide-react";
+import { ExternalLink, Clock, MapPin, TerminalSquare, GitCommit } from "lucide-react";
 
 interface ExperienceProps {
   experiences: ExperienceDetail[];
@@ -10,12 +9,12 @@ interface ExperienceProps {
 
 function formatDate(dateStr: string): string {
   const date = new Date(dateStr);
-  return date.toLocaleDateString('en-US', { month: 'long', year: 'numeric' });
+  return date.toLocaleDateString('en-US', { month: 'short', year: 'numeric' });
 }
 
 function formatDateShort(dateStr: string): string {
   const date = new Date(dateStr);
-  return date.toLocaleDateString('en-US', { month: 'short', year: 'numeric' });
+  return date.toLocaleDateString('en-US', { year: 'numeric' });
 }
 
 function getCompany(exp: ExperienceDetail): Company | null {
@@ -23,105 +22,72 @@ function getCompany(exp: ExperienceDetail): Company | null {
   return exp.company;
 }
 
-function getLogoUrl(company: Company | null): string | null {
-  if (!company?.logo) return null;
-  if (typeof company.logo === 'string') return null;
-  return (company.logo as Media).url || null;
-}
-
 export const Experience = ({ experiences }: ExperienceProps) => {
   const [activeId, setActiveId] = useState<string>(experiences[0]?.id || '');
   const activeExperience = experiences.find(exp => exp.id === activeId);
   const activeCompany = activeExperience ? getCompany(activeExperience) : null;
-  const activeLogo = getLogoUrl(activeCompany);
-
-  // Extract year for watermark
-  const watermarkYear = activeExperience
-    ? new Date(activeExperience.startDate).getFullYear().toString()
-    : '';
 
   if (experiences.length === 0) return null;
 
-  const stats = [
-    { icon: Clock, label: "Years of Experience", value: new Date().getFullYear() - new Date("2013").getFullYear() + "+" },
-    { icon: Building2, label: "Companies", value: `${experiences.length}` },
-    { icon: Code2, label: "Technologies", value: `30+` },
-    { icon: Briefcase, label: "Projects Delivered", value: "50+" },
-  ];
-
-
   return (
-    <section className="py-24 bg-gray-100 relative overflow-hidden">
-      {/* Background Pattern */}
-      <div className="absolute inset-0 opacity-5">
-        <div className="absolute inset-0" style={{
-          backgroundImage: 'radial-gradient(circle, #000 1px, transparent 1px)',
-          backgroundSize: '50px 50px'
-        }}></div>
-      </div>
+    <section className="py-32 bg-background relative overflow-hidden" id="experience">
+      {/* Tech grid overlay */}
+      <div className="absolute inset-0 z-0 opacity-10 pointer-events-none" style={{ backgroundImage: 'radial-gradient(#171717 1px, transparent 1px)', backgroundSize: '40px 40px' }}></div>
 
-      <div className="mx-auto max-w-7xl px-4 relative z-10">
+      <div className="mx-auto max-w-7xl px-6 relative z-10 reveal">
 
-        <div className="text-center mb-8">
-          <h2 className="text-5xl lg:text-6xl font-bold text-gray-900 mb-4">
-            Professional Journey
-          </h2>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-            From my first lines of code in 2012 to leading full-stack projects today,
-            each role has shaped how I approach problems and build solutions.
-          </p>
+        {/* Heading */}
+        <div className="mb-20 flex flex-col md:flex-row md:items-end justify-between gap-6 border-b border-secondary/50 pb-8">
+          <div>
+            <span className="text-neutral-400 text-xs font-bold tracking-[0.2em] uppercase mb-4 block flex items-center gap-2">
+              <TerminalSquare size={14} /> Execution History
+            </span>
+            <h2 className="text-4xl md:text-5xl font-heading font-bold text-foreground tracking-tight uppercase">
+              Professional <span className="text-white">Trajectory</span>
+            </h2>
+          </div>
+          <div className="w-16 h-1 bg-[#092e20] shadow-[0_0_10px_#092e20]"></div>
         </div>
 
-        {/* Stats Bar */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-16 max-w-4xl mx-auto">
-          {stats.map((stat) => (
-            <div
-              key={stat.label}
-              className="bg-white/80 backdrop-blur-sm border border-gray-200 rounded-xl p-5 text-center shadow-sm hover:shadow-md hover:border-primary/30 transition-all duration-300"
-            >
-              <stat.icon className="w-5 h-5 text-primary mx-auto mb-2" />
-              <div className="text-3xl font-bold text-gray-900 mb-1">{stat.value}</div>
-              <div className="text-xs text-gray-500 uppercase tracking-wider font-medium">{stat.label}</div>
-            </div>
-          ))}
-        </div>
-
-
-        <div className="flex flex-col lg:flex-row gap-8">
+        <div className="flex flex-col lg:flex-row gap-12 relative">
+          
           {/* Navigation - Left Side */}
           <div className="lg:w-1/3 relative">
-            <div className="absolute left-4 top-4 bottom-4 w-0.5 bg-gray-200" aria-hidden="true" /> {/* Vertical Line */}
+            
+            {/* Timeline Line */}
+            <div className="absolute left-[11px] top-4 bottom-4 w-0.5 bg-secondary/30" />
 
-            <ul className="space-y-6 relative">
+            <ul className="space-y-6 relative z-10">
               {experiences.map((exp) => {
                 const isActive = activeId === exp.id;
                 const company = getCompany(exp);
                 return (
-                  <li key={exp.id} className="relative pl-12 group">
-                    {/* Dot Indicator */}
+                  <li key={exp.id} className="relative group pl-10">
+                    {/* Node Dot */}
                     <div
-                      className={`absolute left-[11px] top-1.5 w-3 h-3 rounded-full border-2 transition-all duration-300 z-10 ${isActive
-                          ? 'border-primary bg-primary scale-125 shadow-[0_0_0_4px_rgba(var(--primary-rgb),0.2)]'
-                          : 'border-gray-300 bg-white group-hover:border-gray-400 group-hover:scale-110'
+                      className={`absolute left-1.5 top-5 -translate-y-1/2 w-4 h-4 transition-all duration-300 z-20 flex items-center justify-center ${isActive
+                          ? 'bg-background'
+                          : 'bg-background'
                         }`}
-                    />
+                    >
+                      <div className={`w-2 h-2 transition-all duration-300 ${isActive ? 'bg-[#092e20] shadow-[0_0_8px_#092e20]' : 'bg-secondary/50 group-hover:bg-[#092e20]/50'}`}></div>
+                    </div>
 
                     <button
                       onClick={() => setActiveId(exp.id)}
-                      className={`text-left w-full transition-all duration-300 rounded-lg p-3 -ml-3 ${isActive
-                          ? 'bg-white shadow-sm ring-1 ring-gray-200/50'
-                          : 'hover:bg-white/50 hover:shadow-sm'
+                      className={`text-left w-full transition-all duration-300 py-4 px-6 border ${isActive
+                          ? 'bg-secondary/15 border-[#092e20]'
+                          : 'bg-transparent border-transparent hover:border-secondary/50 hover:bg-secondary/5'
                         }`}
                     >
-                      <div className={`font-bold text-lg leading-tight mb-0.5 transition-colors ${isActive ? 'text-primary' : 'text-gray-900 group-hover:text-gray-700'
-                        }`}>
+                      <div className={`text-[10px] font-bold uppercase tracking-widest mb-2 transition-colors duration-300 ${isActive ? 'text-white' : 'text-neutral-400'}`}>
+                        {formatDateShort(exp.startDate)} — {exp.endDate ? formatDateShort(exp.endDate) : 'Present'}
+                      </div>
+                      <div className={`font-heading font-bold text-xl tracking-tight transition-colors duration-300 mb-1 uppercase ${isActive ? 'text-foreground' : 'text-foreground/70'}`}>
                         {company?.name || 'Company'}
                       </div>
-                      <div className="text-sm font-medium text-gray-700 mb-1">
+                      <div className="font-medium text-xs text-neutral-400 tracking-widest uppercase">
                         {exp.role}
-                      </div>
-                      <div className="text-xs text-gray-500 font-mono uppercase tracking-wide">
-                        {formatDateShort(exp.startDate)}
                       </div>
                     </button>
                   </li>
@@ -130,91 +96,72 @@ export const Experience = ({ experiences }: ExperienceProps) => {
             </ul>
           </div>
 
-          {/* Content - Right Side (Sticky) */}
+          {/* Content - Right Side */}
           <div className="lg:w-2/3">
-            <div className="lg:sticky lg:top-24">
+            <div className="lg:sticky lg:top-32 transition-all duration-500">
               {activeExperience && (
-                <article className="relative bg-white border border-gray-200 rounded-2xl overflow-hidden shadow-lg">
-                  {/* Primary accent bar */}
-                  <div className="h-1.5 w-full bg-primary" />
+                <article className="bg-secondary/15 border border-secondary p-8 md:p-12 relative overflow-hidden animate-in fade-in slide-in-from-bottom-4 duration-500">
+                  
+                  <div className="absolute top-0 right-0 w-24 h-24 bg-secondary/10 blur-2xl pointer-events-none"></div>
 
-                  {/* Watermark Year */}
-                  <div className="absolute top-8 right-6 text-[8rem] font-black text-gray-900/[0.03] leading-none select-none pointer-events-none">
-                    {watermarkYear}
-                  </div>
-
-                  <div className="p-8 relative">
+                  <div className="relative z-10">
                     {/* Header */}
-                    <div className="flex justify-between items-start mb-6 pb-6 border-b border-gray-100">
-
+                    <div className="flex flex-col xl:flex-row xl:justify-between xl:items-start gap-6 mb-12 border-b border-secondary/50 pb-8">
                       <div>
-                        <h3 className="text-3xl font-bold text-gray-900 mb-1">
+                        <h3 className="text-3xl md:text-5xl font-heading font-bold text-foreground mb-4 tracking-tight uppercase">
                           {activeCompany?.name || 'Company'}
                         </h3>
-                        <p className="text-lg text-primary font-semibold mb-3">
+                        <div className="inline-flex items-center gap-2 bg-secondary/30 text-white px-3 py-1 text-sm font-bold tracking-widest uppercase mb-6 border border-[#092e20]/30">
+                          <GitCommit size={14} />
                           {activeExperience.role}
-                        </p>
-                        <div className="flex flex-wrap items-center gap-3 text-sm text-gray-500">
-                          <span className="flex items-center gap-1.5 bg-gray-100 px-3 py-1 rounded-full">
-                            <Clock size={13} />
-                            {formatDate(activeExperience.startDate)}
-                            {' — '}
-                            {activeExperience.endDate
-                              ? formatDate(activeExperience.endDate)
-                              : 'Present'}
+                        </div>
+                        <div className="flex flex-wrap gap-6 text-xs font-bold text-neutral-400 tracking-widest uppercase">
+                          <span className="flex items-center gap-2">
+                            <Clock size={14} className="text-neutral-400" />
+                            {formatDate(activeExperience.startDate)} — {activeExperience.endDate ? formatDate(activeExperience.endDate) : 'Present'}
                           </span>
-                          <span className="flex items-center gap-1.5 bg-gray-100 px-3 py-1 rounded-full">
-                            <MapPin size={13} />
-                            {activeExperience.location === 'remote' ? 'Remote' : 'On-site'}
+                          <span className="flex items-center gap-2">
+                            <MapPin size={14} className="text-neutral-400" />
+                            {activeExperience.location === 'remote' ? 'Remote' : 'On-Site'}
                           </span>
                         </div>
                       </div>
+                      
                       {activeCompany?.url && (
                         <a
                           href={activeCompany.url}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="btn btn-sm btn-ghost text-gray-700 border border-gray-300 hover:border-primary hover:text-primary gap-2 shrink-0"
+                          className="bg-transparent border border-secondary text-neutral-400 px-6 py-3 font-bold tracking-widest uppercase text-xs hover:border-[#092e20] hover:bg-[#092e20] hover:text-white transition-all duration-300 shrink-0 flex items-center gap-2"
                         >
-                          Visit
+                          Visit System <ExternalLink size={14} />
                         </a>
                       )}
                     </div>
 
                     {/* Rich Text Content */}
                     {activeExperience.content && (
-                      <div className="text-gray-700 mb-8 text-lg leading-relaxed">
+                      <div className="text-neutral-400 font-medium mb-12 text-base md:text-lg leading-relaxed space-y-6">
                         {renderRichText(activeExperience.content)}
                       </div>
                     )}
 
                     {/* Achievements */}
                     {activeExperience.achievements && activeExperience.achievements.length > 0 && (
-                      <div>
-                        <h4 className="text-sm font-bold text-gray-500 uppercase tracking-wider mb-4">
-                          Key Achievements
+                      <div className="bg-secondary/10 p-8 border border-secondary/50 relative group hover:border-[#092e20] transition-colors duration-300">
+                        <div className="absolute top-0 left-0 w-2 h-2 bg-[#092e20] opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                        <h4 className="font-bold text-foreground uppercase tracking-widest text-sm mb-6 flex items-center gap-3">
+                          <span className="w-2 h-2 bg-[#092e20]"></span>
+                          Key Executions
                         </h4>
-                        <ul className="space-y-3">
+                        <ul className="space-y-4">
                           {activeExperience.achievements.map((item) => (
-                            <li key={item.id} className="flex items-start gap-3 text-gray-700">
-                              <CheckCircle2 size={18} className="text-primary mt-0.5 shrink-0" />
+                            <li key={item.id} className="flex items-start gap-4 text-neutral-400 font-medium leading-relaxed text-sm md:text-base">
+                              <span className="text-neutral-500 mt-1 text-[10px]">■</span>
                               <span>{item.achievement}</span>
                             </li>
                           ))}
                         </ul>
-                      </div>
-                    )}
-
-                    {/* Company Logo - Bottom Right */}
-                    {activeLogo && (
-                      <div className="absolute bottom-6 right-6 w-20 h-20 opacity-80 pointer-events-none select-none">
-                        <Image
-                          src={activeLogo}
-                          alt={activeCompany?.name || ''}
-                          width={80}
-                          height={80}
-                          className="object-contain w-full h-full"
-                        />
                       </div>
                     )}
                   </div>
@@ -228,7 +175,6 @@ export const Experience = ({ experiences }: ExperienceProps) => {
   );
 };
 
-// Simple rich text renderer for Lexical content
 function renderRichText(content: ExperienceDetail['content']) {
   if (!content?.root?.children) return null;
   return (

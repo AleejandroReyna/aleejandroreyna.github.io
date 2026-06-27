@@ -4,6 +4,7 @@ import { getPayload } from "payload"
 import config from "@payload-config"
 import * as Icons from "@icons-pack/react-simple-icons"
 import { Technology, Media } from "@/payload-types"
+import { ArrowRight } from "lucide-react"
 
 interface Props {
   searchParams?: { [key: string]: string | string[] | undefined };
@@ -41,60 +42,73 @@ export const List = async ({ searchParams }: Props) => {
   return (
     <section>
       {result.docs.length === 0 && (
-          <p>No projects found matching the selected filters.</p>
+          <p className="text-neutral-400 font-medium bg-secondary/10 border border-secondary p-8 text-center uppercase tracking-widest text-xs">No projects found matching the selected filters.</p>
       )}
 
       {result.docs.map((project) => {
-        return (
-          <article key={project.id} className="card lg:card-side bg-base-100 shadow-sm mb-4">
-            <figure className="relative min-w-[400px]">
+         const releaseYear = project.releaseDate ? new Date(project.releaseDate).getFullYear() : ''
+         
+         return (
+          <article key={project.id} className="group bg-secondary/15 border border-secondary hover:border-[#092e20] transition-colors duration-300 relative flex flex-col md:flex-row mb-8 overflow-hidden">
+            <div className="absolute top-0 left-0 w-2 h-2 bg-[#092e20] opacity-0 group-hover:opacity-100 transition-opacity"></div>
+            
+            <figure className="relative md:w-2/5 min-h-[240px] bg-secondary/35 border-b md:border-b-0 md:border-r border-secondary group-hover:border-[#092e20] transition-colors duration-300 overflow-hidden">
               {project.thumbnail && typeof project.thumbnail !== 'string' ? (
-                 <Image
+                 <img
                     src={(project.thumbnail as Media).url!}
                     alt={project.name}
-                    width={400}
-                    height={250}
-                    className="object-cover h-full"
+                    className="object-cover h-full w-full grayscale contrast-125 opacity-60 group-hover:grayscale-0 group-hover:opacity-100 group-hover:scale-105 transition-all duration-500 mix-blend-luminosity group-hover:mix-blend-normal"
                  />
               ) : (
                 <img
                   src="https://place-hold.it/400x250"
                   alt="Placeholder"
-                  className="object-cover h-full"
+                  className="object-cover h-full w-full grayscale contrast-125 opacity-60 group-hover:grayscale-0 group-hover:opacity-100 group-hover:scale-105 transition-all duration-500 mix-blend-luminosity group-hover:mix-blend-normal"
                 />
               )}
-            </figure>
-            <div className="card-body">
-              <h2 className="card-title">{project.name}</h2>
-              {project.company && typeof project.company !== 'string' && (
-                  <p className="text-sm text-gray-500">{project.company.name}</p>
+              {/* Tech overlay pattern */}
+              <div className="absolute inset-0 z-10 opacity-20 pointer-events-none mix-blend-overlay" style={{ backgroundImage: 'linear-gradient(rgba(255, 255, 255, 0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, 0.1) 1px, transparent 1px)', backgroundSize: '10px 10px' }}></div>
+              
+              {releaseYear && (
+                <div className="absolute top-4 right-4 z-20">
+                  <span className="px-2 py-1 bg-background/80 border border-[#092e20] text-[10px] font-bold text-white uppercase tracking-widest">{releaseYear}</span>
+                </div>
               )}
+            </figure>
+            
+            <div className="p-8 flex-grow flex flex-col justify-between relative z-10 bg-background/50 md:w-3/5">
+              <div>
+                <h2 className="text-2xl font-heading font-bold text-foreground mb-1 tracking-tight group-hover:text-white transition-colors duration-300">{project.name}</h2>
+                {project.company && typeof project.company !== 'string' && (
+                    <p className="text-xs font-medium text-neutral-400 mb-6 tracking-widest uppercase">Client // {project.company.name}</p>
+                )}
+              </div>
 
-              <strong className="mt-4">Stack: </strong>
-              <div className="flex flex-wrap gap-2">
+              <div className="mt-6 pt-6 border-t border-secondary/50 flex flex-wrap gap-4">
                 {project.technologies?.map((techInput) => {
                     const tech = techInput as Technology
                     if (tech.icon) {
                         const IconComponent = (Icons as any)[tech.icon]
                         if (IconComponent) {
-                            return <IconComponent key={tech.id} color="default" title={tech.name} />
+                            return <div key={tech.id} className="text-neutral-400 group-hover:text-foreground transition-colors duration-300"><IconComponent size={20} title={tech.name} /></div>
                         }
                     }
-                    return <span key={tech.id} className="badge badge-neutral">{tech.name}</span>
+                    return <span key={tech.id} className="text-[10px] font-bold uppercase tracking-widest text-neutral-400">{tech.name}</span>
                 })}
               </div>
-              <div className="card-actions justify-end mt-4">
-                <Link href={`/portfolio/${project.slug}`} className="btn btn-neutral">
-                    See more
+              
+              <div className="mt-8 flex justify-end">
+                <Link href={`/portfolio/${project.slug}`} className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-white hover:text-white transition-colors duration-300 group/link bg-secondary/20 px-4 py-2 border border-secondary group-hover:border-[#092e20] hover:bg-[#092e20]">
+                    See more <ArrowRight size={14} className="group-hover/link:translate-x-1 transition-transform" />
                 </Link>
               </div>
             </div>
           </article>
-        )
+         )
       })}
 
       {result.totalPages > 1 && (
-        <div className="join mt-8 flex justify-center">
+        <div className="flex justify-center gap-2 mt-12 pt-8 border-t border-secondary/30">
             {Array.from({ length: result.totalPages }).map((_, i) => {
                 const pageNum = i + 1
                 const query = new URLSearchParams()
@@ -105,7 +119,7 @@ export const List = async ({ searchParams }: Props) => {
                     <Link
                         key={pageNum}
                         href={`/portfolio?${query.toString()}`}
-                        className={`join-item btn ${pageNum === result.page ? 'btn-active' : ''}`}
+                        className={`px-4 py-2 border text-xs font-bold transition-all duration-300 ${pageNum === result.page ? 'bg-[#092e20] border-[#092e20] text-white' : 'bg-transparent border-secondary text-neutral-400 hover:border-white hover:text-white'}`}
                     >
                         {pageNum}
                     </Link>

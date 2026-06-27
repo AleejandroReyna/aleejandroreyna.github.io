@@ -3,96 +3,70 @@ import { currentYear } from "@/utils/currentYear";
 import { SiGithub } from '@icons-pack/react-simple-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCalendarAlt } from '@fortawesome/free-solid-svg-icons';
-import { Mail, Heart, Linkedin } from 'lucide-react';
-import { PythonOriginal } from "devicons-react";
+import { Mail, Heart, Linkedin, Terminal } from 'lucide-react';
 import { getSiteSettings } from "@/lib/payload";
 
 export const Footer = async () => {
   const settings = await getSiteSettings();
   const { github, linkedin, calendly, email } = settings.social || {};
   return (
-    <footer className="bg-black border-t border-gray-800">
+    <footer className="bg-background border-t border-secondary/50 relative overflow-hidden">
       {/* Main Footer Content */}
-      <div className="mx-auto max-w-7xl px-4 py-12">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+      <div className="mx-auto max-w-7xl px-6 py-20 relative z-10">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-16 lg:gap-12">
 
           {/* Brand Section */}
           <div className="lg:col-span-1">
-            <h3 className="text-2xl font-bold text-white mb-4">
-              <span className="bg-gradient-to-r from-white to-gray-400 bg-clip-text text-transparent">
-                Alejandro Reyna
-              </span>
+            <h3 className="text-3xl font-heading font-bold text-foreground mb-4 tracking-tighter flex items-center gap-2 group">
+              <div className="w-2 h-2 bg-[#092e20] group-hover:shadow-[0_0_15px_#092e20] transition-shadow duration-300"></div>
+              Alejandro Reyna
             </h3>
-            <p className="text-gray-400 mb-2">Code Poet & Full-Stack Developer</p>
-            <p className="text-gray-500 text-sm mb-4">
-              {yearsOfExperience()}+ years crafting elegant solutions
-            </p>
-            <p className="text-gray-400 text-sm italic">
-              {`"I don't just write code that works - I write code that sings."`}
+            <p className="text-neutral-400 text-xs font-bold uppercase tracking-widest mb-6">Full-Stack Engineer</p>
+            <p className="text-neutral-400 text-sm font-medium leading-relaxed">
+              Architecting precision at every layer of the stack. {yearsOfExperience()}+ years building high-performance systems.
             </p>
           </div>
 
           {/* Quick Links */}
           <div>
-            <h4 className="text-lg font-bold text-white mb-4">Quick Links</h4>
-            <nav className="space-y-2">
-              <a
-                href="#home"
-                className="block text-gray-400 hover:text-white transition-colors cursor-pointer"
-              >
-                Home
-              </a>
-              <a
-                href="#about"
-                className="block text-gray-400 hover:text-white transition-colors cursor-pointer"
-              >
-                About
-              </a>
-              <a
-                href="#portfolio"
-                className="block text-gray-400 hover:text-white transition-colors cursor-pointer"
-              >
-                Portfolio
-              </a>
-              <a
-                href="#skills"
-                className="block text-gray-400 hover:text-white transition-colors cursor-pointer"
-              >
-                Skills
-              </a>
-              <a
-                href="#contact"
-                className="block text-gray-400 hover:text-white transition-colors cursor-pointer"
-              >
-                Contact
-              </a>
+            <h4 className="text-sm font-bold font-heading text-foreground mb-6 uppercase tracking-widest flex items-center gap-2">
+              <span className="w-2 h-2 bg-[#092e20]"></span> Quick Links
+            </h4>
+            <nav className="space-y-4">
+              <a href="#home" className="block text-neutral-400 font-medium hover:text-white transition-colors uppercase text-xs tracking-widest">Home</a>
+              <a href="#about" className="block text-neutral-400 font-medium hover:text-white transition-colors uppercase text-xs tracking-widest">About</a>
+              <a href="#portfolio" className="block text-neutral-400 font-medium hover:text-white transition-colors uppercase text-xs tracking-widest">Portfolio</a>
+              <a href="#skills" className="block text-neutral-400 font-medium hover:text-white transition-colors uppercase text-xs tracking-widest">Expertise</a>
+              <a href="#contact" className="block text-neutral-400 font-medium hover:text-white transition-colors uppercase text-xs tracking-widest">Contact</a>
             </nav>
           </div>
 
           {/* Expertise */}
           <div>
-            <h4 className="text-lg font-bold text-white mb-4">Expertise</h4>
-            <ul className="space-y-2 text-gray-400 text-sm">
-              <li>Full-Stack Development</li>
-              <li>Python & Django</li>
-              <li>TypeScript & React</li>
-              <li>API Design & Integration</li>
-              <li>Database Architecture</li>
+            <h4 className="text-sm font-bold font-heading text-foreground mb-6 uppercase tracking-widest flex items-center gap-2">
+              <span className="w-2 h-2 bg-[#092e20]"></span> Tech Stack
+            </h4>
+            <ul className="space-y-4 text-neutral-400 text-xs font-medium uppercase tracking-widest">
+              <li className="flex items-center gap-2 hover:text-foreground transition-colors"><span className="text-neutral-600">/</span> Next.js & React</li>
+              <li className="flex items-center gap-2 hover:text-foreground transition-colors"><span className="text-neutral-600">/</span> Python & Django</li>
+              <li className="flex items-center gap-2 hover:text-foreground transition-colors"><span className="text-neutral-600">/</span> Ruby on Rails</li>
+              <li className="flex items-center gap-2 hover:text-foreground transition-colors"><span className="text-neutral-600">/</span> Cloud & CI/CD</li>
             </ul>
           </div>
 
           {/* Connect */}
           <div>
-            <h4 className="text-lg font-bold text-white mb-4">Connect</h4>
-            <div className="space-y-3 mb-6">
+            <h4 className="text-sm font-bold font-heading text-foreground mb-6 uppercase tracking-widest flex items-center gap-2">
+              <span className="w-2 h-2 bg-[#092e20]"></span> Network
+            </h4>
+            <div className="space-y-4 mb-8">
               <a
                 href={`mailto:${email}`}
-                className="flex items-center gap-2 text-gray-400 hover:text-white transition-colors"
+                className="flex items-center gap-3 text-foreground font-bold hover:text-white transition-all duration-300 p-4 bg-secondary/15 border border-secondary hover:border-[#092e20] hover:bg-[#092e20]/10 group"
               >
-                <Mail size={18} />
-                <span className="text-sm">{email}</span>
+                <Mail size={16} className="text-neutral-400" />
+                <span className="text-xs uppercase tracking-widest">{email}</span>
               </a>
-              <p className="text-gray-400 text-sm">Guatemala, Guatemala</p>
             </div>
 
             <div className="flex gap-4">
@@ -100,28 +74,28 @@ export const Footer = async () => {
                 href={`https://github.com/${github}`}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-gray-400 hover:text-white transition-colors"
+                className="text-neutral-400 bg-secondary/15 border border-secondary p-3 hover:border-[#092e20] hover:text-white transition-all duration-300 hover:bg-[#092e20]/20"
                 aria-label="GitHub"
               >
-                <SiGithub size={24} />
+                <SiGithub size={20} />
               </a>
               <a
                 href={`https://linkedin.com/in/${linkedin}`}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-gray-400 hover:text-blue-500 transition-colors"
+                className="text-neutral-400 bg-secondary/15 border border-secondary p-3 hover:border-[#092e20] hover:text-white transition-all duration-300 hover:bg-[#092e20]/20"
                 aria-label="LinkedIn"
               >
-                <Linkedin size={24} />
+                <Linkedin size={20} />
               </a>
               <a
                 href={`https://calendly.com/${calendly}`}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-gray-400 hover:text-primary transition-colors"
+                className="text-neutral-400 bg-secondary/15 border border-secondary p-3 hover:border-[#092e20] hover:text-white transition-all duration-300 hover:bg-[#092e20]/20"
                 aria-label="Schedule a call"
               >
-                <FontAwesomeIcon icon={faCalendarAlt} size="lg" />
+                <FontAwesomeIcon icon={faCalendarAlt} className="text-xl" />
               </a>
             </div>
           </div>
@@ -129,17 +103,14 @@ export const Footer = async () => {
       </div>
 
       {/* Bottom Bar */}
-      <div className="border-t border-gray-800">
-        <div className="mx-auto max-w-7xl px-4 py-6">
-          <div className="flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-gray-500">
-            <p>
-              © {currentYear()} Alejandro Reyna. All rights reserved.
+      <div className="border-t border-secondary/50 bg-background relative z-10">
+        <div className="mx-auto max-w-7xl px-6 py-6">
+          <div className="flex flex-col md:flex-row justify-between items-center gap-4 text-[10px] font-bold uppercase tracking-widest text-neutral-400">
+            <p className="flex items-center gap-2">
+              <Terminal size={12} className="text-neutral-400" /> ONLINE © {currentYear()} Alejandro Reyna
             </p>
             <p className="flex items-center gap-2">
-              Made with <Heart size={16} className="text-red-500" fill="currentColor" /> in Guatemala
-            </p>
-            <p className="italic text-gray-600">
-              <a href="https://zen-of-python.info/" target="_blank" rel="noopener noreferrer">{`"Simple is better than complex" - Zen of Python`}</a> <PythonOriginal style={{ display: 'inline' }} size={20} />
+              BUILT WITH <Heart size={12} className="text-neutral-400" fill="currentColor" /> IN GTM
             </p>
           </div>
         </div>

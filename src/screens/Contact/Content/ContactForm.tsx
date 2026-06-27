@@ -14,12 +14,13 @@ export const ContactForm = () => {
 
     if (state.success) {
         return (
-            <div className="bg-success text-success-content p-8 rounded-xl text-center">
-                <h3 className="text-2xl font-bold mb-2">Message Sent!</h3>
-                <p>{state.message}</p>
+            <div className="bg-secondary/40 border border-[#092e20] p-8 text-center text-white relative group">
+                <div className="absolute top-0 left-0 w-2 h-2 bg-[#092e20]"></div>
+                <h3 className="text-2xl font-heading font-bold mb-4 uppercase tracking-tight">Message Sent!</h3>
+                <p className="text-neutral-400 text-sm font-medium mb-6">{state.message}</p>
                 <button 
                     onClick={() => window.location.reload()} 
-                    className="btn btn-sm btn-ghost mt-4 border-white"
+                    className="bg-transparent border border-secondary text-neutral-400 px-6 py-3 font-bold tracking-widest uppercase text-xs hover:border-[#092e20] hover:bg-[#092e20] hover:text-white transition-all duration-300"
                 >
                     Send another message
                 </button>
@@ -28,90 +29,113 @@ export const ContactForm = () => {
     }
 
     return (
-        <form action={formAction} className="space-y-6">
-            <div className="space-y-6">
+        <form action={formAction} className="space-y-8">
+            {state.message && !state.success && (
+                <div className="p-4 bg-red-500/10 border border-red-500 text-red-400 text-sm font-bold tracking-widest uppercase">
+                    {state.message}
+                </div>
+            )}
+
+            <div className="grid sm:grid-cols-2 gap-8">
                 <div className="form-control">
-                    <label className="label">
-                        <span className="label-text text-gray-400 font-semibold">Your Name</span>
+                    <label className="block text-[10px] font-bold uppercase tracking-widest text-neutral-400 mb-2">
+                        User_Name
                     </label>
                     <input 
                         name="name"
                         type="text" 
-                        className={`input input-bordered bg-gray-800 border-gray-700 text-white focus:border-primary focus:bg-gray-800 w-full ${state.errors?.name ? 'border-error' : ''}`} 
-                        placeholder="John Doe" 
+                        className={`w-full bg-background border border-secondary p-4 text-foreground font-medium focus:outline-none focus:border-[#092e20] transition-colors placeholder:text-neutral-500 focus:bg-[#092e20]/10 ${state.errors?.name ? 'border-red-400' : ''}`} 
+                        placeholder="Enter name..." 
                         disabled={isPending}
+                        required
                     />
                     {state.errors?.name && (
-                        <span className="text-error text-xs mt-1">{state.errors.name[0]}</span>
+                        <span className="text-red-400 text-xs mt-2 block">{state.errors.name[0]}</span>
                     )}
                 </div>
 
                 <div className="form-control">
-                    <label className="label">
-                        <span className="label-text text-gray-400 font-semibold">Your Email</span>
+                    <label className="block text-[10px] font-bold uppercase tracking-widest text-neutral-400 mb-2">
+                        User_Email
                     </label>
                     <input 
                         name="email"
                         type="email" 
-                        className={`input input-bordered bg-gray-800 border-gray-700 text-white focus:border-primary focus:bg-gray-800 w-full ${state.errors?.email ? 'border-error' : ''}`} 
-                        placeholder="john@example.com" 
+                        className={`w-full bg-background border border-secondary p-4 text-foreground font-medium focus:outline-none focus:border-[#092e20] transition-colors placeholder:text-neutral-500 focus:bg-[#092e20]/10 ${state.errors?.email ? 'border-red-400' : ''}`} 
+                        placeholder="Enter email..." 
                         disabled={isPending}
+                        required
                     />
                     {state.errors?.email && (
-                        <span className="text-error text-xs mt-1">{state.errors.email[0]}</span>
-                    )}
-                </div>
-
-                <div className="form-control">
-                    <label className="label">
-                        <span className="label-text text-gray-400 font-semibold">Your Phone (Optional)</span>
-                    </label>
-                    <input 
-                        name="phone"
-                        type="text" 
-                        className="input input-bordered bg-gray-800 border-gray-700 text-white focus:border-primary focus:bg-gray-800 w-full" 
-                        placeholder="+502 1234 5678" 
-                        disabled={isPending}
-                    />
-                </div>
-
-                <div className="form-control">
-                    <label className="label">
-                        <span className="label-text text-gray-400 font-semibold">Message</span>
-                    </label>
-                    <textarea 
-                        name="message"
-                        rows={6} 
-                        className={`textarea textarea-bordered bg-gray-800 border-gray-700 text-white focus:border-primary focus:bg-gray-800 w-full resize-none ${state.errors?.message ? 'border-error' : ''}`} 
-                        placeholder="Tell me about your project or idea..."
-                        disabled={isPending}
-                    ></textarea>
-                    {state.errors?.message && (
-                        <span className="text-error text-xs mt-1">{state.errors.message[0]}</span>
+                        <span className="text-red-400 text-xs mt-2 block">{state.errors.email[0]}</span>
                     )}
                 </div>
             </div>
 
-            {state.message && !state.success && (
-                <div className="alert alert-error bg-red-900/30 border-2 border-red-700 text-red-400">
-                    <span>{state.message}</span>
+            <div className="grid sm:grid-cols-2 gap-8">
+                <div className="form-control">
+                    <label className="block text-[10px] font-bold uppercase tracking-widest text-neutral-400 mb-2">
+                        Topic
+                    </label>
+                    <input 
+                        name="subject"
+                        type="text" 
+                        className={`w-full bg-background border border-secondary p-4 text-foreground font-medium focus:outline-none focus:border-[#092e20] transition-colors placeholder:text-neutral-500 focus:bg-[#092e20]/10 ${state.errors?.subject ? 'border-red-400' : ''}`} 
+                        placeholder="Enter topic..." 
+                        disabled={isPending}
+                        required
+                    />
+                    {state.errors?.subject && (
+                        <span className="text-red-400 text-xs mt-2 block">{state.errors.subject[0]}</span>
+                    )}
                 </div>
-            )}
 
-            <button 
-                type="submit" 
-                disabled={isPending}
-                className="btn btn-primary w-full text-white gap-2 text-lg"
-            >
-                {isPending ? (
-                  <>
-                    <span className="loading loading-spinner loading-sm"></span>
-                    Sending...
-                  </>
-                ) : (
-                  'Send Message'
+                <div className="form-control">
+                    <label className="block text-[10px] font-bold uppercase tracking-widest text-neutral-400 mb-2">
+                        Comm_Link (Optional)
+                    </label>
+                    <input 
+                        name="phone"
+                        type="text" 
+                        className="w-full bg-background border border-secondary p-4 text-foreground font-medium focus:outline-none focus:border-[#092e20] transition-colors placeholder:text-neutral-500 focus:bg-[#092e20]/10" 
+                        placeholder="Enter phone..." 
+                        disabled={isPending}
+                    />
+                </div>
+            </div>
+
+            <div className="form-control">
+                <label className="block text-[10px] font-bold uppercase tracking-widest text-neutral-400 mb-2">
+                    Payload
+                </label>
+                <textarea 
+                    name="message"
+                    rows={6} 
+                    className={`w-full bg-background border border-secondary p-4 text-foreground font-medium focus:outline-none focus:border-[#092e20] transition-colors resize-none placeholder:text-neutral-500 focus:bg-[#092e20]/10 ${state.errors?.message ? 'border-red-400' : ''}`} 
+                    placeholder="Enter payload data..."
+                    disabled={isPending}
+                    required
+                ></textarea>
+                {state.errors?.message && (
+                    <span className="text-red-400 text-xs mt-2 block">{state.errors.message[0]}</span>
                 )}
-            </button>
+            </div>
+
+            <div className="pt-4">
+                <button 
+                    type="submit" 
+                    disabled={isPending}
+                    className="w-full bg-[#092e20] text-white border border-[#092e20] p-4 font-bold tracking-widest uppercase text-sm hover:bg-transparent hover:text-white transition-all duration-300 flex items-center justify-center gap-3 group"
+                >
+                    {isPending ? (
+                      <span className="animate-pulse">Transmitting...</span>
+                    ) : (
+                      <>
+                        <span>Execute Submit</span>
+                      </>
+                    )}
+                </button>
+            </div>
         </form>
     )
 }
