@@ -1,17 +1,21 @@
-import { getSiteSettings } from "@/lib/payload";
 import { HeroClient } from "./_HeroClient";
+import { TechTicker } from "./_TechTicker";
 
-export const Hero = async () => {
-  const settings = await getSiteSettings();
-  const { github, linkedin, calendly } = settings.social || {};
+export const Hero = () => {
   return (
-    <section className="min-h-screen bg-background relative overflow-hidden flex flex-col justify-center pt-24" id="home">
-      
-      {/* Tech Grid Background overlay */}
-      <div className="absolute inset-0 z-0 opacity-20 pointer-events-none" style={{ backgroundImage: 'radial-gradient(#171717 1px, transparent 1px)', backgroundSize: '40px 40px' }}></div>
-      <div className="absolute top-1/3 left-1/4 w-[600px] h-[600px] bg-cta/5 rounded-full blur-[100px] opacity-70 pointer-events-none"></div>
+    <section className="min-h-screen relative overflow-hidden flex flex-col justify-center pt-24" id="home">
 
-      <HeroClient github={github} linkedin={linkedin} calendly={calendly} />
+      {/* Radial glow, top-left — mirrors the design's hero backdrop */}
+      <div
+        className="absolute inset-0 z-0 pointer-events-none"
+        style={{ background: 'radial-gradient(1000px 460px at 18% -10%, rgba(37,84,58,0.35), transparent 70%)' }}
+      ></div>
+
+      <HeroClient />
+
+      <div className="relative z-10 mt-20">
+        <TechTicker />
+      </div>
     </section>
   );
 };

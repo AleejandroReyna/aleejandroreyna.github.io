@@ -74,6 +74,8 @@ export interface Config {
     technologies: Technology;
     projects: Project;
     'contact-submissions': ContactSubmission;
+    testimonials: Testimonial;
+    capabilities: Capability;
     'payload-kv': PayloadKv;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
@@ -88,6 +90,8 @@ export interface Config {
     technologies: TechnologiesSelect<false> | TechnologiesSelect<true>;
     projects: ProjectsSelect<false> | ProjectsSelect<true>;
     'contact-submissions': ContactSubmissionsSelect<false> | ContactSubmissionsSelect<true>;
+    testimonials: TestimonialsSelect<false> | TestimonialsSelect<true>;
+    capabilities: CapabilitiesSelect<false> | CapabilitiesSelect<true>;
     'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
@@ -290,9 +294,59 @@ export interface ContactSubmission {
   email: string;
   subject?: string | null;
   phone?: string | null;
+  company?: string | null;
+  budget?: string | null;
   message: string;
   status: 'new' | 'contacted';
   notes?: string | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "testimonials".
+ */
+export interface Testimonial {
+  id: string;
+  quote: string;
+  clientName: string;
+  /**
+   * Client position, e.g. "CTO"
+   */
+  role?: string | null;
+  company?: string | null;
+  /**
+   * Only approved testimonials are shown on the site
+   */
+  approved?: boolean | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "capabilities".
+ */
+export interface Capability {
+  id: string;
+  title: string;
+  description?: string | null;
+  /**
+   * Shown top-right of the card, e.g. "12+ Years" or "Since 2023"
+   */
+  experienceLabel?: string | null;
+  /**
+   * Each line renders as "/ LINE" at the bottom of the card
+   */
+  stacks?:
+    | {
+        line: string;
+        id?: string | null;
+      }[]
+    | null;
+  /**
+   * Cards are sorted ascending by this value
+   */
+  order?: number | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -347,6 +401,14 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'contact-submissions';
         value: string | ContactSubmission;
+      } | null)
+    | ({
+        relationTo: 'testimonials';
+        value: string | Testimonial;
+      } | null)
+    | ({
+        relationTo: 'capabilities';
+        value: string | Capability;
       } | null);
   globalSlug?: string | null;
   user: {
@@ -503,9 +565,42 @@ export interface ContactSubmissionsSelect<T extends boolean = true> {
   email?: T;
   subject?: T;
   phone?: T;
+  company?: T;
+  budget?: T;
   message?: T;
   status?: T;
   notes?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "testimonials_select".
+ */
+export interface TestimonialsSelect<T extends boolean = true> {
+  quote?: T;
+  clientName?: T;
+  role?: T;
+  company?: T;
+  approved?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "capabilities_select".
+ */
+export interface CapabilitiesSelect<T extends boolean = true> {
+  title?: T;
+  description?: T;
+  experienceLabel?: T;
+  stacks?:
+    | T
+    | {
+        line?: T;
+        id?: T;
+      };
+  order?: T;
   updatedAt?: T;
   createdAt?: T;
 }

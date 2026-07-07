@@ -9,6 +9,8 @@ const contactSchema = z.object({
     email: z.string().email('Invalid email address'),
     subject: z.string().optional(),
     phone: z.preprocess((val) => val === null ? undefined : val, z.string().optional()),
+    company: z.preprocess((val) => val === null ? undefined : val, z.string().optional()),
+    budget: z.preprocess((val) => val === null ? undefined : val, z.string().optional()),
     message: z.string().min(10, 'Message is too short'),
 })
 
@@ -33,6 +35,8 @@ export async function submitContactForm(
         email: formData.get('email'),
         subject: formData.get('subject'),
         phone: formData.get('phone'),
+        company: formData.get('company'),
+        budget: formData.get('budget'),
         message: formData.get('message'),
     }
 

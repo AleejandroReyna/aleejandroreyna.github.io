@@ -46,6 +46,22 @@ export const ContactSubmissions: CollectionConfig = {
             },
         },
         {
+            name: 'company',
+            type: 'text',
+            admin: {
+                readOnly: true,
+                position: 'sidebar',
+            },
+        },
+        {
+            name: 'budget',
+            type: 'text',
+            admin: {
+                readOnly: true,
+                position: 'sidebar',
+            },
+        },
+        {
             name: 'message',
             type: 'textarea',
             required: true,

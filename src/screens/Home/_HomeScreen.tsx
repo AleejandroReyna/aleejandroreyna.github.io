@@ -1,9 +1,12 @@
 import { Hero } from "./Hero"
+import { Stats } from "./Stats"
 import { About } from "./About"
 import { Portfolio } from "./Portfolio"
+import { Testimonials } from "./Testimonials"
 import { Skills } from "./Skills"
 import { Resume } from "./Resume"
 import { Experience } from "./Experience"
+import { Approach } from "./Approach"
 import { Contact } from "./Contact"
 import { getSiteSettings, getExperienceDetails } from "@/lib/payload"
 
@@ -15,10 +18,13 @@ export const HomeScreen = async () => {
   return (
     <>
       <Hero />
+      <Stats />
       <About />
       <Portfolio />
+      <Testimonials />
       <Skills />
       <Experience experiences={experiences} />
+      <Approach />
       <Contact
         contactEmail={email || ''}
         githubUser={github || ''}
