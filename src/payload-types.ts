@@ -74,6 +74,7 @@ export interface Config {
     technologies: Technology;
     projects: Project;
     'contact-submissions': ContactSubmission;
+    testimonials: Testimonial;
     'payload-kv': PayloadKv;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
@@ -88,6 +89,7 @@ export interface Config {
     technologies: TechnologiesSelect<false> | TechnologiesSelect<true>;
     projects: ProjectsSelect<false> | ProjectsSelect<true>;
     'contact-submissions': ContactSubmissionsSelect<false> | ContactSubmissionsSelect<true>;
+    testimonials: TestimonialsSelect<false> | TestimonialsSelect<true>;
     'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
@@ -298,6 +300,26 @@ export interface ContactSubmission {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "testimonials".
+ */
+export interface Testimonial {
+  id: string;
+  quote: string;
+  clientName: string;
+  /**
+   * Client position, e.g. "CTO"
+   */
+  role?: string | null;
+  company?: string | null;
+  /**
+   * Only approved testimonials are shown on the site
+   */
+  approved?: boolean | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-kv".
  */
 export interface PayloadKv {
@@ -347,6 +369,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'contact-submissions';
         value: string | ContactSubmission;
+      } | null)
+    | ({
+        relationTo: 'testimonials';
+        value: string | Testimonial;
       } | null);
   globalSlug?: string | null;
   user: {
@@ -506,6 +532,19 @@ export interface ContactSubmissionsSelect<T extends boolean = true> {
   message?: T;
   status?: T;
   notes?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "testimonials_select".
+ */
+export interface TestimonialsSelect<T extends boolean = true> {
+  quote?: T;
+  clientName?: T;
+  role?: T;
+  company?: T;
+  approved?: T;
   updatedAt?: T;
   createdAt?: T;
 }

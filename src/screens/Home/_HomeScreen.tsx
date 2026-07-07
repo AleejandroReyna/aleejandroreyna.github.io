@@ -2,6 +2,7 @@ import { Hero } from "./Hero"
 import { Stats } from "./Stats"
 import { About } from "./About"
 import { Portfolio } from "./Portfolio"
+import { Testimonials } from "./Testimonials"
 import { Skills } from "./Skills"
 import { Resume } from "./Resume"
 import { Experience } from "./Experience"
@@ -19,6 +20,7 @@ export const HomeScreen = async () => {
       <Stats />
       <About />
       <Portfolio />
+      <Testimonials />
       <Skills />
       <Experience experiences={experiences} />
       <Contact

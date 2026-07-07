@@ -1,11 +1,50 @@
-import { ExternalLink, ArrowRight, FolderGit2 } from "lucide-react";
-import Image from "next/image";
 import Link from "next/link";
 import { getPayload } from "payload"
 import config from "@payload-config"
-import * as Icons from "@icons-pack/react-simple-icons"
-import { Technology, Media } from "@/payload-types"
+import { Technology, Media, Project } from "@/payload-types"
 import { AnimateIn } from "@/components/ds/AnimateIn"
+
+const FALLBACK_IMAGE = "https://place-hold.it/1600x900"
+
+const projectLabel = (project: Project, index: number) => {
+  const order = String(index + 1).padStart(2, "0")
+  const kind =
+    project.company && typeof project.company !== "string"
+      ? project.company.name
+      : "Project"
+  const year = project.releaseDate ? new Date(project.releaseDate).getFullYear() : null
+  return `${order} — ${kind}${year ? ` · ${year}` : ""}`
+}
+
+const thumbnailUrl = (project: Project) =>
+  project.thumbnail && typeof project.thumbnail !== "string"
+    ? (project.thumbnail as Media).url || FALLBACK_IMAGE
+    : FALLBACK_IMAGE
+
+const TechChips = ({ project }: { project: Project }) => (
+  <div className="flex flex-wrap gap-2">
+    {project.technologies?.slice(0, 3).map((techInput) => {
+      const tech = techInput as Technology
+      return (
+        <span
+          key={tech.id}
+          className="font-mono text-[10px] tracking-[0.1em] uppercase text-[#dfe5e0]/75 border border-[#dfe5e0]/30 bg-[#060907]/50 px-2.5 py-1.5 rounded-sm"
+        >
+          {tech.name}
+        </span>
+      )
+    })}
+  </div>
+)
+
+const CaseStudyLink = ({ slug, children }: { slug?: string | null; children: React.ReactNode }) => (
+  <Link
+    href={`/portfolio/${slug}`}
+    className="font-mono font-medium text-[11px] tracking-[0.16em] uppercase text-[#9be8b8] border-b border-[#9be8b8]/35 pb-1 hover:text-white hover:border-white transition-colors duration-300"
+  >
+    {children}
+  </Link>
+)
 
 export const Portfolio = async () => {
   const payload = await getPayload({ config })
@@ -16,107 +55,117 @@ export const Portfolio = async () => {
     sort: "-releaseDate",
   })
 
-  return (
-    <section className="py-32 relative overflow-hidden" id="portfolio">
-      {/* Background Accent */}
-      <div className="absolute top-1/2 right-0 w-1/3 h-1/2 bg-secondary/5 rounded-full blur-[120px] pointer-events-none"></div>
+  const [featured, ...rest] = result.docs
 
+  const years = result.docs
+    .map((p) => (p.releaseDate ? new Date(p.releaseDate).getFullYear() : null))
+    .filter((y): y is number => y !== null)
+  const yearRange = years.length
+    ? `${Math.min(...years)} — ${Math.max(...years)}`
+    : ""
+
+  return (
+    <section className="py-28 relative overflow-hidden border-t border-[#9be8b8]/8" id="portfolio">
       <div className="mx-auto max-w-7xl px-6 relative z-10">
-        
+
         {/* Heading */}
         <AnimateIn>
-          <div className="mb-20 flex flex-col md:flex-row md:items-end justify-between gap-6 border-b border-secondary/50 pb-8">
+          <div className="mb-14 flex items-baseline justify-between gap-6">
             <div>
-              <span className="text-neutral-400 text-xs font-bold tracking-[0.2em] uppercase mb-4 block flex items-center gap-2">
-                <FolderGit2 size={14} /> Featured Projects
-              </span>
-              <h2 className="text-4xl md:text-5xl font-heading font-bold text-foreground tracking-tight uppercase">
-                Recent <span className="text-white">Projects</span>
+              <div className="font-mono text-[11px] tracking-[0.18em] uppercase text-[#46d386] mb-4">
+                02 — Selected Works
+              </div>
+              <h2 className="font-serif font-medium text-5xl md:text-[54px] text-[#f2f4f0]">
+                Recent projects
               </h2>
             </div>
-            <div className="hidden md:block">
-              <Link href="/portfolio" className="text-sm font-bold tracking-widest uppercase text-white hover:text-neutral-300 border border-[#092e20] px-4 py-2 transition-colors flex items-center gap-2 group hover:bg-[#092e20]">
-                View All Projects <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
-              </Link>
-            </div>
+            {yearRange && (
+              <div className="font-mono text-[11px] tracking-[0.18em] uppercase text-[#dfe5e0]/40 shrink-0">
+                {yearRange}
+              </div>
+            )}
           </div>
         </AnimateIn>
 
-        {/* Projects Grid */}
-        <AnimateIn delay={0.2}>
-          <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
-          {result.docs.map((project) => {
-             const releaseYear = project.releaseDate ? new Date(project.releaseDate).getFullYear() : ''
+        <div className="flex flex-col gap-7">
 
-             return (
-              <article key={project.id} className="group bg-secondary/15 border border-secondary hover:border-[#092e20] transition-colors duration-300 relative flex flex-col">
-                <div className="absolute top-0 left-0 w-2 h-2 bg-[#092e20] opacity-0 group-hover:opacity-100 transition-opacity"></div>
-                
-                <figure className="relative overflow-hidden h-64 bg-secondary/35 border-b border-secondary group-hover:border-[#092e20] transition-colors duration-300">
-                  {project.thumbnail && typeof project.thumbnail !== 'string' ? (
-                    <img
-                      src={(project.thumbnail as Media).url!}
-                      alt={project.name}
-                      className="object-cover h-full w-full grayscale contrast-125 opacity-60 group-hover:grayscale-0 group-hover:opacity-100 group-hover:scale-105 transition-all duration-500 mix-blend-luminosity group-hover:mix-blend-normal"
-                    />
-                  ) : (
-                    <img
-                      src="https://place-hold.it/400x250"
-                      alt="Placeholder"
-                      className="object-cover h-full w-full grayscale contrast-125 opacity-60 group-hover:grayscale-0 group-hover:opacity-100 group-hover:scale-105 transition-all duration-500 mix-blend-luminosity group-hover:mix-blend-normal"
-                    />
-                  )}
-                  {/* Tech overlay pattern */}
-                  <div className="absolute inset-0 z-10 opacity-20 pointer-events-none mix-blend-overlay" style={{ backgroundImage: 'linear-gradient(rgba(255, 255, 255, 0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, 0.1) 1px, transparent 1px)', backgroundSize: '10px 10px' }}></div>
-                  
-                  {releaseYear && (
-                    <div className="absolute top-4 right-4 z-20">
-                      <span className="px-2 py-1 bg-background/80 border border-[#092e20] text-[10px] font-bold text-white uppercase tracking-widest">{releaseYear}</span>
+          {/* Featured project — full-bleed image card */}
+          {featured && (
+            <AnimateIn delay={0.1}>
+              <article className="relative h-[420px] md:h-[520px] rounded overflow-hidden border border-[#9be8b8]/12 group">
+                <img
+                  src={thumbnailUrl(featured)}
+                  alt={featured.name}
+                  className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                />
+                <div
+                  className="absolute inset-0 pointer-events-none"
+                  style={{ background: 'linear-gradient(to top, rgba(6,9,7,0.95) 0%, rgba(6,9,7,0.55) 32%, rgba(6,9,7,0.05) 60%)' }}
+                ></div>
+                <div className="absolute left-0 right-0 bottom-0 p-7 md:p-12 flex flex-col md:flex-row justify-between md:items-end gap-6 md:gap-10">
+                  <div>
+                    <div className="font-mono text-[11px] tracking-[0.18em] uppercase text-[#46d386] mb-3">
+                      {projectLabel(featured, 0)}
                     </div>
-                  )}
-                </figure>
-
-                <div className="p-6 md:p-8 flex-grow flex flex-col relative z-10 bg-background/50">
-                  <h3 className="text-2xl font-heading font-bold text-foreground mb-1 tracking-tight group-hover:text-white transition-colors duration-300">{project.name}</h3>
-                  {project.company && typeof project.company !== 'string' && (
-                      <p className="text-xs font-medium text-neutral-400 mb-6 tracking-widest uppercase">
-                         Client // {project.company.name}
-                      </p>
-                  )}
-
-                  <div className="mt-auto pt-6 border-t border-secondary/50">
-                    <div className="flex flex-wrap gap-4">
-                       {project.technologies?.map((techInput) => {
-                          const tech = techInput as Technology
-                          if (tech.icon) {
-                              const IconComponent = (Icons as any)[tech.icon]
-                              if (IconComponent) {
-                                  return <div key={tech.id} className="text-neutral-400 group-hover:text-foreground transition-colors duration-300"><IconComponent size={20} title={tech.name} /></div>
-                              }
-                          }
-                          return <span key={tech.id} className="text-[10px] font-bold uppercase tracking-widest text-neutral-400">{tech.name}</span>
-                      })}
-                    </div>
+                    <h3 className="font-serif font-medium text-3xl md:text-[42px] text-[#f2f4f0] mb-2.5">
+                      {featured.name}
+                    </h3>
                   </div>
-
-                  <div className="mt-8">
-                    <Link href={`/portfolio/${project.slug}`} className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-white hover:text-white transition-colors duration-300 group/link bg-secondary/20 px-4 py-2 border border-secondary group-hover:border-[#092e20] hover:bg-[#092e20]">
-                        Read Docs <ArrowRight size={14} className="group-hover/link:translate-x-1 transition-transform" />
-                    </Link>
+                  <div className="flex flex-col md:items-end gap-4 shrink-0">
+                    <TechChips project={featured} />
+                    <CaseStudyLink slug={featured.slug}>View Case Study →</CaseStudyLink>
                   </div>
                 </div>
               </article>
-             )
-          })}
-        </div>
-        </AnimateIn>
+            </AnimateIn>
+          )}
 
-        {/* Mobile View All Projects CTA */}
-        <div className="text-center mt-12 md:hidden">
-            <Link href="/portfolio" className="bg-transparent border border-[#092e20] text-white px-6 py-3 font-bold tracking-widest uppercase text-sm hover:bg-[#092e20] hover:text-white transition-all duration-300 inline-flex items-center gap-3">
-              View All Projects
-            </Link>
+          {/* Remaining projects — side by side */}
+          {rest.length > 0 && (
+            <AnimateIn delay={0.2}>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-7">
+                {rest.map((project, i) => (
+                  <article
+                    key={project.id}
+                    className="relative h-[380px] md:h-[440px] rounded overflow-hidden border border-[#9be8b8]/12 group"
+                  >
+                    <img
+                      src={thumbnailUrl(project)}
+                      alt={project.name}
+                      className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                    />
+                    <div
+                      className="absolute inset-0 pointer-events-none"
+                      style={{ background: 'linear-gradient(to top, rgba(6,9,7,0.95) 0%, rgba(6,9,7,0.55) 38%, rgba(6,9,7,0.05) 65%)' }}
+                    ></div>
+                    <div className="absolute left-0 right-0 bottom-0 p-7 md:p-9">
+                      <div className="font-mono text-[11px] tracking-[0.18em] uppercase text-[#46d386] mb-2.5">
+                        {projectLabel(project, i + 1)}
+                      </div>
+                      <h3 className="font-serif font-medium text-2xl md:text-[34px] text-[#f2f4f0] mb-4">
+                        {project.name}
+                      </h3>
+                      <div className="flex justify-between items-center gap-4">
+                        <TechChips project={project} />
+                        <CaseStudyLink slug={project.slug}>Case Study →</CaseStudyLink>
+                      </div>
+                    </div>
+                  </article>
+                ))}
+              </div>
+            </AnimateIn>
+          )}
         </div>
+
+        {/* Full archive link */}
+        <AnimateIn delay={0.3}>
+          <Link
+            href="/portfolio"
+            className="block text-center mt-12 py-4.5 font-mono text-[11px] tracking-[0.18em] uppercase text-[#dfe5e0]/45 border border-[#dfe5e0]/12 hover:text-[#9be8b8] hover:border-[#9be8b8]/35 transition-colors duration-300"
+          >
+            Full Archive — {result.totalDocs}+ Projects →
+          </Link>
+        </AnimateIn>
       </div>
     </section>
   );
