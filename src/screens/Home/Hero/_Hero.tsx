@@ -1,4 +1,5 @@
 import { HeroClient } from "./_HeroClient";
+import { TechTicker } from "./_TechTicker";
 
 export const Hero = () => {
   return (
@@ -11,6 +12,10 @@ export const Hero = () => {
       ></div>
 
       <HeroClient />
+
+      <div className="relative z-10 mt-20">
+        <TechTicker />
+      </div>
     </section>
   );
 };
