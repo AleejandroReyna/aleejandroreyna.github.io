@@ -9,18 +9,20 @@ const initialState: ContactFormState = {
     message: '',
 }
 
+const inputClasses = (hasError?: boolean) =>
+    `w-full bg-transparent border ${hasError ? 'border-red-400' : 'border-[#9be8b8]/15'} rounded-sm px-4.5 py-4 font-mono text-xs tracking-[0.1em] text-[#f2f4f0] placeholder:text-[#dfe5e0]/40 placeholder:uppercase focus:outline-none focus:border-[#46d386]/60 transition-colors`
+
 export const ContactForm = () => {
     const [state, formAction, isPending] = useActionState(submitContactForm, initialState)
 
     if (state.success) {
         return (
-            <div className="bg-secondary/40 border border-[#092e20] p-8 text-center text-white relative group">
-                <div className="absolute top-0 left-0 w-2 h-2 bg-[#092e20]"></div>
-                <h3 className="text-2xl font-heading font-bold mb-4 uppercase tracking-tight">Message Sent!</h3>
-                <p className="text-neutral-400 text-sm font-medium mb-6">{state.message}</p>
-                <button 
-                    onClick={() => window.location.reload()} 
-                    className="bg-transparent border border-secondary text-neutral-400 px-6 py-3 font-bold tracking-widest uppercase text-xs hover:border-[#092e20] hover:bg-[#092e20] hover:text-white transition-all duration-300"
+            <div className="border border-[#46d386]/40 rounded p-10 text-center">
+                <h3 className="font-serif font-medium text-3xl text-[#f2f4f0] mb-3">Message sent<span className="text-[#46d386]">.</span></h3>
+                <p className="font-heading text-sm text-[#dfe5e0]/60 mb-8">{state.message}</p>
+                <button
+                    onClick={() => window.location.reload()}
+                    className="font-mono font-medium text-[11px] tracking-[0.16em] uppercase text-[#9be8b8] border border-[#46d386]/50 px-6 py-3.5 rounded-sm hover:bg-[#46d386] hover:text-[#0a0d0b] transition-all duration-300"
                 >
                     Send another message
                 </button>
@@ -29,23 +31,21 @@ export const ContactForm = () => {
     }
 
     return (
-        <form action={formAction} className="space-y-8">
+        <form action={formAction} className="flex flex-col gap-3.5">
             {state.message && !state.success && (
-                <div className="p-4 bg-red-500/10 border border-red-500 text-red-400 text-sm font-bold tracking-widest uppercase">
+                <div className="p-4 border border-red-400/40 rounded-sm font-mono text-xs tracking-[0.1em] uppercase text-red-400">
                     {state.message}
                 </div>
             )}
 
-            <div className="grid sm:grid-cols-2 gap-8">
-                <div className="form-control">
-                    <label className="block text-[10px] font-bold uppercase tracking-widest text-neutral-400 mb-2">
-                        User_Name
-                    </label>
-                    <input 
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
+                <div>
+                    <input
                         name="name"
-                        type="text" 
-                        className={`w-full bg-background border border-secondary p-4 text-foreground font-medium focus:outline-none focus:border-[#092e20] transition-colors placeholder:text-neutral-500 focus:bg-[#092e20]/10 ${state.errors?.name ? 'border-red-400' : ''}`} 
-                        placeholder="Enter name..." 
+                        type="text"
+                        placeholder="Name"
+                        aria-label="Name"
+                        className={inputClasses(!!state.errors?.name)}
                         disabled={isPending}
                         required
                     />
@@ -53,16 +53,13 @@ export const ContactForm = () => {
                         <span className="text-red-400 text-xs mt-2 block">{state.errors.name[0]}</span>
                     )}
                 </div>
-
-                <div className="form-control">
-                    <label className="block text-[10px] font-bold uppercase tracking-widest text-neutral-400 mb-2">
-                        User_Email
-                    </label>
-                    <input 
+                <div>
+                    <input
                         name="email"
-                        type="email" 
-                        className={`w-full bg-background border border-secondary p-4 text-foreground font-medium focus:outline-none focus:border-[#092e20] transition-colors placeholder:text-neutral-500 focus:bg-[#092e20]/10 ${state.errors?.email ? 'border-red-400' : ''}`} 
-                        placeholder="Enter email..." 
+                        type="email"
+                        placeholder="Email"
+                        aria-label="Email"
+                        className={inputClasses(!!state.errors?.email)}
                         disabled={isPending}
                         required
                     />
@@ -72,47 +69,47 @@ export const ContactForm = () => {
                 </div>
             </div>
 
-            <div className="grid sm:grid-cols-2 gap-8">
-                <div className="form-control">
-                    <label className="block text-[10px] font-bold uppercase tracking-widest text-neutral-400 mb-2">
-                        Topic
-                    </label>
-                    <input 
-                        name="subject"
-                        type="text" 
-                        className={`w-full bg-background border border-secondary p-4 text-foreground font-medium focus:outline-none focus:border-[#092e20] transition-colors placeholder:text-neutral-500 focus:bg-[#092e20]/10 ${state.errors?.subject ? 'border-red-400' : ''}`} 
-                        placeholder="Enter topic..." 
-                        disabled={isPending}
-                        required
-                    />
-                    {state.errors?.subject && (
-                        <span className="text-red-400 text-xs mt-2 block">{state.errors.subject[0]}</span>
-                    )}
-                </div>
-
-                <div className="form-control">
-                    <label className="block text-[10px] font-bold uppercase tracking-widest text-neutral-400 mb-2">
-                        Comm_Link (Optional)
-                    </label>
-                    <input 
-                        name="phone"
-                        type="text" 
-                        className="w-full bg-background border border-secondary p-4 text-foreground font-medium focus:outline-none focus:border-[#092e20] transition-colors placeholder:text-neutral-500 focus:bg-[#092e20]/10" 
-                        placeholder="Enter phone..." 
-                        disabled={isPending}
-                    />
-                </div>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
+                <input
+                    name="company"
+                    type="text"
+                    placeholder="Company (Optional)"
+                    aria-label="Company"
+                    className={inputClasses()}
+                    disabled={isPending}
+                />
+                <input
+                    name="budget"
+                    type="text"
+                    placeholder="Budget Range"
+                    aria-label="Budget Range"
+                    className={inputClasses()}
+                    disabled={isPending}
+                />
             </div>
 
-            <div className="form-control">
-                <label className="block text-[10px] font-bold uppercase tracking-widest text-neutral-400 mb-2">
-                    Payload
-                </label>
-                <textarea 
+            <div>
+                <input
+                    name="subject"
+                    type="text"
+                    placeholder="What are we building?"
+                    aria-label="What are we building?"
+                    className={inputClasses(!!state.errors?.subject)}
+                    disabled={isPending}
+                    required
+                />
+                {state.errors?.subject && (
+                    <span className="text-red-400 text-xs mt-2 block">{state.errors.subject[0]}</span>
+                )}
+            </div>
+
+            <div>
+                <textarea
                     name="message"
-                    rows={6} 
-                    className={`w-full bg-background border border-secondary p-4 text-foreground font-medium focus:outline-none focus:border-[#092e20] transition-colors resize-none placeholder:text-neutral-500 focus:bg-[#092e20]/10 ${state.errors?.message ? 'border-red-400' : ''}`} 
-                    placeholder="Enter payload data..."
+                    rows={5}
+                    placeholder="Tell me about the project — goals, timeline, current state"
+                    aria-label="Message"
+                    className={`${inputClasses(!!state.errors?.message)} resize-none`}
                     disabled={isPending}
                     required
                 ></textarea>
@@ -121,20 +118,20 @@ export const ContactForm = () => {
                 )}
             </div>
 
-            <div className="pt-4">
-                <button 
-                    type="submit" 
-                    disabled={isPending}
-                    className="w-full bg-[#092e20] text-white border border-[#092e20] p-4 font-bold tracking-widest uppercase text-sm hover:bg-transparent hover:text-white transition-all duration-300 flex items-center justify-center gap-3 group"
-                >
-                    {isPending ? (
-                      <span className="animate-pulse">Transmitting...</span>
-                    ) : (
-                      <>
-                        <span>Execute Submit</span>
-                      </>
-                    )}
-                </button>
+            <button
+                type="submit"
+                className="w-full bg-transparent border border-[#46d386]/50 text-[#9be8b8] p-4 font-mono font-medium text-xs tracking-[0.18em] uppercase rounded-sm hover:bg-[#46d386] hover:text-[#0a0d0b] hover:border-[#46d386] transition-all duration-300 disabled:opacity-50"
+                disabled={isPending}
+            >
+                {isPending ? (
+                    <span className="animate-pulse">Sending...</span>
+                ) : (
+                    <span>Send Message →</span>
+                )}
+            </button>
+
+            <div className="font-mono text-[10px] tracking-[0.12em] uppercase text-[#dfe5e0]/35 text-center mt-1.5">
+                Response within 24 hours — usually sooner
             </div>
         </form>
     )

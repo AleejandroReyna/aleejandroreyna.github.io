@@ -1,92 +1,173 @@
-import { SiGithub } from '@icons-pack/react-simple-icons';
-import { LinkedinPlain } from 'devicons-react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faCalendarAlt } from '@fortawesome/free-solid-svg-icons'
-import { Mail, MapPin, Terminal } from 'lucide-react';
 import { getSiteSettings } from "@/lib/payload";
+import { SiGithub } from '@icons-pack/react-simple-icons';
+import { Linkedin, Calendar } from 'lucide-react';
 import { ContactForm } from './ContactForm';
+
+const processSteps = [
+  {
+    number: "01",
+    title: "The call",
+    description: "30 minutes to understand the problem, the constraints, and whether we're a fit. No pitch.",
+  },
+  {
+    number: "02",
+    title: "The blueprint",
+    description: "Architecture, scope, timeline, and a fixed price. You know exactly what you're getting before anything is built.",
+  },
+  {
+    number: "03",
+    title: "The build",
+    description: "Weekly demos on a live staging environment. You watch it grow — no black box, no surprises.",
+  },
+  {
+    number: "04",
+    title: "Production & beyond",
+    description: "Deployment, documentation, and handoff — or ongoing partnership. 30+ systems still under my watch.",
+  },
+];
 
 export const Content = async () => {
   const settings = await getSiteSettings();
-  const { github, linkedin, calendly } = settings.social || {};
+  const { github, linkedin, calendly, email } = settings.social || {};
 
   return (
-    <section className="text-foreground flex-auto w-full py-32 px-6 relative overflow-hidden" id="contact">
-      {/* Background Line Accent */}
-      <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-secondary to-transparent"></div>
+    <section className="text-foreground flex-auto w-full relative overflow-hidden" id="contact">
 
-      <div className="mx-auto max-w-7xl h-full relative z-10 pt-8 lg:pt-16">
-        <div className="flex flex-col lg:flex-row items-start h-full gap-16">
-          <div className="basis-full lg:basis-1/3 mb-12 lg:mb-0">
-            <span className="text-neutral-400 text-xs font-bold tracking-[0.2em] uppercase mb-4 block flex items-center gap-2">
-              <Terminal size={14} /> Get In Touch
-            </span>
-            <h2 className="text-4xl md:text-5xl font-heading font-bold text-foreground tracking-tight uppercase mb-8">
-              Let's <span className="text-white">Connect</span>
-            </h2>
-            <div className="w-16 h-1 bg-[#092e20] shadow-[0_0_10px_#092e20] mb-12"></div>
-            
-            <p className="text-base text-neutral-400 mb-12 leading-relaxed font-body">
-              {"Do you have an interesting project? I want to work with you. Send me a message and let's create something amazing together."}
+      {/* HEADER + FORM */}
+      <div className="pt-36 pb-24 relative">
+        <div
+          className="absolute inset-0 z-0 pointer-events-none"
+          style={{ background: 'radial-gradient(900px 460px at 15% -10%, rgba(37,84,58,0.32), transparent 70%)' }}
+        ></div>
+        <div className="mx-auto max-w-7xl px-6 relative z-10 grid grid-cols-1 lg:grid-cols-11 gap-14 lg:gap-20">
+
+          {/* Left — headline + contact rows */}
+          <div className="lg:col-span-5">
+            <div className="flex items-center gap-2.5 mb-7 font-mono text-[11px] tracking-[0.2em] uppercase text-[#dfe5e0]/50">
+              <span className="w-1.5 h-1.5 rounded-full bg-[#46d386] animate-pulse"></span>
+              Status: Available — 2026
+            </div>
+            <h1 className="font-serif font-medium text-7xl md:text-[92px] leading-none text-[#f2f4f0]">
+              Let&apos;s<br />
+              talk<span className="text-[#46d386]">.</span>
+            </h1>
+            <p className="font-heading text-base leading-[1.75] text-[#dfe5e0]/65 mt-8 max-w-[420px]">
+              Currently accepting a limited number of projects — architecture, full builds, or rescue missions. Tell me what you&apos;re building and I&apos;ll reply within 24 hours.
             </p>
 
-            <div className="space-y-6">
-              <a 
-                target='_blank' 
-                href={`https://linkedin.com/in/${linkedin}`}
-                className='group flex items-center gap-6 bg-secondary/15 border border-secondary p-6 hover:border-[#092e20] transition-colors duration-300 relative'
-              >
-                <div className="absolute left-0 top-0 bottom-0 w-1 bg-[#092e20] scale-y-0 group-hover:scale-y-100 transition-transform origin-top"></div>
-                <div className="w-12 h-12 bg-secondary/40 flex items-center justify-center text-white group-hover:bg-[#092e20] transition-colors duration-300 border border-[#092e20]/30 group-hover:border-[#092e20] shrink-0">
-                  <LinkedinPlain size={20} />
-                </div>
-                <div className="flex flex-col">
-                  <span className="text-[10px] font-bold uppercase tracking-widest text-neutral-400 mb-1 block">LinkedIn</span>
-                  <span className="text-sm md:text-base font-bold tracking-tight text-foreground group-hover:text-white transition-colors duration-300">/in/{linkedin}</span>
-                </div>
-              </a>
-
-              <a 
-                target='_blank' 
-                href={`https://github.com/${github}`}
-                className='group flex items-center gap-6 bg-secondary/15 border border-secondary p-6 hover:border-[#092e20] transition-colors duration-300 relative'
-              >
-                <div className="absolute left-0 top-0 bottom-0 w-1 bg-[#092e20] scale-y-0 group-hover:scale-y-100 transition-transform origin-top"></div>
-                <div className="w-12 h-12 bg-secondary/40 flex items-center justify-center text-white group-hover:bg-[#092e20] transition-colors duration-300 border border-[#092e20]/30 group-hover:border-[#092e20] shrink-0">
-                  <SiGithub size={20} />
-                </div>
-                <div className="flex flex-col">
-                  <span className="text-[10px] font-bold uppercase tracking-widest text-neutral-400 mb-1 block">GitHub</span>
-                  <span className="text-sm md:text-base font-bold tracking-tight text-foreground group-hover:text-white transition-colors duration-300">@{github}</span>
-                </div>
-              </a>
-
-              <a 
-                target='_blank' 
-                href={`https://calendly.com/${calendly}`}
-                className='group flex items-center gap-6 bg-secondary/15 border border-secondary p-6 hover:border-[#092e20] transition-colors duration-300 relative'
-              >
-                <div className="absolute left-0 top-0 bottom-0 w-1 bg-[#092e20] scale-y-0 group-hover:scale-y-100 transition-transform origin-top"></div>
-                <div className="w-12 h-12 bg-secondary/40 flex items-center justify-center text-white group-hover:bg-[#092e20] transition-colors duration-300 border border-[#092e20]/30 group-hover:border-[#092e20] shrink-0">
-                  <FontAwesomeIcon icon={faCalendarAlt} className="text-lg" />
-                </div>
-                <div className="flex flex-col">
-                  <span className="text-[10px] font-bold uppercase tracking-widest text-neutral-400 mb-1 block">Calendly</span>
-                  <span className="text-sm md:text-base font-bold tracking-tight text-foreground group-hover:text-white transition-colors duration-300">Schedule a call</span>
-                </div>
-              </a>
+            <div className="mt-14 flex flex-col">
+              <div className="grid grid-cols-[110px_1fr] md:grid-cols-[130px_1fr] gap-6 py-5.5 border-t border-[#9be8b8]/12 items-baseline">
+                <span className="font-mono text-[10px] tracking-[0.16em] uppercase text-[#dfe5e0]/40">Email</span>
+                <a href={`mailto:${email}`} className="font-mono font-medium text-[15px] tracking-[0.04em] text-[#dfe5e0] hover:text-[#9be8b8] transition-colors duration-300 break-all">
+                  {email}
+                </a>
+              </div>
+              <div className="grid grid-cols-[110px_1fr] md:grid-cols-[130px_1fr] gap-6 py-5.5 border-t border-[#9be8b8]/12 items-baseline">
+                <span className="font-mono text-[10px] tracking-[0.16em] uppercase text-[#dfe5e0]/40">Call</span>
+                <a
+                  href={`https://calendly.com/${calendly}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2.5 font-mono font-medium text-[15px] tracking-[0.04em] text-[#dfe5e0] hover:text-[#9be8b8] transition-colors duration-300 break-all"
+                >
+                  <Calendar size={14} className="shrink-0" />
+                  calendly.com/{calendly} ↗
+                </a>
+              </div>
+              <div className="grid grid-cols-[110px_1fr] md:grid-cols-[130px_1fr] gap-6 py-5.5 border-t border-[#9be8b8]/12 items-baseline">
+                <span className="font-mono text-[10px] tracking-[0.16em] uppercase text-[#dfe5e0]/40">Social</span>
+                <span className="flex flex-wrap gap-x-7 gap-y-2 font-mono font-medium text-xs tracking-[0.14em] uppercase">
+                  <a
+                    href={`https://github.com/${github}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 whitespace-nowrap text-[#dfe5e0] hover:text-[#9be8b8] transition-colors duration-300"
+                  >
+                    <SiGithub size={13} />
+                    GitHub ↗
+                  </a>
+                  <a
+                    href={`https://linkedin.com/in/${linkedin}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 whitespace-nowrap text-[#dfe5e0] hover:text-[#9be8b8] transition-colors duration-300"
+                  >
+                    <Linkedin size={13} />
+                    LinkedIn ↗
+                  </a>
+                </span>
+              </div>
+              <div className="grid grid-cols-[110px_1fr] md:grid-cols-[130px_1fr] gap-6 py-5.5 border-t border-b border-[#9be8b8]/12 items-baseline">
+                <span className="font-mono text-[10px] tracking-[0.16em] uppercase text-[#dfe5e0]/40">Base</span>
+                <span className="font-mono font-medium text-[15px] tracking-[0.04em] text-[#dfe5e0]">
+                  Guatemala City — UTC−6, remote worldwide
+                </span>
+              </div>
             </div>
           </div>
-          
-          <div className="basis-full lg:basis-2/3 w-full">
-            <div className="bg-secondary/15 border border-secondary p-8 lg:p-12 relative group">
-              <div className="absolute top-0 right-0 w-4 h-4 border-t-2 border-r-2 border-[#092e20] opacity-50"></div>
-              <div className="absolute bottom-0 left-0 w-4 h-4 border-b-2 border-l-2 border-[#092e20] opacity-50"></div>
+
+          {/* Right — form card */}
+          <div className="lg:col-span-6">
+            <div className="border border-[#9be8b8]/12 rounded bg-[#0c100d]/90 p-8 md:p-12">
+              <div className="font-mono text-[11px] tracking-[0.18em] uppercase text-[#46d386] mb-8">
+                Start a Project
+              </div>
               <ContactForm />
             </div>
           </div>
         </div>
       </div>
+
+      {/* PROCESS */}
+      <div className="py-24 border-t border-[#9be8b8]/8">
+        <div className="mx-auto max-w-7xl px-6">
+          <div className="font-mono text-[11px] tracking-[0.18em] uppercase text-[#46d386] mb-4">
+            What Happens Next
+          </div>
+          <h2 className="font-serif font-medium text-4xl md:text-5xl text-[#f2f4f0] mb-14">
+            From message to production
+          </h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-px bg-[#9be8b8]/10 border border-[#9be8b8]/10">
+            {processSteps.map((step) => (
+              <div key={step.number} className="bg-[#0c100d]/90 p-10">
+                <div className="font-serif font-medium text-[44px] leading-none text-[#9be8b8]/25 mb-4.5">
+                  {step.number}
+                </div>
+                <div className="font-serif font-medium text-[22px] text-[#f2f4f0] mb-2.5">
+                  {step.title}
+                </div>
+                <p className="font-heading text-[13px] leading-[1.7] text-[#dfe5e0]/55">
+                  {step.description}
+                </p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      {/* CTA STRIP */}
+      <div className="py-22 border-t border-[#9be8b8]/8 text-center relative overflow-hidden">
+        <div
+          className="absolute inset-0 z-0 pointer-events-none"
+          style={{ background: 'radial-gradient(700px 400px at 50% 100%, rgba(37,84,58,0.2), transparent 70%)' }}
+        ></div>
+        <div className="relative z-10 px-6">
+          <div className="font-mono text-[11px] tracking-[0.18em] uppercase text-[#46d386] mb-6">
+            Prefer to skip the form?
+          </div>
+          <div className="font-serif font-medium text-4xl md:text-[52px] leading-[1.1] text-[#f2f4f0]">
+            Book 30 minutes, <span className="italic text-[#9be8b8]">directly</span>.
+          </div>
+          <a
+            href={`https://calendly.com/${calendly}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-block mt-9 font-mono font-medium text-xs tracking-[0.18em] uppercase text-[#dfe5e0] border border-[#9be8b8]/35 px-8 py-4 rounded-sm hover:bg-[#9be8b8]/10 transition-colors duration-300"
+          >
+            Open Calendly ↗
+          </a>
+        </div>
+      </div>
     </section>
-  )
-}
+  );
+};

@@ -294,6 +294,8 @@ export interface ContactSubmission {
   email: string;
   subject?: string | null;
   phone?: string | null;
+  company?: string | null;
+  budget?: string | null;
   message: string;
   status: 'new' | 'contacted';
   notes?: string | null;
@@ -563,6 +565,8 @@ export interface ContactSubmissionsSelect<T extends boolean = true> {
   email?: T;
   subject?: T;
   phone?: T;
+  company?: T;
+  budget?: T;
   message?: T;
   status?: T;
   notes?: T;
