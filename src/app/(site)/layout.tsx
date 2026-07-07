@@ -126,7 +126,7 @@ export default function RootLayout({
   return (
     <html lang="en" data-theme="custom" className="scroll-smooth">
       <GoogleAnalytics gaId={envs.googleAnalyticsId} />
-      <body className={`antialiased flex flex-col min-h-screen text-foreground bg-background ${archivo.variable} ${spaceGrotesk.variable} ${ibmPlexMono.variable} ${cormorantGaramond.variable}`}>
+      <body className={`antialiased flex flex-col min-h-screen text-foreground ${archivo.variable} ${spaceGrotesk.variable} ${ibmPlexMono.variable} ${cormorantGaramond.variable}`}>
         <AmbientBackground />
         <ScrollRevealInit />
         <Navbar />

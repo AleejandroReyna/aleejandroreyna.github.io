@@ -32,28 +32,37 @@
   --color-secondary: #171717;
   --color-cta: #092e20;
   --color-cta-hover: #0e442f;
-  --font-heading: var(--font-heading);
-  --font-body: var(--font-body);
-  --font-mono: var(--font-mono);
-  --font-serif: var(--font-serif);
+  --font-heading: var(--font-archivo), sans-serif;
+  --font-body: var(--font-space-grotesk), sans-serif;
+  --font-mono: var(--font-ibm-plex-mono), monospace;
+  --font-serif: var(--font-cormorant-garamond), serif;
+  /* Emerald accent scale from the Claude design (Obsidian & Emerald) */
+  --color-emerald-bright: #46d386;
+  --color-emerald-soft: #9be8b8;
+  --color-emerald-deep: #25543a;
 }
 
-body {
-  /* Base color lives on the fixed .ambient-bg layer; body stays transparent
-     so the animated background shows through on every page. */
-  background: transparent;
-  color: var(--foreground);
-  font-family: var(--font-body);
-  letter-spacing: -0.02em;
-}
+/* Keep base element styles inside @layer base: unlayered CSS always beats
+   Tailwind's layered utilities, so an unlayered h1 rule here would override
+   classes like font-serif no matter their specificity. */
+@layer base {
+  body {
+    /* Base color lives on the fixed .ambient-bg layer; body stays transparent
+       so the animated background shows through on every page. */
+    background: transparent;
+    color: var(--foreground);
+    font-family: var(--font-body);
+    letter-spacing: -0.02em;
+  }
 
-main {
-  flex: auto;
-}
+  main {
+    flex: auto;
+  }
 
-h1, h2, h3, h4, h5, h6 {
-  font-family: var(--font-heading);
-  letter-spacing: -0.03em;
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-heading);
+    letter-spacing: -0.03em;
+  }
 }
 
 /* Liquid Glass Utilities */
