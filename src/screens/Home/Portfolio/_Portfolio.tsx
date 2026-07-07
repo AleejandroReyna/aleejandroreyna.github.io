@@ -96,8 +96,11 @@ export const Portfolio = async () => {
                 <img
                   src={thumbnailUrl(featured)}
                   alt={featured.name}
-                  className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                  className="absolute inset-0 w-full h-full object-cover grayscale brightness-[0.7] group-hover:grayscale-[0.4] group-hover:brightness-[0.85] group-hover:scale-105 transition-all duration-700"
                 />
+                {/* Emerald tint — blends real screenshots into the theme */}
+                <div className="absolute inset-0 bg-[#25543a]/70 mix-blend-multiply pointer-events-none"></div>
+<div className="absolute inset-0 bg-[#0a0d0b]/40 pointer-events-none"></div>
                 <div
                   className="absolute inset-0 pointer-events-none"
                   style={{ background: 'linear-gradient(to top, rgba(6,9,7,0.95) 0%, rgba(6,9,7,0.55) 32%, rgba(6,9,7,0.05) 60%)' }}
@@ -132,8 +135,10 @@ export const Portfolio = async () => {
                     <img
                       src={thumbnailUrl(project)}
                       alt={project.name}
-                      className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                      className="absolute inset-0 w-full h-full object-cover grayscale brightness-[0.7] group-hover:grayscale-[0.4] group-hover:brightness-[0.85] group-hover:scale-105 transition-all duration-700"
                     />
+                    <div className="absolute inset-0 bg-[#25543a]/70 mix-blend-multiply pointer-events-none"></div>
+<div className="absolute inset-0 bg-[#0a0d0b]/40 pointer-events-none"></div>
                     <div
                       className="absolute inset-0 pointer-events-none"
                       style={{ background: 'linear-gradient(to top, rgba(6,9,7,0.95) 0%, rgba(6,9,7,0.55) 38%, rgba(6,9,7,0.05) 65%)' }}
