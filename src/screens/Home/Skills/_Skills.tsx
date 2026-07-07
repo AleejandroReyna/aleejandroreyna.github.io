@@ -1,5 +1,5 @@
 'use client';
-import { motion } from "motion/react";
+import { motion, Variants } from "motion/react";
 
 // Mock data shaped like the `capabilities` Payload collection — swap for a
 // payload.find({ collection: "capabilities", sort: "order" }) when ready.
@@ -48,7 +48,7 @@ const capabilities = [
 
 const romanNumerals = ["I.", "II.", "III.", "IV.", "V.", "VI."];
 
-const containerVariants = {
+const containerVariants: Variants = {
   hidden: { opacity: 0 },
   visible: {
     opacity: 1,
@@ -58,7 +58,7 @@ const containerVariants = {
   }
 };
 
-const cardVariants = {
+const cardVariants: Variants = {
   hidden: { opacity: 0, y: 16 },
   visible: {
     opacity: 1,

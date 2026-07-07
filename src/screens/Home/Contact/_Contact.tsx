@@ -3,7 +3,7 @@ import { useActionState, useEffect, useRef } from "react";
 import { SiGithub } from '@icons-pack/react-simple-icons';
 import { Linkedin, Calendar } from "lucide-react";
 import { submitContactForm, ContactFormState } from "@/lib/actions/contact";
-import { motion } from "motion/react";
+import { motion, Variants } from "motion/react";
 
 interface ContactProps {
   contactEmail: string;
@@ -18,7 +18,7 @@ const initialState: ContactFormState = {
   message: '',
 };
 
-const containerVariants = {
+const containerVariants: Variants = {
   hidden: { opacity: 0 },
   visible: {
     opacity: 1,
@@ -28,7 +28,7 @@ const containerVariants = {
   }
 };
 
-const itemVariants = {
+const itemVariants: Variants = {
   hidden: { opacity: 0, y: 16 },
   visible: {
     opacity: 1,

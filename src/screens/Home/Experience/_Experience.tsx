@@ -1,6 +1,6 @@
 'use client';
 import type { ExperienceDetail, Company } from "@/payload-types";
-import { motion } from "motion/react";
+import { motion, Variants } from "motion/react";
 
 interface ExperienceProps {
   experiences: ExperienceDetail[];
@@ -27,7 +27,7 @@ function richTextToPlainText(content: ExperienceDetail['content']): string {
     .join(' ');
 }
 
-const containerVariants = {
+const containerVariants: Variants = {
   hidden: { opacity: 0 },
   visible: {
     opacity: 1,
@@ -37,7 +37,7 @@ const containerVariants = {
   }
 };
 
-const rowVariants = {
+const rowVariants: Variants = {
   hidden: { opacity: 0, y: 14 },
   visible: {
     opacity: 1,

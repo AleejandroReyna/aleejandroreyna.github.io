@@ -42,9 +42,9 @@ export const Navbar = () => {
 
   return (
     <motion.header 
-      initial={{ y: -100 }}
-      animate={{ y: 0 }}
-      transition={{ type: "spring", stiffness: 300, damping: 30 }}
+      initial={{ opacity: 0, y: -12 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
       className={`fixed top-0 left-0 right-0 z-50 bg-black/30 backdrop-blur-md transition-all duration-500 ${
         scrolled ? "py-4" : "py-6"
       }`}
