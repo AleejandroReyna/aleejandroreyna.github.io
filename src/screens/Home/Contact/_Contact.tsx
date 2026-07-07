@@ -49,7 +49,7 @@ export const Contact = ({ contactEmail, githubUser, linkedinUser, calendlyUser }
   }, [state.success]);
 
   return (
-    <section className="py-32 bg-background relative overflow-hidden" id="contact">
+    <section className="py-32 relative overflow-hidden" id="contact">
       <div className="mx-auto max-w-7xl px-6 relative z-10">
         
         {/* Heading */}

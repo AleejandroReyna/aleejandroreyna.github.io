@@ -11,7 +11,7 @@ export const Content = async () => {
   const { github, linkedin, calendly } = settings.social || {};
 
   return (
-    <section className="bg-background text-foreground flex-auto w-full py-32 px-6 relative overflow-hidden" id="contact">
+    <section className="text-foreground flex-auto w-full py-32 px-6 relative overflow-hidden" id="contact">
       {/* Background Line Accent */}
       <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-secondary to-transparent"></div>
 

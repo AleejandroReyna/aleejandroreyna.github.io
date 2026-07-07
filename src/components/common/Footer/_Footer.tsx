@@ -11,7 +11,7 @@ export const Footer = async () => {
   const settings = await getSiteSettings();
   const { github, linkedin, calendly, email } = settings.social || {};
   return (
-    <footer className="bg-background border-t border-secondary/50 relative overflow-hidden">
+    <footer className="border-t border-secondary/50 relative overflow-hidden">
       {/* Main Footer Content */}
       <div className="mx-auto max-w-7xl px-6 py-20 relative z-10">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-16 lg:gap-12">
@@ -104,7 +104,7 @@ export const Footer = async () => {
       </div>
 
       {/* Bottom Bar */}
-      <div className="border-t border-secondary/50 bg-background relative z-10">
+      <div className="border-t border-secondary/50 relative z-10">
         <div className="mx-auto max-w-7xl px-6 py-6">
           <div className="flex flex-col md:flex-row justify-between items-center gap-4 text-[10px] font-bold uppercase tracking-widest text-neutral-400">
             <p className="flex items-center gap-2">

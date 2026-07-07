@@ -35,7 +35,9 @@
 }
 
 body {
-  background: var(--background);
+  /* Base color lives on the fixed .ambient-bg layer; body stays transparent
+     so the animated background shows through on every page. */
+  background: transparent;
   color: var(--foreground);
   font-family: var(--font-body);
   letter-spacing: -0.02em;

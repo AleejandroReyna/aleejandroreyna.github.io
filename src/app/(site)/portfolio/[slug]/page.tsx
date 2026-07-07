@@ -53,10 +53,10 @@ export default async function ProjectDetailPage({ params }: Props) {
     }
 
     return (
-        <main className="bg-background min-h-screen pb-32">
+        <main className="min-h-screen pb-32">
             <PageTitle title={project.name} description="Project Details" />
 
-            <section className="py-16 relative overflow-hidden bg-background">
+            <section className="py-16 relative overflow-hidden">
                 <div className="mx-auto max-w-7xl px-6">
 
                     <div className="mb-12 border border-secondary relative group overflow-hidden">

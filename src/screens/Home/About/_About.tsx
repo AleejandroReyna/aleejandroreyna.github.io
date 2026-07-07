@@ -4,7 +4,7 @@ import { motion } from "motion/react"
 
 export const About = () => {
   return (
-    <section className="py-32 bg-background relative overflow-hidden" id="about">
+    <section className="py-32 relative overflow-hidden" id="about">
       <div className="mx-auto max-w-7xl px-6 relative z-10">
         
         {/* Heading */}

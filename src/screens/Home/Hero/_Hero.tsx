@@ -5,7 +5,7 @@ export const Hero = async () => {
   const settings = await getSiteSettings();
   const { github, linkedin, calendly } = settings.social || {};
   return (
-    <section className="min-h-screen bg-background relative overflow-hidden flex flex-col justify-center pt-24" id="home">
+    <section className="min-h-screen relative overflow-hidden flex flex-col justify-center pt-24" id="home">
       
       {/* Tech Grid Background overlay */}
       <div className="absolute inset-0 z-0 opacity-20 pointer-events-none" style={{ backgroundImage: 'radial-gradient(#171717 1px, transparent 1px)', backgroundSize: '40px 40px' }}></div>

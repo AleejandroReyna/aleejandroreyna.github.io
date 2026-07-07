@@ -10,6 +10,7 @@ export const dynamic = 'force-dynamic'
 import { Navbar } from "@/components/common/Navbar";
 import { Footer } from "@/components/common/Footer";
 import { ScrollRevealInit } from "@/components/common/ScrollRevealInit";
+import { AmbientBackground } from "@/components/common/AmbientBackground";
 import { GoogleAnalytics } from '@next/third-parties/google'
 import { envs } from "@/lib/envs";
 
@@ -113,6 +114,7 @@ export default function RootLayout({
     <html lang="en" data-theme="custom" className="scroll-smooth">
       <GoogleAnalytics gaId={envs.googleAnalyticsId} />
       <body className={`antialiased flex flex-col min-h-screen text-foreground bg-background ${archivo.variable} ${spaceGrotesk.variable}`}>
+        <AmbientBackground />
         <ScrollRevealInit />
         <Navbar />
         {children}

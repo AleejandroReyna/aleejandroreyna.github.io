@@ -17,7 +17,7 @@ export const Portfolio = async () => {
   })
 
   return (
-    <section className="bg-background py-32 relative overflow-hidden" id="portfolio">
+    <section className="py-32 relative overflow-hidden" id="portfolio">
       {/* Background Accent */}
       <div className="absolute top-1/2 right-0 w-1/3 h-1/2 bg-secondary/5 rounded-full blur-[120px] pointer-events-none"></div>
 

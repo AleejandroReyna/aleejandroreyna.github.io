@@ -23,7 +23,7 @@ const cardVariants = {
 
 export const Skills = () => {
     return (
-        <section className="bg-background py-32 relative overflow-hidden" id="skills">
+        <section className="py-32 relative overflow-hidden" id="skills">
             {/* Tech background elements */}
             <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-secondary to-transparent"></div>
             

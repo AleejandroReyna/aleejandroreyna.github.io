@@ -50,7 +50,7 @@ export const Experience = ({ experiences }: ExperienceProps) => {
   if (experiences.length === 0) return null;
 
   return (
-    <section className="py-32 bg-background relative overflow-hidden" id="experience">
+    <section className="py-32 relative overflow-hidden" id="experience">
       {/* Tech grid overlay */}
       <div className="absolute inset-0 z-0 opacity-10 pointer-events-none" style={{ backgroundImage: 'radial-gradient(#171717 1px, transparent 1px)', backgroundSize: '40px 40px' }}></div>
 
