@@ -14,9 +14,9 @@ export const About = () => {
 
         {/* Left column — section label + headline */}
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
+          transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
           viewport={{ once: true }}
           className="lg:col-span-5"
         >
@@ -31,9 +31,9 @@ export const About = () => {
 
         {/* Right column — quote, story, and the two pillars */}
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.15 }}
+          transition={{ duration: 0.9, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
           viewport={{ once: true }}
           className="lg:col-span-7"
         >

@@ -38,11 +38,11 @@ const containerVariants = {
 };
 
 const rowVariants = {
-  hidden: { opacity: 0, y: 20 },
+  hidden: { opacity: 0, y: 14 },
   visible: {
     opacity: 1,
     y: 0,
-    transition: { duration: 0.5 }
+    transition: { duration: 0.9, ease: [0.16, 1, 0.3, 1] }
   }
 };
 
@@ -61,9 +61,9 @@ export const Experience = ({ experiences }: ExperienceProps) => {
 
         {/* Heading */}
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
+          transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
           viewport={{ once: true }}
         >
           <div className="font-mono text-[11px] tracking-[0.18em] uppercase text-[#46d386] mb-4">

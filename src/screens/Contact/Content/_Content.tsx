@@ -1,6 +1,7 @@
 import { getSiteSettings } from "@/lib/payload";
 import { SiGithub } from '@icons-pack/react-simple-icons';
 import { Linkedin, Calendar } from 'lucide-react';
+import { AnimateIn } from "@/components/ds/AnimateIn";
 import { ContactForm } from './ContactForm';
 
 const processSteps = [
@@ -42,7 +43,7 @@ export const Content = async () => {
         <div className="mx-auto max-w-7xl px-6 relative z-10 grid grid-cols-1 lg:grid-cols-11 gap-14 lg:gap-20">
 
           {/* Left — headline + contact rows */}
-          <div className="lg:col-span-5">
+          <AnimateIn className="lg:col-span-5">
             <div className="flex items-center gap-2.5 mb-7 font-mono text-[11px] tracking-[0.2em] uppercase text-[#dfe5e0]/50">
               <span className="w-1.5 h-1.5 rounded-full bg-[#46d386] animate-pulse"></span>
               Status: Available — 2026
@@ -104,29 +105,32 @@ export const Content = async () => {
                 </span>
               </div>
             </div>
-          </div>
+          </AnimateIn>
 
           {/* Right — form card */}
-          <div className="lg:col-span-6">
+          <AnimateIn delay={0.15} className="lg:col-span-6">
             <div className="border border-[#9be8b8]/12 rounded bg-[#0c100d]/90 p-8 md:p-12">
               <div className="font-mono text-[11px] tracking-[0.18em] uppercase text-[#46d386] mb-8">
                 Start a Project
               </div>
               <ContactForm />
             </div>
-          </div>
+          </AnimateIn>
         </div>
       </div>
 
       {/* PROCESS */}
       <div className="py-24 border-t border-[#9be8b8]/8">
         <div className="mx-auto max-w-7xl px-6">
+          <AnimateIn>
           <div className="font-mono text-[11px] tracking-[0.18em] uppercase text-[#46d386] mb-4">
             What Happens Next
           </div>
           <h2 className="font-serif font-medium text-4xl md:text-5xl text-[#f2f4f0] mb-14">
             From message to production
           </h2>
+          </AnimateIn>
+          <AnimateIn delay={0.15}>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-px bg-[#9be8b8]/10 border border-[#9be8b8]/10">
             {processSteps.map((step) => (
               <div key={step.number} className="bg-[#0c100d]/90 p-10">
@@ -142,6 +146,7 @@ export const Content = async () => {
               </div>
             ))}
           </div>
+          </AnimateIn>
         </div>
       </div>
 
@@ -151,7 +156,7 @@ export const Content = async () => {
           className="absolute inset-0 z-0 pointer-events-none"
           style={{ background: 'radial-gradient(700px 400px at 50% 100%, rgba(37,84,58,0.2), transparent 70%)' }}
         ></div>
-        <div className="relative z-10 px-6">
+        <AnimateIn className="relative z-10 px-6">
           <div className="font-mono text-[11px] tracking-[0.18em] uppercase text-[#46d386] mb-6">
             Prefer to skip the form?
           </div>
@@ -166,7 +171,7 @@ export const Content = async () => {
           >
             Open Calendly ↗
           </a>
-        </div>
+        </AnimateIn>
       </div>
     </section>
   );

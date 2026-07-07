@@ -29,11 +29,11 @@ const containerVariants = {
 };
 
 const itemVariants = {
-  hidden: { opacity: 0, y: 30 },
+  hidden: { opacity: 0, y: 16 },
   visible: {
     opacity: 1,
     y: 0,
-    transition: { duration: 0.6 }
+    transition: { duration: 0.9, ease: [0.16, 1, 0.3, 1] }
   }
 };
 

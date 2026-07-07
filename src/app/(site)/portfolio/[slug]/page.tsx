@@ -7,6 +7,7 @@ import { RichText } from '@payloadcms/richtext-lexical/react'
 
 import { Media, Technology } from "@/payload-types"
 import { getSiteSettings } from "@/lib/payload"
+import { AnimateIn } from "@/components/ds/AnimateIn"
 
 interface Props {
     params: Promise<{ slug: string }>
@@ -90,6 +91,7 @@ export default async function ProjectDetailPage({ params }: Props) {
                     style={{ background: 'radial-gradient(900px 420px at 18% -10%, rgba(37,84,58,0.3), transparent 70%)' }}
                 ></div>
                 <div className="mx-auto max-w-7xl px-6 relative z-10">
+                    <AnimateIn>
                     <Link
                         href="/portfolio"
                         className="font-mono text-[11px] tracking-[0.18em] uppercase text-[#dfe5e0]/45 hover:text-[#9be8b8] transition-colors duration-300"
@@ -116,6 +118,7 @@ export default async function ProjectDetailPage({ params }: Props) {
                             </a>
                         )}
                     </div>
+                    </AnimateIn>
                 </div>
             </div>
 
@@ -143,6 +146,7 @@ export default async function ProjectDetailPage({ params }: Props) {
 
             {/* HERO IMAGE */}
             <div className="mx-auto max-w-7xl px-6 py-16">
+                <AnimateIn delay={0.15}>
                 <div className="relative rounded overflow-hidden border border-[#9be8b8]/12">
                     <img
                         src={thumbnail}
@@ -153,25 +157,26 @@ export default async function ProjectDetailPage({ params }: Props) {
                     <div className="absolute inset-0 bg-[#25543a]/60 mix-blend-multiply pointer-events-none"></div>
 <div className="absolute inset-0 bg-[#0a0d0b]/30 pointer-events-none"></div>
                 </div>
+                </AnimateIn>
             </div>
 
             {/* OVERVIEW */}
             <div className="mx-auto max-w-7xl px-6 pb-24 grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-20">
-                <div className="lg:col-span-5">
+                <AnimateIn className="lg:col-span-5">
                     <div className="font-mono text-[11px] tracking-[0.18em] uppercase text-[#46d386] mb-5">
                         01 — Overview
                     </div>
                     <h2 className="font-serif font-medium text-4xl md:text-[44px] leading-[1.1] text-[#f2f4f0]">
                         About the project<span className="text-[#46d386]">.</span>
                     </h2>
-                </div>
-                <div className="lg:col-span-7">
+                </AnimateIn>
+                <AnimateIn delay={0.15} className="lg:col-span-7">
                     {project.content && (
                         <div className="prose prose-invert max-w-none font-heading text-[15px] leading-[1.8] text-[#dfe5e0]/65 prose-p:text-[#dfe5e0]/65 prose-headings:font-serif prose-headings:text-[#f2f4f0]">
                             <RichText data={project.content} />
                         </div>
                     )}
-                </div>
+                </AnimateIn>
             </div>
 
             {/* CTA */}
@@ -180,7 +185,7 @@ export default async function ProjectDetailPage({ params }: Props) {
                     className="absolute inset-0 z-0 pointer-events-none"
                     style={{ background: 'radial-gradient(700px 400px at 50% 100%, rgba(37,84,58,0.2), transparent 70%)' }}
                 ></div>
-                <div className="relative z-10 px-6">
+                <AnimateIn className="relative z-10 px-6">
                     <div className="font-serif font-medium text-4xl md:text-[64px] leading-[1.05] text-[#f2f4f0]">
                         Want results like these<span className="italic text-[#9be8b8]">?</span>
                     </div>
@@ -192,7 +197,7 @@ export default async function ProjectDetailPage({ params }: Props) {
                             {contactEmail}
                         </a>
                     )}
-                </div>
+                </AnimateIn>
             </div>
 
             {/* NEXT PROJECT */}
