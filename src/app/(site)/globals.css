@@ -21,6 +21,8 @@
   --foreground: #ffffff;
   --font-heading: var(--font-archivo), sans-serif;
   --font-body: var(--font-space-grotesk), sans-serif;
+  --font-mono: var(--font-ibm-plex-mono), monospace;
+  --font-serif: var(--font-cormorant-garamond), serif;
 }
 
 @theme inline {
@@ -32,6 +34,8 @@
   --color-cta-hover: #0e442f;
   --font-heading: var(--font-heading);
   --font-body: var(--font-body);
+  --font-mono: var(--font-mono);
+  --font-serif: var(--font-serif);
 }
 
 body {
