@@ -1,14 +1,18 @@
-import Image from "next/image"
 import Link from "next/link"
 import { getPayload } from "payload"
 import config from "@payload-config"
-import * as Icons from "@icons-pack/react-simple-icons"
-import { Technology, Media } from "@/payload-types"
-import { ArrowRight } from "lucide-react"
+import { Technology, Media, Project } from "@/payload-types"
 
 interface Props {
   searchParams?: { [key: string]: string | string[] | undefined };
 }
+
+const FALLBACK_IMAGE = "https://place-hold.it/1200x800"
+
+const thumbnailUrl = (project: Project) =>
+  project.thumbnail && typeof project.thumbnail !== "string"
+    ? (project.thumbnail as Media).url || FALLBACK_IMAGE
+    : FALLBACK_IMAGE
 
 export const List = async ({ searchParams }: Props) => {
   const payload = await getPayload({ config })
@@ -42,89 +46,99 @@ export const List = async ({ searchParams }: Props) => {
   return (
     <section>
       {result.docs.length === 0 && (
-          <p className="text-neutral-400 font-medium bg-secondary/10 border border-secondary p-8 text-center uppercase tracking-widest text-xs">No projects found matching the selected filters.</p>
+        <p className="font-mono text-xs tracking-[0.14em] uppercase text-[#dfe5e0]/45 border border-[#9be8b8]/12 p-8 text-center mb-7">
+          No projects found matching the selected filters.
+        </p>
       )}
 
-      {result.docs.map((project) => {
-         const releaseYear = project.releaseDate ? new Date(project.releaseDate).getFullYear() : ''
-         
-         return (
-          <article key={project.id} className="group bg-secondary/15 border border-secondary hover:border-[#092e20] transition-colors duration-300 relative flex flex-col md:flex-row mb-8 overflow-hidden">
-            <div className="absolute top-0 left-0 w-2 h-2 bg-[#092e20] opacity-0 group-hover:opacity-100 transition-opacity"></div>
-            
-            <figure className="relative md:w-2/5 min-h-[240px] bg-secondary/35 border-b md:border-b-0 md:border-r border-secondary group-hover:border-[#092e20] transition-colors duration-300 overflow-hidden">
-              {project.thumbnail && typeof project.thumbnail !== 'string' ? (
-                 <img
-                    src={(project.thumbnail as Media).url!}
-                    alt={project.name}
-                    className="object-cover h-full w-full grayscale contrast-125 opacity-60 group-hover:grayscale-0 group-hover:opacity-100 group-hover:scale-105 transition-all duration-500 mix-blend-luminosity group-hover:mix-blend-normal"
-                 />
-              ) : (
-                <img
-                  src="https://place-hold.it/400x250"
-                  alt="Placeholder"
-                  className="object-cover h-full w-full grayscale contrast-125 opacity-60 group-hover:grayscale-0 group-hover:opacity-100 group-hover:scale-105 transition-all duration-500 mix-blend-luminosity group-hover:mix-blend-normal"
-                />
-              )}
-              {/* Tech overlay pattern */}
-              <div className="absolute inset-0 z-10 opacity-20 pointer-events-none mix-blend-overlay" style={{ backgroundImage: 'linear-gradient(rgba(255, 255, 255, 0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, 0.1) 1px, transparent 1px)', backgroundSize: '10px 10px' }}></div>
-              
-              {releaseYear && (
-                <div className="absolute top-4 right-4 z-20">
-                  <span className="px-2 py-1 bg-background/80 border border-[#092e20] text-[10px] font-bold text-white uppercase tracking-widest">{releaseYear}</span>
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-7">
+        {result.docs.map((project) => {
+          const releaseYear = project.releaseDate ? new Date(project.releaseDate).getFullYear() : null
+          const category =
+            project.company && typeof project.company !== 'string'
+              ? project.company.name
+              : 'Project'
+          const techLine = project.technologies
+            ?.map((t) => (t as Technology).name)
+            .filter(Boolean)
+            .slice(0, 4)
+            .join(' · ')
+
+          return (
+            <Link
+              key={project.id}
+              href={`/portfolio/${project.slug}`}
+              className="relative h-[340px] md:h-[400px] rounded overflow-hidden border border-[#9be8b8]/12 block group"
+            >
+              <img
+                src={thumbnailUrl(project)}
+                alt={project.name}
+                className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+              />
+              <div
+                className="absolute inset-0 pointer-events-none"
+                style={{ background: 'linear-gradient(to top, rgba(6,9,7,0.95) 0%, rgba(6,9,7,0.5) 40%, rgba(6,9,7,0.05) 68%)' }}
+              ></div>
+              <div className="absolute left-0 right-0 bottom-0 p-7 md:p-8">
+                <div className="flex justify-between items-baseline mb-2.5">
+                  <span className="font-mono text-[11px] tracking-[0.18em] uppercase text-[#46d386]">
+                    {category}
+                  </span>
+                  {releaseYear && (
+                    <span className="font-mono text-[11px] text-[#dfe5e0]/50">{releaseYear}</span>
+                  )}
                 </div>
-              )}
-            </figure>
-            
-            <div className="p-8 flex-grow flex flex-col justify-between relative z-10 bg-background/50 md:w-3/5">
-              <div>
-                <h2 className="text-2xl font-heading font-bold text-foreground mb-1 tracking-tight group-hover:text-white transition-colors duration-300">{project.name}</h2>
-                {project.company && typeof project.company !== 'string' && (
-                    <p className="text-xs font-medium text-neutral-400 mb-6 tracking-widest uppercase">Client // {project.company.name}</p>
+                <h2 className="font-serif font-medium text-[32px] text-[#f2f4f0] mb-1.5">
+                  {project.name}
+                </h2>
+                {techLine && (
+                  <div className="font-heading text-[13px] leading-[1.6] text-[#dfe5e0]/70">
+                    {techLine}
+                  </div>
                 )}
               </div>
+            </Link>
+          )
+        })}
 
-              <div className="mt-6 pt-6 border-t border-secondary/50 flex flex-wrap gap-4">
-                {project.technologies?.map((techInput) => {
-                    const tech = techInput as Technology
-                    if (tech.icon) {
-                        const IconComponent = (Icons as any)[tech.icon]
-                        if (IconComponent) {
-                            return <div key={tech.id} className="text-neutral-400 group-hover:text-foreground transition-colors duration-300"><IconComponent size={20} title={tech.name} /></div>
-                        }
-                    }
-                    return <span key={tech.id} className="text-[10px] font-bold uppercase tracking-widest text-neutral-400">{tech.name}</span>
-                })}
-              </div>
-              
-              <div className="mt-8 flex justify-end">
-                <Link href={`/portfolio/${project.slug}`} className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-white hover:text-white transition-colors duration-300 group/link bg-secondary/20 px-4 py-2 border border-secondary group-hover:border-[#092e20] hover:bg-[#092e20]">
-                    See more <ArrowRight size={14} className="group-hover/link:translate-x-1 transition-transform" />
-                </Link>
-              </div>
-            </div>
-          </article>
-         )
-      })}
+        {/* NDA card — closes the grid like the design */}
+        <div className="rounded border border-dashed border-[#9be8b8]/25 flex flex-col items-center justify-center gap-3.5 min-h-[340px] md:min-h-[400px] text-center p-10">
+          <div className="font-serif font-medium italic text-[28px] text-[#dfe5e0]/70">
+            + 80 more under NDA
+          </div>
+          <div className="font-mono text-xs leading-[1.8] tracking-[0.1em] uppercase text-[#dfe5e0]/40">
+            Fintech · Logistics · Healthcare<br />
+            Ask about them in a call
+          </div>
+          <a
+            href="/#contact"
+            className="font-mono font-medium text-[11px] tracking-[0.16em] uppercase text-[#9be8b8] border-b border-[#9be8b8]/35 pb-1 mt-2 hover:text-white hover:border-white transition-colors duration-300"
+          >
+            Book a Call →
+          </a>
+        </div>
+      </div>
 
       {result.totalPages > 1 && (
-        <div className="flex justify-center gap-2 mt-12 pt-8 border-t border-secondary/30">
-            {Array.from({ length: result.totalPages }).map((_, i) => {
-                const pageNum = i + 1
-                const query = new URLSearchParams()
-                if (techs.length > 0) query.set('tech', techs.join(','))
-                query.set('page', pageNum.toString())
+        <div className="flex justify-center gap-2.5 mt-14">
+          {Array.from({ length: result.totalPages }).map((_, i) => {
+            const pageNum = i + 1
+            const query = new URLSearchParams()
+            if (techs.length > 0) query.set('tech', techs.join(','))
+            query.set('page', pageNum.toString())
 
-                return (
-                    <Link
-                        key={pageNum}
-                        href={`/portfolio?${query.toString()}`}
-                        className={`px-4 py-2 border text-xs font-bold transition-all duration-300 ${pageNum === result.page ? 'bg-[#092e20] border-[#092e20] text-white' : 'bg-transparent border-secondary text-neutral-400 hover:border-white hover:text-white'}`}
-                    >
-                        {pageNum}
-                    </Link>
-                )
-            })}
+            return (
+              <Link
+                key={pageNum}
+                href={`/portfolio?${query.toString()}`}
+                className={`font-mono text-[11px] tracking-[0.14em] px-4 py-2.5 rounded-sm transition-colors duration-300 ${pageNum === result.page
+                  ? 'bg-[#46d386] text-[#0a0d0b] font-medium'
+                  : 'text-[#dfe5e0]/55 border border-[#dfe5e0]/15 hover:border-[#9be8b8]/40 hover:text-[#9be8b8]'}`}
+              >
+                {pageNum}
+              </Link>
+            )
+          })}
         </div>
       )}
     </section>

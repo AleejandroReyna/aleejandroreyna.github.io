@@ -1,4 +1,3 @@
-import { PageTitle } from "@/components/ds/PageTitle"
 import { Content } from "./Content"
 
 interface Props {
@@ -8,7 +7,31 @@ interface Props {
 export const PortfolioScreen = ({ searchParams }: Props) => {
   return (
     <>
-      <PageTitle title="Portfolio" description="Some of my projects" />
+      {/* Archive header */}
+      <div className="pt-40 pb-14 relative overflow-hidden">
+        <div
+          className="absolute inset-0 z-0 pointer-events-none"
+          style={{ background: 'radial-gradient(900px 420px at 18% -10%, rgba(37,84,58,0.3), transparent 70%)' }}
+        ></div>
+        <div className="mx-auto max-w-7xl px-6 relative z-10">
+          <div className="font-mono text-[11px] tracking-[0.18em] uppercase text-[#46d386] mb-5">
+            The Archive
+          </div>
+          <div className="flex flex-col md:flex-row md:justify-between md:items-end gap-8 md:gap-16">
+            <h1 className="font-serif font-medium text-6xl md:text-8xl lg:text-[96px] leading-none text-[#f2f4f0]">
+              All projects<span className="text-[#46d386]">.</span>
+            </h1>
+            <div className="font-mono text-[11px] tracking-[0.14em] uppercase text-[#9be8b8]/60 md:text-right leading-loose shrink-0">
+              86+ Shipped since 2013<br />
+              30+ In production today
+            </div>
+          </div>
+          <p className="max-w-[520px] font-heading text-base leading-[1.7] text-[#dfe5e0]/60 mt-8">
+            Platforms, e-commerce, chatbots, and internal tools — a selection of what can be shown publicly.
+          </p>
+        </div>
+      </div>
+
       <Content searchParams={searchParams} />
     </>
   )
