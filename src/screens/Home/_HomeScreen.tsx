@@ -6,6 +6,7 @@ import { Testimonials } from "./Testimonials"
 import { Skills } from "./Skills"
 import { Resume } from "./Resume"
 import { Experience } from "./Experience"
+import { Approach } from "./Approach"
 import { Contact } from "./Contact"
 import { getSiteSettings, getExperienceDetails } from "@/lib/payload"
 
@@ -23,6 +24,7 @@ export const HomeScreen = async () => {
       <Testimonials />
       <Skills />
       <Experience experiences={experiences} />
+      <Approach />
       <Contact
         contactEmail={email || ''}
         githubUser={github || ''}
