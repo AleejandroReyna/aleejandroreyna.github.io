@@ -11,9 +11,9 @@ export const Approach = () => {
       ></div>
 
       <motion.div
-        initial={{ opacity: 0, y: 30 }}
+        initial={{ opacity: 0, y: 16 }}
         whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.7 }}
+        transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
         viewport={{ once: true }}
         className="mx-auto max-w-7xl px-6 relative z-10 text-center"
       >

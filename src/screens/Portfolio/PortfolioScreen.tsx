@@ -1,3 +1,4 @@
+import { AnimateIn } from "@/components/ds/AnimateIn"
 import { Content } from "./Content"
 
 interface Props {
@@ -14,6 +15,7 @@ export const PortfolioScreen = ({ searchParams }: Props) => {
           style={{ background: 'radial-gradient(900px 420px at 18% -10%, rgba(37,84,58,0.3), transparent 70%)' }}
         ></div>
         <div className="mx-auto max-w-7xl px-6 relative z-10">
+          <AnimateIn>
           <div className="font-mono text-[11px] tracking-[0.18em] uppercase text-[#46d386] mb-5">
             The Archive
           </div>
@@ -29,6 +31,7 @@ export const PortfolioScreen = ({ searchParams }: Props) => {
           <p className="max-w-[520px] font-heading text-base leading-[1.7] text-[#dfe5e0]/60 mt-8">
             Platforms, e-commerce, chatbots, and internal tools — a selection of what can be shown publicly.
           </p>
+          </AnimateIn>
         </div>
       </div>
 
