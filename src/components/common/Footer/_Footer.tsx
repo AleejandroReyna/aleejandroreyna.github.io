@@ -1,102 +1,97 @@
 import { yearsOfExperience } from "@/utils/yearsOfExperience";
 import { currentYear } from "@/utils/currentYear";
 import { SiGithub } from '@icons-pack/react-simple-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCalendarAlt } from '@fortawesome/free-solid-svg-icons';
-import { Mail, Heart, Linkedin, Terminal } from 'lucide-react';
+import { Mail, Linkedin, Calendar, Feather } from 'lucide-react';
 import { getSiteSettings } from "@/lib/payload";
-import { PythonOriginal } from "devicons-react";
 
 export const Footer = async () => {
   const settings = await getSiteSettings();
   const { github, linkedin, calendly, email } = settings.social || {};
   return (
-    <footer className="border-t border-secondary/50 relative overflow-hidden">
+    <footer className="border-t border-[#9be8b8]/8 relative overflow-hidden">
       {/* Main Footer Content */}
       <div className="mx-auto max-w-7xl px-6 py-20 relative z-10">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-16 lg:gap-12">
 
           {/* Brand Section */}
           <div className="lg:col-span-1">
-            <h3 className="text-3xl font-heading font-bold text-foreground mb-4 tracking-tighter flex items-center gap-2 group">
-              <div className="w-2 h-2 bg-[#092e20] group-hover:shadow-[0_0_15px_#092e20] transition-shadow duration-300"></div>
+            <h3 className="font-serif font-medium text-3xl text-[#f2f4f0] mb-4 flex items-center gap-3">
+              <Feather className="w-4.5 h-4.5 text-white" strokeWidth={1.75} />
               Alejandro Reyna
             </h3>
-            <p className="text-neutral-400 text-xs font-bold uppercase tracking-widest mb-6">Full-Stack Engineer</p>
-            <p className="text-neutral-400 text-sm font-medium leading-relaxed">
+            <p className="font-mono text-[11px] tracking-[0.16em] uppercase text-[#9be8b8]/70 mb-6">Full-Stack Engineer</p>
+            <p className="font-heading text-[13px] leading-[1.7] text-[#dfe5e0]/55">
               Architecting precision at every layer of the stack. {yearsOfExperience()}+ years building high-performance systems.
             </p>
           </div>
 
           {/* Quick Links */}
           <div>
-            <h4 className="text-sm font-bold font-heading text-foreground mb-6 uppercase tracking-widest flex items-center gap-2">
-              <span className="w-2 h-2 bg-[#092e20]"></span> Quick Links
+            <h4 className="font-mono text-[11px] tracking-[0.18em] uppercase text-[#46d386] mb-6">
+              Quick Links
             </h4>
             <nav className="space-y-4">
-              <a href="#home" className="block text-neutral-400 font-medium hover:text-white transition-colors uppercase text-xs tracking-widest">Home</a>
-              <a href="#about" className="block text-neutral-400 font-medium hover:text-white transition-colors uppercase text-xs tracking-widest">About</a>
-              <a href="#portfolio" className="block text-neutral-400 font-medium hover:text-white transition-colors uppercase text-xs tracking-widest">Portfolio</a>
-              <a href="#skills" className="block text-neutral-400 font-medium hover:text-white transition-colors uppercase text-xs tracking-widest">Expertise</a>
-              <a href="#contact" className="block text-neutral-400 font-medium hover:text-white transition-colors uppercase text-xs tracking-widest">Contact</a>
+              <a href="#home" className="block font-mono text-[11px] tracking-[0.16em] uppercase text-[#dfe5e0]/50 hover:text-[#9be8b8] transition-colors duration-300">Home</a>
+              <a href="#about" className="block font-mono text-[11px] tracking-[0.16em] uppercase text-[#dfe5e0]/50 hover:text-[#9be8b8] transition-colors duration-300">About</a>
+              <a href="#portfolio" className="block font-mono text-[11px] tracking-[0.16em] uppercase text-[#dfe5e0]/50 hover:text-[#9be8b8] transition-colors duration-300">Portfolio</a>
+              <a href="#skills" className="block font-mono text-[11px] tracking-[0.16em] uppercase text-[#dfe5e0]/50 hover:text-[#9be8b8] transition-colors duration-300">Expertise</a>
+              <a href="#contact" className="block font-mono text-[11px] tracking-[0.16em] uppercase text-[#dfe5e0]/50 hover:text-[#9be8b8] transition-colors duration-300">Contact</a>
             </nav>
           </div>
 
-          {/* Expertise */}
+          {/* Tech Stack */}
           <div>
-            <h4 className="text-sm font-bold font-heading text-foreground mb-6 uppercase tracking-widest flex items-center gap-2">
-              <span className="w-2 h-2 bg-[#092e20]"></span> Tech Stack
+            <h4 className="font-mono text-[11px] tracking-[0.18em] uppercase text-[#46d386] mb-6">
+              Tech Stack
             </h4>
-            <ul className="space-y-4 text-neutral-400 text-xs font-medium uppercase tracking-widest">
-              <li className="flex items-center gap-2 hover:text-foreground transition-colors"><span className="text-neutral-600">/</span> Next.js & React</li>
-              <li className="flex items-center gap-2 hover:text-foreground transition-colors"><span className="text-neutral-600">/</span> Python & Django</li>
-              <li className="flex items-center gap-2 hover:text-foreground transition-colors"><span className="text-neutral-600">/</span> Ruby on Rails</li>
-              <li className="flex items-center gap-2 hover:text-foreground transition-colors"><span className="text-neutral-600">/</span> Cloud & CI/CD</li>
+            <ul className="space-y-4 font-mono text-[11px] tracking-[0.16em] uppercase text-[#9be8b8]/55">
+              <li>/ Next.js &amp; React</li>
+              <li>/ Python &amp; Django</li>
+              <li>/ Ruby on Rails</li>
+              <li>/ Cloud &amp; CI/CD</li>
             </ul>
           </div>
 
-          {/* Connect */}
+          {/* Network */}
           <div>
-            <h4 className="text-sm font-bold font-heading text-foreground mb-6 uppercase tracking-widest flex items-center gap-2">
-              <span className="w-2 h-2 bg-[#092e20]"></span> Network
+            <h4 className="font-mono text-[11px] tracking-[0.18em] uppercase text-[#46d386] mb-6">
+              Network
             </h4>
-            <div className="space-y-4 mb-8">
-              <a
-                href={`mailto:${email}`}
-                className="flex items-center gap-3 text-foreground font-bold hover:text-white transition-all duration-300 p-4 bg-secondary/15 border border-secondary hover:border-[#092e20] hover:bg-[#092e20]/10 group"
-              >
-                <Mail size={16} className="text-neutral-400" />
-                <span className="text-xs uppercase tracking-widest">{email}</span>
-              </a>
-            </div>
+            <a
+              href={`mailto:${email}`}
+              className="inline-flex items-center gap-3 font-mono text-xs tracking-[0.08em] text-[#dfe5e0] border-b border-[#9be8b8]/40 pb-1.5 mb-8 hover:text-[#9be8b8] hover:border-[#9be8b8] transition-colors duration-300"
+            >
+              <Mail size={13} />
+              {email}
+            </a>
 
-            <div className="flex gap-4">
+            <div className="flex flex-wrap gap-x-6 gap-y-4 font-mono text-[11px] tracking-[0.16em] uppercase text-[#dfe5e0]/50">
               <a
                 href={`https://github.com/${github}`}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-neutral-400 bg-secondary/15 border border-secondary p-3 hover:border-[#092e20] hover:text-white transition-all duration-300 hover:bg-[#092e20]/20"
-                aria-label="GitHub"
+                className="flex items-center gap-2 whitespace-nowrap hover:text-[#9be8b8] transition-colors duration-300"
               >
-                <SiGithub size={20} />
+                <SiGithub size={13} />
+                GitHub
               </a>
               <a
                 href={`https://linkedin.com/in/${linkedin}`}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-neutral-400 bg-secondary/15 border border-secondary p-3 hover:border-[#092e20] hover:text-white transition-all duration-300 hover:bg-[#092e20]/20"
-                aria-label="LinkedIn"
+                className="flex items-center gap-2 whitespace-nowrap hover:text-[#9be8b8] transition-colors duration-300"
               >
-                <Linkedin size={20} />
+                <Linkedin size={13} />
+                LinkedIn
               </a>
               <a
                 href={`https://calendly.com/${calendly}`}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-neutral-400 bg-secondary/15 border border-secondary p-3 hover:border-[#092e20] hover:text-white transition-all duration-300 hover:bg-[#092e20]/20"
-                aria-label="Schedule a call"
+                className="flex items-center gap-2 whitespace-nowrap hover:text-[#9be8b8] transition-colors duration-300"
               >
-                <FontAwesomeIcon icon={faCalendarAlt} className="text-xl" />
+                <Calendar size={13} />
+                Calendly
               </a>
             </div>
           </div>
@@ -104,19 +99,19 @@ export const Footer = async () => {
       </div>
 
       {/* Bottom Bar */}
-      <div className="border-t border-secondary/50 relative z-10">
+      <div className="border-t border-[#9be8b8]/8 relative z-10">
         <div className="mx-auto max-w-7xl px-6 py-6">
-          <div className="flex flex-col md:flex-row justify-between items-center gap-4 text-[10px] font-bold uppercase tracking-widest text-neutral-400">
-            <p className="flex items-center gap-2">
-              <Terminal size={12} className="text-neutral-400" /> ONLINE © {currentYear()} Alejandro Reyna
-            </p>
-            <p className="font-body italic text-[11px] text-neutral-500 hover:text-white transition-colors duration-300 flex items-center gap-2 normal-case tracking-normal">
-              <a href="https://zen-of-python.info/" target="_blank" rel="noopener noreferrer">{`"Simple is better than complex" - Zen of Python`}</a> 
-              <PythonOriginal style={{ display: 'inline' }} size={16} />
-            </p>
-            <p className="flex items-center gap-2">
-              BUILT WITH <Heart size={12} className="text-neutral-400" fill="currentColor" /> IN GTM
-            </p>
+          <div className="flex flex-col md:flex-row justify-between items-center gap-4 font-mono text-[10px] tracking-[0.14em] uppercase text-[#dfe5e0]/35">
+            <span>© {currentYear()} Alejandro Reyna</span>
+            <a
+              href="https://zen-of-python.info/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:text-[#9be8b8] transition-colors duration-300"
+            >
+              &ldquo;Simple is better than complex&rdquo; — Zen of Python
+            </a>
+            <span>Guatemala — Worldwide</span>
           </div>
         </div>
       </div>
