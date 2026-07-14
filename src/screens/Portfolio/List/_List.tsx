@@ -1,7 +1,9 @@
 import Link from "next/link"
 import { getPayload } from "payload"
 import config from "@payload-config"
+import { getTranslations } from "next-intl/server"
 import { Technology, Media, Project } from "@/payload-types"
+import { getLocale } from "@/lib/locale"
 
 interface Props {
   searchParams?: { [key: string]: string | string[] | undefined };
@@ -15,6 +17,8 @@ const thumbnailUrl = (project: Project) =>
     : FALLBACK_IMAGE
 
 export const List = async ({ searchParams }: Props) => {
+  const t = await getTranslations('portfolioArchive')
+  const locale = await getLocale()
   const payload = await getPayload({ config })
   const page = typeof searchParams?.page === 'string' ? parseInt(searchParams.page, 10) : 1
 
@@ -41,13 +45,14 @@ export const List = async ({ searchParams }: Props) => {
     page,
     limit: 10,
     where,
+    locale,
   })
 
   return (
     <section>
       {result.docs.length === 0 && (
         <p className="font-mono text-xs tracking-[0.14em] uppercase text-[#dfe5e0]/45 border border-[#9be8b8]/12 p-8 text-center mb-7">
-          No projects found matching the selected filters.
+          {t('noResults')}
         </p>
       )}
 
@@ -57,7 +62,7 @@ export const List = async ({ searchParams }: Props) => {
           const category =
             project.company && typeof project.company !== 'string'
               ? project.company.name
-              : 'Project'
+              : t('fallbackKind')
           const techLine = project.technologies
             ?.map((t) => (t as Technology).name)
             .filter(Boolean)
@@ -77,7 +82,7 @@ export const List = async ({ searchParams }: Props) => {
               />
               {/* Emerald tint — blends real screenshots into the theme */}
               <div className="absolute inset-0 bg-[#25543a]/70 mix-blend-multiply pointer-events-none"></div>
-<div className="absolute inset-0 bg-[#0a0d0b]/40 pointer-events-none"></div>
+              <div className="absolute inset-0 bg-[#0a0d0b]/40 pointer-events-none"></div>
               <div
                 className="absolute inset-0 pointer-events-none"
                 style={{ background: 'linear-gradient(to top, rgba(6,9,7,0.95) 0%, rgba(6,9,7,0.5) 40%, rgba(6,9,7,0.05) 68%)' }}
@@ -107,17 +112,17 @@ export const List = async ({ searchParams }: Props) => {
         {/* NDA card — closes the grid like the design */}
         <div className="rounded border border-dashed border-[#9be8b8]/25 flex flex-col items-center justify-center gap-3.5 min-h-[340px] md:min-h-[400px] text-center p-10">
           <div className="font-serif font-medium italic text-[28px] text-[#dfe5e0]/70">
-            + 80 more under NDA
+            {t('ndaTitle')}
           </div>
           <div className="font-mono text-xs leading-[1.8] tracking-[0.1em] uppercase text-[#dfe5e0]/40">
-            Fintech · Logistics · Healthcare<br />
-            Ask about them in a call
+            {t('ndaBody')}<br />
+            {t('ndaCta')}
           </div>
           <a
             href="/#contact"
             className="font-mono font-medium text-[11px] tracking-[0.16em] uppercase text-[#9be8b8] border-b border-[#9be8b8]/35 pb-1 mt-2 hover:text-white hover:border-white transition-colors duration-300"
           >
-            Book a Call →
+            {t('bookCall')}
           </a>
         </div>
       </div>

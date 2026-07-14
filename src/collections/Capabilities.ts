@@ -22,16 +22,19 @@ export const Capabilities: CollectionConfig = {
             label: 'Title',
             type: 'text',
             required: true,
+            localized: true,
         },
         {
             name: 'description',
             label: 'Description',
             type: 'textarea',
+            localized: true,
         },
         {
             name: 'experienceLabel',
             label: 'Experience Label',
             type: 'text',
+            localized: true,
             admin: {
                 description: 'Shown top-right of the card, e.g. "12+ Years" or "Since 2023"',
             },
@@ -40,6 +43,7 @@ export const Capabilities: CollectionConfig = {
             name: 'stacks',
             label: 'Stack Lines',
             type: 'array',
+            localized: true,
             admin: {
                 description: 'Each line renders as "/ LINE" at the bottom of the card',
             },

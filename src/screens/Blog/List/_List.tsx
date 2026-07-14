@@ -1,14 +1,16 @@
 import Link from "next/link"
 import { getPayload } from "payload"
 import config from "@payload-config"
+import { getTranslations } from "next-intl/server"
 import { Category, Post } from "@/payload-types"
+import { getLocale } from "@/lib/locale"
 
 interface Props {
   searchParams?: { [key: string]: string | string[] | undefined };
 }
 
-const formatDate = (dateStr: string) =>
-  new Date(dateStr).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })
+const formatDate = (dateStr: string, locale: string) =>
+  new Date(dateStr).toLocaleDateString(locale, { month: 'short', day: 'numeric', year: 'numeric' })
 
 // Flattens Lexical richtext into plain text, used as a excerpt fallback.
 const richTextToPlainText = (content: Post['content']): string => {
@@ -23,22 +25,24 @@ const richTextToPlainText = (content: Post['content']): string => {
 }
 
 export const List = async ({ searchParams }: Props) => {
+  const t = await getTranslations('blog')
+  const locale = await getLocale()
   const payload = await getPayload({ config })
   const page = typeof searchParams?.page === 'string' ? parseInt(searchParams.page, 10) : 1
 
   const categoryFilters = searchParams?.category
-  let categories: string[] = []
+  let categorySlugs: string[] = []
   if (Array.isArray(categoryFilters)) {
-      categories = categoryFilters
+      categorySlugs = categoryFilters
   } else if (typeof categoryFilters === 'string') {
-      categories = categoryFilters.split(',')
+      categorySlugs = categoryFilters.split(',')
   }
 
   let where = {}
-  if (categories.length > 0) {
+  if (categorySlugs.length > 0) {
       where = {
-          'categories.name': {
-              in: categories
+          'categories.slug': {
+              in: categorySlugs
           }
       }
   }
@@ -49,13 +53,14 @@ export const List = async ({ searchParams }: Props) => {
     page,
     limit: 10,
     where,
+    locale,
   })
 
   return (
     <section>
       {result.docs.length === 0 && (
         <p className="font-mono text-xs tracking-[0.14em] uppercase text-[#dfe5e0]/45 border border-[#9be8b8]/12 p-8 text-center mb-7">
-          No posts found matching the selected filters.
+          {t('noResults')}
         </p>
       )}
 
@@ -73,7 +78,7 @@ export const List = async ({ searchParams }: Props) => {
               className={`group grid grid-cols-1 md:grid-cols-[160px_1fr] gap-4 md:gap-10 py-9 border-t border-[#9be8b8]/12 items-baseline ${i === result.docs.length - 1 ? 'border-b' : ''}`}
             >
               <div className="font-mono text-xs tracking-[0.14em] uppercase text-[#9be8b8]/60">
-                {formatDate(post.publishedDate)}
+                {formatDate(post.publishedDate, locale)}
               </div>
               <div>
                 <h2 className="font-serif font-medium text-[28px] text-[#f2f4f0] group-hover:text-[#9be8b8] transition-colors duration-300 mb-2">
@@ -107,7 +112,7 @@ export const List = async ({ searchParams }: Props) => {
           {Array.from({ length: result.totalPages }).map((_, i) => {
             const pageNum = i + 1
             const query = new URLSearchParams()
-            if (categories.length > 0) query.set('category', categories.join(','))
+            if (categorySlugs.length > 0) query.set('category', categorySlugs.join(','))
             query.set('page', pageNum.toString())
 
             return (

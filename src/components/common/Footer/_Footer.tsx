@@ -2,9 +2,11 @@ import { yearsOfExperience } from "@/utils/yearsOfExperience";
 import { currentYear } from "@/utils/currentYear";
 import { SiGithub } from '@icons-pack/react-simple-icons';
 import { Mail, Linkedin, Calendar, Feather } from 'lucide-react';
+import { getTranslations } from "next-intl/server";
 import { getSiteSettings } from "@/lib/payload";
 
 export const Footer = async () => {
+  const t = await getTranslations('footer');
   const settings = await getSiteSettings();
   const { github, linkedin, calendly, email } = settings.social || {};
   return (
@@ -19,30 +21,30 @@ export const Footer = async () => {
               <Feather className="w-4.5 h-4.5 text-white" strokeWidth={1.75} />
               Alejandro Reyna
             </h3>
-            <p className="font-mono text-[11px] tracking-[0.16em] uppercase text-[#9be8b8]/70 mb-6">Full-Stack Engineer</p>
+            <p className="font-mono text-[11px] tracking-[0.16em] uppercase text-[#9be8b8]/70 mb-6">{t('role')}</p>
             <p className="font-heading text-[13px] leading-[1.7] text-[#dfe5e0]/55">
-              Architecting precision at every layer of the stack. {yearsOfExperience()}+ years building high-performance systems.
+              {t('tagline', { years: yearsOfExperience() })}
             </p>
           </div>
 
           {/* Quick Links */}
           <div>
             <h4 className="font-mono text-[11px] tracking-[0.18em] uppercase text-[#46d386] mb-6">
-              Quick Links
+              {t('quickLinks')}
             </h4>
             <nav className="space-y-4">
-              <a href="#home" className="block font-mono text-[11px] tracking-[0.16em] uppercase text-[#dfe5e0]/50 hover:text-[#9be8b8] transition-colors duration-300">Home</a>
-              <a href="#about" className="block font-mono text-[11px] tracking-[0.16em] uppercase text-[#dfe5e0]/50 hover:text-[#9be8b8] transition-colors duration-300">About</a>
-              <a href="#portfolio" className="block font-mono text-[11px] tracking-[0.16em] uppercase text-[#dfe5e0]/50 hover:text-[#9be8b8] transition-colors duration-300">Portfolio</a>
-              <a href="#skills" className="block font-mono text-[11px] tracking-[0.16em] uppercase text-[#dfe5e0]/50 hover:text-[#9be8b8] transition-colors duration-300">Expertise</a>
-              <a href="#contact" className="block font-mono text-[11px] tracking-[0.16em] uppercase text-[#dfe5e0]/50 hover:text-[#9be8b8] transition-colors duration-300">Contact</a>
+              <a href="#home" className="block font-mono text-[11px] tracking-[0.16em] uppercase text-[#dfe5e0]/50 hover:text-[#9be8b8] transition-colors duration-300">{t('home')}</a>
+              <a href="#about" className="block font-mono text-[11px] tracking-[0.16em] uppercase text-[#dfe5e0]/50 hover:text-[#9be8b8] transition-colors duration-300">{t('about')}</a>
+              <a href="#portfolio" className="block font-mono text-[11px] tracking-[0.16em] uppercase text-[#dfe5e0]/50 hover:text-[#9be8b8] transition-colors duration-300">{t('portfolio')}</a>
+              <a href="#skills" className="block font-mono text-[11px] tracking-[0.16em] uppercase text-[#dfe5e0]/50 hover:text-[#9be8b8] transition-colors duration-300">{t('expertise')}</a>
+              <a href="#contact" className="block font-mono text-[11px] tracking-[0.16em] uppercase text-[#dfe5e0]/50 hover:text-[#9be8b8] transition-colors duration-300">{t('contact')}</a>
             </nav>
           </div>
 
           {/* Tech Stack */}
           <div>
             <h4 className="font-mono text-[11px] tracking-[0.18em] uppercase text-[#46d386] mb-6">
-              Tech Stack
+              {t('techStack')}
             </h4>
             <ul className="space-y-4 font-mono text-[11px] tracking-[0.16em] uppercase text-[#9be8b8]/55">
               <li>/ Next.js &amp; React</li>
@@ -55,7 +57,7 @@ export const Footer = async () => {
           {/* Network */}
           <div>
             <h4 className="font-mono text-[11px] tracking-[0.18em] uppercase text-[#46d386] mb-6">
-              Network
+              {t('network')}
             </h4>
             <a
               href={`mailto:${email}`}
@@ -73,7 +75,7 @@ export const Footer = async () => {
                 className="flex items-center gap-2 whitespace-nowrap hover:text-[#9be8b8] transition-colors duration-300"
               >
                 <SiGithub size={13} />
-                GitHub
+                {t('github')}
               </a>
               <a
                 href={`https://linkedin.com/in/${linkedin}`}
@@ -82,7 +84,7 @@ export const Footer = async () => {
                 className="flex items-center gap-2 whitespace-nowrap hover:text-[#9be8b8] transition-colors duration-300"
               >
                 <Linkedin size={13} />
-                LinkedIn
+                {t('linkedin')}
               </a>
               <a
                 href={`https://calendly.com/${calendly}`}
@@ -91,7 +93,7 @@ export const Footer = async () => {
                 className="flex items-center gap-2 whitespace-nowrap hover:text-[#9be8b8] transition-colors duration-300"
               >
                 <Calendar size={13} />
-                Calendly
+                {t('calendly')}
               </a>
             </div>
           </div>
@@ -102,16 +104,16 @@ export const Footer = async () => {
       <div className="border-t border-[#9be8b8]/8 relative z-10">
         <div className="mx-auto max-w-7xl px-6 py-6">
           <div className="flex flex-col md:flex-row justify-between items-center gap-4 font-mono text-[10px] tracking-[0.14em] uppercase text-[#dfe5e0]/35">
-            <span>© {currentYear()} Alejandro Reyna</span>
+            <span>{t('copyright', { year: currentYear() })}</span>
             <a
               href="https://zen-of-python.info/"
               target="_blank"
               rel="noopener noreferrer"
               className="hover:text-[#9be8b8] transition-colors duration-300"
             >
-              &ldquo;Simple is better than complex&rdquo; — Zen of Python
+              {t('quote')}
             </a>
-            <span>Guatemala — Worldwide</span>
+            <span>{t('location')}</span>
           </div>
         </div>
       </div>

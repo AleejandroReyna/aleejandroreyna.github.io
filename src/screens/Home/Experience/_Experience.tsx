@@ -1,13 +1,14 @@
 'use client';
 import type { ExperienceDetail, Company } from "@/payload-types";
 import { motion, Variants } from "motion/react";
+import { useLocale, useTranslations } from "next-intl";
 
 interface ExperienceProps {
   experiences: ExperienceDetail[];
 }
 
-function formatYear(dateStr: string): string {
-  return new Date(dateStr).toLocaleDateString('en-US', { year: 'numeric' });
+function formatYear(dateStr: string, locale: string): string {
+  return new Date(dateStr).toLocaleDateString(locale, { year: 'numeric' });
 }
 
 function getCompany(exp: ExperienceDetail): Company | null {
@@ -47,6 +48,9 @@ const rowVariants: Variants = {
 };
 
 export const Experience = ({ experiences }: ExperienceProps) => {
+  const t = useTranslations('home.experience');
+  const locale = useLocale();
+
   if (experiences.length === 0) return null;
 
   return (
@@ -67,10 +71,10 @@ export const Experience = ({ experiences }: ExperienceProps) => {
           viewport={{ once: true }}
         >
           <div className="font-mono text-[11px] tracking-[0.18em] uppercase text-[#46d386] mb-4">
-            04 — Journey
+            {t('label')}
           </div>
           <h2 className="font-serif font-medium text-5xl md:text-[54px] text-[#f2f4f0] mb-16">
-            Professional trajectory
+            {t('title')}
           </h2>
         </motion.div>
 
@@ -85,11 +89,11 @@ export const Experience = ({ experiences }: ExperienceProps) => {
           {experiences.map((exp, i) => {
             const company = getCompany(exp);
             const isCurrent = !exp.endDate;
-            const dateRange = `${formatYear(exp.startDate)} — ${exp.endDate ? formatYear(exp.endDate) : 'Present'}`;
+            const dateRange = `${formatYear(exp.startDate, locale)} — ${exp.endDate ? formatYear(exp.endDate, locale) : t('present')}`;
             const description = richTextToPlainText(exp.content);
             const roleLine = [
               exp.role,
-              exp.location === 'remote' ? 'Remote' : 'On-Site',
+              exp.location === 'remote' ? t('remote') : t('onSite'),
             ].filter(Boolean).join(' · ');
 
             return (
@@ -113,7 +117,7 @@ export const Experience = ({ experiences }: ExperienceProps) => {
                         {company.name}
                       </a>
                     ) : (
-                      company?.name || 'Independent'
+                      company?.name || t('independent')
                     )}
                   </h3>
                   <div className="font-mono text-xs tracking-[0.1em] uppercase text-[#dfe5e0]/45 mt-2">

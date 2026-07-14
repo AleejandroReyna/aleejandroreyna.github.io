@@ -1,7 +1,10 @@
 'use client'
 import { motion } from "motion/react"
+import { useTranslations } from "next-intl"
 
 export const About = () => {
+  const t = useTranslations('home.philosophy')
+
   return (
     <section className="py-28 relative overflow-hidden" id="about">
       {/* Radial glow, top-right — mirrors the design's philosophy backdrop */}
@@ -21,11 +24,11 @@ export const About = () => {
           className="lg:col-span-5"
         >
           <div className="font-mono text-[11px] tracking-[0.18em] uppercase text-[#46d386] mb-6">
-            01 — Philosophy
+            {t('label')}
           </div>
           <h2 className="font-serif font-medium text-5xl md:text-[54px] leading-[1.1] text-[#f2f4f0]">
-            Beyond<br />
-            the logic<span className="text-[#46d386]">.</span>
+            {t('titleLine1')}<br />
+            {t('titleLine2')}<span className="text-[#46d386]">.</span>
           </h2>
         </motion.div>
 
@@ -38,27 +41,27 @@ export const About = () => {
           className="lg:col-span-7"
         >
           <p className="font-serif italic text-[22px] md:text-2xl leading-[1.6] text-[#e8ede9] mb-7">
-            &ldquo;Programming is more than solving problems — it&apos;s composing scalable systems wrapped in interfaces people trust.&rdquo;
+            {t('quote')}
           </p>
           <p className="font-heading text-[15px] leading-[1.8] text-[#dfe5e0]/60 mb-7">
-            For over thirteen years I&apos;ve been architecting digital solutions from Guatemala for teams around the world. From complex database architectures to the micro-interactions on the frontend — every layer matters, and every layer gets built like it&apos;s the one that will fail first.
+            {t('body')}
           </p>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-10">
             <div>
               <div className="font-mono text-[11px] tracking-[0.16em] uppercase text-[#9be8b8]/70 mb-2.5">
-                Global Impact
+                {t('globalImpactLabel')}
               </div>
               <p className="font-heading text-[13px] leading-[1.7] text-[#dfe5e0]/55">
-                Remote collaboration with teams worldwide. Python, TypeScript, React, Node.js, Rails.
+                {t('globalImpactBody')}
               </p>
             </div>
             <div>
               <div className="font-mono text-[11px] tracking-[0.16em] uppercase text-[#9be8b8]/70 mb-2.5">
-                Human Side
+                {t('humanSideLabel')}
               </div>
               <p className="font-heading text-[13px] leading-[1.7] text-[#dfe5e0]/55">
-                Music, BMX, and one demanding cat. Clear communication and empathy, always.
+                {t('humanSideBody')}
               </p>
             </div>
           </div>

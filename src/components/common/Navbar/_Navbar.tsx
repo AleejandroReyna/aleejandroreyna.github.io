@@ -4,10 +4,13 @@ import { useRouter, usePathname } from "next/navigation";
 import { useState, useEffect, useRef } from "react";
 import { Menu, X, Feather } from "lucide-react";
 import { motion } from "motion/react";
+import { useTranslations } from "next-intl";
+import { LanguageSwitcher } from "@/components/common/LanguageSwitcher";
 
 const BG_THRESHOLD = 100;
 
 export const Navbar = () => {
+  const t = useTranslations('nav');
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const router = useRouter();
@@ -49,9 +52,9 @@ export const Navbar = () => {
   };
 
   const links = [
-    { href: "/", label: "Home" },
-    { href: "/portfolio", label: "Portfolio" },
-    { href: "/blog", label: "Blog" },
+    { href: "/", label: t('home') },
+    { href: "/portfolio", label: t('portfolio') },
+    { href: "/blog", label: t('blog') },
   ];
 
   return (
@@ -89,8 +92,9 @@ export const Navbar = () => {
                 <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-[#092e20] transition-all duration-300 group-hover:w-full"></span>
               </Link>
             ))}
+            <LanguageSwitcher />
             <Link href="/contact" className="font-mono text-[11px] tracking-[0.16em] uppercase px-5 py-2.5 border border-white/10 hover:border-[#092e20] font-medium hover:bg-[#092e20] hover:text-white transition-all duration-300">
-              LET'S TALK
+              {t('letsTalk')}
             </Link>
           </nav>
 
@@ -120,8 +124,11 @@ export const Navbar = () => {
                 {link.label}
               </Link>
             ))}
-            <Link href="/contact" onClick={() => setIsOpen(false)} className="mt-4 px-5 py-3 border border-white/10 hover:border-[#092e20] font-mono text-xs tracking-[0.16em] uppercase bg-white/5 hover:bg-[#092e20] hover:text-white transition-all duration-300 text-center">
-              LET'S TALK
+            <div className="pt-2">
+              <LanguageSwitcher />
+            </div>
+            <Link href="/contact" onClick={() => setIsOpen(false)} className="mt-2 px-5 py-3 border border-white/10 hover:border-[#092e20] font-mono text-xs tracking-[0.16em] uppercase bg-white/5 hover:bg-[#092e20] hover:text-white transition-all duration-300 text-center">
+              {t('letsTalk')}
             </Link>
           </nav>
         </div>

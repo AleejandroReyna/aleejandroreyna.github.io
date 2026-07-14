@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useCallback } from "react"
 import { useRouter, useSearchParams, usePathname } from "next/navigation"
+import { useTranslations } from "next-intl"
 
 interface Tech {
     id: string;
@@ -11,6 +12,7 @@ interface Tech {
 const pillBase = "font-mono text-[11px] tracking-[0.14em] uppercase px-4.5 py-2.5 rounded-sm cursor-pointer transition-colors duration-300"
 
 export const Form = () => {
+  const t = useTranslations('portfolioArchive')
   const [techs, setTechs] = useState<Tech[]>([])
   const router = useRouter()
   const pathname = usePathname()
@@ -57,7 +59,7 @@ export const Form = () => {
           ? 'bg-[#46d386] text-[#0a0d0b] font-medium'
           : 'text-[#dfe5e0]/55 border border-[#dfe5e0]/15 hover:border-[#9be8b8]/40 hover:text-[#9be8b8]'}`}
       >
-        All
+        {t('all')}
       </button>
       {techs.map((tech) => {
         const isActive = items.includes(tech.name)
