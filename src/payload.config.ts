@@ -15,6 +15,8 @@ import { Projects } from './collections/Projects'
 import { ContactSubmissions } from './collections/ContactSubmissions'
 import { Testimonials } from './collections/Testimonials'
 import { Capabilities } from './collections/Capabilities'
+import { Categories } from './collections/Categories'
+import { Posts } from './collections/Posts'
 import { SiteSettings } from './globals/SiteSettings'
 import { envs } from './lib/envs'
 
@@ -28,7 +30,7 @@ export default buildConfig({
             baseDir: path.resolve(dirname),
         },
     },
-    collections: [Users, Media, Companies, ExperienceDetails, Technologies, Projects, ContactSubmissions, Testimonials, Capabilities],
+    collections: [Users, Media, Companies, ExperienceDetails, Technologies, Projects, ContactSubmissions, Testimonials, Capabilities, Categories, Posts],
     globals: [SiteSettings],
     editor: lexicalEditor(),
     secret: envs.payloadSecret,
