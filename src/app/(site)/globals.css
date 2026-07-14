@@ -93,6 +93,21 @@
   box-shadow: 0 0 20px rgba(9, 46, 32, 0.4); /* #092e20 shadow */
 }
 
+.no-scrollbar {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+/* Anchor targets for StickyNav — offset past the fixed header and the
+   docked sub-nav so sections land fully visible instead of tucked under
+   them on jump-to-anchor scroll. */
+#about, #portfolio, #skills, #experience, #contact {
+  scroll-margin-top: calc(var(--header-height, 88px) + var(--subnav-height, 0px));
+}
+
 .btn-elegant-solid {
   background: var(--color-cta);
   color: var(--foreground);

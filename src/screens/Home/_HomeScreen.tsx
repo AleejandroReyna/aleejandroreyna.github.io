@@ -1,3 +1,4 @@
+import { StickyNav } from "@/components/common/StickyNav"
 import { Hero } from "./Hero"
 import { Stats } from "./Stats"
 import { About } from "./About"
@@ -19,6 +20,7 @@ export const HomeScreen = async () => {
     <>
       <Hero />
       <Stats />
+      <StickyNav />
       <About />
       <Portfolio />
       <Testimonials />
