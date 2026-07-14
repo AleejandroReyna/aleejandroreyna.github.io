@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { yearsOfExperience } from "@/utils/yearsOfExperience";
 import { currentYear } from "@/utils/currentYear";
 import { SiGithub } from '@icons-pack/react-simple-icons';
@@ -7,6 +8,7 @@ import { getSiteSettings } from "@/lib/payload";
 
 export const Footer = async () => {
   const t = await getTranslations('footer');
+  const tNav = await getTranslations('nav');
   const settings = await getSiteSettings();
   const { github, linkedin, calendly, email } = settings.social || {};
   return (
@@ -33,11 +35,12 @@ export const Footer = async () => {
               {t('quickLinks')}
             </h4>
             <nav className="space-y-4">
-              <a href="#home" className="block font-mono text-[11px] tracking-[0.16em] uppercase text-[#dfe5e0]/50 hover:text-[#9be8b8] transition-colors duration-300">{t('home')}</a>
-              <a href="#about" className="block font-mono text-[11px] tracking-[0.16em] uppercase text-[#dfe5e0]/50 hover:text-[#9be8b8] transition-colors duration-300">{t('about')}</a>
-              <a href="#portfolio" className="block font-mono text-[11px] tracking-[0.16em] uppercase text-[#dfe5e0]/50 hover:text-[#9be8b8] transition-colors duration-300">{t('portfolio')}</a>
-              <a href="#skills" className="block font-mono text-[11px] tracking-[0.16em] uppercase text-[#dfe5e0]/50 hover:text-[#9be8b8] transition-colors duration-300">{t('expertise')}</a>
-              <a href="#contact" className="block font-mono text-[11px] tracking-[0.16em] uppercase text-[#dfe5e0]/50 hover:text-[#9be8b8] transition-colors duration-300">{t('contact')}</a>
+              <Link href="/" className="block font-mono text-[11px] tracking-[0.16em] uppercase text-[#dfe5e0]/50 hover:text-[#9be8b8] transition-colors duration-300">{t('home')}</Link>
+              <Link href="/#about" className="block font-mono text-[11px] tracking-[0.16em] uppercase text-[#dfe5e0]/50 hover:text-[#9be8b8] transition-colors duration-300">{t('about')}</Link>
+              <Link href="/portfolio" className="block font-mono text-[11px] tracking-[0.16em] uppercase text-[#dfe5e0]/50 hover:text-[#9be8b8] transition-colors duration-300">{t('portfolio')}</Link>
+              <Link href="/#skills" className="block font-mono text-[11px] tracking-[0.16em] uppercase text-[#dfe5e0]/50 hover:text-[#9be8b8] transition-colors duration-300">{t('expertise')}</Link>
+              <Link href="/blog" className="block font-mono text-[11px] tracking-[0.16em] uppercase text-[#dfe5e0]/50 hover:text-[#9be8b8] transition-colors duration-300">{tNav('blog')}</Link>
+              <Link href="/contact" className="block font-mono text-[11px] tracking-[0.16em] uppercase text-[#dfe5e0]/50 hover:text-[#9be8b8] transition-colors duration-300">{t('contact')}</Link>
             </nav>
           </div>
 
