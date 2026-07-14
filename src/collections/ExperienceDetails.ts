@@ -30,6 +30,7 @@ export const ExperienceDetails: CollectionConfig = {
             label: 'Role / Position',
             type: 'text',
             required: true,
+            localized: true,
         },
         {
             type: 'row',
@@ -78,11 +79,13 @@ export const ExperienceDetails: CollectionConfig = {
             label: 'Description',
             type: 'richText',
             editor: lexicalEditor(),
+            localized: true,
         },
         {
             name: 'achievements',
             label: 'Key Achievements',
             type: 'array',
+            localized: true,
             fields: [
                 {
                     name: 'achievement',

@@ -4,17 +4,19 @@ import Link from "next/link"
 import { getPayload } from "payload"
 import config from "@payload-config"
 import { RichText } from '@payloadcms/richtext-lexical/react'
+import { getTranslations } from "next-intl/server"
 
 import { Category } from "@/payload-types"
 import { getSiteSettings } from "@/lib/payload"
+import { getLocale } from "@/lib/locale"
 import { AnimateIn } from "@/components/ds/AnimateIn"
 
 interface Props {
     params: Promise<{ slug: string }>
 }
 
-const formatDate = (dateStr: string) =>
-    new Date(dateStr).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })
+const formatDate = (dateStr: string, locale: string) =>
+    new Date(dateStr).toLocaleDateString(locale, { month: 'long', day: 'numeric', year: 'numeric' })
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
     const { slug } = await params
@@ -41,12 +43,15 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 export default async function BlogPostPage({ params }: Props) {
     const { slug } = await params
+    const t = await getTranslations('postDetail')
+    const locale = await getLocale()
     const payload = await getPayload({ config })
     const result = await payload.find({
         collection: 'posts',
         where: { slug: { equals: slug } },
         limit: 1,
         depth: 2,
+        locale,
     })
 
     const post = result.docs[0]
@@ -68,6 +73,7 @@ export default async function BlogPostPage({ params }: Props) {
         sort: '-publishedDate',
         limit: 100,
         depth: 0,
+        locale,
     })
     const currentIndex = all.docs.findIndex((p) => p.id === post.id)
     const nextPost = all.docs.length > 1
@@ -89,11 +95,11 @@ export default async function BlogPostPage({ params }: Props) {
                         href="/blog"
                         className="font-mono text-[11px] tracking-[0.18em] uppercase text-[#dfe5e0]/45 hover:text-[#9be8b8] transition-colors duration-300"
                     >
-                        ← All Posts
+                        {t('allPosts')}
                     </Link>
                     <div className="flex items-center gap-4 mt-10 mb-5">
                         <span className="font-mono text-[11px] tracking-[0.18em] uppercase text-[#46d386]">
-                            {formatDate(post.publishedDate)}
+                            {formatDate(post.publishedDate, locale)}
                         </span>
                         {postCategories.length > 0 && (
                             <span className="font-mono text-[11px] tracking-[0.18em] uppercase text-[#dfe5e0]/45">
@@ -127,7 +133,7 @@ export default async function BlogPostPage({ params }: Props) {
                 ></div>
                 <AnimateIn className="relative z-10 px-6">
                     <div className="font-serif font-medium text-4xl md:text-[56px] leading-[1.05] text-[#f2f4f0]">
-                        Want to talk about it<span className="italic text-[#9be8b8]">?</span>
+                        {t('ctaTitle')}<span className="italic text-[#9be8b8]">?</span>
                     </div>
                     {contactEmail && (
                         <a
@@ -148,7 +154,7 @@ export default async function BlogPostPage({ params }: Props) {
                 >
                     <div className="mx-auto max-w-4xl px-6">
                         <div className="font-mono text-[11px] tracking-[0.18em] uppercase text-[#46d386] mb-3.5">
-                            Next Post
+                            {t('nextPost')}
                         </div>
                         <div className="font-serif font-medium text-3xl md:text-[42px] text-[#f2f4f0] group-hover:text-[#9be8b8] transition-colors duration-300">
                             {nextPost.title} →

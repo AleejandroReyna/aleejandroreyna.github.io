@@ -1,7 +1,10 @@
 'use client';
 import { motion, Variants } from 'motion/react';
+import { useTranslations } from 'next-intl';
 
 export const HeroClient = () => {
+  const t = useTranslations('home.hero');
+
   const containerVariants: Variants = {
     hidden: { opacity: 0 },
     visible: {
@@ -31,7 +34,7 @@ export const HeroClient = () => {
         className="flex items-center gap-2.5 mb-9 font-mono text-[11px] tracking-[0.2em] uppercase text-[#dfe5e0]/50"
       >
         <span className="w-1.5 h-1.5 rounded-full bg-[#46d386] animate-pulse"></span>
-        Available for select projects — 2026
+        {t('badge')}
       </motion.div>
 
       {/* Main Headline */}
@@ -49,11 +52,11 @@ export const HeroClient = () => {
         className="flex flex-col md:flex-row md:items-end md:justify-between gap-10 md:gap-16 w-full mt-13"
       >
         <p className="max-w-[500px] font-heading text-[17px] leading-[1.7] text-[#dfe5e0]/65">
-          Full-stack engineer building systems that carry weight — cloud architecture, conversational AI, and platforms that don&apos;t flinch under load. Thirteen years. Every layer of the stack.
+          {t('description')}
         </p>
         <div className="font-mono text-[11px] tracking-[0.14em] uppercase text-[#9be8b8]/60 md:text-right leading-loose shrink-0">
-          Guatemala — Remote, Worldwide<br />
-          Est. 2013
+          {t('location')}<br />
+          {t('since')}
         </div>
       </motion.div>
     </motion.div>

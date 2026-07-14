@@ -4,6 +4,7 @@ import { SiGithub } from '@icons-pack/react-simple-icons';
 import { Linkedin, Calendar } from "lucide-react";
 import { submitContactForm, ContactFormState } from "@/lib/actions/contact";
 import { motion, Variants } from "motion/react";
+import { useTranslations } from "next-intl";
 
 interface ContactProps {
   contactEmail: string;
@@ -41,6 +42,7 @@ const inputClasses = (hasError?: boolean) =>
   `w-full bg-transparent border ${hasError ? 'border-red-400' : 'border-[#9be8b8]/15'} rounded-sm px-4.5 py-4 font-mono text-xs tracking-[0.1em] text-[#f2f4f0] placeholder:text-[#dfe5e0]/40 placeholder:uppercase focus:outline-none focus:border-[#46d386]/60 transition-colors`;
 
 export const Contact = ({ contactEmail, githubUser, linkedinUser, calendlyUser }: ContactProps) => {
+  const t = useTranslations('home.contact');
   const [state, formAction, isPending] = useActionState(submitContactForm, initialState);
   const formRef = useRef<HTMLFormElement>(null);
 
@@ -65,15 +67,15 @@ export const Contact = ({ contactEmail, githubUser, linkedinUser, calendlyUser }
           {/* Left column — headline + direct contact */}
           <motion.div variants={itemVariants}>
             <div className="font-mono text-[11px] tracking-[0.18em] uppercase text-[#46d386] mb-6">
-              05 — Contact
+              {t('label')}
             </div>
             <h2 className="font-serif font-medium text-5xl md:text-[68px] leading-[1.05] text-[#f2f4f0]">
-              Let&apos;s build<br />
-              something that<br />
-              <span className="italic text-[#9be8b8]">lasts</span>.
+              {t('titleLine1')}<br />
+              {t('titleLine2')}<br />
+              <span className="italic text-[#9be8b8]">{t('titleEmphasis')}</span>.
             </h2>
             <p className="font-heading text-[15px] leading-[1.7] text-[#dfe5e0]/60 mt-7 max-w-[400px]">
-              Currently accepting a limited number of projects — architecture, full builds, or rescue missions.
+              {t('description')}
             </p>
             <a
               href={`mailto:${contactEmail}`}
@@ -89,7 +91,7 @@ export const Contact = ({ contactEmail, githubUser, linkedinUser, calendlyUser }
                 className="flex items-center gap-2 hover:text-[#9be8b8] transition-colors duration-300"
               >
                 <SiGithub size={13} />
-                GitHub
+                {t('github')}
               </a>
               <a
                 href={`https://linkedin.com/in/${linkedinUser}`}
@@ -98,7 +100,7 @@ export const Contact = ({ contactEmail, githubUser, linkedinUser, calendlyUser }
                 className="flex items-center gap-2 hover:text-[#9be8b8] transition-colors duration-300"
               >
                 <Linkedin size={13} />
-                LinkedIn
+                {t('linkedin')}
               </a>
               <a
                 href={`https://calendly.com/${calendlyUser}`}
@@ -107,7 +109,7 @@ export const Contact = ({ contactEmail, githubUser, linkedinUser, calendlyUser }
                 className="flex items-center gap-2 hover:text-[#9be8b8] transition-colors duration-300"
               >
                 <Calendar size={13} />
-                Calendly
+                {t('calendly')}
               </a>
             </div>
           </motion.div>
@@ -128,8 +130,8 @@ export const Contact = ({ contactEmail, githubUser, linkedinUser, calendlyUser }
                   <input
                     type="text"
                     name="name"
-                    placeholder="Name"
-                    aria-label="Name"
+                    placeholder={t('namePlaceholder')}
+                    aria-label={t('namePlaceholder')}
                     className={inputClasses(!!state.errors?.name)}
                     required
                     disabled={isPending}
@@ -140,8 +142,8 @@ export const Contact = ({ contactEmail, githubUser, linkedinUser, calendlyUser }
                   <input
                     type="email"
                     name="email"
-                    placeholder="Email"
-                    aria-label="Email"
+                    placeholder={t('emailPlaceholder')}
+                    aria-label={t('emailPlaceholder')}
                     className={inputClasses(!!state.errors?.email)}
                     required
                     disabled={isPending}
@@ -154,8 +156,8 @@ export const Contact = ({ contactEmail, githubUser, linkedinUser, calendlyUser }
                 <input
                   type="text"
                   name="subject"
-                  placeholder="Subject"
-                  aria-label="Subject"
+                  placeholder={t('subjectPlaceholder')}
+                  aria-label={t('subjectPlaceholder')}
                   className={inputClasses(!!state.errors?.subject)}
                   required
                   disabled={isPending}
@@ -167,8 +169,8 @@ export const Contact = ({ contactEmail, githubUser, linkedinUser, calendlyUser }
                 <textarea
                   name="message"
                   rows={5}
-                  placeholder="Message"
-                  aria-label="Message"
+                  placeholder={t('messagePlaceholder')}
+                  aria-label={t('messagePlaceholder')}
                   className={`${inputClasses(!!state.errors?.message)} resize-none`}
                   required
                   disabled={isPending}
@@ -182,9 +184,9 @@ export const Contact = ({ contactEmail, githubUser, linkedinUser, calendlyUser }
                 disabled={isPending}
               >
                 {isPending ? (
-                  <span className="animate-pulse">Sending...</span>
+                  <span className="animate-pulse">{t('sending')}</span>
                 ) : (
-                  <span>Send Message →</span>
+                  <span>{t('send')}</span>
                 )}
               </button>
             </form>

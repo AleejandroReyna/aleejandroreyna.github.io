@@ -32,6 +32,11 @@ export default buildConfig({
     },
     collections: [Users, Media, Companies, ExperienceDetails, Technologies, Projects, ContactSubmissions, Testimonials, Capabilities, Categories, Posts],
     globals: [SiteSettings],
+    localization: {
+        locales: ['en', 'es'],
+        defaultLocale: 'en',
+        fallback: true,
+    },
     editor: lexicalEditor(),
     secret: envs.payloadSecret,
     typescript: {

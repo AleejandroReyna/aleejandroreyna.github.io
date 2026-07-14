@@ -1,50 +1,14 @@
 'use client';
 import { motion, Variants } from "motion/react";
+import { useTranslations } from "next-intl";
 
-// Mock data shaped like the `capabilities` Payload collection — swap for a
-// payload.find({ collection: "capabilities", sort: "order" }) when ready.
-const capabilities = [
-  {
-    id: "full-stack",
-    title: "Full-Stack Engineering",
-    description: "End-to-end product builds. Interfaces with intent, backends with backbone.",
-    experienceLabel: "12+ Years",
-    stacks: [
-      { line: "TypeScript · React · Next.js · Vue" },
-      { line: "Python & Django · Node.js · Rails" },
-    ],
-  },
-  {
-    id: "architecture",
-    title: "Architecture & APIs",
-    description: "Contracts and protocols designed so systems talk clearly — and keep talking.",
-    experienceLabel: "9+ Years",
-    stacks: [
-      { line: "REST · GraphQL · WebSockets" },
-      { line: "OAuth & JWT · OpenAPI · Microservices" },
-    ],
-  },
-  {
-    id: "data-cloud",
-    title: "Data & Cloud Systems",
-    description: "Schemas, pipelines, and infrastructure that stays quiet at 3 a.m.",
-    experienceLabel: "8+ Years",
-    stacks: [
-      { line: "PostgreSQL · MongoDB · Redis" },
-      { line: "AWS · Docker · CI/CD" },
-    ],
-  },
-  {
-    id: "conversational-ai",
-    title: "Conversational AI",
-    description: "Chatbots and LLM agents wired into real business workflows — automation that pays for itself.",
-    experienceLabel: "Since 2023",
-    stacks: [
-      { line: "LLM Agents · RAG · Function Calling" },
-      { line: "WhatsApp & Web Channels" },
-    ],
-  },
-];
+interface CapabilityItem {
+  id: string;
+  title: string;
+  description: string;
+  experienceLabel: string;
+  stacks: string[];
+}
 
 const romanNumerals = ["I.", "II.", "III.", "IV.", "V.", "VI."];
 
@@ -68,6 +32,12 @@ const cardVariants: Variants = {
 };
 
 export const Skills = () => {
+  const t = useTranslations('home.skills');
+  // Mock data shaped like the `capabilities` Payload collection, sourced from
+  // messages for now — swap for payload.find({ collection: "capabilities" })
+  // when ready (fields already carry the same shape).
+  const capabilities = t.raw('items') as CapabilityItem[];
+
   return (
     <section className="py-28 relative overflow-hidden border-t border-[#9be8b8]/8" id="skills">
       <div className="mx-auto max-w-7xl px-6 relative z-10">
@@ -80,10 +50,10 @@ export const Skills = () => {
           viewport={{ once: true }}
         >
           <div className="font-mono text-[11px] tracking-[0.18em] uppercase text-[#46d386] mb-4">
-            03 — Expertise
+            {t('label')}
           </div>
           <h2 className="font-serif font-medium text-5xl md:text-[54px] text-[#f2f4f0] mb-14">
-            Capabilities
+            {t('title')}
           </h2>
         </motion.div>
 
@@ -120,8 +90,8 @@ export const Skills = () => {
                 </p>
               )}
               <div className="font-mono text-[11px] leading-loose tracking-[0.08em] uppercase text-[#9be8b8]/55">
-                {capability.stacks?.map((stack) => (
-                  <div key={stack.line}>/ {stack.line}</div>
+                {capability.stacks?.map((line) => (
+                  <div key={line}>/ {line}</div>
                 ))}
               </div>
             </motion.div>

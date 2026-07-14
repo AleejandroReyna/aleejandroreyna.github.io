@@ -1,15 +1,20 @@
 'use client'
 import { motion } from "motion/react"
+import { useTranslations } from "next-intl"
 
 // Mock values until these are driven by Payload site settings.
-const stats = [
-  { value: "13", suffix: "", label: "Years Engineering" },
-  { value: "86", suffix: "+", label: "Projects Shipped" },
-  { value: "30", suffix: "+", label: "In Production Today" },
-  { value: "4", suffix: "", label: "Core Stacks" },
+const values = [
+  { value: "13", suffix: "" },
+  { value: "86", suffix: "+" },
+  { value: "30", suffix: "+" },
+  { value: "4", suffix: "" },
 ]
 
 export const Stats = () => {
+  const t = useTranslations('home.stats')
+  const labelKeys = ['years', 'projects', 'production', 'stacks'] as const
+  const stats = values.map((v, i) => ({ ...v, label: t(labelKeys[i]) }))
+
   return (
     <motion.section
       initial={{ opacity: 0 }}

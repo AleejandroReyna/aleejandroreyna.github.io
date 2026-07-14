@@ -1,8 +1,12 @@
 import { getPayload } from "payload"
 import config from "@payload-config"
+import { getTranslations } from "next-intl/server"
 import { AnimateIn } from "@/components/ds/AnimateIn"
+import { getLocale } from "@/lib/locale"
 
 export const Testimonials = async () => {
+  const t = await getTranslations('home.testimonials')
+  const locale = await getLocale()
   const payload = await getPayload({ config })
   const result = await payload.find({
     collection: "testimonials",
@@ -10,6 +14,7 @@ export const Testimonials = async () => {
       approved: { equals: true },
     },
     limit: 100,
+    locale,
   })
 
   // Payload/Mongo has no random sort — shuffle the approved pool and take 3.
@@ -38,10 +43,10 @@ export const Testimonials = async () => {
         {/* Heading */}
         <AnimateIn>
           <div className="font-mono text-[11px] tracking-[0.18em] uppercase text-[#46d386] mb-4">
-            In Their Words
+            {t('label')}
           </div>
           <h2 className="font-serif font-medium text-5xl md:text-[54px] text-[#f2f4f0] mb-14">
-            What clients say
+            {t('title')}
           </h2>
         </AnimateIn>
 

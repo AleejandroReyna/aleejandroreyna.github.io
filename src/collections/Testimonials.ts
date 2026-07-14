@@ -21,6 +21,7 @@ export const Testimonials: CollectionConfig = {
             label: 'Quote',
             type: 'textarea',
             required: true,
+            localized: true,
         },
         {
             name: 'clientName',
@@ -32,6 +33,7 @@ export const Testimonials: CollectionConfig = {
             name: 'role',
             label: 'Role',
             type: 'text',
+            localized: true,
             admin: {
                 description: 'Client position, e.g. "CTO"',
             },

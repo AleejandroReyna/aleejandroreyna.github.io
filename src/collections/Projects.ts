@@ -67,6 +67,7 @@ export const Projects: CollectionConfig = {
             label: 'Content',
             type: 'richText',
             editor: lexicalEditor(),
+            localized: true,
         },
         slugField('name'),
     ],

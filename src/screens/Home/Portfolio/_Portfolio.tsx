@@ -1,17 +1,19 @@
 import Link from "next/link";
 import { getPayload } from "payload"
 import config from "@payload-config"
+import { getTranslations } from "next-intl/server"
 import { Technology, Media, Project } from "@/payload-types"
 import { AnimateIn } from "@/components/ds/AnimateIn"
+import { getLocale } from "@/lib/locale"
 
 const FALLBACK_IMAGE = "https://place-hold.it/1600x900"
 
-const projectLabel = (project: Project, index: number) => {
+const projectLabel = (project: Project, index: number, fallbackKind: string) => {
   const order = String(index + 1).padStart(2, "0")
   const kind =
     project.company && typeof project.company !== "string"
       ? project.company.name
-      : "Project"
+      : fallbackKind
   const year = project.releaseDate ? new Date(project.releaseDate).getFullYear() : null
   return `${order} — ${kind}${year ? ` · ${year}` : ""}`
 }
@@ -47,12 +49,15 @@ const CaseStudyLink = ({ slug, children }: { slug?: string | null; children: Rea
 )
 
 export const Portfolio = async () => {
+  const t = await getTranslations('home.portfolio')
+  const locale = await getLocale()
   const payload = await getPayload({ config })
   const result = await payload.find({
     collection: "projects",
     depth: 2,
     limit: 3,
     sort: "-releaseDate",
+    locale,
   })
 
   const [featured, ...rest] = result.docs
@@ -73,10 +78,10 @@ export const Portfolio = async () => {
           <div className="mb-14 flex items-baseline justify-between gap-6">
             <div>
               <div className="font-mono text-[11px] tracking-[0.18em] uppercase text-[#46d386] mb-4">
-                02 — Selected Works
+                {t('label')}
               </div>
               <h2 className="font-serif font-medium text-5xl md:text-[54px] text-[#f2f4f0]">
-                Recent projects
+                {t('title')}
               </h2>
             </div>
             {yearRange && (
@@ -108,7 +113,7 @@ export const Portfolio = async () => {
                 <div className="absolute left-0 right-0 bottom-0 p-7 md:p-12 flex flex-col md:flex-row justify-between md:items-end gap-6 md:gap-10">
                   <div>
                     <div className="font-mono text-[11px] tracking-[0.18em] uppercase text-[#46d386] mb-3">
-                      {projectLabel(featured, 0)}
+                      {projectLabel(featured, 0, t('fallbackKind'))}
                     </div>
                     <h3 className="font-serif font-medium text-3xl md:text-[42px] text-[#f2f4f0] mb-2.5">
                       {featured.name}
@@ -116,7 +121,7 @@ export const Portfolio = async () => {
                   </div>
                   <div className="flex flex-col md:items-end gap-4 shrink-0">
                     <TechChips project={featured} />
-                    <CaseStudyLink slug={featured.slug}>View Case Study →</CaseStudyLink>
+                    <CaseStudyLink slug={featured.slug}>{t('viewCaseStudy')}</CaseStudyLink>
                   </div>
                 </div>
               </article>
@@ -145,14 +150,14 @@ export const Portfolio = async () => {
                     ></div>
                     <div className="absolute left-0 right-0 bottom-0 p-7 md:p-9">
                       <div className="font-mono text-[11px] tracking-[0.18em] uppercase text-[#46d386] mb-2.5">
-                        {projectLabel(project, i + 1)}
+                        {projectLabel(project, i + 1, t('fallbackKind'))}
                       </div>
                       <h3 className="font-serif font-medium text-2xl md:text-[34px] text-[#f2f4f0] mb-4">
                         {project.name}
                       </h3>
                       <div className="flex justify-between items-center gap-4">
                         <TechChips project={project} />
-                        <CaseStudyLink slug={project.slug}>Case Study →</CaseStudyLink>
+                        <CaseStudyLink slug={project.slug}>{t('caseStudy')}</CaseStudyLink>
                       </div>
                     </div>
                   </article>
@@ -168,7 +173,7 @@ export const Portfolio = async () => {
             href="/portfolio"
             className="block text-center mt-12 py-4.5 font-mono text-[11px] tracking-[0.18em] uppercase text-[#dfe5e0]/45 border border-[#dfe5e0]/12 hover:text-[#9be8b8] hover:border-[#9be8b8]/35 transition-colors duration-300"
           >
-            Full Archive — {result.totalDocs}+ Projects →
+            {t('fullArchive', { count: result.totalDocs })}
           </Link>
         </AnimateIn>
       </div>

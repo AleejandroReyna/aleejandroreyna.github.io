@@ -1,35 +1,21 @@
 import { getSiteSettings } from "@/lib/payload";
 import { SiGithub } from '@icons-pack/react-simple-icons';
 import { Linkedin, Calendar } from 'lucide-react';
+import { getTranslations } from "next-intl/server";
 import { AnimateIn } from "@/components/ds/AnimateIn";
 import { ContactForm } from './ContactForm';
 
-const processSteps = [
-  {
-    number: "01",
-    title: "The call",
-    description: "30 minutes to understand the problem, the constraints, and whether we're a fit. No pitch.",
-  },
-  {
-    number: "02",
-    title: "The blueprint",
-    description: "Architecture, scope, timeline, and a fixed price. You know exactly what you're getting before anything is built.",
-  },
-  {
-    number: "03",
-    title: "The build",
-    description: "Weekly demos on a live staging environment. You watch it grow — no black box, no surprises.",
-  },
-  {
-    number: "04",
-    title: "Production & beyond",
-    description: "Deployment, documentation, and handoff — or ongoing partnership. 30+ systems still under my watch.",
-  },
-];
-
 export const Content = async () => {
+  const t = await getTranslations('contactPage');
   const settings = await getSiteSettings();
   const { github, linkedin, calendly, email } = settings.social || {};
+
+  const processSteps = [
+    { number: "01", title: t('step1Title'), description: t('step1Body') },
+    { number: "02", title: t('step2Title'), description: t('step2Body') },
+    { number: "03", title: t('step3Title'), description: t('step3Body') },
+    { number: "04", title: t('step4Title'), description: t('step4Body') },
+  ];
 
   return (
     <section className="text-foreground flex-auto w-full relative overflow-hidden" id="contact">
@@ -46,25 +32,25 @@ export const Content = async () => {
           <AnimateIn className="lg:col-span-5">
             <div className="flex items-center gap-2.5 mb-7 font-mono text-[11px] tracking-[0.2em] uppercase text-[#dfe5e0]/50">
               <span className="w-1.5 h-1.5 rounded-full bg-[#46d386] animate-pulse"></span>
-              Status: Available — 2026
+              {t('status')}
             </div>
             <h1 className="font-serif font-medium text-7xl md:text-[92px] leading-none text-[#f2f4f0]">
-              Let&apos;s<br />
-              talk<span className="text-[#46d386]">.</span>
+              {t('titleLine1')}<br />
+              {t('titleLine2')}<span className="text-[#46d386]">.</span>
             </h1>
             <p className="font-heading text-base leading-[1.75] text-[#dfe5e0]/65 mt-8 max-w-[420px]">
-              Currently accepting a limited number of projects — architecture, full builds, or rescue missions. Tell me what you&apos;re building and I&apos;ll reply within 24 hours.
+              {t('description')}
             </p>
 
             <div className="mt-14 flex flex-col">
               <div className="grid grid-cols-[110px_1fr] md:grid-cols-[130px_1fr] gap-6 py-5.5 border-t border-[#9be8b8]/12 items-baseline">
-                <span className="font-mono text-[10px] tracking-[0.16em] uppercase text-[#dfe5e0]/40">Email</span>
+                <span className="font-mono text-[10px] tracking-[0.16em] uppercase text-[#dfe5e0]/40">{t('emailLabel')}</span>
                 <a href={`mailto:${email}`} className="font-mono font-medium text-[15px] tracking-[0.04em] text-[#dfe5e0] hover:text-[#9be8b8] transition-colors duration-300 break-all">
                   {email}
                 </a>
               </div>
               <div className="grid grid-cols-[110px_1fr] md:grid-cols-[130px_1fr] gap-6 py-5.5 border-t border-[#9be8b8]/12 items-baseline">
-                <span className="font-mono text-[10px] tracking-[0.16em] uppercase text-[#dfe5e0]/40">Call</span>
+                <span className="font-mono text-[10px] tracking-[0.16em] uppercase text-[#dfe5e0]/40">{t('callLabel')}</span>
                 <a
                   href={`https://calendly.com/${calendly}`}
                   target="_blank"
@@ -76,7 +62,7 @@ export const Content = async () => {
                 </a>
               </div>
               <div className="grid grid-cols-[110px_1fr] md:grid-cols-[130px_1fr] gap-6 py-5.5 border-t border-[#9be8b8]/12 items-baseline">
-                <span className="font-mono text-[10px] tracking-[0.16em] uppercase text-[#dfe5e0]/40">Social</span>
+                <span className="font-mono text-[10px] tracking-[0.16em] uppercase text-[#dfe5e0]/40">{t('socialLabel')}</span>
                 <span className="flex flex-wrap gap-x-7 gap-y-2 font-mono font-medium text-xs tracking-[0.14em] uppercase">
                   <a
                     href={`https://github.com/${github}`}
@@ -85,7 +71,7 @@ export const Content = async () => {
                     className="inline-flex items-center gap-2 whitespace-nowrap text-[#dfe5e0] hover:text-[#9be8b8] transition-colors duration-300"
                   >
                     <SiGithub size={13} />
-                    GitHub ↗
+                    {t('github')} ↗
                   </a>
                   <a
                     href={`https://linkedin.com/in/${linkedin}`}
@@ -94,14 +80,14 @@ export const Content = async () => {
                     className="inline-flex items-center gap-2 whitespace-nowrap text-[#dfe5e0] hover:text-[#9be8b8] transition-colors duration-300"
                   >
                     <Linkedin size={13} />
-                    LinkedIn ↗
+                    {t('linkedin')} ↗
                   </a>
                 </span>
               </div>
               <div className="grid grid-cols-[110px_1fr] md:grid-cols-[130px_1fr] gap-6 py-5.5 border-t border-b border-[#9be8b8]/12 items-baseline">
-                <span className="font-mono text-[10px] tracking-[0.16em] uppercase text-[#dfe5e0]/40">Base</span>
+                <span className="font-mono text-[10px] tracking-[0.16em] uppercase text-[#dfe5e0]/40">{t('baseLabel')}</span>
                 <span className="font-mono font-medium text-[15px] tracking-[0.04em] text-[#dfe5e0]">
-                  Guatemala City — UTC−6, remote worldwide
+                  {t('baseValue')}
                 </span>
               </div>
             </div>
@@ -111,7 +97,7 @@ export const Content = async () => {
           <AnimateIn delay={0.15} className="lg:col-span-6">
             <div className="border border-[#9be8b8]/12 rounded bg-[#0c100d]/90 p-8 md:p-12">
               <div className="font-mono text-[11px] tracking-[0.18em] uppercase text-[#46d386] mb-8">
-                Start a Project
+                {t('formTitle')}
               </div>
               <ContactForm />
             </div>
@@ -124,10 +110,10 @@ export const Content = async () => {
         <div className="mx-auto max-w-7xl px-6">
           <AnimateIn>
           <div className="font-mono text-[11px] tracking-[0.18em] uppercase text-[#46d386] mb-4">
-            What Happens Next
+            {t('processLabel')}
           </div>
           <h2 className="font-serif font-medium text-4xl md:text-5xl text-[#f2f4f0] mb-14">
-            From message to production
+            {t('processTitle')}
           </h2>
           </AnimateIn>
           <AnimateIn delay={0.15}>
@@ -158,10 +144,10 @@ export const Content = async () => {
         ></div>
         <AnimateIn className="relative z-10 px-6">
           <div className="font-mono text-[11px] tracking-[0.18em] uppercase text-[#46d386] mb-6">
-            Prefer to skip the form?
+            {t('ctaLabel')}
           </div>
           <div className="font-serif font-medium text-4xl md:text-[52px] leading-[1.1] text-[#f2f4f0]">
-            Book 30 minutes, <span className="italic text-[#9be8b8]">directly</span>.
+            {t('ctaTitleLine1')} <span className="italic text-[#9be8b8]">{t('ctaEmphasis')}</span>.
           </div>
           <a
             href={`https://calendly.com/${calendly}`}
@@ -169,7 +155,7 @@ export const Content = async () => {
             rel="noopener noreferrer"
             className="inline-block mt-9 font-mono font-medium text-xs tracking-[0.18em] uppercase text-[#dfe5e0] border border-[#9be8b8]/35 px-8 py-4 rounded-sm hover:bg-[#9be8b8]/10 transition-colors duration-300"
           >
-            Open Calendly ↗
+            {t('openCalendly')}
           </a>
         </AnimateIn>
       </div>

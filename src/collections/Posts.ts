@@ -23,11 +23,13 @@ export const Posts: CollectionConfig = {
             label: 'Title',
             type: 'text',
             required: true,
+            localized: true,
         },
         {
             name: 'excerpt',
             label: 'Excerpt',
             type: 'textarea',
+            localized: true,
             admin: {
                 description: 'Short summary shown in blog listings',
             },
@@ -38,6 +40,7 @@ export const Posts: CollectionConfig = {
             type: 'richText',
             editor: lexicalEditor(),
             required: true,
+            localized: true,
         },
         {
             name: 'categories',

@@ -10,10 +10,12 @@ import { Experience } from "./Experience"
 import { Approach } from "./Approach"
 import { Contact } from "./Contact"
 import { getSiteSettings, getExperienceDetails } from "@/lib/payload"
+import { getLocale } from "@/lib/locale"
 
 export const HomeScreen = async () => {
+  const locale = await getLocale();
   const settings = await getSiteSettings();
-  const experiences = await getExperienceDetails();
+  const experiences = await getExperienceDetails(locale);
   const { github, linkedin, calendly, email } = settings.social || {};
 
   return (

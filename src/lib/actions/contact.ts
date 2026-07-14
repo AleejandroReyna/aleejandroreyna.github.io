@@ -3,16 +3,7 @@
 import { getPayload } from 'payload'
 import config from '@payload-config'
 import { z } from 'zod'
-
-const contactSchema = z.object({
-    name: z.string().min(2, 'Name is too short'),
-    email: z.string().email('Invalid email address'),
-    subject: z.string().optional(),
-    phone: z.preprocess((val) => val === null ? undefined : val, z.string().optional()),
-    company: z.preprocess((val) => val === null ? undefined : val, z.string().optional()),
-    budget: z.preprocess((val) => val === null ? undefined : val, z.string().optional()),
-    message: z.string().min(10, 'Message is too short'),
-})
+import { getTranslations } from 'next-intl/server'
 
 export type ContactFormState = {
     success: boolean
@@ -30,6 +21,18 @@ export async function submitContactForm(
     prevState: ContactFormState,
     formData: FormData
 ): Promise<ContactFormState> {
+    const t = await getTranslations('contactForm')
+
+    const contactSchema = z.object({
+        name: z.string().min(2, t('nameTooShort')),
+        email: z.string().email(t('invalidEmail')),
+        subject: z.string().optional(),
+        phone: z.preprocess((val) => val === null ? undefined : val, z.string().optional()),
+        company: z.preprocess((val) => val === null ? undefined : val, z.string().optional()),
+        budget: z.preprocess((val) => val === null ? undefined : val, z.string().optional()),
+        message: z.string().min(10, t('messageTooShort')),
+    })
+
     const rawData = {
         name: formData.get('name'),
         email: formData.get('email'),
@@ -48,7 +51,7 @@ export async function submitContactForm(
         return {
             success: false,
             errors: validatedFields.error.flatten().fieldErrors,
-            message: `Please fix the errors: ${errorMessages.join(', ')}`,
+            message: t('fixErrors', { errors: errorMessages.join(', ') }),
         }
     }
 
@@ -64,13 +67,13 @@ export async function submitContactForm(
 
         return {
             success: true,
-            message: 'Thank you! Your message has been sent.',
+            message: t('thankYou'),
         }
     } catch (error) {
         console.error('Error saving contact submission:', error)
         return {
             success: false,
-            message: 'Something went wrong. Please try again later.',
+            message: t('error'),
         }
     }
 }

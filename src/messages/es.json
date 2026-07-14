@@ -1,0 +1,228 @@
+{
+  "nav": {
+    "home": "Inicio",
+    "portfolio": "Portafolio",
+    "blog": "Blog",
+    "letsTalk": "Hablemos"
+  },
+  "stickyNav": {
+    "philosophy": "Filosofía",
+    "portfolio": "Portafolio",
+    "expertise": "Expertise",
+    "journey": "Trayectoria",
+    "contact": "Contacto"
+  },
+  "footer": {
+    "role": "Ingeniero Full-Stack",
+    "tagline": "Arquitectando precisión en cada capa del stack. {years}+ años construyendo sistemas de alto rendimiento.",
+    "quickLinks": "Enlaces Rápidos",
+    "home": "Inicio",
+    "about": "Filosofía",
+    "portfolio": "Portafolio",
+    "expertise": "Expertise",
+    "contact": "Contacto",
+    "techStack": "Stack Tecnológico",
+    "network": "Redes",
+    "github": "GitHub",
+    "linkedin": "LinkedIn",
+    "calendly": "Calendly",
+    "copyright": "© {year} Alejandro Reyna",
+    "quote": "“Lo simple es mejor que lo complejo” — Zen de Python",
+    "location": "Guatemala — Mundial"
+  },
+  "home": {
+    "hero": {
+      "badge": "Disponible para proyectos seleccionados — 2026",
+      "description": "Ingeniero full-stack que construye sistemas que soportan peso real — arquitectura en la nube, IA conversacional y plataformas que no fallan bajo carga. Trece años. Cada capa del stack.",
+      "location": "Guatemala — Remoto, Mundial",
+      "since": "Desde 2013"
+    },
+    "stats": {
+      "years": "Años de Experiencia",
+      "projects": "Proyectos Entregados",
+      "production": "En Producción Hoy",
+      "stacks": "Stacks Principales"
+    },
+    "philosophy": {
+      "label": "01 — Filosofía",
+      "titleLine1": "Más allá",
+      "titleLine2": "de la lógica",
+      "quote": "“Programar es más que resolver problemas — es componer sistemas escalables envueltos en interfaces en las que la gente confía.”",
+      "body": "Por más de trece años he arquitectado soluciones digitales desde Guatemala para equipos alrededor del mundo. Desde arquitecturas de bases de datos complejas hasta las micro-interacciones del frontend — cada capa importa, y cada capa se construye como si fuera la que va a fallar primero.",
+      "globalImpactLabel": "Alcance Global",
+      "globalImpactBody": "Colaboración remota con equipos en todo el mundo. Python, TypeScript, React, Node.js, Rails.",
+      "humanSideLabel": "Lado Humano",
+      "humanSideBody": "Música, BMX, y un gato exigente. Comunicación clara y empatía, siempre."
+    },
+    "portfolio": {
+      "label": "02 — Trabajos Seleccionados",
+      "title": "Proyectos recientes",
+      "fallbackKind": "Proyecto",
+      "viewCaseStudy": "Ver Caso de Estudio →",
+      "caseStudy": "Caso de Estudio →",
+      "fullArchive": "Archivo Completo — {count}+ Proyectos →"
+    },
+    "testimonials": {
+      "label": "En Sus Palabras",
+      "title": "Lo que dicen los clientes"
+    },
+    "skills": {
+      "label": "03 — Experiencia",
+      "title": "Capacidades",
+      "items": [
+        {
+          "id": "full-stack",
+          "title": "Ingeniería Full-Stack",
+          "description": "Desarrollos completos de producto. Interfaces con intención, backends con solidez.",
+          "experienceLabel": "12+ Años",
+          "stacks": ["TypeScript · React · Next.js · Vue", "Python & Django · Node.js · Rails"]
+        },
+        {
+          "id": "architecture",
+          "title": "Arquitectura y APIs",
+          "description": "Contratos y protocolos diseñados para que los sistemas se comuniquen con claridad — y sigan comunicándose.",
+          "experienceLabel": "9+ Años",
+          "stacks": ["REST · GraphQL · WebSockets", "OAuth y JWT · OpenAPI · Microservicios"]
+        },
+        {
+          "id": "data-cloud",
+          "title": "Datos y Sistemas en la Nube",
+          "description": "Esquemas, pipelines e infraestructura que se mantienen tranquilos a las 3 a.m.",
+          "experienceLabel": "8+ Años",
+          "stacks": ["PostgreSQL · MongoDB · Redis", "AWS · Docker · CI/CD"]
+        },
+        {
+          "id": "conversational-ai",
+          "title": "IA Conversacional",
+          "description": "Chatbots y agentes LLM conectados a flujos de negocio reales — automatización que se paga sola.",
+          "experienceLabel": "Desde 2023",
+          "stacks": ["Agentes LLM · RAG · Function Calling", "WhatsApp y Canales Web"]
+        }
+      ]
+    },
+    "experience": {
+      "label": "04 — Trayectoria",
+      "title": "Trayectoria profesional",
+      "present": "Presente",
+      "remote": "Remoto",
+      "onSite": "Presencial",
+      "independent": "Independiente"
+    },
+    "approach": {
+      "label": "El Enfoque",
+      "quote": "“Lo simple es mejor que lo complejo. Pero lo simple a escala es lo más difícil de construir — y lo único que vale la pena lanzar.”",
+      "attribution": "— Principio de trabajo, desde 2013"
+    },
+    "contact": {
+      "label": "05 — Contacto",
+      "titleLine1": "Construyamos",
+      "titleLine2": "algo que",
+      "titleEmphasis": "perdure",
+      "description": "Actualmente aceptando un número limitado de proyectos — arquitectura, desarrollos completos, o misiones de rescate.",
+      "github": "GitHub",
+      "linkedin": "LinkedIn",
+      "calendly": "Calendly",
+      "namePlaceholder": "Nombre",
+      "emailPlaceholder": "Correo",
+      "subjectPlaceholder": "Asunto",
+      "messagePlaceholder": "Mensaje",
+      "send": "Enviar Mensaje →",
+      "sending": "Enviando..."
+    }
+  },
+  "portfolioArchive": {
+    "label": "El Archivo",
+    "title": "Todos los proyectos",
+    "shippedSince": "86+ Entregados desde 2013",
+    "inProduction": "30+ En producción hoy",
+    "description": "Plataformas, e-commerce, chatbots y herramientas internas — una selección de lo que se puede mostrar públicamente.",
+    "fallbackKind": "Proyecto",
+    "all": "Todos",
+    "noResults": "No se encontraron proyectos con los filtros seleccionados.",
+    "ndaTitle": "+ 80 más bajo NDA",
+    "ndaBody": "Fintech · Logística · Salud",
+    "ndaCta": "Pregunta por ellos en una llamada",
+    "bookCall": "Agenda una Llamada →"
+  },
+  "projectDetail": {
+    "allProjects": "← Todos los Proyectos",
+    "caseStudy": "Caso de Estudio",
+    "visitSite": "Visitar Sitio en Vivo ↗",
+    "client": "Cliente",
+    "confidential": "Confidencial",
+    "role": "Rol",
+    "roleValue": "Arquitectura y desarrollo completo",
+    "year": "Año",
+    "stack": "Stack",
+    "overviewLabel": "01 — Resumen",
+    "overviewTitle": "Sobre el proyecto",
+    "ctaTitle": "¿Quieres resultados como estos",
+    "nextProject": "Siguiente Caso de Estudio"
+  },
+  "blog": {
+    "label": "El Diario",
+    "title": "Escritos",
+    "description": "Notas sobre arquitectura, sistemas en la nube y cómo construir software que perdura.",
+    "all": "Todos",
+    "noResults": "No se encontraron publicaciones con los filtros seleccionados.",
+    "ctaLabel": "¿Disfrutando la lectura?",
+    "ctaTitle": "Pongámoslo a trabajar",
+    "ctaEmphasis": "en tu sistema",
+    "ctaButton": "Iniciar un Proyecto →"
+  },
+  "postDetail": {
+    "allPosts": "← Todas las Publicaciones",
+    "ctaTitle": "¿Quieres hablar de esto",
+    "nextPost": "Siguiente Publicación"
+  },
+  "contactPage": {
+    "status": "Estado: Disponible — 2026",
+    "titleLine1": "Quiero",
+    "titleLine2": "Conocerte",
+    "description": "Actualmente aceptando un número limitado de proyectos — arquitectura, desarrollos completos, o misiones de rescate. Cuéntame qué estás construyendo y te responderé en 24 horas.",
+    "emailLabel": "Correo",
+    "callLabel": "Llamada",
+    "socialLabel": "Redes",
+    "baseLabel": "Base",
+    "baseValue": "Ciudad de Guatemala — UTC−6, remoto mundial",
+    "github": "GitHub",
+    "linkedin": "LinkedIn",
+    "formTitle": "Inicia un Proyecto",
+    "namePlaceholder": "Nombre",
+    "emailPlaceholder": "Correo",
+    "companyPlaceholder": "Empresa (Opcional)",
+    "budgetPlaceholder": "Rango de Presupuesto",
+    "subjectPlaceholder": "¿Qué vamos a construir?",
+    "messagePlaceholder": "Cuéntame sobre el proyecto — objetivos, tiempos, estado actual",
+    "send": "Enviar Mensaje →",
+    "sending": "Enviando...",
+    "responseTime": "Respuesta en 24 horas — usualmente antes",
+    "messageSentTitle": "Mensaje enviado",
+    "sendAnother": "Enviar otro mensaje",
+    "processLabel": "Qué Sigue",
+    "processTitle": "Del mensaje a producción",
+    "step1Title": "La llamada",
+    "step1Body": "30 minutos para entender el problema, las restricciones, y si somos compatibles. Sin discurso de venta.",
+    "step2Title": "El plano",
+    "step2Body": "Arquitectura, alcance, tiempos, y un precio fijo. Sabes exactamente qué vas a recibir antes de construir nada.",
+    "step3Title": "La construcción",
+    "step3Body": "Demos semanales en un entorno de staging en vivo. Ves cómo crece — sin caja negra, sin sorpresas.",
+    "step4Title": "Producción y más allá",
+    "step4Body": "Despliegue, documentación, y entrega — o una asociación continua. Más de 30 sistemas siguen bajo mi cuidado.",
+    "ctaLabel": "¿Prefieres saltarte el formulario?",
+    "ctaTitleLine1": "Agenda 30 minutos,",
+    "ctaEmphasis": "directamente",
+    "openCalendly": "Abrir Calendly ↗"
+  },
+  "languageSwitcher": {
+    "label": "Idioma"
+  },
+  "contactForm": {
+    "nameTooShort": "El nombre es demasiado corto",
+    "invalidEmail": "Correo electrónico inválido",
+    "messageTooShort": "El mensaje es demasiado corto",
+    "fixErrors": "Por favor corrige los errores: {errors}",
+    "thankYou": "¡Gracias! Tu mensaje ha sido enviado.",
+    "error": "Algo salió mal. Por favor intenta de nuevo más tarde."
+  }
+}

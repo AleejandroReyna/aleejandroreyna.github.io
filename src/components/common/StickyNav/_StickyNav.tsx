@@ -1,20 +1,17 @@
 'use client';
 import { useEffect, useRef, useState } from "react";
+import { useTranslations } from "next-intl";
 
-const links = [
-  { href: "#about", label: "Philosophy" },
-  { href: "#portfolio", label: "Portfolio" },
-  { href: "#skills", label: "Expertise" },
-  { href: "#experience", label: "Journey" },
-  { href: "#contact", label: "Contact" },
-];
+const hrefs = ["#about", "#portfolio", "#skills", "#experience", "#contact"] as const;
+const labelKeys = ["philosophy", "portfolio", "expertise", "journey", "contact"] as const;
 
 // In-page section nav for the home screen. It scrolls with the page until it
 // reaches the main header, then docks flush beneath it (top = measured
 // header height, kept in sync via a CSS var set by Navbar).
 export const StickyNav = () => {
+  const t = useTranslations('stickyNav');
   const navRef = useRef<HTMLDivElement>(null);
-  const [activeHref, setActiveHref] = useState<string>(links[0].href);
+  const [activeHref, setActiveHref] = useState<string>(hrefs[0]);
 
   // Expose our own height so section scroll-margin can account for both the
   // fixed header and this docked bar — otherwise anchored sections land
@@ -36,8 +33,8 @@ export const StickyNav = () => {
 
   // Track which section is currently in view to light up its dot.
   useEffect(() => {
-    const sections = links
-      .map((link) => document.querySelector(link.href))
+    const sections = hrefs
+      .map((href) => document.querySelector(href))
       .filter((el): el is Element => !!el);
     if (sections.length === 0) return;
 
@@ -64,12 +61,12 @@ export const StickyNav = () => {
       style={{ top: 'var(--header-height, 88px)' }}
     >
       <nav className="mx-auto max-w-7xl px-6 flex items-center gap-8 overflow-x-auto py-4 no-scrollbar">
-        {links.map((link) => {
-          const isActive = activeHref === link.href;
+        {hrefs.map((href, i) => {
+          const isActive = activeHref === href;
           return (
             <a
-              key={link.href}
-              href={link.href}
+              key={href}
+              href={href}
               className={`flex items-center gap-2 font-mono text-[11px] tracking-[0.16em] uppercase transition-colors duration-300 whitespace-nowrap shrink-0 ${
                 isActive ? 'text-foreground' : 'text-neutral-400 hover:text-foreground'
               }`}
@@ -79,7 +76,7 @@ export const StickyNav = () => {
                   isActive ? 'bg-[#46d386]' : 'bg-transparent'
                 }`}
               />
-              {link.label}
+              {t(labelKeys[i])}
             </a>
           );
         })}

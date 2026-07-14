@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { Archivo, Space_Grotesk, IBM_Plex_Mono, Cormorant_Garamond } from "next/font/google";
 import { config } from '@fortawesome/fontawesome-svg-core'
 import '@fortawesome/fontawesome-svg-core/styles.css'
+import { NextIntlClientProvider } from 'next-intl';
+import { getLocale, getMessages } from 'next-intl/server';
 import "./globals.css";
 
 export const dynamic = 'force-dynamic'
@@ -118,20 +120,25 @@ export const metadata: Metadata = {
   },
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const locale = await getLocale();
+  const messages = await getMessages();
+
   return (
-    <html lang="en" data-theme="custom" className="scroll-smooth">
+    <html lang={locale} data-theme="custom" className="scroll-smooth">
       <GoogleAnalytics gaId={envs.googleAnalyticsId} />
       <body className={`antialiased flex flex-col min-h-screen text-foreground ${archivo.variable} ${spaceGrotesk.variable} ${ibmPlexMono.variable} ${cormorantGaramond.variable}`}>
-        <AmbientBackground />
-        <ScrollRevealInit />
-        <Navbar />
-        {children}
-        <Footer />
+        <NextIntlClientProvider locale={locale} messages={messages}>
+          <AmbientBackground />
+          <ScrollRevealInit />
+          <Navbar />
+          {children}
+          <Footer />
+        </NextIntlClientProvider>
       </body>
     </html>
   );
