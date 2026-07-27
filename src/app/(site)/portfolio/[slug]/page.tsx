@@ -8,8 +8,7 @@ import { RichText } from '@payloadcms/richtext-lexical/react'
 import { getTranslations } from "next-intl/server"
 
 import { Media, Technology } from "@/payload-types"
-import { getSiteSettings } from "@/lib/payload"
-import { getLocale } from "@/lib/locale"
+import { getSiteSettings, findBySlugAnyLocale } from "@/lib/payload"
 import { AnimateIn } from "@/components/ds/AnimateIn"
 
 interface Props {
@@ -20,14 +19,7 @@ const FALLBACK_IMAGE = "https://place-hold.it/1920x1080"
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
     const { slug } = await params
-    const payload = await getPayload({ config })
-    const result = await payload.find({
-        collection: 'projects',
-        where: { slug: { equals: slug } },
-        limit: 1,
-    })
-
-    const project = result.docs[0]
+    const { doc: project } = await findBySlugAnyLocale('projects', slug)
 
     if (!project) {
         return {
@@ -36,7 +28,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     }
 
     return {
-        title: `${project.name} | Portfolio`,
+        title: project.metaTitle || `${project.name} | Portfolio`,
         description: `Details about the ${project.name} project.`,
         alternates: {
             canonical: `/portfolio/${slug}`,
@@ -46,22 +38,16 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 export default async function ProjectDetailPage({ params }: Props) {
     const { slug } = await params
-    const t = await getTranslations('projectDetail')
-    const locale = await getLocale()
-    const payload = await getPayload({ config })
-    const result = await payload.find({
-        collection: 'projects',
-        where: { slug: { equals: slug } },
-        limit: 1,
-        depth: 2,
-        locale,
-    })
+    // The slug determines the project's language here (not the visitor's
+    // locale cookie) — each locale has its own independent slug.
+    const { doc: project, locale } = await findBySlugAnyLocale('projects', slug, 2)
 
-    const project = result.docs[0]
-
-    if (!project) {
+    if (!project || !locale) {
         notFound()
     }
+
+    const t = await getTranslations({ locale, namespace: 'projectDetail' })
+    const payload = await getPayload({ config })
 
     const settings = await getSiteSettings()
     const contactEmail = settings.social?.email

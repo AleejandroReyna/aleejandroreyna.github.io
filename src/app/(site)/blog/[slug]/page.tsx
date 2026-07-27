@@ -7,8 +7,7 @@ import { RichText } from '@payloadcms/richtext-lexical/react'
 import { getTranslations } from "next-intl/server"
 
 import { Category } from "@/payload-types"
-import { getSiteSettings } from "@/lib/payload"
-import { getLocale } from "@/lib/locale"
+import { getSiteSettings, findBySlugAnyLocale } from "@/lib/payload"
 import { AnimateIn } from "@/components/ds/AnimateIn"
 
 interface Props {
@@ -20,14 +19,7 @@ const formatDate = (dateStr: string, locale: string) =>
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
     const { slug } = await params
-    const payload = await getPayload({ config })
-    const result = await payload.find({
-        collection: 'posts',
-        where: { slug: { equals: slug } },
-        limit: 1,
-    })
-
-    const post = result.docs[0]
+    const { doc: post } = await findBySlugAnyLocale('posts', slug)
 
     if (!post) {
         return {
@@ -36,7 +28,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     }
 
     return {
-        title: `${post.title} | Blog`,
+        title: post.metaTitle || post.title,
         description: post.excerpt || `Read ${post.title} on the blog.`,
         alternates: {
             canonical: `/blog/${slug}`,
@@ -46,22 +38,17 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 export default async function BlogPostPage({ params }: Props) {
     const { slug } = await params
-    const t = await getTranslations('postDetail')
-    const locale = await getLocale()
-    const payload = await getPayload({ config })
-    const result = await payload.find({
-        collection: 'posts',
-        where: { slug: { equals: slug } },
-        limit: 1,
-        depth: 2,
-        locale,
-    })
+    // The slug is what determines the post's language here (not the visitor's
+    // locale cookie) — otherwise a Spanish-slug URL opened with an "en" cookie
+    // would 404, since each locale has its own independent slug.
+    const { doc: post, locale } = await findBySlugAnyLocale('posts', slug, 2)
 
-    const post = result.docs[0]
-
-    if (!post) {
+    if (!post || !locale) {
         notFound()
     }
+
+    const t = await getTranslations({ locale, namespace: 'postDetail' })
+    const payload = await getPayload({ config })
 
     const settings = await getSiteSettings()
     const contactEmail = settings.social?.email
@@ -93,7 +80,9 @@ export default async function BlogPostPage({ params }: Props) {
         ],
     }
 
-    // Next post: the one following this one by published date (wraps around).
+    // Next post: the one following this one by published date (wraps around),
+    // resolved in the same locale as the current post so the link stays in
+    // that language.
     const all = await payload.find({
         collection: 'posts',
         sort: '-publishedDate',

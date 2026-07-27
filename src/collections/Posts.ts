@@ -26,6 +26,15 @@ export const Posts: CollectionConfig = {
             localized: true,
         },
         {
+            name: 'metaTitle',
+            label: 'Meta Title (SEO)',
+            type: 'text',
+            localized: true,
+            admin: {
+                description: 'Optional. Falls back to the Title above if left blank. Keep it under ~60 characters so Google doesn\'t truncate it in search results — useful when the real title is long or stylistic.',
+            },
+        },
+        {
             name: 'excerpt',
             label: 'Excerpt',
             type: 'textarea',

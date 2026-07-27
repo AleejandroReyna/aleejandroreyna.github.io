@@ -266,6 +266,10 @@ export interface Project {
    * Must be a real link in production
    */
   public_link: string;
+  /**
+   * Optional. Falls back to the Project Name above if left blank. Keep it under ~60 characters so Google doesn't truncate it in search results.
+   */
+  metaTitle?: string | null;
   company?: (string | null) | Company;
   technologies?: (string | Technology)[] | null;
   thumbnail?: (string | null) | Media;
@@ -372,6 +376,10 @@ export interface Category {
 export interface Post {
   id: string;
   title: string;
+  /**
+   * Optional. Falls back to the Title above if left blank. Keep it under ~60 characters so Google doesn't truncate it in search results — useful when the real title is long or stylistic.
+   */
+  metaTitle?: string | null;
   /**
    * Short summary shown in blog listings
    */
@@ -603,6 +611,7 @@ export interface ProjectsSelect<T extends boolean = true> {
   name?: T;
   releaseDate?: T;
   public_link?: T;
+  metaTitle?: T;
   company?: T;
   technologies?: T;
   thumbnail?: T;
@@ -675,6 +684,7 @@ export interface CategoriesSelect<T extends boolean = true> {
  */
 export interface PostsSelect<T extends boolean = true> {
   title?: T;
+  metaTitle?: T;
   excerpt?: T;
   content?: T;
   categories?: T;

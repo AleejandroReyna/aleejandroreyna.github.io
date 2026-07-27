@@ -8,6 +8,7 @@ export const slugField = (fieldToUse: string = 'name'): Field => ({
     required: true,
     unique: true,
     index: true,
+    localized: true,
     admin: {
         position: 'sidebar',
         components: {
