@@ -2,6 +2,7 @@
 
 @import "tailwindcss";
 @plugin "daisyui";
+@plugin "@tailwindcss/typography";
 
 @plugin "daisyui/theme" {
   name: "custom";

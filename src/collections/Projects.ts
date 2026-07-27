@@ -78,7 +78,7 @@ export const Projects: CollectionConfig = {
             editor: lexicalEditor(),
             localized: true,
         },
-        slugField('name'),
+        slugField('name', true),
     ],
     hooks: {
         afterChange: [

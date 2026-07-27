@@ -1,14 +1,14 @@
 import type { Field } from 'payload'
 import { formatSlug } from '@/utils/formatSlug'
 
-export const slugField = (fieldToUse: string = 'name'): Field => ({
+export const slugField = (fieldToUse: string = 'name', localized: boolean = false): Field => ({
     name: 'slug',
     label: 'Slug',
     type: 'text',
     required: true,
     unique: true,
     index: true,
-    localized: true,
+    localized,
     admin: {
         position: 'sidebar',
         components: {

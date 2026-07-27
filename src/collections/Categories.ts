@@ -23,7 +23,7 @@ export const Categories: CollectionConfig = {
             required: true,
             localized: true,
         },
-        slugField('name'),
+        slugField('name', true),
     ],
     hooks: {
         afterChange: [

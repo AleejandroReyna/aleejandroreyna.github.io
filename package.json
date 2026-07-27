@@ -24,6 +24,7 @@
     "@payloadcms/richtext-lexical": "^3.76.1",
     "@payloadcms/storage-vercel-blob": "^3.76.1",
     "@payloadcms/ui": "^3.76.1",
+    "@tailwindcss/typography": "^0.5.20",
     "cross-env": "^10.1.0",
     "daisyui": "^5.0.9",
     "devicons-react": "^1.4.0",

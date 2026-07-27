@@ -70,7 +70,7 @@ export const Posts: CollectionConfig = {
                 },
             },
         },
-        slugField('title'),
+        slugField('title', true),
     ],
     hooks: {
         afterChange: [
