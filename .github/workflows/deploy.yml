@@ -101,6 +101,13 @@ jobs:
             PAYLOAD_SECRET=${{ secrets.PAYLOAD_SECRET }}
             DATABASE_URL=${{ secrets.DATABASE_URL }}
             GOOGLE_ANALYTICS_ID=${{ secrets.GOOGLE_ANALYTICS_ID }}
+            SMTP_HOST=${{ secrets.SMTP_HOST }}
+            SMTP_PORT=${{ secrets.SMTP_PORT }}
+            SMTP_USER=${{ secrets.SMTP_USER }}
+            SMTP_PASS=${{ secrets.SMTP_PASS }}
+            SMTP_FROM_ADDRESS=${{ secrets.SMTP_FROM_ADDRESS }}
+            SMTP_FROM_NAME=${{ secrets.SMTP_FROM_NAME }}
+            CONTACT_NOTIFY_TO=${{ secrets.CONTACT_NOTIFY_TO }}
 
       - name: Show Service URL
         run: |-

@@ -56,3 +56,8 @@ override.tf.json
 *_override.tf.json
 .terraform.rc
 terraform.rc
+
+# Brand assets kept local (contain personal contact details)
+design-system/alejandro-reyna/linkedin-banner.html
+design-system/alejandro-reyna/email-signature.html
+design-system/alejandro-reyna/gen-banner.js

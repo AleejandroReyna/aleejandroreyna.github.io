@@ -1,5 +1,6 @@
 import { mongooseAdapter } from '@payloadcms/db-mongodb'
 import { lexicalEditor } from '@payloadcms/richtext-lexical'
+import { nodemailerAdapter } from '@payloadcms/email-nodemailer'
 import { vercelBlobStorage } from '@payloadcms/storage-vercel-blob'
 import path from 'path'
 import { buildConfig } from 'payload'
@@ -51,6 +52,27 @@ export default buildConfig({
         fallback: true,
     },
     editor: lexicalEditor(),
+    // Only wired up when SMTP credentials are present. Without them Payload
+    // falls back to logging mail to the console, which is what we want in
+    // local dev and during the Docker build (placeholder envs only).
+    ...(envs.smtp.isConfigured
+        ? {
+              email: nodemailerAdapter({
+                  defaultFromAddress: envs.smtp.fromAddress!,
+                  defaultFromName: envs.smtp.fromName,
+                  transportOptions: {
+                      host: envs.smtp.host,
+                      port: envs.smtp.port,
+                      // 465 is implicit TLS; 587 upgrades via STARTTLS.
+                      secure: envs.smtp.port === 465,
+                      auth: {
+                          user: envs.smtp.user,
+                          pass: envs.smtp.pass,
+                      },
+                  },
+              }),
+          }
+        : {}),
     secret: envs.payloadSecret,
     typescript: {
         outputFile: path.resolve(dirname, 'payload-types.ts'),

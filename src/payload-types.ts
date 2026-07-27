@@ -305,6 +305,10 @@ export interface ContactSubmission {
   company?: string | null;
   budget?: string | null;
   message: string;
+  /**
+   * Language the visitor submitted in
+   */
+  locale?: string | null;
   status: 'new' | 'contacted';
   notes?: string | null;
   updatedAt: string;
@@ -632,6 +636,7 @@ export interface ContactSubmissionsSelect<T extends boolean = true> {
   company?: T;
   budget?: T;
   message?: T;
+  locale?: T;
   status?: T;
   notes?: T;
   updatedAt?: T;

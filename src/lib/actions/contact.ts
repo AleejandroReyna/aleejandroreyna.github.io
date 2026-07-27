@@ -4,6 +4,7 @@ import { getPayload } from 'payload'
 import config from '@payload-config'
 import { z } from 'zod'
 import { getTranslations } from 'next-intl/server'
+import { getLocale } from '@/lib/locale'
 
 export type ContactFormState = {
     success: boolean
@@ -57,10 +58,12 @@ export async function submitContactForm(
 
     try {
         const payload = await getPayload({ config })
+        const locale = await getLocale()
         await payload.create({
             collection: 'contact-submissions',
             data: {
                 ...validatedFields.data,
+                locale,
                 status: 'new',
             },
         })
