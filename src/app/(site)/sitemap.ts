@@ -2,6 +2,11 @@ import { MetadataRoute } from 'next'
 import { getPayload } from 'payload'
 import config from '@payload-config'
 
+// Queries Payload for live project/post slugs, so it must run per-request
+// against the real database rather than being prerendered at build time
+// (the Docker build only has a placeholder DATABASE_URL).
+export const dynamic = 'force-dynamic'
+
 const baseUrl = 'https://alejandroreyna.com'
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
