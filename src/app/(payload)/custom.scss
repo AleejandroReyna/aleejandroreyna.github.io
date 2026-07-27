@@ -1,0 +1,93 @@
+// Brand accent — swaps Payload's default blue "success" ramp for the site's
+// emerald palette (#9be8b8 soft mint / #46d386 accent / #25543a, #092e20 deep
+// greens). This ramp drives primary buttons, active nav, links, and focus
+// rings across both light and dark admin themes.
+:root {
+  --color-success-50: #f2fdf7;
+  --color-success-100: #dff9ec;
+  --color-success-150: #c8f2dd;
+  --color-success-200: #9be8b8;
+  --color-success-250: #86e0ac;
+  --color-success-300: #71d8a0;
+  --color-success-350: #5ed093;
+  --color-success-400: #55c98d;
+  --color-success-450: #4dcf8a;
+  --color-success-500: #46d386;
+  --color-success-550: #3bbd76;
+  --color-success-600: #329f65;
+  --color-success-650: #2b8a58;
+  --color-success-700: #25764a;
+  --color-success-750: #25543a;
+  --color-success-800: #1c4330;
+  --color-success-850: #163527;
+  --color-success-900: #12291e;
+  --color-success-950: #092e20;
+}
+
+// Dark mode — rebuilds the elevation ramp (page bg, panels, borders, text)
+// out of the site's actual dark surfaces (#060907 / #0a0d0b) instead of
+// Payload's neutral gray, so the whole panel reads as part of the site.
+html[data-theme='dark'] {
+  --theme-elevation-0: #060907;
+  --theme-elevation-50: #0a0d0b;
+  --theme-elevation-100: #0d110f;
+  --theme-elevation-150: #101513;
+  --theme-elevation-200: #141a17;
+  --theme-elevation-250: #181f1c;
+  --theme-elevation-300: #1c2521;
+  --theme-elevation-350: #212b26;
+  --theme-elevation-400: #26322c;
+  --theme-elevation-450: #2c3a33;
+  --theme-elevation-500: #33453c;
+  --theme-elevation-550: #3b5347;
+  --theme-elevation-600: #456354;
+  --theme-elevation-650: #517763;
+  --theme-elevation-700: #5f8d74;
+  --theme-elevation-750: #6fa587;
+  --theme-elevation-800: #82bd9c;
+  --theme-elevation-850: #98d3b3;
+  --theme-elevation-900: #b3e2c8;
+  --theme-elevation-950: #d3eeda;
+  --theme-elevation-1000: #f2f4f0;
+}
+
+html[data-theme='dark'] .nav {
+  background: linear-gradient(180deg, #060907 0%, #0a0d0b 100%);
+}
+
+html[data-theme='dark'] .app-header__bg {
+  background: linear-gradient(180deg, rgba(10, 13, 11, 0.94), rgba(6, 9, 7, 0.94));
+}
+
+// Light mode — kept white/legible for readability, but the chrome (sidebar,
+// header, primary actions) carries the same palette as a soft gradient tint
+// instead of flat neutral gray.
+html[data-theme='light'] .nav {
+  background: linear-gradient(180deg, #f2fdf7 0%, #ffffff 65%);
+}
+
+html[data-theme='light'] .app-header__bg {
+  background: linear-gradient(180deg, rgba(238, 253, 245, 0.95), rgba(255, 255, 255, 0.95));
+}
+
+// Active nav item + primary action buttons — both themes, driven by the
+// success ramp above so they stay correct in light and dark automatically.
+.nav__link.active {
+  color: var(--theme-success-500);
+}
+
+.nav__link-indicator {
+  background: var(--theme-success-500);
+}
+
+.btn--style-primary {
+  --color: #0a0d0b;
+  --bg-color: var(--theme-success-500);
+  --hover-bg: var(--theme-success-550);
+  --hover-color: var(--color);
+  background-image: linear-gradient(135deg, var(--theme-success-450), var(--theme-success-650));
+}
+
+.btn--style-primary.btn--disabled {
+  background-image: none;
+}

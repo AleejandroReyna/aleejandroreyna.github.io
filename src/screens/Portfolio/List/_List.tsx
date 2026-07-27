@@ -71,8 +71,8 @@ export const List = async ({ searchParams }: Props) => {
             .join(' · ')
 
           return (
+            <article key={project.id}>
             <Link
-              key={project.id}
               href={`/portfolio/${project.slug}`}
               className="relative h-[340px] md:h-[400px] rounded overflow-hidden border border-[#9be8b8]/12 block group"
             >
@@ -95,8 +95,8 @@ export const List = async ({ searchParams }: Props) => {
                   <span className="font-mono text-[11px] tracking-[0.18em] uppercase text-[#46d386]">
                     {category}
                   </span>
-                  {releaseYear && (
-                    <span className="font-mono text-[11px] text-[#dfe5e0]/50">{releaseYear}</span>
+                  {releaseYear && project.releaseDate && (
+                    <time dateTime={project.releaseDate} className="font-mono text-[11px] text-[#dfe5e0]/50">{releaseYear}</time>
                   )}
                 </div>
                 <h2 className="font-serif font-medium text-[32px] text-[#f2f4f0] mb-1.5">
@@ -109,6 +109,7 @@ export const List = async ({ searchParams }: Props) => {
                 )}
               </div>
             </Link>
+            </article>
           )
         })}
 

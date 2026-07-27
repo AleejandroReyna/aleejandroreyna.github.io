@@ -105,13 +105,28 @@ export default async function ProjectDetailPage({ params }: Props) {
         ...(techNames.length > 0 ? { keywords: techNames.join(', ') } : {}),
     }
 
+    const breadcrumbJsonLd = {
+        '@context': 'https://schema.org',
+        '@type': 'BreadcrumbList',
+        itemListElement: [
+            { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://alejandroreyna.com' },
+            { '@type': 'ListItem', position: 2, name: 'Portfolio', item: 'https://alejandroreyna.com/portfolio' },
+            { '@type': 'ListItem', position: 3, name: project.name, item: `https://alejandroreyna.com/portfolio/${slug}` },
+        ],
+    }
+
     return (
         <main className="min-h-screen">
             <script
                 type="application/ld+json"
                 dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
             />
+            <script
+                type="application/ld+json"
+                dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
+            />
 
+            <article>
             {/* CASE HEADER */}
             <div className="pt-36 pb-16 relative overflow-hidden">
                 <div
@@ -163,7 +178,11 @@ export default async function ProjectDetailPage({ params }: Props) {
                     </div>
                     <div className="py-7 pr-8 lg:px-8 lg:border-r border-[#9be8b8]/8">
                         <div className="font-mono text-[10px] tracking-[0.16em] uppercase text-[#dfe5e0]/40 mb-2">{t('year')}</div>
-                        <div className="font-heading font-medium text-sm text-[#f2f4f0]">{releaseYear || '—'}</div>
+                        {project.releaseDate ? (
+                            <time dateTime={project.releaseDate} className="font-heading font-medium text-sm text-[#f2f4f0] block">{releaseYear}</time>
+                        ) : (
+                            <div className="font-heading font-medium text-sm text-[#f2f4f0]">—</div>
+                        )}
                     </div>
                     <div className="py-7 px-0 lg:px-8">
                         <div className="font-mono text-[10px] tracking-[0.16em] uppercase text-[#dfe5e0]/40 mb-2">{t('stack')}</div>
@@ -209,6 +228,7 @@ export default async function ProjectDetailPage({ params }: Props) {
                     )}
                 </AnimateIn>
             </div>
+            </article>
 
             {/* CTA */}
             <div className="py-24 border-t border-[#9be8b8]/8 text-center relative overflow-hidden">

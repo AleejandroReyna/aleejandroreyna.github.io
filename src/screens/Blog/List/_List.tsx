@@ -72,14 +72,14 @@ export const List = async ({ searchParams }: Props) => {
             .filter(Boolean)
 
           return (
+            <article key={post.id}>
             <Link
-              key={post.id}
               href={`/blog/${post.slug}`}
               className={`group grid grid-cols-1 md:grid-cols-[160px_1fr] gap-4 md:gap-10 py-9 border-t border-[#9be8b8]/12 items-baseline ${i === result.docs.length - 1 ? 'border-b' : ''}`}
             >
-              <div className="font-mono text-xs tracking-[0.14em] uppercase text-[#9be8b8]/60">
+              <time dateTime={post.publishedDate} className="font-mono text-xs tracking-[0.14em] uppercase text-[#9be8b8]/60">
                 {formatDate(post.publishedDate, locale)}
-              </div>
+              </time>
               <div>
                 <h2 className="font-serif font-medium text-[28px] text-[#f2f4f0] group-hover:text-[#9be8b8] transition-colors duration-300 mb-2">
                   {post.title}
@@ -103,6 +103,7 @@ export const List = async ({ searchParams }: Props) => {
                 )}
               </div>
             </Link>
+            </article>
           )
         })}
       </div>

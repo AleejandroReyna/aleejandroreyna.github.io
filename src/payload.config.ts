@@ -29,6 +29,19 @@ export default buildConfig({
         importMap: {
             baseDir: path.resolve(dirname),
         },
+        meta: {
+            title: 'Alejandro Reyna — Admin',
+            titleSuffix: ' — Alejandro Reyna',
+            icons: [
+                { url: '/images/payload-favicon.svg', type: 'image/svg+xml' },
+            ],
+        },
+        components: {
+            graphics: {
+                Logo: '@/components/payload/AdminLogo',
+                Icon: '@/components/payload/AdminIcon',
+            },
+        },
     },
     collections: [Users, Media, Companies, ExperienceDetails, Technologies, Projects, ContactSubmissions, Testimonials, Capabilities, Categories, Posts],
     globals: [SiteSettings],

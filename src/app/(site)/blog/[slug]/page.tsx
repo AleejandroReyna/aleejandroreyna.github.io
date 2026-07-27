@@ -83,6 +83,16 @@ export default async function BlogPostPage({ params }: Props) {
         mainEntityOfPage: `https://alejandroreyna.com/blog/${slug}`,
     }
 
+    const breadcrumbJsonLd = {
+        '@context': 'https://schema.org',
+        '@type': 'BreadcrumbList',
+        itemListElement: [
+            { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://alejandroreyna.com' },
+            { '@type': 'ListItem', position: 2, name: 'Blog', item: 'https://alejandroreyna.com/blog' },
+            { '@type': 'ListItem', position: 3, name: post.title, item: `https://alejandroreyna.com/blog/${slug}` },
+        ],
+    }
+
     // Next post: the one following this one by published date (wraps around).
     const all = await payload.find({
         collection: 'posts',
@@ -102,7 +112,12 @@ export default async function BlogPostPage({ params }: Props) {
                 type="application/ld+json"
                 dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
             />
+            <script
+                type="application/ld+json"
+                dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
+            />
 
+            <article>
             {/* POST HEADER */}
             <div className="pt-36 pb-16 relative overflow-hidden">
                 <div
@@ -118,9 +133,9 @@ export default async function BlogPostPage({ params }: Props) {
                         {t('allPosts')}
                     </Link>
                     <div className="flex items-center gap-4 mt-10 mb-5">
-                        <span className="font-mono text-[11px] tracking-[0.18em] uppercase text-[#46d386]">
+                        <time dateTime={post.publishedDate} className="font-mono text-[11px] tracking-[0.18em] uppercase text-[#46d386]">
                             {formatDate(post.publishedDate, locale)}
-                        </span>
+                        </time>
                         {postCategories.length > 0 && (
                             <span className="font-mono text-[11px] tracking-[0.18em] uppercase text-[#dfe5e0]/45">
                                 {postCategories.join(' · ')}
@@ -144,6 +159,7 @@ export default async function BlogPostPage({ params }: Props) {
                     )}
                 </AnimateIn>
             </div>
+            </article>
 
             {/* CTA */}
             <div className="py-24 border-t border-[#9be8b8]/8 text-center relative overflow-hidden">
