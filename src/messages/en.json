@@ -14,7 +14,7 @@
   },
   "footer": {
     "role": "Full-Stack Engineer",
-    "tagline": "Architecting precision at every layer of the stack. {years}+ years building high-performance systems.",
+    "tagline": "{years}+ years building software from Guatemala, for teams scattered across the world.",
     "quickLinks": "Quick Links",
     "home": "Home",
     "about": "About",
@@ -36,7 +36,7 @@
       "role": "Senior Software Developer",
       "buildIntro": "Let's build something",
       "buildWords": ["scalable.", "resilient.", "production-ready.", "battle-tested."],
-      "description": "Full-stack engineer building systems that carry weight — cloud architecture, conversational AI, and platforms that don't flinch under load. Thirteen years. Every layer of the stack.",
+      "description": "Full-stack engineer. Thirteen years, from Guatemala, mostly for teams in another time zone. Cloud architecture, conversational AI, and systems that have been running quietly for years.",
       "location": "Guatemala — Remote, Worldwide",
       "since": "Est. 2013"
     },
@@ -50,12 +50,12 @@
       "label": "01 — Philosophy",
       "titleLine1": "Beyond",
       "titleLine2": "the logic",
-      "quote": "“Programming is more than solving problems — it's composing scalable systems wrapped in interfaces people trust.”",
-      "body": "For over thirteen years I've been architecting digital solutions from Guatemala for teams around the world. From complex database architectures to the micro-interactions on the frontend — every layer matters, and every layer gets built like it's the one that will fail first.",
+      "quote": "“Writing the code is the easy part. The hard part is leaving it so whoever comes next understands why you did it that way.”",
+      "body": "I've spent more than thirteen years building software from Guatemala for teams in other countries. I've worked at every layer: the schema, the API that exposes it, the interface people actually use. None of them forgives neglect, and over the years I learned to give all of them the same respect.",
       "globalImpactLabel": "Global Impact",
-      "globalImpactBody": "Remote collaboration with teams worldwide. Python, TypeScript, React, Node.js, Rails.",
+      "globalImpactBody": "Remote work with teams across time zones. Python, TypeScript, React, Node.js, Rails.",
       "humanSideLabel": "Human Side",
-      "humanSideBody": "Music, BMX, and one demanding cat. Clear communication and empathy, always."
+      "humanSideBody": "Guitar and percussion, some bass and ukulele. BMX, and a cat who demands more than he gives. I write clearly and ask before assuming."
     },
     "portfolio": {
       "label": "02 — Selected Works",
@@ -76,30 +76,30 @@
         {
           "id": "full-stack",
           "title": "Full-Stack Engineering",
-          "description": "End-to-end product builds. Interfaces with intent, backends with backbone.",
+          "description": "Full product, from the database to the screen. Equally at home at either end.",
           "experienceLabel": "12+ Years",
           "stacks": ["TypeScript · React · Next.js · Vue", "Python & Django · Node.js · Rails"]
         },
         {
           "id": "architecture",
           "title": "Architecture & APIs",
-          "description": "Contracts and protocols designed so systems talk clearly — and keep talking.",
+          "description": "Contracts and protocols so systems understand each other, and keep understanding each other as they change.",
           "experienceLabel": "9+ Years",
           "stacks": ["REST · GraphQL · WebSockets", "OAuth & JWT · OpenAPI · Microservices"]
         },
         {
           "id": "data-cloud",
           "title": "Data & Cloud Systems",
-          "description": "Schemas, pipelines, and infrastructure that stays quiet at 3 a.m.",
+          "description": "Schemas, pipelines, and infrastructure. The foundation that holds everything else up, especially when nobody is watching.",
           "experienceLabel": "8+ Years",
           "stacks": ["PostgreSQL · MongoDB · Redis", "AWS · Docker · CI/CD"]
         },
         {
           "id": "conversational-ai",
           "title": "Conversational AI",
-          "description": "Chatbots and LLM agents wired into real business workflows — automation that pays for itself.",
-          "experienceLabel": "Since 2023",
-          "stacks": ["LLM Agents · RAG · Function Calling", "WhatsApp & Web Channels"]
+          "description": "Chatbots and LLM agents wired into processes that already exist. I started back when every intent had to be trained by hand.",
+          "experienceLabel": "Since 2019",
+          "stacks": ["LLM Agents · RAG · Function Calling", "Rasa · WhatsApp Business · Messenger"]
         }
       ]
     },
@@ -113,7 +113,7 @@
     },
     "approach": {
       "label": "The Approach",
-      "quote": "“Simple is better than complex. But simple at scale is the hardest thing to build — and the only thing worth shipping.”",
+      "quote": "“Simple is better than complex. The hard part isn't getting to simple: it's not losing it as the system grows.”",
       "attribution": "— Working Principle, since 2013"
     },
     "contact": {
@@ -121,7 +121,7 @@
       "titleLine1": "Let's build",
       "titleLine2": "something that",
       "titleEmphasisWords": ["lasts.", "grows.", "converts.", "scales.", "performs."],
-      "description": "Currently accepting a limited number of projects — architecture, full builds, or rescue missions.",
+      "description": "I take on few projects at a time. I work best with people who know where they want to go but not yet where to start: architecture, full builds, and a digital presence that starts out right.",
       "github": "GitHub",
       "linkedin": "LinkedIn",
       "calendly": "Calendly",
@@ -138,7 +138,7 @@
     "title": "All projects",
     "shippedSince": "86+ Shipped since 2013",
     "inProduction": "30+ In production today",
-    "description": "Platforms, e-commerce, chatbots, and internal tools — a selection of what can be shown publicly.",
+    "description": "Platforms, e-commerce, chatbots, and internal tools. A selection; the rest lives under NDA.",
     "fallbackKind": "Project",
     "all": "All",
     "noResults": "No projects found matching the selected filters.",
@@ -165,10 +165,10 @@
   "blog": {
     "label": "The Journal",
     "title": "Writing",
-    "description": "Notes on architecture, cloud systems, and building software that lasts.",
+    "description": "Notes on architecture and cloud systems. What the years teach, written down while it's still fresh.",
     "all": "All",
     "noResults": "No posts found matching the selected filters.",
-    "ctaLabel": "Enjoying the writing?",
+    "ctaLabel": "Did any of this resonate?",
     "ctaTitle": "Let's put it to work",
     "ctaEmphasis": "on your system",
     "ctaButton": "Start a Project →"
@@ -182,7 +182,7 @@
     "status": "Status: Available — 2026",
     "titleLine1": "Let's",
     "titleLine2": "talk",
-    "description": "Currently accepting a limited number of projects — architecture, full builds, or rescue missions. Tell me what you're building and I'll reply within 24 hours.",
+    "description": "I take on few projects at a time. I work best with people who know where they want to go but not yet where to start: architecture, full builds, and a digital presence that starts out right. Tell me what you're building and I'll reply in under 24 hours.",
     "emailLabel": "Email",
     "callLabel": "Call",
     "socialLabel": "Social",
@@ -196,22 +196,22 @@
     "companyPlaceholder": "Company (Optional)",
     "budgetPlaceholder": "Budget Range",
     "subjectPlaceholder": "What are we building?",
-    "messagePlaceholder": "Tell me about the project — goals, timeline, current state",
+    "messagePlaceholder": "Tell me about the project: goals, timeline, current state",
     "send": "Send Message →",
     "sending": "Sending...",
-    "responseTime": "Response within 24 hours — usually sooner",
+    "responseTime": "Reply in under 24 hours",
     "messageSentTitle": "Message sent",
     "sendAnother": "Send another message",
     "processLabel": "What Happens Next",
     "processTitle": "From message to production",
     "step1Title": "The call",
-    "step1Body": "30 minutes to understand the problem, the constraints, and whether we're a fit. No pitch.",
+    "step1Body": "30 minutes to understand the problem, the constraints, and the real scope. We both leave that call knowing whether the path is the right one.",
     "step2Title": "The blueprint",
-    "step2Body": "Architecture, scope, timeline, and a fixed price. You know exactly what you're getting before anything is built.",
+    "step2Body": "Architecture, scope, timeline, and a fixed price. Before a single line is written you know what you're getting.",
     "step3Title": "The build",
-    "step3Body": "Weekly demos on a live staging environment. You watch it grow — no black box, no surprises.",
-    "step4Title": "Production & beyond",
-    "step4Body": "Deployment, documentation, and handoff — or ongoing partnership. 30+ systems still under my watch.",
+    "step3Body": "Demos every week on a staging environment. You see the actual progress, not a progress report.",
+    "step4Title": "Production & after",
+    "step4Body": "Deployment, documentation, and handoff. Or we keep working together: 30+ systems are still on my watch.",
     "ctaLabel": "Prefer to skip the form?",
     "ctaTitleLine1": "Book 30 minutes,",
     "ctaEmphasis": "directly",

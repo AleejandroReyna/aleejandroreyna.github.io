@@ -50,7 +50,7 @@ export const metadata: Metadata = {
     default: 'Alejandro Reyna | Full-Stack Developer & Software Engineer',
     template: '%s | Alejandro Reyna'
   },
-  description: 'Experienced Full-Stack Developer from Guatemala with 12+ years building scalable web applications. Expert in Python, Django, JavaScript, TypeScript, React, Node.js, and Ruby on Rails. Available for remote opportunities.',
+  description: 'Full-Stack Developer from Guatemala. 13+ years building web platforms, APIs, and conversational AI. Python, Django, TypeScript, React, Node.js. Available for remote work.',
   keywords: [
     'Full-Stack Developer',
     'Software Engineer',
@@ -70,7 +70,12 @@ export const metadata: Metadata = {
     'API Development',
     'PostgreSQL',
     'MongoDB',
-    'AWS'
+    'AWS',
+    'Chatbot Developer',
+    'Conversational AI',
+    'LLM Agents',
+    'WhatsApp Bot Development',
+    'Rasa Developer'
   ],
   authors: [{ name: 'Alejandro Reyna' }],
   creator: 'Alejandro Reyna',
@@ -100,7 +105,7 @@ export const metadata: Metadata = {
     url: 'https://alejandroreyna.com',
     siteName: 'Alejandro Reyna Portfolio',
     title: 'Alejandro Reyna | Full-Stack Developer & Software Engineer',
-    description: 'Experienced Full-Stack Developer from Guatemala with 12+ years building scalable web applications. Expert in Python, Django, JavaScript, TypeScript, React, Node.js, and Ruby on Rails.',
+    description: 'Full-Stack Developer from Guatemala. 13+ years building web platforms, APIs, and conversational AI — chatbots and LLM agents since 2019.',
     images: [
       {
         url: '/images/about/me.jpg',
@@ -113,7 +118,7 @@ export const metadata: Metadata = {
   twitter: {
     card: 'summary_large_image',
     title: 'Alejandro Reyna | Full-Stack Developer & Software Engineer',
-    description: 'Experienced Full-Stack Developer from Guatemala with 12+ years building scalable web applications. Expert in Python, Django, JavaScript, TypeScript, React, Node.js, and Ruby on Rails.',
+    description: 'Full-Stack Developer from Guatemala. 13+ years building web platforms, APIs, and conversational AI — chatbots and LLM agents since 2019.',
     creator: '@aleejandroreyna',
     images: ['/images/about/me.jpg'],
   },
@@ -147,7 +152,7 @@ export default async function RootLayout({
       name: 'Alejandro Reyna',
       url: 'https://alejandroreyna.com',
       jobTitle: 'Full-Stack Developer',
-      description: 'Full-Stack Developer from Guatemala with 12+ years building scalable web applications.',
+      description: 'Full-Stack Developer from Guatemala with 13+ years building web platforms and conversational AI.',
       image: 'https://alejandroreyna.com/images/about/me.jpg',
       address: {
         '@type': 'PostalAddress',
