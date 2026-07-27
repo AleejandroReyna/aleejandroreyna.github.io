@@ -4,7 +4,10 @@ import { PortfolioScreen } from "@/screens/Portfolio";
 
 export const metadata : Metadata = {
   title: "Portfolio",
-  description: "Portfolio page",
+  description: "Case studies and projects built by Alejandro Reyna — Full-Stack Developer specializing in Python, Django, React, and Node.js.",
+  alternates: {
+    canonical: '/portfolio',
+  },
 };
 
 interface Props {

@@ -3,7 +3,10 @@ import { ContactScreen } from "@/screens/Contact";
 
 export const metadata : Metadata = {
   title: "Contact",
-  description: "Contact page",
+  description: "Get in touch with Alejandro Reyna, Full-Stack Developer, for remote software engineering opportunities and project inquiries.",
+  alternates: {
+    canonical: '/contact',
+  },
 };
 
 export default function ContactPage() {

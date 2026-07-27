@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { getPayload } from "payload"
 import config from "@payload-config"
 import { getTranslations } from "next-intl/server"
@@ -98,10 +99,13 @@ export const Portfolio = async () => {
           {featured && (
             <AnimateIn delay={0.1}>
               <article className="relative h-[420px] md:h-[520px] rounded overflow-hidden border border-[#9be8b8]/12 group">
-                <img
+                <Image
                   src={thumbnailUrl(featured)}
                   alt={featured.name}
-                  className="absolute inset-0 w-full h-full object-cover grayscale brightness-[0.7] group-hover:grayscale-[0.4] group-hover:brightness-[0.85] group-hover:scale-105 transition-all duration-700"
+                  fill
+                  priority
+                  sizes="(max-width: 768px) 100vw, 1200px"
+                  className="object-cover grayscale brightness-[0.7] group-hover:grayscale-[0.4] group-hover:brightness-[0.85] group-hover:scale-105 transition-all duration-700"
                 />
                 {/* Emerald tint — blends real screenshots into the theme */}
                 <div className="absolute inset-0 bg-[#25543a]/70 mix-blend-multiply pointer-events-none"></div>
@@ -137,10 +141,12 @@ export const Portfolio = async () => {
                     key={project.id}
                     className="relative h-[380px] md:h-[440px] rounded overflow-hidden border border-[#9be8b8]/12 group"
                   >
-                    <img
+                    <Image
                       src={thumbnailUrl(project)}
                       alt={project.name}
-                      className="absolute inset-0 w-full h-full object-cover grayscale brightness-[0.7] group-hover:grayscale-[0.4] group-hover:brightness-[0.85] group-hover:scale-105 transition-all duration-700"
+                      fill
+                      sizes="(max-width: 768px) 100vw, 600px"
+                      className="object-cover grayscale brightness-[0.7] group-hover:grayscale-[0.4] group-hover:brightness-[0.85] group-hover:scale-105 transition-all duration-700"
                     />
                     <div className="absolute inset-0 bg-[#25543a]/70 mix-blend-multiply pointer-events-none"></div>
 <div className="absolute inset-0 bg-[#0a0d0b]/40 pointer-events-none"></div>

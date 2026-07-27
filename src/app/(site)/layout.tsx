@@ -6,8 +6,6 @@ import { NextIntlClientProvider } from 'next-intl';
 import { getLocale, getMessages } from 'next-intl/server';
 import "./globals.css";
 
-export const dynamic = 'force-dynamic'
-
 // UI Components
 import { Navbar } from "@/components/common/Navbar";
 import { Footer } from "@/components/common/Footer";
@@ -15,6 +13,7 @@ import { ScrollRevealInit } from "@/components/common/ScrollRevealInit";
 import { AmbientBackground } from "@/components/common/AmbientBackground";
 import { GoogleAnalytics } from '@next/third-parties/google'
 import { envs } from "@/lib/envs";
+import { getSiteSettings } from "@/lib/payload";
 
 // Constants
 const archivo = Archivo({
@@ -76,6 +75,9 @@ export const metadata: Metadata = {
   authors: [{ name: 'Alejandro Reyna' }],
   creator: 'Alejandro Reyna',
   publisher: 'Alejandro Reyna',
+  alternates: {
+    canonical: '/',
+  },
   robots: {
     index: true,
     follow: true,
@@ -120,6 +122,9 @@ export const metadata: Metadata = {
   },
 };
 
+const asUrl = (handle: string, prefix: string) =>
+  handle.startsWith('http') ? handle : `${prefix}${handle}`;
+
 export default async function RootLayout({
   children,
 }: Readonly<{
@@ -127,11 +132,45 @@ export default async function RootLayout({
 }>) {
   const locale = await getLocale();
   const messages = await getMessages();
+  const settings = await getSiteSettings();
+  const social = settings.social
+
+  const sameAs = [
+    social?.github ? asUrl(social.github, 'https://github.com/') : null,
+    social?.linkedin ? asUrl(social.linkedin, 'https://linkedin.com/in/') : null,
+  ].filter(Boolean)
+
+  const jsonLd = [
+    {
+      '@context': 'https://schema.org',
+      '@type': 'Person',
+      name: 'Alejandro Reyna',
+      url: 'https://alejandroreyna.com',
+      jobTitle: 'Full-Stack Developer',
+      description: 'Full-Stack Developer from Guatemala with 12+ years building scalable web applications.',
+      image: 'https://alejandroreyna.com/images/about/me.jpg',
+      address: {
+        '@type': 'PostalAddress',
+        addressCountry: 'GT',
+      },
+      ...(sameAs.length > 0 ? { sameAs } : {}),
+    },
+    {
+      '@context': 'https://schema.org',
+      '@type': 'WebSite',
+      name: 'Alejandro Reyna Portfolio',
+      url: 'https://alejandroreyna.com',
+    },
+  ]
 
   return (
     <html lang={locale} data-theme="custom" className="scroll-smooth">
       <GoogleAnalytics gaId={envs.googleAnalyticsId} />
       <body className={`antialiased flex flex-col min-h-screen text-foreground ${archivo.variable} ${spaceGrotesk.variable} ${ibmPlexMono.variable} ${cormorantGaramond.variable}`}>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
         <NextIntlClientProvider locale={locale} messages={messages}>
           <AmbientBackground />
           <ScrollRevealInit />

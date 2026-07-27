@@ -5,6 +5,9 @@ import { BlogScreen } from "@/screens/Blog";
 export const metadata: Metadata = {
   title: "Blog",
   description: "Notes on architecture, cloud systems, and building software that lasts.",
+  alternates: {
+    canonical: '/blog',
+  },
 };
 
 interface Props {

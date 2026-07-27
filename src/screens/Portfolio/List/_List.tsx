@@ -1,4 +1,5 @@
 import Link from "next/link"
+import Image from "next/image"
 import { getPayload } from "payload"
 import config from "@payload-config"
 import { getTranslations } from "next-intl/server"
@@ -75,10 +76,12 @@ export const List = async ({ searchParams }: Props) => {
               href={`/portfolio/${project.slug}`}
               className="relative h-[340px] md:h-[400px] rounded overflow-hidden border border-[#9be8b8]/12 block group"
             >
-              <img
+              <Image
                 src={thumbnailUrl(project)}
                 alt={project.name}
-                className="absolute inset-0 w-full h-full object-cover grayscale brightness-[0.7] group-hover:grayscale-[0.4] group-hover:brightness-[0.85] group-hover:scale-105 transition-all duration-700"
+                fill
+                sizes="(max-width: 768px) 100vw, 600px"
+                className="object-cover grayscale brightness-[0.7] group-hover:grayscale-[0.4] group-hover:brightness-[0.85] group-hover:scale-105 transition-all duration-700"
               />
               {/* Emerald tint — blends real screenshots into the theme */}
               <div className="absolute inset-0 bg-[#25543a]/70 mix-blend-multiply pointer-events-none"></div>

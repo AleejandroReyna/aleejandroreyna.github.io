@@ -1,6 +1,7 @@
 import { Metadata } from "next"
 import { notFound } from "next/navigation"
 import Link from "next/link"
+import Image from "next/image"
 import { getPayload } from "payload"
 import config from "@payload-config"
 import { RichText } from '@payloadcms/richtext-lexical/react'
@@ -37,6 +38,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     return {
         title: `${project.name} | Portfolio`,
         description: `Details about the ${project.name} project.`,
+        alternates: {
+            canonical: `/portfolio/${slug}`,
+        },
     }
 }
 
@@ -87,8 +91,26 @@ export default async function ProjectDetailPage({ params }: Props) {
         ? (nextProject.thumbnail as Media).url || FALLBACK_IMAGE
         : FALLBACK_IMAGE
 
+    const jsonLd = {
+        '@context': 'https://schema.org',
+        '@type': 'CreativeWork',
+        name: project.name,
+        description: `Case study: ${project.name}`,
+        image: thumbnail,
+        author: {
+            '@type': 'Person',
+            name: 'Alejandro Reyna',
+        },
+        ...(project.releaseDate ? { datePublished: project.releaseDate } : {}),
+        ...(techNames.length > 0 ? { keywords: techNames.join(', ') } : {}),
+    }
+
     return (
         <main className="min-h-screen">
+            <script
+                type="application/ld+json"
+                dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+            />
 
             {/* CASE HEADER */}
             <div className="pt-36 pb-16 relative overflow-hidden">
@@ -153,11 +175,14 @@ export default async function ProjectDetailPage({ params }: Props) {
             {/* HERO IMAGE */}
             <div className="mx-auto max-w-7xl px-6 py-16">
                 <AnimateIn delay={0.15}>
-                <div className="relative rounded overflow-hidden border border-[#9be8b8]/12">
-                    <img
+                <div className="relative h-[360px] md:h-[620px] rounded overflow-hidden border border-[#9be8b8]/12">
+                    <Image
                         src={thumbnail}
                         alt={project.name}
-                        className="w-full h-[360px] md:h-[620px] object-cover grayscale brightness-[0.75]"
+                        fill
+                        priority
+                        sizes="100vw"
+                        className="object-cover grayscale brightness-[0.75]"
                     />
                     {/* Emerald tint — blends real screenshots into the theme */}
                     <div className="absolute inset-0 bg-[#25543a]/60 mix-blend-multiply pointer-events-none"></div>
@@ -212,10 +237,12 @@ export default async function ProjectDetailPage({ params }: Props) {
                     href={`/portfolio/${nextProject.slug}`}
                     className="relative h-[280px] md:h-[340px] overflow-hidden border-t border-[#9be8b8]/8 block group"
                 >
-                    <img
+                    <Image
                         src={nextThumbnail}
                         alt={nextProject.name}
-                        className="absolute inset-0 w-full h-full object-cover grayscale brightness-[0.7] group-hover:grayscale-[0.4] group-hover:brightness-[0.85] group-hover:scale-105 transition-all duration-700"
+                        fill
+                        sizes="100vw"
+                        className="object-cover grayscale brightness-[0.7] group-hover:grayscale-[0.4] group-hover:brightness-[0.85] group-hover:scale-105 transition-all duration-700"
                     />
                     <div className="absolute inset-0 bg-[#25543a]/70 mix-blend-multiply pointer-events-none"></div>
                     <div className="absolute inset-0 bg-[#0a0d0b]/40 pointer-events-none"></div>

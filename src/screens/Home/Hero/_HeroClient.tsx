@@ -44,6 +44,9 @@ export const HeroClient = () => {
       >
         Alejandro<br />
         Reyna<span className="text-[#46d386]">.</span>
+        <span className="block font-mono font-medium text-base md:text-lg tracking-[0.14em] uppercase text-[#9be8b8]/80 mt-4">
+          {t('role')}
+        </span>
       </motion.h1>
 
       {/* Description + Location */}

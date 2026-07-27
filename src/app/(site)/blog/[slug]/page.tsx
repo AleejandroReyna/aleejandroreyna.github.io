@@ -38,6 +38,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     return {
         title: `${post.title} | Blog`,
         description: post.excerpt || `Read ${post.title} on the blog.`,
+        alternates: {
+            canonical: `/blog/${slug}`,
+        },
     }
 }
 
@@ -67,6 +70,19 @@ export default async function BlogPostPage({ params }: Props) {
         ?.map((c) => (c as Category).name)
         .filter(Boolean) || []
 
+    const jsonLd = {
+        '@context': 'https://schema.org',
+        '@type': 'BlogPosting',
+        headline: post.title,
+        description: post.excerpt || undefined,
+        datePublished: post.publishedDate,
+        author: {
+            '@type': 'Person',
+            name: 'Alejandro Reyna',
+        },
+        mainEntityOfPage: `https://alejandroreyna.com/blog/${slug}`,
+    }
+
     // Next post: the one following this one by published date (wraps around).
     const all = await payload.find({
         collection: 'posts',
@@ -82,6 +98,10 @@ export default async function BlogPostPage({ params }: Props) {
 
     return (
         <main className="min-h-screen">
+            <script
+                type="application/ld+json"
+                dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+            />
 
             {/* POST HEADER */}
             <div className="pt-36 pb-16 relative overflow-hidden">
