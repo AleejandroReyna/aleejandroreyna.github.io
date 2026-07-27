@@ -1,5 +1,5 @@
 import Link from "next/link"
-import { getPayload } from "payload"
+import { getPayload, type Where } from "payload"
 import config from "@payload-config"
 import { getTranslations } from "next-intl/server"
 import { Category, Post } from "@/payload-types"
@@ -38,13 +38,13 @@ export const List = async ({ searchParams }: Props) => {
       categorySlugs = categoryFilters.split(',')
   }
 
-  let where = {}
+  // Only list posts that actually exist in the current language. Payload is
+  // configured with `fallback: true`, so without this an untranslated post
+  // would silently show up here in English; `title` is localized, so requiring
+  // it to exist filters at the DB level and keeps pagination counts honest.
+  const conditions: Where[] = [{ title: { exists: true } }]
   if (categorySlugs.length > 0) {
-      where = {
-          'categories.slug': {
-              in: categorySlugs
-          }
-      }
+      conditions.push({ 'categories.slug': { in: categorySlugs } })
   }
 
   const result = await payload.find({
@@ -52,8 +52,9 @@ export const List = async ({ searchParams }: Props) => {
     depth: 2,
     page,
     limit: 10,
-    where,
+    where: { and: conditions },
     locale,
+    fallbackLocale: false,
   })
 
   return (

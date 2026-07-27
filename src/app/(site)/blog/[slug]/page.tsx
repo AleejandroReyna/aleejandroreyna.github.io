@@ -82,13 +82,16 @@ export default async function BlogPostPage({ params }: Props) {
 
     // Next post: the one following this one by published date (wraps around),
     // resolved in the same locale as the current post so the link stays in
-    // that language.
+    // that language. Untranslated posts are excluded to match the blog list,
+    // which hides them rather than falling back to English.
     const all = await payload.find({
         collection: 'posts',
         sort: '-publishedDate',
         limit: 100,
         depth: 0,
         locale,
+        fallbackLocale: false,
+        where: { title: { exists: true } },
     })
     const currentIndex = all.docs.findIndex((p) => p.id === post.id)
     const nextPost = all.docs.length > 1
