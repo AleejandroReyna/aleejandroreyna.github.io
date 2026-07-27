@@ -73,10 +73,18 @@ export const Navbar = () => {
           <Link
             href="/"
             onClick={goHome}
-            className="flex items-center gap-2 group"
+            className="flex items-center gap-2.5 group"
             aria-label="Alejandro Reyna"
           >
-            <Feather className="w-5 h-5 text-white group-hover:drop-shadow-[0_0_8px_rgba(255,255,255,0.5)] transition-all duration-300" strokeWidth={1.75} />
+            <Feather className="w-5 h-5 text-white shrink-0 group-hover:drop-shadow-[0_0_8px_rgba(255,255,255,0.5)] transition-all duration-300" strokeWidth={1.75} />
+            <motion.span
+              initial={false}
+              animate={{ opacity: scrolled ? 1 : 0, width: scrolled ? "auto" : 0, marginLeft: scrolled ? 0 : -10 }}
+              transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
+              className="font-mono text-[13px] tracking-[0.12em] uppercase text-white whitespace-nowrap overflow-hidden"
+            >
+              Alejandro Reyna
+            </motion.span>
           </Link>
 
           {/* Desktop Navigation */}

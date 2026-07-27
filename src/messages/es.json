@@ -33,7 +33,9 @@
   "home": {
     "hero": {
       "badge": "Disponible para proyectos seleccionados — 2026",
-      "role": "Desarrollador Full-Stack de Software",
+      "role": "Desarrollador de Software Senior",
+      "buildIntro": "Construyamos algo",
+      "buildWords": ["escalable.", "resiliente.", "robusto.", "blindado."],
       "description": "Ingeniero full-stack que construye sistemas que soportan peso real — arquitectura en la nube, IA conversacional y plataformas que no fallan bajo carga. Trece años. Cada capa del stack.",
       "location": "Guatemala — Remoto, Mundial",
       "since": "Desde 2013"
@@ -118,7 +120,7 @@
       "label": "05 — Contacto",
       "titleLine1": "Construyamos",
       "titleLine2": "algo que",
-      "titleEmphasis": "perdure",
+      "titleEmphasisWords": ["perdure.", "crezca.", "convierta.", "escale.", "rinda."],
       "description": "Actualmente aceptando un número limitado de proyectos — arquitectura, desarrollos completos, o misiones de rescate.",
       "github": "GitHub",
       "linkedin": "LinkedIn",

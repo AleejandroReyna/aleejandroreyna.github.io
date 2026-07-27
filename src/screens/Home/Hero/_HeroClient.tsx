@@ -1,9 +1,12 @@
 'use client';
 import { motion, Variants } from 'motion/react';
 import { useTranslations } from 'next-intl';
+import { useTypewriter } from '@/hooks/useTypewriter';
 
 export const HeroClient = () => {
   const t = useTranslations('home.hero');
+  const buildWords = t.raw('buildWords') as string[];
+  const typedWord = useTypewriter(buildWords);
 
   const containerVariants: Variants = {
     hidden: { opacity: 0 },
@@ -37,17 +40,25 @@ export const HeroClient = () => {
         {t('badge')}
       </motion.div>
 
-      {/* Main Headline */}
+      {/* Name + role — kept semantic and prominent for SEO, styled compact */}
       <motion.h1
+        variants={itemVariants}
+        className="font-mono font-medium text-sm md:text-base tracking-[0.14em] uppercase text-[#9be8b8]/80 mb-6"
+      >
+        Alejandro Reyna — {t('role')}
+      </motion.h1>
+
+      {/* Main Headline — the typewriter is the visual protagonist */}
+      <motion.h2
         variants={itemVariants}
         className="font-serif font-medium text-7xl md:text-8xl lg:text-[148px] leading-[0.96] tracking-[-0.01em] text-[#f2f4f0]"
       >
-        Alejandro<br />
-        Reyna<span className="text-[#46d386]">.</span>
-        <span className="block font-mono font-medium text-base md:text-lg tracking-[0.14em] uppercase text-[#9be8b8]/80 mt-4">
-          {t('role')}
+        {t('buildIntro')}<br />
+        <span className="text-[#46d386]">
+          {typedWord}
+          <span aria-hidden="true" className="inline-block w-[0.06em] h-[0.85em] bg-[#46d386] ml-1.5 -mb-1.5 animate-pulse" />
         </span>
-      </motion.h1>
+      </motion.h2>
 
       {/* Description + Location */}
       <motion.div

@@ -33,7 +33,9 @@
   "home": {
     "hero": {
       "badge": "Available for select projects — 2026",
-      "role": "Full-Stack Software Developer",
+      "role": "Senior Software Developer",
+      "buildIntro": "Let's build something",
+      "buildWords": ["scalable.", "resilient.", "production-ready.", "battle-tested."],
       "description": "Full-stack engineer building systems that carry weight — cloud architecture, conversational AI, and platforms that don't flinch under load. Thirteen years. Every layer of the stack.",
       "location": "Guatemala — Remote, Worldwide",
       "since": "Est. 2013"
@@ -118,7 +120,7 @@
       "label": "05 — Contact",
       "titleLine1": "Let's build",
       "titleLine2": "something that",
-      "titleEmphasis": "lasts",
+      "titleEmphasisWords": ["lasts.", "grows.", "converts.", "scales.", "performs."],
       "description": "Currently accepting a limited number of projects — architecture, full builds, or rescue missions.",
       "github": "GitHub",
       "linkedin": "LinkedIn",

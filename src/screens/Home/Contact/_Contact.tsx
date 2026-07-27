@@ -5,6 +5,7 @@ import { Linkedin, Calendar } from "lucide-react";
 import { submitContactForm, ContactFormState } from "@/lib/actions/contact";
 import { motion, Variants } from "motion/react";
 import { useTranslations } from "next-intl";
+import { useTypewriter } from "@/hooks/useTypewriter";
 
 interface ContactProps {
   contactEmail: string;
@@ -43,6 +44,8 @@ const inputClasses = (hasError?: boolean) =>
 
 export const Contact = ({ contactEmail, githubUser, linkedinUser, calendlyUser }: ContactProps) => {
   const t = useTranslations('home.contact');
+  const titleEmphasisWords = t.raw('titleEmphasisWords') as string[];
+  const typedEmphasis = useTypewriter(titleEmphasisWords);
   const [state, formAction, isPending] = useActionState(submitContactForm, initialState);
   const formRef = useRef<HTMLFormElement>(null);
 
@@ -72,7 +75,10 @@ export const Contact = ({ contactEmail, githubUser, linkedinUser, calendlyUser }
             <h2 className="font-serif font-medium text-5xl md:text-[68px] leading-[1.05] text-[#f2f4f0]">
               {t('titleLine1')}<br />
               {t('titleLine2')}<br />
-              <span className="italic text-[#9be8b8]">{t('titleEmphasis')}</span>.
+              <span className="italic text-[#9be8b8]">
+                {typedEmphasis}
+                <span aria-hidden="true" className="inline-block w-[0.05em] h-[0.8em] bg-[#9be8b8] ml-1 -mb-1 animate-pulse" />
+              </span>
             </h2>
             <p className="font-heading text-[15px] leading-[1.7] text-[#dfe5e0]/60 mt-7 max-w-[400px]">
               {t('description')}
