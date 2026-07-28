@@ -6,6 +6,8 @@
 // no <style> blocks, no web fonts, no SVG, no gradients — all of which get
 // dropped somewhere along the chain.
 
+import { envs } from '@/lib/envs'
+
 export interface ContactSubmissionData {
     name: string
     email: string
@@ -18,6 +20,12 @@ export interface ContactSubmissionData {
 }
 
 const SITE = 'https://alejandroreyna.com'
+const CALENDLY = 'https://calendly.com/aleejandroreyna'
+const LINKEDIN = 'https://linkedin.com/in/aleejandroreyna'
+const GITHUB = 'https://github.com/aleejandroReyna'
+// The address visitors are told to write to. Falls back to a sensible default
+// so the template never renders an empty mailto if the env var is missing.
+const CONTACT_EMAIL = envs.smtp.notifyTo ?? 'me@alejandroreyna.com'
 
 // Escapes user-supplied values before they go into an HTML email. Without this
 // a submitted "<script>" or a stray "<" would break the markup, and the owner
@@ -83,27 +91,35 @@ export function buildOwnerNotification(data: ContactSubmissionData) {
 const COPY = {
     en: {
         subject: 'Thanks for reaching out — Alejandro Reyna',
-        role: 'SENIOR SOFTWARE DEVELOPER',
-        greeting: (name: string) => `Hi ${name},`,
-        body: 'Your message arrived. I read everything myself, and I reply in under 24 hours — usually sooner.',
-        recap: 'What you sent',
-        noSubject: '(no subject)',
-        meanwhile: 'In the meantime, if it is easier to talk than to type:',
-        cta: 'Book 30 minutes',
-        footerNote: 'This address is unmonitored. Reply to this email and it reaches me directly.',
+        identity: 'ALEJANDRO REYNA · SENIOR SOFTWARE DEVELOPER',
+        headlineTop: 'Thanks for',
+        headlineBottom: 'writing',
+        body: (name: string) =>
+            `Hi ${name}, your message is in my inbox. I read every one of them myself and reply in under 24 hours, usually sooner.`,
+        meanwhile: 'IN THE MEANTIME',
+        links: [
+            { href: `${SITE}/portfolio`, title: 'Portfolio', desc: 'Platforms, e-commerce and chatbots in production' },
+            { href: `${SITE}/blog`, title: 'Blog', desc: 'Notes on architecture and cloud systems' },
+            { href: CALENDLY, title: 'Book a call', desc: '30 minutes, no sales pitch' },
+        ],
         quote: 'Simple is better than complex.',
+        footerNote: "This mailbox isn't monitored. To reach me directly:",
     },
     es: {
         subject: 'Gracias por escribir — Alejandro Reyna',
-        role: 'DESARROLLADOR DE SOFTWARE SENIOR',
-        greeting: (name: string) => `Hola ${name}:`,
-        body: 'Tu mensaje llegó. Los leo todos personalmente y respondo en menos de 24 horas, normalmente antes.',
-        recap: 'Lo que enviaste',
-        noSubject: '(sin asunto)',
-        meanwhile: 'Mientras tanto, si prefieres hablar en vez de escribir:',
-        cta: 'Agenda 30 minutos',
-        footerNote: 'Esta dirección no se revisa. Responde a este correo y me llega directo.',
+        identity: 'ALEJANDRO REYNA · DESARROLLADOR DE SOFTWARE SENIOR',
+        headlineTop: 'Gracias por',
+        headlineBottom: 'escribir',
+        body: (name: string) =>
+            `Hola ${name}, tu mensaje ya está en mi bandeja. Los leo todos personalmente y te respondo en menos de 24 horas, normalmente antes.`,
+        meanwhile: 'MIENTRAS TANTO',
+        links: [
+            { href: `${SITE}/portfolio`, title: 'Portafolio', desc: 'Plataformas, e-commerce y chatbots en producción' },
+            { href: `${SITE}/blog`, title: 'Blog', desc: 'Notas sobre arquitectura y sistemas en la nube' },
+            { href: CALENDLY, title: 'Agenda una llamada', desc: '30 minutos, sin discurso de venta' },
+        ],
         quote: 'Lo simple es mejor que lo complejo.',
+        footerNote: 'Este buzón no se revisa. Para escribirme directamente:',
     },
 } as const
 
@@ -112,69 +128,81 @@ export function buildUserConfirmation(data: ContactSubmissionData) {
     const t = COPY[lang]
     const firstName = esc(data.name.trim().split(/\s+/)[0])
 
+    // Rows for the three invitations. Built as table rows rather than a list
+    // so Outlook keeps the dividers and spacing.
+    const linkRows = t.links
+        .map(
+            (link, i) => `
+          <tr>
+            <td style="border-top:1px solid #1c2521;${i === t.links.length - 1 ? 'border-bottom:1px solid #1c2521;' : ''}padding:18px 0;">
+              <a href="${link.href}" style="text-decoration:none;">
+                <span style="font-family:Georgia,'Times New Roman',serif;font-size:21px;color:#f2f4f0;">${link.title}</span>
+                <span style="font-family:Georgia,serif;font-size:21px;color:#46d386;">&nbsp;&rarr;</span>
+                <br>
+                <span style="font-family:Arial,Helvetica,sans-serif;font-size:13px;line-height:1.6;color:#8b9b91;">${link.desc}</span>
+              </a>
+            </td>
+          </tr>`,
+        )
+        .join('')
+
     const html = `
-<table cellpadding="0" cellspacing="0" border="0" width="100%" style="border-collapse:collapse;background-color:#f2f4f2;">
- <tr><td align="center" style="padding:28px 12px;">
+<table cellpadding="0" cellspacing="0" border="0" width="100%" style="border-collapse:collapse;background-color:#060907;">
+ <tr><td align="center" style="padding:32px 12px;">
 
-  <table cellpadding="0" cellspacing="0" border="0" width="520" style="border-collapse:collapse;width:520px;max-width:520px;">
+  <table cellpadding="0" cellspacing="0" border="0" width="540" style="border-collapse:collapse;width:540px;max-width:540px;background-color:#0a0d0b;">
 
-    <!-- Header: dark field, same as the site -->
     <tr>
-      <td bgcolor="#0f2419" style="background-color:#0f2419;padding:30px 34px 26px 34px;">
-        <div style="font-family:Georgia,'Times New Roman',serif;font-size:27px;line-height:1.2;color:#f2f4f0;letter-spacing:-0.3px;">Alejandro Reyna<span style="color:#46d386;">.</span></div>
-        <div style="font-family:Consolas,'Courier New',monospace;font-size:11px;letter-spacing:2px;color:#46d386;padding-top:8px;">${t.role}</div>
+      <td style="padding:36px 40px 0 40px;">
+        <div style="font-family:Consolas,'Courier New',monospace;font-size:11px;letter-spacing:2px;color:#46d386;">${t.identity}</div>
       </td>
     </tr>
 
-    <!-- Body -->
     <tr>
-      <td bgcolor="#ffffff" style="background-color:#ffffff;padding:32px 34px 8px 34px;">
-        <div style="font-family:Georgia,'Times New Roman',serif;font-size:20px;line-height:1.4;color:#0a1410;">${t.greeting(firstName)}</div>
-        <div style="font-family:Arial,Helvetica,sans-serif;font-size:15px;line-height:1.75;color:#4f6157;padding-top:12px;">${t.body}</div>
+      <td style="padding:26px 40px 0 40px;">
+        <div style="font-family:Georgia,'Times New Roman',serif;font-size:40px;line-height:1.1;color:#f2f4f0;letter-spacing:-0.5px;">${t.headlineTop}<br>${t.headlineBottom}<span style="color:#46d386;">.</span></div>
       </td>
     </tr>
 
-    <!-- Recap of what they sent -->
     <tr>
-      <td bgcolor="#ffffff" style="background-color:#ffffff;padding:22px 34px 0 34px;">
-        <table cellpadding="0" cellspacing="0" border="0" width="100%" style="border-collapse:collapse;">
-          <tr>
-            <td bgcolor="#f4fbf7" style="background-color:#f4fbf7;border-left:3px solid #46d386;padding:18px 20px;">
-              <div style="font-family:Consolas,'Courier New',monospace;font-size:10px;letter-spacing:1.8px;color:#237a4b;padding-bottom:10px;">${t.recap.toUpperCase()}</div>
-              <div style="font-family:Arial,Helvetica,sans-serif;font-size:14px;line-height:1.5;color:#0a1410;font-weight:bold;">${data.subject ? esc(data.subject) : t.noSubject}</div>
-              <div style="font-family:Arial,Helvetica,sans-serif;font-size:14px;line-height:1.7;color:#55665c;padding-top:8px;">${nl2br(data.message)}</div>
-            </td>
-          </tr>
+      <td style="padding:22px 40px 0 40px;">
+        <div style="font-family:Arial,Helvetica,sans-serif;font-size:15px;line-height:1.8;color:#a8bcb0;">${t.body(firstName)}</div>
+      </td>
+    </tr>
+
+    <tr>
+      <td style="padding:38px 40px 0 40px;">
+        <div style="font-family:Consolas,'Courier New',monospace;font-size:11px;letter-spacing:2px;color:#46d386;padding-bottom:6px;">${t.meanwhile}</div>
+      </td>
+    </tr>
+
+    <tr>
+      <td style="padding:0 40px;">
+        <table cellpadding="0" cellspacing="0" border="0" width="100%" style="border-collapse:collapse;">${linkRows}
         </table>
       </td>
     </tr>
 
-    <!-- CTA -->
     <tr>
-      <td bgcolor="#ffffff" style="background-color:#ffffff;padding:26px 34px 32px 34px;">
-        <div style="font-family:Arial,Helvetica,sans-serif;font-size:14px;line-height:1.7;color:#4f6157;padding-bottom:16px;">${t.meanwhile}</div>
-        <table cellpadding="0" cellspacing="0" border="0" style="border-collapse:collapse;">
-          <tr>
-            <td bgcolor="#0f2419" style="background-color:#0f2419;padding:13px 26px;">
-              <a href="https://calendly.com/aleejandroreyna" style="font-family:Consolas,'Courier New',monospace;font-size:13px;letter-spacing:1.4px;color:#9be8b8;text-decoration:none;">${t.cta.toUpperCase()} &rarr;</a>
-            </td>
-          </tr>
-        </table>
-      </td>
-    </tr>
-
-    <!-- Footer -->
-    <tr>
-      <td bgcolor="#ffffff" style="background-color:#ffffff;border-top:1px solid #e4ede8;padding:22px 34px 30px 34px;">
-        <div style="font-family:Georgia,'Times New Roman',serif;font-style:italic;font-size:15px;line-height:1.5;color:#8b9b91;padding-bottom:16px;">${t.quote}</div>
-        <div style="font-family:Consolas,'Courier New',monospace;font-size:12px;line-height:1.9;color:#55665c;">
-          <a href="${SITE}" style="color:#25543a;text-decoration:none;font-weight:bold;">alejandroreyna.com</a><br>
-          <a href="https://github.com/aleejandroReyna" style="color:#55665c;text-decoration:none;">GitHub</a>
+      <td style="padding:26px 40px 0 40px;">
+        <div style="font-family:Consolas,'Courier New',monospace;font-size:12px;letter-spacing:1.4px;color:#8b9b91;">
+          <a href="${LINKEDIN}" style="color:#9be8b8;text-decoration:none;">LINKEDIN</a>
           &nbsp;&middot;&nbsp;
-          <a href="https://linkedin.com/in/aleejandroreyna" style="color:#55665c;text-decoration:none;">LinkedIn</a><br>
-          Guatemala City &middot; UTC&minus;6
+          <a href="${GITHUB}" style="color:#9be8b8;text-decoration:none;">GITHUB</a>
         </div>
-        <div style="font-family:Arial,Helvetica,sans-serif;font-size:11px;line-height:1.6;color:#9aa89f;padding-top:16px;">${t.footerNote}</div>
+      </td>
+    </tr>
+
+    <tr>
+      <td style="padding:34px 40px 36px 40px;">
+        <div style="font-family:Georgia,'Times New Roman',serif;font-style:italic;font-size:16px;line-height:1.5;color:#6f7f75;padding-bottom:18px;">${t.quote}</div>
+        <div style="font-family:Consolas,'Courier New',monospace;font-size:11px;line-height:1.8;color:#6f7f75;">
+          <a href="${SITE}" style="color:#8b9b91;text-decoration:none;">alejandroreyna.com</a>
+          &nbsp;&middot;&nbsp; Guatemala City &middot; UTC&minus;6
+          <br>
+          ${t.footerNote}
+          <a href="mailto:${CONTACT_EMAIL}" style="color:#8b9b91;text-decoration:none;">${CONTACT_EMAIL}</a>
+        </div>
       </td>
     </tr>
 
