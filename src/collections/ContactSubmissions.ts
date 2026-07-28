@@ -123,33 +123,50 @@ export const ContactSubmissions: CollectionConfig = {
                     return doc
                 }
 
-                const owner = buildOwnerNotification(doc)
-                const user = buildUserConfirmation(doc)
+                // Belt and braces. `sendEmail` can reject, but it can also
+                // throw synchronously when the transport failed to initialise
+                // (a bad SMTP password makes the adapter throw on verify, not
+                // on send) — and a throw here would roll the create back and
+                // surface an error to the visitor whose message we already
+                // stored. Nothing in this block may escape.
+                try {
+                    const owner = buildOwnerNotification(doc)
+                    const user = buildUserConfirmation(doc)
 
-                // Sent independently so one failure can't suppress the other.
-                const results = await Promise.allSettled([
-                    req.payload.sendEmail({
-                        to: envs.smtp.notifyTo,
-                        replyTo: doc.email,
-                        subject: owner.subject,
-                        html: owner.html,
-                    }),
-                    req.payload.sendEmail({
-                        to: doc.email,
-                        subject: user.subject,
-                        html: user.html,
-                    }),
-                ])
+                    // Sent independently so one failure can't suppress the other.
+                    const results = await Promise.allSettled([
+                        req.payload.sendEmail({
+                            to: envs.smtp.notifyTo,
+                            replyTo: doc.email,
+                            subject: owner.subject,
+                            html: owner.html,
+                        }),
+                        req.payload.sendEmail({
+                            to: doc.email,
+                            // Sent from the no-reply address, but a visitor who
+                            // hits reply should still reach a real inbox — the
+                            // template promises exactly that.
+                            replyTo: envs.smtp.notifyTo,
+                            subject: user.subject,
+                            html: user.html,
+                        }),
+                    ])
 
-                const labels = ['owner notification', 'visitor confirmation']
-                results.forEach((result, i) => {
-                    if (result.status === 'rejected') {
-                        req.payload.logger.error(
-                            { err: result.reason },
-                            `Contact form: ${labels[i]} failed to send.`,
-                        )
-                    }
-                })
+                    const labels = ['owner notification', 'visitor confirmation']
+                    results.forEach((result, i) => {
+                        if (result.status === 'rejected') {
+                            req.payload.logger.error(
+                                { err: result.reason },
+                                `Contact form: ${labels[i]} failed to send.`,
+                            )
+                        }
+                    })
+                } catch (err) {
+                    req.payload.logger.error(
+                        { err },
+                        'Contact form: email transport unavailable. Submission was still saved.',
+                    )
+                }
 
                 return doc
             },
