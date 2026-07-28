@@ -160,7 +160,10 @@ export default async function ProjectDetailPage({ params }: Props) {
                     </div>
                     <div className="py-7 px-0 lg:px-8 lg:border-r border-[#9be8b8]/8">
                         <div className="font-mono text-[10px] tracking-[0.16em] uppercase text-[#dfe5e0]/40 mb-2">{t('role')}</div>
-                        <div className="font-heading font-medium text-sm text-[#f2f4f0]">{t('roleValue')}</div>
+                        {/* Per-project override from the CMS; the translation
+                            still covers projects created before the field
+                            existed, which have no value stored. */}
+                        <div className="font-heading font-medium text-sm text-[#f2f4f0]">{project.projectRole || t('roleValue')}</div>
                     </div>
                     <div className="py-7 pr-8 lg:px-8 lg:border-r border-[#9be8b8]/8">
                         <div className="font-mono text-[10px] tracking-[0.16em] uppercase text-[#dfe5e0]/40 mb-2">{t('year')}</div>

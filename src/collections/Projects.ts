@@ -53,6 +53,27 @@ export const Projects: CollectionConfig = {
             },
         },
         {
+            // Deliberately not called `role`: SlugComponent falls back to a
+            // field of that name when auto-generating slugs, and this one ships
+            // with a default value, so a brand-new project would briefly slug
+            // itself from the role text before the name is typed.
+            name: 'projectRole',
+            label: 'Role',
+            type: 'text',
+            localized: true,
+            // Payload hands the active locale to a defaultValue function, so a
+            // new project starts with the right wording per language instead of
+            // one hardcoded string leaking into the other.
+            defaultValue: ({ locale }) =>
+                locale === 'es'
+                    ? 'Arquitectura, desarrollo y traspaso'
+                    : 'Architecture, build & handover',
+            admin: {
+                description:
+                    'Shown in the project meta bar. Defaults per language; override for projects where the role was different.',
+            },
+        },
+        {
             name: 'company',
             label: 'Company',
             type: 'relationship',

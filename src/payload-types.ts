@@ -270,6 +270,10 @@ export interface Project {
    * Optional. Falls back to the Project Name above if left blank. Keep it under ~60 characters so Google doesn't truncate it in search results.
    */
   metaTitle?: string | null;
+  /**
+   * Shown in the project meta bar. Defaults per language; override for projects where the role was different.
+   */
+  projectRole?: string | null;
   company?: (string | null) | Company;
   technologies?: (string | Technology)[] | null;
   thumbnail?: (string | null) | Media;
@@ -616,6 +620,7 @@ export interface ProjectsSelect<T extends boolean = true> {
   releaseDate?: T;
   public_link?: T;
   metaTitle?: T;
+  projectRole?: T;
   company?: T;
   technologies?: T;
   thumbnail?: T;
