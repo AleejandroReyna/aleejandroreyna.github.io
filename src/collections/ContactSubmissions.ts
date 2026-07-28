@@ -155,15 +155,31 @@ export const ContactSubmissions: CollectionConfig = {
                     const labels = ['owner notification', 'visitor confirmation']
                     results.forEach((result, i) => {
                         if (result.status === 'rejected') {
+                            // Log only what's needed to diagnose a transport
+                            // failure. Dumping the raw error drags recipient
+                            // addresses and message fragments into Cloud Run
+                            // logs, which are retained and readable by anyone
+                            // with project access — visitor data doesn't
+                            // belong there.
+                            const err = result.reason as {
+                                code?: string
+                                responseCode?: number
+                                response?: string
+                                message?: string
+                            }
                             req.payload.logger.error(
-                                { err: result.reason },
+                                {
+                                    code: err?.code,
+                                    responseCode: err?.responseCode,
+                                    response: err?.response ?? err?.message,
+                                },
                                 `Contact form: ${labels[i]} failed to send.`,
                             )
                         }
                     })
                 } catch (err) {
                     req.payload.logger.error(
-                        { err },
+                        { reason: (err as Error)?.message },
                         'Contact form: email transport unavailable. Submission was still saved.',
                     )
                 }
