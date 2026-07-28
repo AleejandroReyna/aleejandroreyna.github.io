@@ -46,40 +46,82 @@ const nl2br = (value: string): string => esc(value).replace(/\r?\n/g, '<br>')
 /* ------------------------------------------------------------------ */
 
 export function buildOwnerNotification(data: ContactSubmissionData) {
+    // Only rows with a value render — an empty "Company:" line is noise in
+    // something read at a glance, often on a phone.
     const row = (label: string, value?: string | null) =>
         value
             ? `<tr>
-                 <td style="padding:6px 16px 6px 0;font-family:Arial,Helvetica,sans-serif;font-size:13px;color:#777;white-space:nowrap;vertical-align:top;">${label}</td>
-                 <td style="padding:6px 0;font-family:Arial,Helvetica,sans-serif;font-size:14px;color:#111;">${esc(value)}</td>
+                 <td style="padding:7px 18px 7px 0;font-family:Consolas,'Courier New',monospace;font-size:11px;letter-spacing:1.4px;color:#6f7f75;white-space:nowrap;vertical-align:top;">${label}</td>
+                 <td style="padding:7px 0;font-family:Arial,Helvetica,sans-serif;font-size:14px;color:#dfe5e0;vertical-align:top;">${esc(value)}</td>
                </tr>`
             : ''
 
+    const firstName = esc(data.name.trim().split(/\s+/)[0]).toUpperCase()
+
     const html = `
-<table cellpadding="0" cellspacing="0" border="0" style="border-collapse:collapse;max-width:600px;">
-  <tr><td style="font-family:Arial,Helvetica,sans-serif;font-size:16px;color:#111;padding-bottom:14px;">
-    <strong>New contact submission</strong>
-  </td></tr>
-  <tr><td>
-    <table cellpadding="0" cellspacing="0" border="0" style="border-collapse:collapse;">
-      ${row('Name', data.name)}
-      ${row('Email', data.email)}
-      ${row('Phone', data.phone)}
-      ${row('Company', data.company)}
-      ${row('Budget', data.budget)}
-      ${row('Subject', data.subject)}
-      ${row('Language', data.locale)}
-    </table>
-  </td></tr>
-  <tr><td style="padding-top:16px;font-family:Arial,Helvetica,sans-serif;font-size:14px;line-height:1.7;color:#111;border-top:1px solid #e0e0e0;margin-top:16px;">
-    ${nl2br(data.message)}
-  </td></tr>
-  <tr><td style="padding-top:18px;font-family:Arial,Helvetica,sans-serif;font-size:12px;color:#888;">
-    Reply directly to this email to answer ${esc(data.name)}.
-  </td></tr>
+<table cellpadding="0" cellspacing="0" border="0" width="100%" style="border-collapse:collapse;background-color:#060907;">
+ <tr><td align="center" style="padding:32px 12px;">
+
+  <table cellpadding="0" cellspacing="0" border="0" width="560" style="border-collapse:collapse;width:560px;max-width:560px;background-color:#0a0d0b;">
+
+    <tr>
+      <td style="padding:32px 38px 0 38px;">
+        <div style="font-family:Consolas,'Courier New',monospace;font-size:11px;letter-spacing:2px;color:#46d386;">NUEVO MENSAJE &middot; ${data.locale === 'es' ? 'ESPA&Ntilde;OL' : 'INGL&Eacute;S'}</div>
+      </td>
+    </tr>
+
+    <tr>
+      <td style="padding:18px 38px 0 38px;">
+        <div style="font-family:Georgia,'Times New Roman',serif;font-size:32px;line-height:1.15;color:#f2f4f0;letter-spacing:-0.4px;">${esc(data.name)}<span style="color:#46d386;">.</span></div>
+      </td>
+    </tr>
+
+    <tr>
+      <td style="padding:22px 38px 0 38px;">
+        <table cellpadding="0" cellspacing="0" border="0" style="border-collapse:collapse;">
+          ${row('CORREO', data.email)}
+          ${row('TEL&Eacute;FONO', data.phone)}
+          ${row('EMPRESA', data.company)}
+          ${row('PRESUPUESTO', data.budget)}
+          ${row('ASUNTO', data.subject)}
+        </table>
+      </td>
+    </tr>
+
+    <tr>
+      <td style="padding:26px 38px 0 38px;">
+        <table cellpadding="0" cellspacing="0" border="0" width="100%" style="border-collapse:collapse;">
+          <tr>
+            <td bgcolor="#0f1512" style="background-color:#0f1512;border-left:3px solid #46d386;padding:18px 22px;">
+              <div style="font-family:Arial,Helvetica,sans-serif;font-size:15px;line-height:1.8;color:#f2f4f0;">${nl2br(data.message)}</div>
+            </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+    <tr>
+      <td style="padding:26px 38px 34px 38px;">
+        <table cellpadding="0" cellspacing="0" border="0" style="border-collapse:collapse;">
+          <tr>
+            <td style="border:1px solid #46d386;padding:12px 24px;">
+              <a href="mailto:${esc(data.email)}" style="font-family:Consolas,'Courier New',monospace;font-size:12px;letter-spacing:1.4px;color:#9be8b8;text-decoration:none;">RESPONDER A ${firstName} &rarr;</a>
+            </td>
+          </tr>
+        </table>
+        <div style="font-family:Consolas,'Courier New',monospace;font-size:11px;line-height:1.7;color:#6f7f75;padding-top:16px;">
+          O responde a este correo directamente.
+        </div>
+      </td>
+    </tr>
+
+  </table>
+
+ </td></tr>
 </table>`.trim()
 
     return {
-        subject: `New contact: ${data.name}${data.company ? ` — ${data.company}` : ''}`,
+        subject: `Nuevo contacto: ${data.name}${data.company ? ` — ${data.company}` : ''}`,
         html,
     }
 }

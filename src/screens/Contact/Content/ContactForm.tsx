@@ -71,6 +71,9 @@ export const ContactForm = () => {
                 </div>
             </div>
 
+            {/* Optional context. Nothing here is required: the email template
+                skips rows that come back empty, so a sparse submission still
+                renders cleanly. */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
                 <input
                     name="company"
@@ -81,14 +84,23 @@ export const ContactForm = () => {
                     disabled={isPending}
                 />
                 <input
-                    name="budget"
-                    type="text"
-                    placeholder={t('budgetPlaceholder')}
-                    aria-label={t('budgetPlaceholder')}
+                    name="phone"
+                    type="tel"
+                    placeholder={t('phonePlaceholder')}
+                    aria-label={t('phonePlaceholder')}
                     className={inputClasses()}
                     disabled={isPending}
                 />
             </div>
+
+            <input
+                name="budget"
+                type="text"
+                placeholder={t('budgetPlaceholder')}
+                aria-label={t('budgetPlaceholder')}
+                className={inputClasses()}
+                disabled={isPending}
+            />
 
             <div>
                 <input

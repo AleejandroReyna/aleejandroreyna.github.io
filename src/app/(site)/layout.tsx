@@ -106,21 +106,15 @@ export const metadata: Metadata = {
     siteName: 'Alejandro Reyna Portfolio',
     title: 'Alejandro Reyna | Full-Stack Developer & Software Engineer',
     description: 'Full-Stack Developer from Guatemala. 13+ years building web platforms, APIs, and conversational AI — chatbots and LLM agents since 2019.',
-    images: [
-      {
-        url: '/images/about/me.jpg',
-        width: 1200,
-        height: 630,
-        alt: 'Alejandro Reyna - Full-Stack Developer',
-      },
-    ],
+    // No `images` here on purpose: the generated cards from the
+    // `opengraph-image.tsx` files take over, and a hardcoded entry would
+    // override them.
   },
   twitter: {
     card: 'summary_large_image',
     title: 'Alejandro Reyna | Full-Stack Developer & Software Engineer',
     description: 'Full-Stack Developer from Guatemala. 13+ years building web platforms, APIs, and conversational AI — chatbots and LLM agents since 2019.',
     creator: '@aleejandroreyna',
-    images: ['/images/about/me.jpg'],
   },
   verification: {
     google: 'G-J0NP6MJ4QZ',

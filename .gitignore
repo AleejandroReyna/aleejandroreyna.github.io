@@ -63,3 +63,6 @@ design-system/alejandro-reyna/email-signature.html
 design-system/alejandro-reyna/gen-banner.js
 design-system/alejandro-reyna/email-contact-template.html
 
+
+# Local OG image previews (generated on demand in production)
+og-preview/
