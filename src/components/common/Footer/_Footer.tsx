@@ -1,16 +1,34 @@
 import Link from "next/link";
 import { yearsOfExperience } from "@/utils/yearsOfExperience";
 import { currentYear } from "@/utils/currentYear";
-import { SiGithub } from '@icons-pack/react-simple-icons';
+import { SiGithub, SiInstagram, SiFacebook, SiTiktok } from '@icons-pack/react-simple-icons';
 import { Mail, Linkedin, Calendar, Feather } from 'lucide-react';
 import { getTranslations } from "next-intl/server";
 import { getSiteSettings } from "@/lib/payload";
+
+/** Acepta tanto un handle suelto como una URL completa pegada en el CMS. */
+const handleOf = (value?: string | null) =>
+  value?.trim().replace(/^https?:\/\/[^/]+\//, '').replace(/^@/, '').replace(/\/+$/, '') || '';
 
 export const Footer = async () => {
   const t = await getTranslations('footer');
   const tNav = await getTranslations('nav');
   const settings = await getSiteSettings();
-  const { github, linkedin, calendly, email } = settings.social || {};
+  const { github, linkedin, instagram, facebook, tiktok, calendly, email } = settings.social || {};
+
+  // Perfiles principales: se muestran con el identificador visible.
+  const namedSocials = [
+    { key: 'github', Icon: SiGithub, handle: handleOf(github), display: (h: string) => `@${h}`, url: (h: string) => `https://github.com/${h}` },
+    { key: 'calendly', Icon: Calendar, handle: handleOf(calendly), display: (h: string) => `/${h}`, url: (h: string) => `https://calendly.com/${h}` },
+  ].filter((s) => s.handle);
+
+  // Redes sociales: fila de botones sólo con icono.
+  const iconSocials = [
+    { key: 'linkedin', Icon: Linkedin, handle: handleOf(linkedin).replace(/^in\//, ''), url: (h: string) => `https://linkedin.com/in/${h}` },
+    { key: 'instagram', Icon: SiInstagram, handle: handleOf(instagram), url: (h: string) => `https://instagram.com/${h}` },
+    { key: 'facebook', Icon: SiFacebook, handle: handleOf(facebook), url: (h: string) => `https://facebook.com/${h}` },
+    { key: 'tiktok', Icon: SiTiktok, handle: handleOf(tiktok), url: (h: string) => `https://tiktok.com/@${h}` },
+  ].filter((s) => s.handle);
   return (
     <footer className="border-t border-[#9be8b8]/8 relative overflow-hidden">
       {/* Main Footer Content */}
@@ -70,35 +88,39 @@ export const Footer = async () => {
               {email}
             </a>
 
-            <div className="flex flex-wrap gap-x-6 gap-y-4 font-mono text-[11px] tracking-[0.16em] uppercase text-[#dfe5e0]/50">
-              <a
-                href={`https://github.com/${github}`}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center gap-2 whitespace-nowrap hover:text-[#9be8b8] transition-colors duration-300"
-              >
-                <SiGithub size={13} />
-                {t('github')}
-              </a>
-              <a
-                href={`https://linkedin.com/in/${linkedin}`}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center gap-2 whitespace-nowrap hover:text-[#9be8b8] transition-colors duration-300"
-              >
-                <Linkedin size={13} />
-                {t('linkedin')}
-              </a>
-              <a
-                href={`https://calendly.com/${calendly}`}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center gap-2 whitespace-nowrap hover:text-[#9be8b8] transition-colors duration-300"
-              >
-                <Calendar size={13} />
-                {t('calendly')}
-              </a>
+            <div className="flex flex-col gap-4 font-mono text-[11px] tracking-[0.06em] text-[#dfe5e0]/50">
+              {namedSocials.map(({ key, Icon, handle, display, url }) => (
+                <a
+                  key={key}
+                  href={url(handle)}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={t(key)}
+                  className="flex items-center gap-3 whitespace-nowrap hover:text-[#9be8b8] transition-colors duration-300"
+                >
+                  <Icon size={13} className="shrink-0" />
+                  {display(handle)}
+                </a>
+              ))}
             </div>
+
+            {iconSocials.length > 0 && (
+              <div className="flex items-center gap-3 mt-8">
+                {iconSocials.map(({ key, Icon, handle, url }) => (
+                  <a
+                    key={key}
+                    href={url(handle)}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={t(key)}
+                    title={t(key)}
+                    className="flex items-center justify-center w-9 h-9 border border-[#9be8b8]/15 text-[#dfe5e0]/50 hover:text-[#9be8b8] hover:border-[#9be8b8]/40 transition-colors duration-300"
+                  >
+                    <Icon size={15} />
+                  </a>
+                ))}
+              </div>
+            )}
           </div>
         </div>
       </div>

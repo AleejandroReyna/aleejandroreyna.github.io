@@ -759,6 +759,18 @@ export interface SiteSetting {
      */
     linkedin: string;
     /**
+     * Instagram username (sin @)
+     */
+    instagram?: string | null;
+    /**
+     * Facebook page/profile slug
+     */
+    facebook?: string | null;
+    /**
+     * TikTok username (sin @)
+     */
+    tiktok?: string | null;
+    /**
      * Calendly username or full URL
      */
     calendly?: string | null;
@@ -777,6 +789,9 @@ export interface SiteSettingsSelect<T extends boolean = true> {
     | {
         github?: T;
         linkedin?: T;
+        instagram?: T;
+        facebook?: T;
+        tiktok?: T;
         calendly?: T;
         email?: T;
       };

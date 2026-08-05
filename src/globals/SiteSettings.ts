@@ -39,6 +39,30 @@ export const SiteSettings: GlobalConfig = {
                     },
                 },
                 {
+                    name: 'instagram',
+                    label: 'Instagram',
+                    type: 'text',
+                    admin: {
+                        description: 'Instagram username (sin @)',
+                    },
+                },
+                {
+                    name: 'facebook',
+                    label: 'Facebook',
+                    type: 'text',
+                    admin: {
+                        description: 'Facebook page/profile slug',
+                    },
+                },
+                {
+                    name: 'tiktok',
+                    label: 'TikTok',
+                    type: 'text',
+                    admin: {
+                        description: 'TikTok username (sin @)',
+                    },
+                },
+                {
                     name: 'calendly',
                     label: 'Calendly',
                     type: 'text',
