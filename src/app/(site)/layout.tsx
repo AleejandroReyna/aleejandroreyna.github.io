@@ -14,6 +14,7 @@ import { AmbientBackground } from "@/components/common/AmbientBackground";
 import { GoogleAnalytics } from '@next/third-parties/google'
 import { envs } from "@/lib/envs";
 import { getSiteSettings } from "@/lib/payload";
+import { getSocialLinks } from "@/utils/socialLinks";
 
 // Constants
 const archivo = Archivo({
@@ -121,9 +122,6 @@ export const metadata: Metadata = {
   },
 };
 
-const asUrl = (handle: string, prefix: string) =>
-  handle.startsWith('http') ? handle : `${prefix}${handle}`;
-
 export default async function RootLayout({
   children,
 }: Readonly<{
@@ -132,12 +130,10 @@ export default async function RootLayout({
   const locale = await getLocale();
   const messages = await getMessages();
   const settings = await getSiteSettings();
-  const social = settings.social
+  const social = getSocialLinks(settings.social)
 
-  const sameAs = [
-    social?.github ? asUrl(social.github, 'https://github.com/') : null,
-    social?.linkedin ? asUrl(social.linkedin, 'https://linkedin.com/in/') : null,
-  ].filter(Boolean)
+  // `sameAs` es la señal con la que Google enlaza este perfil con las redes.
+  const sameAs = [social.github, ...social.icons].filter((s) => s !== null).map((s) => s.url)
 
   const jsonLd = [
     {

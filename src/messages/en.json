@@ -193,6 +193,10 @@
     "baseValue": "Guatemala City — UTC−6, remote worldwide",
     "github": "GitHub",
     "linkedin": "LinkedIn",
+    "instagram": "Instagram",
+    "facebook": "Facebook",
+    "tiktok": "TikTok",
+    "calendly": "Calendly",
     "formTitle": "Start a Project",
     "namePlaceholder": "Name",
     "emailPlaceholder": "Email",
@@ -220,6 +224,16 @@
     "ctaTitleLine1": "Book 30 minutes,",
     "ctaEmphasis": "directly",
     "openCalendly": "Open Calendly ↗"
+  },
+  "notFound": {
+    "label": "Error 404",
+    "title": "Lost Route",
+    "description": "This address leads nowhere: the page moved, was renamed, or never existed at all. No harm done — there are better places to go right below.",
+    "goHome": "Back Home",
+    "goContact": "Get in Touch",
+    "projectsLabel": "Recent Work",
+    "postsLabel": "Latest Writing",
+    "seeAll": "See All ↗"
   },
   "languageSwitcher": {
     "label": "Language"

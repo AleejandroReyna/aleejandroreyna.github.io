@@ -1,34 +1,20 @@
 import Link from "next/link";
 import { yearsOfExperience } from "@/utils/yearsOfExperience";
 import { currentYear } from "@/utils/currentYear";
-import { SiGithub, SiInstagram, SiFacebook, SiTiktok } from '@icons-pack/react-simple-icons';
-import { Mail, Linkedin, Calendar, Feather } from 'lucide-react';
+import { Mail, Feather } from 'lucide-react';
 import { getTranslations } from "next-intl/server";
 import { getSiteSettings } from "@/lib/payload";
-
-/** Acepta tanto un handle suelto como una URL completa pegada en el CMS. */
-const handleOf = (value?: string | null) =>
-  value?.trim().replace(/^https?:\/\/[^/]+\//, '').replace(/^@/, '').replace(/\/+$/, '') || '';
+import { getSocialLinks } from "@/utils/socialLinks";
 
 export const Footer = async () => {
   const t = await getTranslations('footer');
   const tNav = await getTranslations('nav');
   const settings = await getSiteSettings();
-  const { github, linkedin, instagram, facebook, tiktok, calendly, email } = settings.social || {};
+  const { email } = settings.social || {};
+  const social = getSocialLinks(settings.social);
 
   // Perfiles principales: se muestran con el identificador visible.
-  const namedSocials = [
-    { key: 'github', Icon: SiGithub, handle: handleOf(github), display: (h: string) => `@${h}`, url: (h: string) => `https://github.com/${h}` },
-    { key: 'calendly', Icon: Calendar, handle: handleOf(calendly), display: (h: string) => `/${h}`, url: (h: string) => `https://calendly.com/${h}` },
-  ].filter((s) => s.handle);
-
-  // Redes sociales: fila de botones sólo con icono.
-  const iconSocials = [
-    { key: 'linkedin', Icon: Linkedin, handle: handleOf(linkedin).replace(/^in\//, ''), url: (h: string) => `https://linkedin.com/in/${h}` },
-    { key: 'instagram', Icon: SiInstagram, handle: handleOf(instagram), url: (h: string) => `https://instagram.com/${h}` },
-    { key: 'facebook', Icon: SiFacebook, handle: handleOf(facebook), url: (h: string) => `https://facebook.com/${h}` },
-    { key: 'tiktok', Icon: SiTiktok, handle: handleOf(tiktok), url: (h: string) => `https://tiktok.com/@${h}` },
-  ].filter((s) => s.handle);
+  const namedSocials = [social.github, social.calendly].filter((s) => s !== null);
   return (
     <footer className="border-t border-[#9be8b8]/8 relative overflow-hidden">
       {/* Main Footer Content */}
@@ -89,27 +75,27 @@ export const Footer = async () => {
             </a>
 
             <div className="flex flex-col gap-4 font-mono text-[11px] tracking-[0.06em] text-[#dfe5e0]/50">
-              {namedSocials.map(({ key, Icon, handle, display, url }) => (
+              {namedSocials.map(({ key, Icon, display, url }) => (
                 <a
                   key={key}
-                  href={url(handle)}
+                  href={url}
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={t(key)}
                   className="flex items-center gap-3 whitespace-nowrap hover:text-[#9be8b8] transition-colors duration-300"
                 >
                   <Icon size={13} className="shrink-0" />
-                  {display(handle)}
+                  {display}
                 </a>
               ))}
             </div>
 
-            {iconSocials.length > 0 && (
+            {social.icons.length > 0 && (
               <div className="flex items-center gap-3 mt-8">
-                {iconSocials.map(({ key, Icon, handle, url }) => (
+                {social.icons.map(({ key, Icon, url }) => (
                   <a
                     key={key}
-                    href={url(handle)}
+                    href={url}
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label={t(key)}

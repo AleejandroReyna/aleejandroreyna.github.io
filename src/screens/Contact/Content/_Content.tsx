@@ -1,14 +1,17 @@
 import { getSiteSettings } from "@/lib/payload";
-import { SiGithub } from '@icons-pack/react-simple-icons';
-import { Linkedin, Calendar } from 'lucide-react';
+import { Calendar } from 'lucide-react';
 import { getTranslations } from "next-intl/server";
 import { AnimateIn } from "@/components/ds/AnimateIn";
+import { getSocialLinks } from "@/utils/socialLinks";
 import { ContactForm } from './ContactForm';
 
 export const Content = async () => {
   const t = await getTranslations('contactPage');
   const settings = await getSiteSettings();
-  const { github, linkedin, calendly, email } = settings.social || {};
+  const { calendly, email } = settings.social || {};
+  const social = getSocialLinks(settings.social);
+  // Calendly va en su propia fila ("Llamada"), no se repite aquí.
+  const socialProfiles = [social.github, ...social.icons].filter((s) => s !== null);
 
   const processSteps = [
     { number: "01", title: t('step1Title'), description: t('step1Body') },
@@ -61,28 +64,23 @@ export const Content = async () => {
                   calendly.com/{calendly} ↗
                 </a>
               </div>
-              <div className="grid grid-cols-[110px_1fr] md:grid-cols-[130px_1fr] gap-6 py-5.5 border-t border-[#9be8b8]/12 items-baseline">
+              <div className="grid grid-cols-[110px_1fr] md:grid-cols-[130px_1fr] gap-6 py-5.5 border-t border-[#9be8b8]/12 items-center">
                 <span className="font-mono text-[10px] tracking-[0.16em] uppercase text-[#dfe5e0]/40">{t('socialLabel')}</span>
-                <span className="flex flex-wrap gap-x-7 gap-y-2 font-mono font-medium text-xs tracking-[0.14em] uppercase">
-                  <a
-                    href={`https://github.com/${github}`}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 whitespace-nowrap text-[#dfe5e0] hover:text-[#9be8b8] transition-colors duration-300"
-                  >
-                    <SiGithub size={13} />
-                    {t('github')} ↗
-                  </a>
-                  <a
-                    href={`https://linkedin.com/in/${linkedin}`}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 whitespace-nowrap text-[#dfe5e0] hover:text-[#9be8b8] transition-colors duration-300"
-                  >
-                    <Linkedin size={13} />
-                    {t('linkedin')} ↗
-                  </a>
-                </span>
+                <div className="grid grid-cols-2 gap-x-6 gap-y-3.5">
+                  {socialProfiles.map(({ key, Icon, display, url }) => (
+                    <a
+                      key={key}
+                      href={url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label={t(key)}
+                      className="inline-flex items-center gap-2.5 whitespace-nowrap font-mono font-medium text-[13px] tracking-[0.04em] text-[#dfe5e0] hover:text-[#9be8b8] transition-colors duration-300"
+                    >
+                      <Icon size={13} className="shrink-0" />
+                      {display}
+                    </a>
+                  ))}
+                </div>
               </div>
               <div className="grid grid-cols-[110px_1fr] md:grid-cols-[130px_1fr] gap-6 py-5.5 border-t border-b border-[#9be8b8]/12 items-baseline">
                 <span className="font-mono text-[10px] tracking-[0.16em] uppercase text-[#dfe5e0]/40">{t('baseLabel')}</span>

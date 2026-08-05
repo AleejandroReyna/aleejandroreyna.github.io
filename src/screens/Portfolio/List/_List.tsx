@@ -122,12 +122,12 @@ export const List = async ({ searchParams }: Props) => {
             {t('ndaBody')}<br />
             {t('ndaCta')}
           </div>
-          <a
+          <Link
             href="/#contact"
             className="font-mono font-medium text-[11px] tracking-[0.16em] uppercase text-[#9be8b8] border-b border-[#9be8b8]/35 pb-1 mt-2 hover:text-white hover:border-white transition-colors duration-300"
           >
             {t('bookCall')}
-          </a>
+          </Link>
         </div>
       </div>
 

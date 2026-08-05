@@ -1,6 +1,5 @@
 'use client'
 
-import { useState, useEffect, useCallback } from "react"
 import { useRouter, useSearchParams, usePathname } from "next/navigation"
 import { useTranslations } from "next-intl"
 
@@ -9,28 +8,19 @@ interface Tech {
     name: string;
 }
 
+interface Props {
+  techs: Tech[];
+}
+
 const pillBase = "font-mono text-[11px] tracking-[0.14em] uppercase px-4.5 py-2.5 rounded-sm cursor-pointer transition-colors duration-300"
 
-export const Form = () => {
+// Las tecnologías llegan ya resueltas desde el servidor: este componente sólo
+// traduce clics en cambios de query string.
+export const Form = ({ techs }: Props) => {
   const t = useTranslations('portfolioArchive')
-  const [techs, setTechs] = useState<Tech[]>([])
   const router = useRouter()
   const pathname = usePathname()
   const searchParams = useSearchParams()
-
-  const fetchTechs = useCallback(async () => {
-    try {
-        const response = await fetch('/api/technologies?limit=100')
-        const data = await response.json()
-        setTechs(data.docs)
-    } catch (error) {
-        console.error('Error fetching technologies', error)
-    }
-  }, [])
-
-  useEffect(() => {
-      fetchTechs()
-  }, [fetchTechs])
 
   const currentParams = new URLSearchParams(Array.from(searchParams.entries()))
   const currentTechParams = currentParams.get('tech')

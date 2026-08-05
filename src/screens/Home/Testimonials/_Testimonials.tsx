@@ -3,6 +3,7 @@ import config from "@payload-config"
 import { getTranslations } from "next-intl/server"
 import { AnimateIn } from "@/components/ds/AnimateIn"
 import { getLocale } from "@/lib/locale"
+import { pickRandom } from "@/utils/pickRandom"
 
 export const Testimonials = async () => {
   const t = await getTranslations('home.testimonials')
@@ -18,7 +19,8 @@ export const Testimonials = async () => {
   })
 
   // Payload/Mongo has no random sort — shuffle the approved pool and take 3.
-  const testimonials = [...result.docs].sort(() => Math.random() - 0.5).slice(0, 3)
+  // This route is dynamic, so the pick is resolved per request.
+  const testimonials = pickRandom(result.docs, 3)
 
   if (testimonials.length === 0) return null
 

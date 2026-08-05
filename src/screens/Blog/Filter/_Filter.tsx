@@ -1,8 +1,7 @@
 'use client'
 
-import { useState, useEffect, useCallback } from "react"
 import { useRouter, useSearchParams, usePathname } from "next/navigation"
-import { useLocale, useTranslations } from "next-intl"
+import { useTranslations } from "next-intl"
 
 interface Category {
     id: string;
@@ -10,29 +9,19 @@ interface Category {
     slug: string;
 }
 
+interface Props {
+  categories: Category[];
+}
+
 const pillBase = "font-mono text-[11px] tracking-[0.14em] uppercase px-4.5 py-2.5 rounded-sm cursor-pointer transition-colors duration-300"
 
-export const Filter = () => {
+// Las categorías llegan ya resueltas desde el servidor: este componente sólo
+// traduce clics en cambios de query string.
+export const Filter = ({ categories }: Props) => {
   const t = useTranslations('blog')
-  const locale = useLocale()
-  const [categories, setCategories] = useState<Category[]>([])
   const router = useRouter()
   const pathname = usePathname()
   const searchParams = useSearchParams()
-
-  const fetchCategories = useCallback(async () => {
-    try {
-        const response = await fetch(`/api/categories?limit=100&locale=${locale}`)
-        const data = await response.json()
-        setCategories(data.docs)
-    } catch (error) {
-        console.error('Error fetching categories', error)
-    }
-  }, [locale])
-
-  useEffect(() => {
-      fetchCategories()
-  }, [fetchCategories])
 
   const currentParams = new URLSearchParams(Array.from(searchParams.entries()))
   const currentCategoryParams = currentParams.get('category')

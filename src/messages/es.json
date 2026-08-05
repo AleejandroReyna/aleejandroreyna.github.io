@@ -193,6 +193,10 @@
     "baseValue": "Ciudad de Guatemala — UTC−6, remoto mundial",
     "github": "GitHub",
     "linkedin": "LinkedIn",
+    "instagram": "Instagram",
+    "facebook": "Facebook",
+    "tiktok": "TikTok",
+    "calendly": "Calendly",
     "formTitle": "Inicia un Proyecto",
     "namePlaceholder": "Nombre",
     "emailPlaceholder": "Correo",
@@ -220,6 +224,16 @@
     "ctaTitleLine1": "Agenda 30 minutos,",
     "ctaEmphasis": "directamente",
     "openCalendly": "Abrir Calendly ↗"
+  },
+  "notFound": {
+    "label": "Error 404",
+    "title": "Ruta Perdida",
+    "description": "Esta dirección no lleva a ninguna parte: la página se movió, cambió de nombre o nunca existió. Nada que lamentar, aquí abajo hay mejores lugares a dónde ir.",
+    "goHome": "Volver al Inicio",
+    "goContact": "Escríbeme",
+    "projectsLabel": "Trabajo Reciente",
+    "postsLabel": "Últimos Escritos",
+    "seeAll": "Ver Todo ↗"
   },
   "languageSwitcher": {
     "label": "Idioma"
