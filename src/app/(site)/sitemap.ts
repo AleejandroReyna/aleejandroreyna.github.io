@@ -26,12 +26,19 @@ const buildLocalizedRoutes = (
             availableLocales.map((locale) => [locale, `${baseUrl}${pathPrefix}/${doc.slug[locale]}`]),
         )
 
-        return availableLocales.map((locale) => ({
-            url: `${baseUrl}${pathPrefix}/${doc.slug[locale]}`,
+        // Un documento cuyo slug es idéntico en los dos idiomas es una sola URL.
+        // Emitirla una vez por idioma la duplicaba dentro del propio sitemap, que
+        // es exactamente la señal de contenido duplicado que se quiere evitar.
+        const uniqueUrls = [...new Set(availableLocales.map((locale) => `${baseUrl}${pathPrefix}/${doc.slug[locale]}`))]
+
+        return uniqueUrls.map((url) => ({
+            url,
             lastModified: doc.updatedAt ? new Date(doc.updatedAt) : new Date(),
             changeFrequency: 'monthly' as const,
             priority,
-            alternates: { languages },
+            // Sólo tiene sentido declarar alternates cuando cada idioma vive en
+            // una URL distinta; si no, se estaría apuntando a sí misma.
+            ...(uniqueUrls.length > 1 ? { alternates: { languages } } : {}),
         }))
     })
 
