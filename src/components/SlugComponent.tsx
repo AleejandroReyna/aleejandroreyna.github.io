@@ -1,8 +1,12 @@
 'use client'
 
-import React, { useEffect, useState } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import { useFormFields, useField, TextInput } from '@payloadcms/ui'
-import { Lock, Unlock } from 'lucide-react'
+import { Lock, RefreshCw, Unlock } from 'lucide-react'
+
+// Se reutiliza la misma funcion que el hook de servidor para que el slug que
+// se ve en el admin sea exactamente el que se guarda.
+import { format as formatSlug } from '@/utils/formatSlug'
 
 export const SlugComponent: React.FC<any> = ({ path, label, required }) => {
     const { value, setValue } = useField<string>({ path })
@@ -16,20 +20,33 @@ export const SlugComponent: React.FC<any> = ({ path, label, required }) => {
 
     const fallbackValue = nameField || titleField || roleField || emailField || altField
 
-    const formatSlug = (val: string) =>
-        val
-            .replace(/\s+/g, '_')
-            .replace(/[^\w-]+/g, '')
-            .toLowerCase()
-
+    // Sólo se genera cuando todavía no hay slug para este locale: una URL ya
+    // publicada no debe cambiar porque se retoque el título. Como el campo es
+    // localizado, al abrir el documento en español el valor viene vacío y se
+    // genera ahí su propio slug, una única vez e independiente del inglés.
     useEffect(() => {
-        if (isLocked && fallbackValue) {
-            const newSlug = formatSlug(fallbackValue)
-            if (newSlug !== value) {
-                setValue(newSlug)
-            }
+        if (!value && fallbackValue) {
+            setValue(formatSlug(fallbackValue))
         }
-    }, [isLocked, fallbackValue, value, setValue])
+    }, [value, fallbackValue, setValue])
+
+    const regenerate = useCallback(() => {
+        if (fallbackValue) {
+            setValue(formatSlug(fallbackValue))
+        }
+    }, [fallbackValue, setValue])
+
+    const buttonStyle: React.CSSProperties = {
+        padding: '0.5rem',
+        cursor: 'pointer',
+        border: '1px solid #ccc',
+        background: '#fff',
+        borderRadius: '4px',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        color: 'black',
+    }
 
     return (
         <div style={{ marginBottom: '1rem' }}>
@@ -47,28 +64,26 @@ export const SlugComponent: React.FC<any> = ({ path, label, required }) => {
                 </div>
                 <button
                     type="button"
+                    onClick={regenerate}
+                    disabled={!fallbackValue}
+                    style={{ ...buttonStyle, opacity: fallbackValue ? 1 : 0.5 }}
+                    title="Regenerate from title"
+                >
+                    <RefreshCw size={16} />
+                </button>
+                <button
+                    type="button"
                     onClick={() => setIsLocked(!isLocked)}
-                    style={{
-                        padding: '0.5rem',
-                        cursor: 'pointer',
-                        border: '1px solid #ccc',
-                        background: '#fff',
-                        borderRadius: '4px',
-                        display: 'flex',
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                        color: 'black'
-                    }}
-                    title={isLocked ? 'Unlock to edit' : 'Lock to auto-generate'}
+                    style={buttonStyle}
+                    title={isLocked ? 'Unlock to edit' : 'Lock field'}
                 >
                     {isLocked ? <Lock size={16} /> : <Unlock size={16} />}
                 </button>
             </div>
-            {isLocked && (
-                <p style={{ fontSize: '0.8rem', color: '#666', marginTop: '0.25rem' }}>
-                    Auto-generated. Unlock to edit manually.
-                </p>
-            )}
+            <p style={{ fontSize: '0.8rem', color: '#666', marginTop: '0.25rem' }}>
+                Generated once from the title. Use the refresh button to rebuild it, or unlock to edit
+                manually. Changing the title never rewrites an existing slug.
+            </p>
         </div>
     )
 }
