@@ -27,12 +27,26 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
         }
     }
 
+    const title = post.metaTitle || post.title
+    const description = post.excerpt || `Read ${post.title} on the blog.`
+
     return {
-        title: post.metaTitle || post.title,
-        description: post.excerpt || `Read ${post.title} on the blog.`,
+        title,
+        description,
         alternates: {
             canonical: `/blog/${slug}`,
         },
+        // Sin openGraph propio se heredan los del layout raiz, y og:url
+        // apuntando al home hace que Facebook trate el post como si fuera la
+        // portada: descarta la tarjeta generada y muestra la del sitio.
+        openGraph: {
+            type: 'article',
+            url: `/blog/${slug}`,
+            title,
+            description,
+            publishedTime: post.publishedDate || undefined,
+        },
+        twitter: { title, description },
     }
 }
 

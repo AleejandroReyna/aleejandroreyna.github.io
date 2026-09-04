@@ -27,12 +27,24 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
         }
     }
 
+    const title = project.metaTitle || `${project.name} | Portfolio`
+    const description = `Details about the ${project.name} project.`
+
     return {
-        title: project.metaTitle || `${project.name} | Portfolio`,
-        description: `Details about the ${project.name} project.`,
+        title,
+        description,
         alternates: {
             canonical: `/portfolio/${slug}`,
         },
+        // Ver la nota en blog/[slug]: sin openGraph propio se hereda el
+        // og:url del home y Facebook muestra la tarjeta equivocada.
+        openGraph: {
+            type: 'article',
+            url: `/portfolio/${slug}`,
+            title,
+            description,
+        },
+        twitter: { title, description },
     }
 }
 

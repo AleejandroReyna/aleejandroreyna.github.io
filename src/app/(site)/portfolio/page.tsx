@@ -8,6 +8,15 @@ export const metadata : Metadata = {
   alternates: {
     canonical: '/portfolio',
   },
+  openGraph: {
+    url: '/portfolio',
+    title: "Portfolio",
+    description: "Case studies and projects built by Alejandro Reyna — Full-Stack Developer specializing in Python, Django, React, and Node.js.",
+  },
+  twitter: {
+    title: "Portfolio",
+    description: "Case studies and projects built by Alejandro Reyna — Full-Stack Developer specializing in Python, Django, React, and Node.js.",
+  },
 };
 
 interface Props {

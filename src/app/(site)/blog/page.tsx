@@ -8,6 +8,15 @@ export const metadata: Metadata = {
   alternates: {
     canonical: '/blog',
   },
+  openGraph: {
+    url: '/blog',
+    title: "Blog",
+    description: "Notes on architecture, cloud systems, and building software that lasts.",
+  },
+  twitter: {
+    title: "Blog",
+    description: "Notes on architecture, cloud systems, and building software that lasts.",
+  },
 };
 
 interface Props {

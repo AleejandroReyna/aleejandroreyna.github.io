@@ -7,6 +7,15 @@ export const metadata : Metadata = {
   alternates: {
     canonical: '/contact',
   },
+  openGraph: {
+    url: '/contact',
+    title: "Contact",
+    description: "Get in touch with Alejandro Reyna, Full-Stack Developer, for remote software engineering opportunities and project inquiries.",
+  },
+  twitter: {
+    title: "Contact",
+    description: "Get in touch with Alejandro Reyna, Full-Stack Developer, for remote software engineering opportunities and project inquiries.",
+  },
 };
 
 export default function ContactPage() {
