@@ -8,8 +8,12 @@ export const contentType = OG_CONTENT_TYPE
 
 export const dynamic = 'force-dynamic'
 
-export default async function Image({ params }: { params: { slug: string } }) {
-    const { doc: project } = await findBySlugAnyLocale('projects', params.slug)
+// params es una Promise en Next 15+. Leerlo como objeto plano dejaba el slug
+// en undefined, y la consulta sin filtro devolvía el post más reciente en el
+// primer locale probado: todas las tarjetas salían idénticas.
+export default async function Image({ params }: { params: Promise<{ slug: string }> }) {
+    const { slug } = await params
+    const { doc: project } = await findBySlugAnyLocale('projects', slug)
 
     return new ImageResponse(
         <OgCard

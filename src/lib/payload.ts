@@ -12,6 +12,12 @@ export async function findBySlugAnyLocale<T extends CollectionSlug>(
     slug: string,
     depth: number = 0,
 ) {
+    // Sin esto, un slug vacío producía `where: { slug: { equals: undefined } }`,
+    // que Payload trata como "sin filtro" y devuelve el primer documento del
+    // orden por defecto. Un fallo así no lanza error: entrega el documento
+    // equivocado como si fuera el correcto.
+    if (!slug) return { doc: null, locale: undefined }
+
     const payload = await getPayload({ config })
 
     for (const locale of locales) {

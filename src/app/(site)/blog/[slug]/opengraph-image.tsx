@@ -10,8 +10,12 @@ export const contentType = OG_CONTENT_TYPE
 // build (placeholder DATABASE_URL) — same reason the sitemap is dynamic.
 export const dynamic = 'force-dynamic'
 
-export default async function Image({ params }: { params: { slug: string } }) {
-    const { doc: post } = await findBySlugAnyLocale('posts', params.slug)
+// params es una Promise en Next 15+. Leerlo como objeto plano dejaba el slug
+// en undefined, y la consulta sin filtro devolvía el post más reciente en el
+// primer locale probado: todas las tarjetas salían idénticas.
+export default async function Image({ params }: { params: Promise<{ slug: string }> }) {
+    const { slug } = await params
+    const { doc: post } = await findBySlugAnyLocale('posts', slug)
 
     return new ImageResponse(
         <OgCard
