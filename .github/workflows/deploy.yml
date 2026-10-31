@@ -67,7 +67,7 @@ jobs:
       - name: Build and Push Container
         run: |-
           IMAGE_TAG="${{ env.REGION }}-docker.pkg.dev/${{ env.PROJECT_ID }}/${{ env.REPOSITORY }}/${{ env.SERVICE_NAME }}:${{ github.sha }}"
-          docker build \n            --build-arg NEXT_PUBLIC_TURNSTILE_SITE_KEY=${{ secrets.NEXT_PUBLIC_TURNSTILE_SITE_KEY }} \n            -t "$IMAGE_TAG" .
+          docker build --build-arg NEXT_PUBLIC_TURNSTILE_SITE_KEY=${{ secrets.NEXT_PUBLIC_TURNSTILE_SITE_KEY }} -t "$IMAGE_TAG" .
           docker push "$IMAGE_TAG"
 
   deploy:
