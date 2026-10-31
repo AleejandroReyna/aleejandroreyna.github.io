@@ -3,6 +3,7 @@
 import { useActionState } from 'react'
 import { useTranslations } from 'next-intl'
 import { submitContactForm, ContactFormState } from '@/lib/actions/contact'
+import { Turnstile } from '@/components/common/Turnstile'
 
 const initialState: ContactFormState = {
     success: false,
@@ -131,6 +132,8 @@ export const ContactForm = () => {
                     <span className="text-red-400 text-xs mt-2 block">{state.errors.message[0]}</span>
                 )}
             </div>
+
+            <Turnstile resetKey={state} />
 
             <button
                 type="submit"

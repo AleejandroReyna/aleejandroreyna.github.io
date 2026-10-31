@@ -16,6 +16,9 @@ ENV PAYLOAD_SECRET=build_placeholder_secret
 ENV GOOGLE_ANALYTICS_ID=build-placeholder
 ENV UPLOAD_PREFIX=build-placeholder
 ENV BLOB_READ_WRITE_TOKEN=vercel_blob_rw_placeholder_placeholder
+# Public site key is inlined into the client bundle at build time.
+ARG NEXT_PUBLIC_TURNSTILE_SITE_KEY
+ENV NEXT_PUBLIC_TURNSTILE_SITE_KEY=$NEXT_PUBLIC_TURNSTILE_SITE_KEY
 RUN npm run build
 
 FROM base AS runner

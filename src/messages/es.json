@@ -244,6 +244,7 @@
     "messageTooShort": "El mensaje es demasiado corto",
     "fixErrors": "Por favor corrige los errores: {errors}",
     "thankYou": "¡Gracias! Tu mensaje ha sido enviado.",
+    "captchaFailed": "No pudimos verificar que eres humano. Por favor intenta de nuevo.",
     "error": "Algo salió mal. Por favor intenta de nuevo más tarde."
   }
 }

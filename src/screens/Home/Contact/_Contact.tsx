@@ -3,6 +3,7 @@ import { useActionState, useEffect, useRef } from "react";
 import { SiGithub } from '@icons-pack/react-simple-icons';
 import { Linkedin, Calendar } from "lucide-react";
 import { submitContactForm, ContactFormState } from "@/lib/actions/contact";
+import { Turnstile } from "@/components/common/Turnstile";
 import { motion, Variants } from "motion/react";
 import { useTranslations } from "next-intl";
 import { useTypewriter } from "@/hooks/useTypewriter";
@@ -183,6 +184,8 @@ export const Contact = ({ contactEmail, githubUser, linkedinUser, calendlyUser }
                 ></textarea>
                 {state.errors?.message && <span className="text-red-400 text-xs mt-2 block">{state.errors.message[0]}</span>}
               </div>
+
+              <Turnstile resetKey={state} />
 
               <button
                 type="submit"
